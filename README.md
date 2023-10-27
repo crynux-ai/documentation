@@ -18,7 +18,11 @@ By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Comput
 
 ## Hydrogen Network
 
+Hydrogen Network is the very first testnet of the Crynux Network. Hydrogen Network implements a fully decentralized AI task execution engine that supports running the Stable Diffusion image generation task.
 
+Everyone has an Nvidia GPU could have already joined the network by [starting a Docker container](node-hosting/join-the-network.md).&#x20;
+
+And the applications could now [send Stable Diffusion image generation tasks](application-development/application-workflow.md) to the network using API, and get the images instantly.
 
 
 
