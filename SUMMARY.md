@@ -8,10 +8,10 @@
 * [Network Architecture](system-design/network-architecture.md)
 * [Consensus Mechanism](system-design/consensus-mechanism.md)
 
-## Node
+## Node Hosting
 
-* [Join the Network](node/join-the-network.md)
-* [Advanced Configuration](node/advanced-configuration.md)
+* [Join the Network](node-hosting/join-the-network.md)
+* [Advanced Configuration](node-hosting/advanced-configuration.md)
 
 ## Application Development
 
