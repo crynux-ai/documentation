@@ -1,2 +1,2 @@
-# Crynux Technology Documentation
-Crynux tech documentation
+# About Crynux
+
