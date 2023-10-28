@@ -38,6 +38,10 @@ To use the inference API, connect your application to the Hydrogen Network, go t
 
 ## Links
 
+Join the Crynux community on Discord:
+
+{% embed url="https://discord.gg/Ug2AHUbrrm" %}
+
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
 {% embed url="https://github.com/crynux-ai" %}
