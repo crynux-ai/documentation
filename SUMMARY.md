@@ -6,7 +6,7 @@
 ## System Design
 
 * [Network Architecture](system-design/network-architecture.md)
-* [Consensus Mechanism](system-design/consensus-mechanism.md)
+* [Consensus Protocol](system-design/consensus-protocol.md)
 
 ## Node Hosting
 
