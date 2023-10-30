@@ -8,13 +8,33 @@ The core participants in the network are the **Nodes** and the **Applications**.
 
 Each of the nodes and the applications will start a **Blockchain node**, and communicate with each other using it. The Blockchain executes a consensus mechanism to make sure no one is cheating: the nodes could never use the fake images to get rewards, and the applications could never get the images without paying.
 
-Beside the Blockchain, the nodes and applications will also communicate through the **Relay**, to send data such as the task arguments and images, which are not recorded on-chain, but can be verified using the data hash on-chain. The relay solves two problems: the data availability problem and the network reachability problem.&#x20;
+Beside the Blockchain, the nodes and applications will also communicate through the **Relay**, to send data such as the task arguments and the images, which are too large to be stored on chain. These data are sent between the applications and the nodes directly, thus causes the data availability problem and the network reachability problem. The Relay stands between the nodes and the applications as a reliable intermediate to solve these problems.
 
 ## The Node
 
+The Node, once started, constantly monitors the Blockchain for new tasks.&#x20;
+
+When a new task arrives, the Node connects to the Relay to get the detailed task arguments, such as the ID of the base model on Huggingface, and the URL of the LoRA model on Civitai. Then the node executes the task on the local hardware, producing the result images.
+
+> A general framework has been developed to support most of the popular configurations in a Stable Diffusion image generation task, such as LoRA, Controlnet and Textual Inversion. The details on how to define a Stable Diffusion task can be found [in this doc](../application-development/stable-diffusion-task.md).
+
+
+
+The source code of the Node of the Hydrogen Network could be found in the repository [https://github.com/crynux-ai/h-node](https://github.com/crynux-ai/h-node).
+
 ## The Application
+
+The source code of the Image Generator could be found at:
+
+Backend: [https://github.com/crynux-ai/ig-server](https://github.com/crynux-ai/ig-server)
+
+Web UI: [https://github.com/crynux-ai/ig-web](https://github.com/crynux-ai/ig-web)
 
 ## The Blockchain
 
 ## The Relay
+
+The source code of the Relay could be found at:
+
+[https://github.com/crynux-ai/h-relay](https://github.com/crynux-ai/h-relay)
 
