@@ -11,6 +11,7 @@
 ## Node Hosting
 
 * [Join the Network](node-hosting/join-the-network.md)
+* [Headless Start](node-hosting/headless-start.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
 
 ## Application Development
