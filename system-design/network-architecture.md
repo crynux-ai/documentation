@@ -14,7 +14,7 @@ Beside the Blockchain, the nodes and applications will also communicate through 
 
 The Node, once started, constantly monitors the Blockchain for new tasks.&#x20;
 
-When a new task arrives, the Node connects to the Relay to get the detailed task arguments, such as the ID of the base model on Huggingface, and the URL of the LoRA model on Civitai. Then the node executes the task on the local hardware, producing the result images.
+When a new task arrives from the Blockchain, the Node connects to the Relay to get the task arguments, such as the ID of the base model on Huggingface, and the URL of the LoRA model on Civitai. Then the node executes the task on the local hardware, producing the result images.
 
 > A general framework has been developed to support most of the popular configurations in a Stable Diffusion image generation task, such as LoRA, Controlnet and Textual Inversion. The details on how to define a Stable Diffusion task can be found [in this doc](../application-development/stable-diffusion-task.md).
 
@@ -34,7 +34,9 @@ After the Blockchain confirmation, the Application sends the task arguments to t
 
 Once the task success event has been emitted on the Blockchain, the Application could fetch the images from the Relay, and continue with its own subsequent business logics.
 
-A showcase application, the [Image Generator](https://ig.crynux.ai), has been developed to demonstrate the workflow. The showcase application is quite similar to the [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), which is a web interface for the users to generate images using various of models and text-prompt. Except that our application does not require the presence of a local GPU. The application could be accessed at: [https://ig.crynux.ai](https://ig.crynux.ai).
+A showcase application, the [Image Generator](https://ig.crynux.ai), has been developed to demonstrate the workflow. The showcase application is quite similar to the [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), which is a web interface for the users to generate images using different models and text prompt. The difference is that, our application does not require the presence of a local GPU, thus could be used on any devices.
+
+The Image Generator could be accessed at: [https://ig.crynux.ai](https://ig.crynux.ai).
 
 The Image Generator is designed to be a traditional centralized application. The wallet is created and operated transparently by the application backend. To the end users, the Blockchain, the tokens, are completely invisible. By such design, it will be easier for the users to get started, compared to a DApp where the users have to install Metamask, and prepare a wallet with enough tokens before using the app.
 
@@ -50,7 +52,21 @@ Web UI: [https://github.com/crynux-ai/ig-web](https://github.com/crynux-ai/ig-we
 
 ## The Blockchain
 
+The Blockchain ensures that the consensus protocol is executed correctly. A list of all the nodes and their status are maintained. No central party is controlling the network. The nodes could join and quit the network freely at any time. As long as there are enough nodes, the network will operate normally.
+
+Certain amount of tokens must be staked on-chain in order to join the network. If the node is found cheating, the staked tokens will be slashed.
+
+&#x20;When a task is submitted by an application, the Blockchain randomly selects 3 available nodes to execute the task. When the node discloses their image hashes on-chain, the Blockchain compares the hashes of the 3 nodes, and slash the node whose result is different.
+
+A complete introduction of the consensus protocol [can be found here](consensus-protocol.md).
+
+Hydrogen Network could be running on any Blockchain system. The functions are implemented using smart contracts.
+
 ## The Relay
+
+The Relay is actually a compromization on the decentralization of the network, to make the network usable and more efficient at this time.
+
+
 
 The source code of the Relay could be found at:
 
