@@ -64,7 +64,7 @@ data/ docker-compose.yml
 
 #### 2. Add the mounting point in the `docker-compose.yml` file
 
-```
+```yaml
 ---
 version: "3.8"
 name: "h_node"
@@ -110,7 +110,7 @@ config/ data/ docker-compose.yml
 
 #### 2. Add the mounting point in the `docker-compose.yml` file
 
-```
+```yaml
 ---
 version: "3.8"
 name: "h_node"

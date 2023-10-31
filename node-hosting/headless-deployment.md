@@ -6,6 +6,14 @@ description: Start the Node without Web UI
 
 The Hydrogen Network Node could be deployed on the server without using the WebUI. The node will automatically join the network at container startup, and quit the network before the container stops.
 
+{% hint style="info" %}
+If the Node is started in the headless mode, the integrated API server will not be started. Which means the WebUI will not be accessible at all.
+{% endhint %}
+
+{% hint style="info" %}
+In headless mode, the Node will try to quit the network when the terminate signal is received. The operation needs some time. So try not to kill the running container directly,  and wait for it to gracefully shutdown.
+{% endhint %}
+
 #### 1. Create the deployment folder for Docker compose
 
 ```sh
@@ -41,7 +49,7 @@ config.yml
 
 The private key must be provided inside the ethereum section:
 
-```
+```yaml
 ...
 
 ethereum:
@@ -56,7 +64,7 @@ ethereum:
 
 The headless mode must be enabled:
 
-```
+```yaml
 ...
 headless: true
 ...
@@ -66,7 +74,7 @@ headless: true
 
 Create `docker-compose.yml` inside the working directory. And mount the config folder and model cache folder to the local folders we just created:
 
-```
+```yaml
 ---
 version: "3.8"
 name: "h_node"
