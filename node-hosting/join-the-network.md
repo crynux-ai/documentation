@@ -74,7 +74,7 @@ After clicking Submit, the address of the wallet should be displayed on the webp
 
 <figure><img src="../.gitbook/assets/preparing.png" alt=""><figcaption><p>Preparing</p></figcaption></figure>
 
-The Node is now downloading the frequently used models such as the Stable Diffusion 1.5. About 30GB of models will be download during this preparing phase. And this is a one-time operation, please be patient to wait.&#x20;
+The Node is now downloading the frequently used models such as the Stable Diffusion 1.5. About 30GB of models will be downloaded during this preparing phase. And this is a one-time operation, please be patient to wait.&#x20;
 
 After the downloading is finished, you will be able to control the node to join the network:
 
