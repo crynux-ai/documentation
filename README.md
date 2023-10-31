@@ -44,7 +44,7 @@ Join the Crynux community on Discord:
 
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
-{% embed url="https://github.com/crynux-ai" %}
+{% @github-files/github-code-block url="https://github.com/crynux-ai" %}
 
 The Crynux Blog contains the technical explanations and our latest progress:
 

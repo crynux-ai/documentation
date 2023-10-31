@@ -25,7 +25,7 @@ config/ data/
 
 An example config file could be found in the repository of the Node:
 
-
+[https://github.com/crynux-ai/h-node/blob/main/config/config.yml.example](https://github.com/crynux-ai/h-node/blob/main/config/config.yml.example)
 
 Create a file named `config.yml` inside the config folder, and copy the content of the example config file into it.
 
@@ -38,6 +38,29 @@ config.yml
 ```
 
 #### 4. Edit the config file
+
+The private key must be provided inside the ethereum section:
+
+```
+...
+
+ethereum:
+  privkey: "0x2738....69cf"
+  provider: "https://block-node.crynux.ai/rpc"
+  chain_id: 42
+  gas: 42949670
+  gas_price: 1
+
+...
+```
+
+The headless mode must be enabled:
+
+```
+...
+headless: true
+...
+```
 
 #### 5. Create `docker-compose.yml`&#x20;
 
