@@ -12,7 +12,7 @@
 
 * [Join the Network](node-hosting/join-the-network.md)
 * [Docker Compose](node-hosting/docker-compose.md)
-* [Headless Start](node-hosting/headless-start.md)
+* [Headless Deployment](node-hosting/headless-deployment.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
 
 ## Application Development
