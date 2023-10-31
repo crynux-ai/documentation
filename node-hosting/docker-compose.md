@@ -46,9 +46,9 @@ docker compose up -d
 
 Now you should already be able to access the WebUI from the browser.
 
-## Mount the Model Caching Folder
+## Mount the Model Cache Folder
 
-Since the model preloading takes a long time, often we want to persist the model caching folder outside of the Docker container so that it survives the container recreating during updates. This is easily done by mounting the data folder `/app/data` to a local folder on the host machine:
+Since the model preloading takes a long time, often we want to persist the model cache folder outside of the Docker container so that it survives the container recreation during updates. This is easily done by mounting the data folder `/app/data` to a local folder on the host machine:
 
 #### 1. Create an empty data folder inside the working directory
 
@@ -98,14 +98,15 @@ The configuration file could also be mounted to the local folder, so the config 
 
 #### 1. Create an empty config folder inside the working directory
 
-<pre class="language-sh"><code class="lang-sh">$ ls .
-<strong>data/ docker-compose.yml
-</strong>
+```sh
+$ ls .
+data/ docker-compose.yml
+
 $ mkdir config
 
 $ ls .
 config/ data/ docker-compose.yml
-</code></pre>
+```
 
 #### 2. Add the mounting point in the `docker-compose.yml` file
 
@@ -140,8 +141,9 @@ docker compose up -d
 
 #### 4. A config file will be created automatically after the container creation
 
-<pre class="language-sh"><code class="lang-sh">$ ls config/
-<strong>config.yml
-</strong></code></pre>
+```sh
+$ ls config/
+config.yml
+```
 
 For an explanation of all the config items, please refer to the [Advanced Configuration](advanced-configuration.md).

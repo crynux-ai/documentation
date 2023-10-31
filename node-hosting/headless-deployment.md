@@ -64,7 +64,7 @@ headless: true
 
 #### 5. Create `docker-compose.yml`&#x20;
 
-Create docker-compose.yml inside the working directory. And mount the config folder and model caching folder to the local folders we just created:
+Create `docker-compose.yml` inside the working directory. And mount the config folder and model cache folder to the local folders we just created:
 
 ```
 ---
