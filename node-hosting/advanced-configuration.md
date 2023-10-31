@@ -65,8 +65,8 @@ task_config:
   # by the task execution engine
   inference_logs_dir: "/app/inference-logs"
   
+  # The directory that stores the source code of the task execution engine
   script_dir: "/app/stable-diffusion-task"
-  result_url: ""
 
   # Models that will be preloaded before any task execution
   # Other models specified by the task
