@@ -176,4 +176,8 @@ The last step is to get the images from the Relay. This is done by calling the f
 
 The signature and timestamp is still required. The URL could be treated like an image downloading link as it returns the binary stream of the image content directly.
 
+{% hint style="info" %}
+When the application accesses the above URL after the `TaskSuccess` event is received, it could keep getting `404 not found` for a short while before it gets the correct images. The reason is that the Node will start to upload images to the Relay only after the `TaskSuccess` event is received. So before the uploading is done, the application can not find the images on the Relay. Several times of retrying is required at this place.
+{% endhint %}
+
 The source code where the Image Generator downloads the images is [located here](https://github.com/crynux-ai/ig-server/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/relay/inference\_task.go#L93).
