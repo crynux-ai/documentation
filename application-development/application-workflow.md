@@ -102,6 +102,14 @@ The `taskHash` is the keccak256 hash of the JSON string of the task arguments.
 
 The `dataHash` is reserved for the future features and is not used right now. The application could just pass 32 zero bytes to it.
 
+#### Get the task creation result
+
+After the transaction is sent, the application should get the creation result before proceeding to the next step. Since the transaction might be reverted by the Blockchain due to several reasons such as not enough CNX tokens left in the application wallet.
+
+All the possible reasons a transaction is reverted for can be found [in the source code](https://github.com/crynux-ai/h-contracts/blob/43f98cc0d0b6726c54dc93103739414c6313a6c9/contracts/Task.sol#L59C21-L59C21).
+
+
+
 ## Upload the Task Arguments to the Relay
 
 ## Wait for the Task to Finish
