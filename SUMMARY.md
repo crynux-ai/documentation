@@ -19,6 +19,7 @@
 
 * [Application Workflow](application-development/application-workflow.md)
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
+* [Hydrogen SDK](application-development/hydrogen-sdk.md)
 
 ## Troubleshooting
 

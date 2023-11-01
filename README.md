@@ -10,7 +10,7 @@ As the foundation layer, Crynux Network is composed of the decentralized nodes w
 
 On top of the computing network, a decentralized model/dataset hosting service is provided to better support the various AI use cases.&#x20;
 
-The applications could easily connect to the Crynux Network using Inference API, bring AI power to their users with no extra need for the hardware and development.
+The applications could easily connect to the Crynux Network using API, bring AI power to their users with no extra need for the hardware and development.
 
 The developers could write codes to train/fine-tune their models on the dataset provided by the network, using the computing power of the network. The developed model could also be hosted on the network as a service for others.
 
@@ -22,7 +22,7 @@ Hydrogen Network is the very first testnet of the Crynux Network. Hydrogen Netwo
 
 Everyone has an Nvidia GPU could have already joined the network by starting a Docker container.&#x20;
 
-And the applications could now send Stable Diffusion image generation tasks to the network using API, and get the images instantly.
+And the applications could now send Stable Diffusion image generation tasks to the network using the inference API, and get the images back instantly.
 
 A showcase application has been developed to demonstrate the abilities. The app provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. Thanks to the Hydrogen Network, the users could use the application on any devices that do not have a capable GPU integrated.
 
