@@ -22,15 +22,15 @@ The smart contract then selects 3 nodes randomly, and emits 3 `TaskCreated` even
 
 After the transaction is confirmed on-chain, the application sends the actual task arguments to the Relay.
 
-> The task arguments will be fetched by the selected Nodes, and the task will be started on the Nodes.
+> The task arguments will be fetched from the Relay by the selected Nodes, and then the task will be started on the Nodes.
 >
-> When the images are generated, the Nodes will generate proofs and send them to the Blockchain, who will verify the correctness of the proofs, and transfer the tokens to them after the verification.
+> When the images are generated, the Nodes will generate proofs and send them to the Blockchain, who will verify the correctness of the proofs, and transfer the tokens to the Nodes after the verification.
 >
-> The Nodes will also upload the actual images to the Relay, who will compare the images with the proofs on-chain to make sure the images are the ones that passed the Blockchain verification.&#x20;
+> The Nodes will also upload the result images to the Relay, who will compare the images with the proofs on-chain to make sure the images are the correct ones.
 
 From the application's perspective, it simply waits for the `TaskSuccess` event from the Blockchain. When the event arrives, the application could get the images from the Relay, and the task workflow is completed.
 
-Note that there is no need to verify the images by the application, since they have been verified by the Relay already.
+Note that there is no need to verify the images by the application, since the images have been verified by the Relay already.
 
 The workflow has been fully implemented in the showcase application: the Image Generator. Which can be accessed at:
 
