@@ -97,13 +97,28 @@ We could use the model in the task as following:
 }
 ```
 
-
-
 {% hint style="info" %}
-Only Safetensors file is supported.
+Only `safetensors` format is supported in the download URL.
+
+The execution engine treats the download URL as a binary stream of a model file in the `safetensors` format. If other formats are used, or the content of the link is not a model file at all, the execution engine will throw an exception during the execution.
 {% endhint %}
 
 ## LoRA Models
+
+LoRA models can be specified using the same format as the base model: the Huggingface model ID or the file download URL. The weight of the LoRA model can also be set in the arguments:
+
+```json
+{
+   "lora": {
+     "model": "https://civitai.com/api/download/models/31284",
+     "weight": 80
+   }
+}
+```
+
+The weight should be an integer between 1 and 100.
+
+If the LoRA model given is not compatible with the base model, for example, a LoRA model fine-tuned on the Stable Diffusion 1.5 is used, but the base model is set to be Stable Diffusion XL, the execution engine will also throw an exception.
 
 ## Controlnet
 
