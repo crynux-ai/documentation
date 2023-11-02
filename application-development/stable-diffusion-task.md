@@ -229,15 +229,21 @@ There are also some config options that can be tuned:
 
 ```json
 {
-   "image_width": 512,       // The width of the generated image
-   "image_height": 512,      // The height of the generated image
-   "steps": 30,              // Step to run
-   "seed": 34736484,         // The seed used to initialize the random processes
-   "num_images": 6,          // The number of images to generate in a single task
-   "safety_checker": true,   // Filter the unsafe images
-   "cfg": 5                  // Classifier-Free Guidance, how close the images should be to the prompt given
+   "task_config": {
+     "image_width": 512,       // The width of the generated image
+     "image_height": 512,      // The height of the generated image
+     "steps": 30,              // Step to run
+     "seed": 34736484,         // The seed used to initialize the random processes
+     "num_images": 6,          // The number of images to generate in a single task
+     "safety_checker": true,   // Filter the unsafe images
+     "cfg": 5                  // Classifier-Free Guidance, how close the images should be to the prompt given
+   }
 }
 ```
 
+{% hint style="info" %}
+Hydrogen Network requires a deterministic image generation process, which means the images generated on the different Nodes should be as close as possible, given the same task definition, which is required for the consensus protocol to work. So the seed is left as a required argument in the task definition so that all the Nodes could use the same seed to initialize their random number generators, which will hopefully produce the same random numbers across all the Nodes.
 
+Beside the seed, the Stable Diffusion Task Framework has been implemented to maximize the reproducibility, for all the components used, across the whole image generation process.&#x20;
+{% endhint %}
 
