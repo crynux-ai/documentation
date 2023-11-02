@@ -52,4 +52,4 @@ The Crynux Blog contains the technical explanations and our latest progress:
 
 And follow us on Twitter:
 
-{% embed url="https://twitter/crynuxai" %}
+{% embed url="https://twitter.com/crynuxai" fullWidth="true" %}
