@@ -208,7 +208,7 @@ The VAE model used in the Stable Diffusion pipeline can also be replaced with an
 
 If the Stable Diffusion XL is selected as the base model in the task, the SDXL Refiner could also be used to further refine the image, which is by design of the SDXL:
 
-```
+```json
 {
     "refiner": {
        "model": "stabilityai/stable-diffusion-xl-refiner-1.0",
@@ -225,7 +225,19 @@ If the Controlnet is used with the Stable Diffusion XL base model, the `denoisin
 
 ## Task Config
 
+There are also some config options that can be tuned:
 
+```json
+{
+   "image_width": 512,       // The width of the generated image
+   "image_height": 512,      // The height of the generated image
+   "steps": 30,              // Step to run
+   "seed": 34736484,         // The seed used to initialize the random processes
+   "num_images": 6,          // The number of images to generate in a single task
+   "safety_checker": true,   // Filter the unsafe images
+   "cfg": 5                  // Classifier-Free Guidance, how close the images should be to the prompt given
+}
+```
 
 
 
