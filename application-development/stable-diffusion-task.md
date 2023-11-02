@@ -51,7 +51,7 @@ The Huggingface model ID for the original Stable Diffusion models are listed bel
 
 * **Stable Diffusion 1.5**
 
-```
+```json
 {
   "base_model": "runwayml/stable-diffusion-v1-5"
 }
@@ -59,7 +59,7 @@ The Huggingface model ID for the original Stable Diffusion models are listed bel
 
 * **Stable Diffusion 2.1**
 
-```
+```json
 {
   "base_model": "stabilityai/stable-diffusion-2-1"
 }
@@ -67,7 +67,7 @@ The Huggingface model ID for the original Stable Diffusion models are listed bel
 
 * **Stable Diffusion XL**
 
-```
+```json
 {
   "base_model": "stabilityai/stable-diffusion-xl-base-1.0"
 }
@@ -75,9 +75,9 @@ The Huggingface model ID for the original Stable Diffusion models are listed bel
 
 * **Custom Fine-tuned Checkpoints**
 
-Other custom fine-tuned checkpoints based on the original SD models can also be used, for example, the ChilloutMix model:
+Other custom fine-tuned checkpoints based on the original SD models can also be used, for example, the [ChilloutMix](https://huggingface.co/emilianJR/chilloutmix\_NiPrunedFp32Fix) model on the Huggingface:
 
-```
+```json
 {
   "base_model": "emilianJR/chilloutmix_NiPrunedFp32Fix"
 }
@@ -85,7 +85,23 @@ Other custom fine-tuned checkpoints based on the original SD models can also be 
 
 #### File Download URL
 
+A URL can also be used as the base model. The execution engine will download the file before executing the task.
 
+For example, if we want to use an SDXL fined-tuned checkpoint on Civitai. The webpage of the model is [https://civitai.com/models/169868/thinkdiffusionxl](https://civitai.com/models/169868/thinkdiffusionxl)the download link of the model file can be copied from the download button on the webpage: [https://civitai.com/api/download/models/190908](https://civitai.com/api/download/models/190908)
+
+We could use the model in the task as following:
+
+```json
+{
+  "base_model": "https://civitai.com/api/download/models/190908"
+}
+```
+
+
+
+{% hint style="info" %}
+Only Safetensors file is supported.
+{% endhint %}
 
 ## LoRA Models
 
