@@ -169,15 +169,48 @@ If preprocessing is not needed, just set the value of the `controlnet` section t
 
 ## Prompt
 
+Unlike the basic SD models, the length of the prompt is not limited in this framework. The prompt and the negative prompt are specified separately:
+
+```json
+{
+   "prompt": "a realistic portrait photo of a beautiful girl, blonde hair+++, smiling, facing the viewer",
+   "negative_prompt": "low resolution++, bad hands"
+}
+```
+
+#### Prompt Weighting
+
+Prompt weighting is supported using the [Compel](https://github.com/damian0815/compel) library. The basic idea is to put more plus signs (`+`) to give the word more weights. More complex usages can be found in the documentation of the Compel library.
+
 ## Textual Inversion
 
-## Task Config
+Textual Inversion models are also supported:
 
-## SDXL Refiner
+```
+{
+  "textual_inversion": "sd-concepts-library/cat-toy"
+}
+```
 
 ## VAE
 
-## Examples
+The VAE model used in the Stable Diffusion pipeline can also be replaced with another one, either from the Huggingface ID, or a file download URL:
+
+```
+{
+  "vae": "stabilityai/sd-vae-ft-mse"
+}
+```
+
+## SDXL Refiner
+
+
+
+## Task Config
+
+
+
+##
 
 
 
