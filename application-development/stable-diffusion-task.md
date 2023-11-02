@@ -39,7 +39,7 @@ The following is an intuitive look at a task definition:
 }
 ```
 
-## Base Models
+## Base Model
 
 The base model could be the original Stable Diffusion models, such as the Stable Diffusion 1.5 and the Stable Diffusion XL, or a checkpoint that is fine-tuned based on the original Stable Diffusion models.
 
@@ -87,7 +87,9 @@ Other custom fine-tuned checkpoints based on the original SD models can also be 
 
 A URL can also be used as the base model. The execution engine will download the file before executing the task.
 
-For example, if we want to use an SDXL fined-tuned checkpoint on Civitai. The webpage of the model is [https://civitai.com/models/169868/thinkdiffusionxl](https://civitai.com/models/169868/thinkdiffusionxl)the download link of the model file can be copied from the download button on the webpage: [https://civitai.com/api/download/models/190908](https://civitai.com/api/download/models/190908)
+For example, if we want to use an SDXL fined-tuned checkpoint on Civitai. The webpage of the model is [https://civitai.com/models/169868/thinkdiffusionxl](https://civitai.com/models/169868/thinkdiffusionxl) and the download link of the model file can be copied from the download button on the webpage:&#x20;
+
+[https://civitai.com/api/download/models/190908](https://civitai.com/api/download/models/190908)
 
 We could use the model in the task as following:
 
@@ -100,10 +102,10 @@ We could use the model in the task as following:
 {% hint style="info" %}
 Only `safetensors` format is supported in the download URL.
 
-The execution engine treats the download URL as a binary stream of a model file in the `safetensors` format. If other formats are used, or the content of the link is not a model file at all, the execution engine will throw an exception during the execution.
+The execution engine assumes the download URL to be a binary stream of a model file in the `safetensors` format. If other formats are used, or the content of the link is not a model file at all, the execution engine will throw an exception during the execution.
 {% endhint %}
 
-## LoRA Models
+## LoRA Model
 
 LoRA models can be specified using the same format as the base model: the Huggingface model ID or the file download URL. The weight of the LoRA model can also be set in the arguments:
 
@@ -121,6 +123,49 @@ The weight should be an integer between 1 and 100.
 If the LoRA model given is not compatible with the base model, for example, a LoRA model fine-tuned on the Stable Diffusion 1.5 is used, but the base model is set to be Stable Diffusion XL, the execution engine will also throw an exception.
 
 ## Controlnet
+
+The Controlnet section has two parts: the Controlnet model, and the preprocess method.&#x20;
+
+The Controlnet model also supports the Huggingface ID and the download URL, which is exactly the same as the LoRA model.
+
+The control image should be a PNG image encoded in the DataURL format. The DataURL string should be filled in the `image_dataurl` field.
+
+```json
+{
+   "controlnet": {
+      "model": "lllyasviel/control_v11p_sd15_openpose",
+      "weight": 90,
+      "image_dataurl": "base64,image/png:..."
+   }
+}
+```
+
+#### Image Preprocessing
+
+The image preprocessing function is implemented using the [`controlnet_aux`](https://github.com/patrickvonplaten/controlnet\_aux) project. All the preprocessing methods and models in this project can be used:
+
+```json
+{
+   "controlnet": {
+      "model": "lllyasviel/control_v11p_sd15_openpose",
+      "weight": 90,
+      "image_dataurl": "base64,image/png:...",
+      "preprocess": {
+         "method": "canny",
+         "args": {
+            "high_threshold": 200,
+            "low_threshold": 100
+         }
+      }
+   }
+}
+```
+
+Here is a list of all the available preprocess methods and their arguments:
+
+<table><thead><tr><th width="154.33333333333331">Method</th><th width="289">Arguments</th><th>Description</th></tr></thead><tbody><tr><td>canny</td><td>high_threshold, low_threshold</td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
+
+If preprocessing is not needed, just set the value of the `controlnet` section to be null, or just delete the section from the JSON.
 
 ## Prompt
 
