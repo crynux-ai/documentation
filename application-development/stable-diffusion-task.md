@@ -39,6 +39,8 @@ The following is an intuitive look at a task definition:
 }
 ```
 
+More examples of the different Stable Diffusion tasks can be found [in the GitHub repository](https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples).
+
 ## Base Model
 
 The base model could be the original Stable Diffusion models, such as the Stable Diffusion 1.5 and the Stable Diffusion XL, or a checkpoint that is fine-tuned based on the original Stable Diffusion models.
@@ -186,7 +188,7 @@ Prompt weighting is supported using the [Compel](https://github.com/damian0815/c
 
 Textual Inversion models are also supported:
 
-```
+```json
 {
   "textual_inversion": "sd-concepts-library/cat-toy"
 }
@@ -196,7 +198,7 @@ Textual Inversion models are also supported:
 
 The VAE model used in the Stable Diffusion pipeline can also be replaced with another one, either from the Huggingface ID, or a file download URL:
 
-```
+```json
 {
   "vae": "stabilityai/sd-vae-ft-mse"
 }
@@ -204,13 +206,26 @@ The VAE model used in the Stable Diffusion pipeline can also be replaced with an
 
 ## SDXL Refiner
 
+If the Stable Diffusion XL is selected as the base model in the task, the SDXL Refiner could also be used to further refine the image, which is by design of the SDXL:
 
+```
+{
+    "refiner": {
+       "model": "stabilityai/stable-diffusion-xl-refiner-1.0",
+       "denoising_cutoff": 80
+    }
+}
+```
+
+The `denoising_cutoff` is used to stop the denoising process earlier in the pipeline, when the noise level reaches the cutoff value, and leave the rest to the refiner model, which is called the [ensemble of expert denoisers](https://research.nvidia.com/labs/dir/eDiff-I/).
+
+{% hint style="info" %}
+If the Controlnet is used with the Stable Diffusion XL base model, the `denoising_cutoff` argument is not supported due to the current limitations in the [diffusers library](https://huggingface.co/docs/diffusers/index). If refiner is configured, it will be executed after the base model generation is completed, the cutoff value is ignored.
+{% endhint %}
 
 ## Task Config
 
 
-
-##
 
 
 
