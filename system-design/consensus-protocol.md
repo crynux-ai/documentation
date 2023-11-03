@@ -1,6 +1,38 @@
+---
+description: Decentralize the Infrastructure
+---
+
 # Consensus Protocol
 
-The consensus protocol makes sure no one could cheat the network, when everyone could freely join the network, and do whatever they want.
+The consensus protocol in the Hydrogen Network makes sure no one could cheat the network, where everyone could freely join the network, and do whatever they want.
 
-&#x20;For example, a malicious node could submit a random image to the task without actually perform the computation.
+For example, a malicious node could submit a random image to the network without actually perform the computation. If we leave the mission of discovering the cheating to the user, i.e. allowing the user to pay only after he verified the result image, then a malicious user could deny all the payment to use the network for free.
+
+The goal of the the consensus protocol in the Hydrogen Network is to find out whether an image is the correct output of a task, given the task arguments and the image. And if the image is correct, make sure the Node who summited the correct image get paid.
+
+The consensus protocol must be implemented using the smart contracts, and executed on the Blockchain, so that we don't need a trusted central party to enforce the protocol, who will be cheating himself given so much power.
+
+## Result Validation by Voting
+
+The result validation is simply implemented by comparing 3 results from 3 randomly selected Nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available Nodes, and notifies them to start the task. The Nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the Nodes are cheating or not.
+
+#### Similarity Comparison of the Images
+
+Due to some technical limitations, such as [this](https://github.com/pytorch/pytorch/issues/87992) ,and [this](https://pytorch.org/docs/stable/notes/randomness.html). It it nearly impossible to generate two exactly same images on two different devices. We could say that the randomness is the nature in the machine learning world.
+
+Luckily, we don't need the images to be exactly the same. If we could compute a similarity score between two results, and the score is high, the results are already **satisfied** to the application.&#x20;
+
+And yes, there will be some lower cost methods to generate a similar image than perform the actual SD computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
+
+The Hydrogen Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The Node submits the pHash of the images to the Blockchain, and the Blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
+
+#### Two Phase Result Disclosure On-Chain
+
+The pHash should not be submitted to the Blockchain directly,&#x20;
+
+#### Random Number Generation on the Blockchain
+
+#### Sequential Node Selection
+
+## Staking based Cheating Prevention
 
