@@ -68,9 +68,17 @@ Considering that to make this attack **practical**, the attacker must control a 
 
 Even if the attacker can not manipulate the selection result of the task, he could adopt the strategy that when he has only one node selected in a task, he will perform the computation honestly. However, he will skip the computation and submit fake results when he has two or more Nodes selected. The system has no way to identify this behavior.
 
-The idea is to avoid any chance, for anyone, to find out how many of his own nodes have been selected for a single task.
+The idea is to avoid any chance, for anyone, to find out whether two of his Nodes are executing the same task. The selected addresses could be hidden from the public by using the VRF, the task ID could even be hidden from the selected Nodes by using the ZKP. The malicious attacker could still find out whether two of his Nodes are executing the same task by comparing the task arguments.
 
-## Staking based Penalization&#x20;
+The only option left for us is the sequential node selection. The Blockchain will select one node at a time, and wait until the selected node has submitted the commitment, and then start the selection again. When a Node of the attacker has been selected to run the task, the attacker has no way to find out if his Node will be selected again in the next round. Then the attacker does not have the confidence to submit a fake result at this step.
+
+Even if the Node of the attacker has been selected twice in a single task. When the attacker finds out that he is selected again in the second selection round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
+
+The sequential node selection could solve the problem, but it significantly increases the execution time of a task by around 3 times of the time required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of Nodes in the whole network by himself, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
+
+## Staking based Penalization
+
+### The Expectation of the Income
 
 ## Task Error and Timeout
 
