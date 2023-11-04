@@ -114,5 +114,7 @@ $$
 
 Where k is the price of the task, and s is the number of the staked tokens for a Node.
 
+By increasing the number of staked tokens s, we could decrease the expectation E down to zero or even below. If E is below zero, there is no benefit to attack the system by starting more fake nodes. The attacking is highly likely to cause the attacker to loose money rather than earn.
+
 ## Task Error and Timeout
 
