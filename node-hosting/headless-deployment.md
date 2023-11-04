@@ -21,12 +21,12 @@ $ mkdir h_node
 $ cd h_node
 ```
 
-#### 2. Create the model cache folder and the config folder
+#### 2. Create the config folder
 
 ```sh
-$ mkdir config data
+$ mkdir config
 $ ls .
-config/ data/
+config/
 ```
 
 #### 3. Create the config file
@@ -39,7 +39,7 @@ Create a file named `config.yml` inside the config folder, and copy the content 
 
 ```sh
 $ ls .
-config/ data/
+config/
 
 $ ls config/
 config.yml
@@ -72,7 +72,14 @@ headless: true
 
 #### 5. Create `docker-compose.yml`&#x20;
 
-Create `docker-compose.yml` inside the working directory. And mount the config folder and model cache folder to the local folders we just created:
+Create `docker-compose.yml` inside the working directory:
+
+```
+$ ls .
+config/ docker-compose.yml
+```
+
+And mount the config folder to the local folder we just created:
 
 ```yaml
 ---
@@ -87,7 +94,6 @@ services:
     ports:
       - "127.0.0.1:7412:7412"
     volumes:
-      - "./data:/app/data"
       - "./config:/app/config"
     deploy:
       resources:
