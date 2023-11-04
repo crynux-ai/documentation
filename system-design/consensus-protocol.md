@@ -20,7 +20,7 @@ The result validation is simply implemented by comparing 3 results from 3 random
 
 Due to some technical limitations, such as [this](https://github.com/pytorch/pytorch/issues/87992) ,and [this](https://pytorch.org/docs/stable/notes/randomness.html). It it nearly impossible to generate two exactly same images on two different devices. We could say that the randomness is the nature in the machine learning world.
 
-Luckily, we don't need the images to be exactly the same. If we could compute a similarity score between two results, and the score is high, the results are already **satisfied** to the application.&#x20;
+Luckily, we don't need the images to be exactly the same. If we could compute a similarity score between two results, and the score is high, the results are already **satisfied** to the application.
 
 And yes, there will be some lower cost methods to generate a similar image than performing the actual SD computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
 
@@ -32,13 +32,14 @@ The pHash should not be submitted to the Blockchain directly, since a malicious 
 
 A two phase commitment-disclosure process is used to tackle this problem.
 
-* **Phase 1 - Submitting the commitment on-chain**
+* **Phase 1 - Submit the commitment on-chain**
 
 The Node should generated a random number locally, calculate the hash of the pHash concatenated by the random number, as the commitment, and then submit the commitment and the random number on-chain.
 
 ```javascript
 random_number = generate_random_number()
 commitment = hash(p_hash + random_number)
+submit_to_the_blockchain(commitment, random_number)
 ```
 
 The commitment will not leak any information about the pHash. And the Blockchain will wait for all the 3 Nodes to submit their commitments and the corresponding random numbers on-chain, and then go into phase 2.
@@ -47,13 +48,25 @@ The commitment will not leak any information about the pHash. And the Blockchain
 
 The honest Nodes could safely submit their pHash to the Blockchain now. The Blockchain will validate the pHash using the commitment and the random number that have been submitted on-chain in the last step. If the validation passes, the Blockchain goes into the next step to compare the pHashes between the Nodes, otherwise, the Blockchain will reject the pHash.
 
-The malicious Node could not learn anything about the pHashes of other nodes in the last step, before it has to submit a wrong commitment on-chain. Now that the malicious Node has already submitted a wrong commitment, even if the malicious Node could intercept a correct pHash from another Node at phase 2, it is too late since he can not use the correct pHash to pass the validation with the wrong commitment on-chain.&#x20;
+The malicious Node could not learn anything about the pHashes of other nodes in the last step, before it has to submit a wrong commitment on-chain. Now that the malicious Node has already submitted a wrong commitment, even if the malicious Node could intercept a correct pHash from another Node at phase 2, it is too late since he can not use the correct pHash to pass the validation with the wrong commitment on-chain.
 
 #### Random Number Generation on the Blockchain
 
+Generating random numbers on the Blockchain is then a critical step to the security of the whole network. Ethereum now has the support of `prevrando`, which can be used as the source of the random number. On the other Blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the [Verifiable Random Functions](https://en.wikipedia.org/wiki/Verifiable\_random\_function). However, strictly speaking, none of these methods are safe enough in our scenario.
+
+The attack one could perform, given that the result validation is effective, is for an attacker to host more Nodes by himself, and try to have two or more of his own Nodes selected for a single task. In which case the attacker could submit two identical fake results to cheat the Blockchain.
+
+If a Hydrogen Node is hosting the Blockchain node (and producing the blocks) itself, the last block hash, or `prevrando`, or the selection of the VRF, is known to the Node before the `CreateTask` transaction has been confirmed by the next block.  Which leaves a chance for the Node to find out if it is selected for a task ahead of time.
+
+Given the attacking method above, the Node could then reject the `CreateTask` transactions in which it can not cheat, i.e. not having two or more of his own Nodes selected in the task.
+
+By carefully constructing and organizing more adjacent blocks, the Node could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the Blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
+
+Considering that to make this attack **practical**, the attacker must control a significant large number of Nodes in the whole network by himself. The Hydrogen Network chooses to ignore this situation and uses a simple system architecture of using the `prevrando` on the supported Blockchains, and the last block hash on other platforms.
+
 #### Sequential Node Selection
 
-## Staking based Cheating Prevention
+## Staking based Penalization&#x20;
 
 ## Task Error and Timeout
 
