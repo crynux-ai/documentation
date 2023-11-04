@@ -19,7 +19,8 @@
 
 * [Application Workflow](application-development/application-workflow.md)
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
-* [Hydrogen SDK](application-development/hydrogen-sdk.md)
+* [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
+* [Hydrogen Network SDK](application-development/hydrogen-network-sdk.md)
 
 ## Troubleshooting
 

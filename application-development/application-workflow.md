@@ -136,38 +136,8 @@ If the transaction is reverted, no event will be emitted. So the creation result
 
 When the transaction of the task creation is confirmed, the next step is to upload the actual JSON string of the task arguments to the Relay. The API endpoint to be used is:
 
-{% swagger method="post" path="" baseUrl="https://relay.h.crynux.ai/v1/inference_tasks" summary="Upload task arguments to the Relay" %}
-{% swagger-description %}
-
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="task_args" required="true" %}
-The task arguments in JSON string
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="task_id" required="true" %}
-The task ID on-chain
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="timestamp" required="true" %}
-Unix timestamp
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="signature" required="true" %}
-The request signature
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="Upload success" %}
-
-{% endswagger-response %}
-
-{% swagger-response status="400: Bad Request" description="Validation errors" %}
-
-{% endswagger-response %}
-
-{% swagger-response status="500: Internal Server Error" description="Unhandled exceptions on the server" %}
-
-{% endswagger-response %}
+{% swagger src="https://relay.h.crynux.ai/openapi.json" path="/v1/inference_tasks" method="post" %}
+[https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
 {% endswagger %}
 
 The complete API documentation can be found in the [OpenAPI specifications](https://relay.h.crynux.ai/static/api\_docs.html).
@@ -200,38 +170,8 @@ The Image Generator uses the first method, the source code of the block synchron
 
 The last step is to get the images from the Relay. This is done by calling the following API of the Relay:
 
-{% swagger method="get" path="" baseUrl="https://relay.h.crynux.ai/v1/inference_tasks/<:task_id>/results/<:image_number>" summary="Get the images from the Relay" %}
-{% swagger-description %}
-
-{% endswagger-description %}
-
-{% swagger-parameter in="path" name="task_id" required="true" %}
-The task ID on chain
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="image_number" required="true" %}
-The number of the image
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="timestamp" required="true" %}
-The Unix timestamp
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="signature" required="true" %}
-The request signature
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="The binary content of the image" %}
-
-{% endswagger-response %}
-
-{% swagger-response status="400: Bad Request" description="Image not found" %}
-
-{% endswagger-response %}
-
-{% swagger-response status="500: Internal Server Error" description="Unhandled exceptions on the server" %}
-
-{% endswagger-response %}
+{% swagger src="https://relay.h.crynux.ai/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
+[https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
 {% endswagger %}
 
 The signature and timestamp is still required. The URL could be treated like an image downloading link as it returns the binary stream of the image content directly.
