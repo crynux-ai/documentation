@@ -91,8 +91,6 @@ services:
     image: ghcr.io/crynux-ai/h-node:latest
     container_name: h_node
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:7412:7412"
     volumes:
       - "./config:/app/config"
     deploy:
