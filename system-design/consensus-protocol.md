@@ -92,7 +92,7 @@ And more importantly, if not panelized properly, the attackers could still attac
 
 ### Attack based on the Probability
 
-Now that the attacker can not do anything undiscoverable in a single task, he can still perform attacks by starting as many Nodes as he could. All the malicious Nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious Nodes have been selected in a task, in which situation the attacker wins regardless of the validation method used on the Blockchain.
+Now that the attacker can not do anything undiscoverable in a single task, he can still perform attacks by starting as many Nodes as he could. All the malicious Nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious Nodes have been selected in a task, in which case the attacker wins regardless of the validation method used on the Blockchain.
 
 Let's call this a success of the attacker. It is then the number of the probability of success that should be considered. If the probability is high, even if the malicious behavior is panelized, there will still be rooms for the attacker to make profit.
 
@@ -131,6 +131,10 @@ Neither are the applications reliable. The tasks submitted by the applications m
 ### Task Error Reporting
 
 When an exception occurred during the task execution on the node, if the exception is not recoverable, the node will report the error to the Blockchain.
+
+The error reporting is treated as a normal task result on the Blockchain. If more than 2 nodes has reported the error to the Blockchain, the task is aborted. If a node reported the error while the other 2 nodes submitted the computation results correctly, the node will be slashed.
+
+The Hydrogen Network allows the model to be downloaded from an external link in the task. However, there might be network issues when the node is downloading the model. It is hard to tell whether the network issue is common to all the 3 nodes, or the whether network issue is temporary.
 
 ### Task Cancellation on Timeout
 
