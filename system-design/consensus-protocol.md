@@ -96,7 +96,7 @@ Now that the attacker can not do anything undiscoverable in a single task, he ca
 
 Let's call this a success of the attacker. It is then the number of the probability of success that should be considered. If the probability is high, even if the malicious behavior is panelized, there will still be rooms for the attacker to make profit.
 
-### The Expectation of the Income
+### Expectation of the Income
 
 The probability of a successful attack (an attacker getting more than 2 nodes of himself selected in a task) could be calculated as:
 
@@ -104,7 +104,7 @@ $$
 p = \frac{ C_d^2 * C_h^1 + C_d^3}{C_{d+h}^3}
 $$
 
-Where h is the number of the honest nodes, and d is the number of the dishonest nodes the attacker possesses.
+Where **h** is the number of the honest nodes, and **d** is the number of the dishonest nodes the attacker possesses.
 
 And the expectation of the income from cheating is given by:
 
@@ -112,9 +112,26 @@ $$
 E = p * k - (1-p) * s
 $$
 
-Where k is the price of the task, and s is the number of the staked tokens for a Node.
+Where _**k**_ is the price of the task, and _**s**_ is the number of the staked tokens for a Node.
 
-By increasing the number of staked tokens s, we could decrease the expectation E down to zero or even below. If E is below zero, there is no benefit to attack the system by starting more fake nodes. The attacking is highly likely to cause the attacker to loose money rather than earn.
+By increasing the number of the staked tokens _**s**_, we could decrease the expectation _**E**_ down to zero or even below. If _**E**_ is below zero, there is no benefit to attack the system by starting more fake nodes. The attacking is highly likely to cause the attacker to loose money rather than earn.
+
+The safety of the network now depends on the calculated value of the amount of the staked tokens _**s**_. Given a network size (the number of the total nodes in the network), and a target ratio of the malicious nodes (under which the network is safe), the probability of a successful attack _**p**_ is then fixed. Setting _**E**_ to zero, the amount of the staked tokens required for a single Node _**s**_ is determined by:
+
+$$
+s = \frac{p * k}{1-p}
+$$
 
 ## Task Error and Timeout
 
+Since the network is a loosely coupled P2P network formed by the home computers and even the laptops, we can not put any assumptions on the reliability of the nodes. A node could lost contact to the network at any minute, while on the Blockchain, it is still marked as available, or executing a task.
+
+Neither are the applications reliable. The tasks submitted by the applications might not be executable at all, such as a mismatched combination of the SD1.5 base model and a LoRA model for the SDXL.
+
+### Task Error Reporting
+
+When an exception occurred during the task execution on the node, if the exception is not recoverable, the node will report the error to the Blockchain.
+
+### Task Cancellation on Timeout
+
+### Expectation of the Income by Exploiting the Timeout
