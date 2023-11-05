@@ -101,10 +101,10 @@ Let's call this a success of the attacker. It is then the number of the probabil
 The probability of a successful attack (an attacker getting more than 2 nodes of himself selected in a task) could be calculated as:
 
 $$
-p = \frac{ C_d^2 * C_h^1 + C_d^3}{C_{d+h}^3}
+p(h, d) = \frac{ C_d^2 * C_h^1 + C_d^3}{C_{d+h}^3}
 $$
 
-Where **h** is the number of the honest nodes, and **d** is the number of the dishonest nodes the attacker possesses.
+Where _**h**_ is the number of the honest nodes, and _**d**_ is the number of the dishonest nodes the attacker possesses.
 
 And the expectation of the income from cheating is given by:
 
@@ -134,8 +134,36 @@ When an exception occurred during the task execution on the node, if the excepti
 
 The error reporting is treated as a normal task result on the Blockchain. If more than 2 nodes has reported the error to the Blockchain, the task is aborted. If a node reported the error while the other 2 nodes submitted the computation results correctly, the node will be slashed.
 
-The Hydrogen Network allows the model to be downloaded from an external link in the task. However, there might be network issues when the node is downloading the model. It is hard to tell whether the network issue is common to all the 3 nodes, or the whether network issue is temporary.
+The Hydrogen Network allows the model to be downloaded from an external link. However, there might be network issues when the node is downloading the model. It is hard to tell whether the network issue is common to all the 3 nodes, or whether the network issue is temporary.
+
+To avoid the slashing of the honest nodes by mistake, reporting error should be used only when the node is 100% sure it is the error of the task arguments, rather than the network issue. The rest of the cases should be taken care of by the timeout mechanism.
+
+If the task is aborted due to error reporting, the tokens will not be returned to the application, since  the nodes have already spend some resources on the task, and it is the application to blame for the task error.
 
 ### Task Cancellation on Timeout
 
+The consensus protocol requires the submission of the commitments of all the 3 nodes. If a selected node goes offline before submitting the commitment to the Blockchain, the other 2 nodes will have to wait for an unlimited time, which is not tolerable for both the nodes and the applications.
+
+The timeout mechanism is introduced to solve this problem. After a pre-defined period, all the 3 nodes, and the application, are allowed to submit the request to cancel the task on the Blockchain. Once submitted, the Blockchain will abort the task immediately&#x20;
+
 ### Expectation of the Income by Exploiting the Timeout
+
+The timeout mechanism introduces a new vulnerability to the network. The attacker, starting as many nodes as he could, will wait for the timeout if he finds out that he has no more than two nodes of his own selected in the task, to escape from the penalization, and submit fake results in other cases.&#x20;
+
+We can never tell between an intended offline and an accidental offline. As long as the timeout mechanism exists, we can not eliminate this behavior technically. What we can do is to limit the intention economically.
+
+By controlling the required length of the period, given the number of the honest nodes and the number of malicious nodes an attacker started, we can calculate an expected income for an attacker. Since starting a node requires the staking of certain amount of tokens, the income becomes an interest.
+
+The probability _**p**_ of an attacker getting more than 2 nodes of himself selected in a task is already given above. To get such a probability, the amount of tokens the attacker has to stake is:
+
+$$
+T(p) = s * d = \frac{p * k * d}{1-p}
+$$
+
+The daily interest of these tokens is then:
+
+$$
+I(p) = \frac{ 86400 * p * k }{ t * T } = \frac{86400*(1-p)}{t * d}
+$$
+
+Where _**t**_ is the period of the timeout in seconds. We can see that the interest is only related to the timeout period and the number of the honest and dishonest nodes. By extending the period, we could reduce the interest to a value that no one will want to try it.
