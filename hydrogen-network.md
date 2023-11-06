@@ -20,7 +20,7 @@ The Hydrogen Network is running on a private Blockchain whose node can be access
 https://block-node.crynux.ai/rpc
 ```
 
-The Blockchain is built using the Frontier project, which contains an EVM running on top of the Substrate Blockchain. The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
+The Blockchain is built using the [Frontier project](https://paritytech.github.io/frontier/), which contains an EVM running on top of the [Substrate Blockchain](https://substrate.io/). The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
 
 The Hydrogen Network is coordinated by three smart contracts on the Blockchain:
 
