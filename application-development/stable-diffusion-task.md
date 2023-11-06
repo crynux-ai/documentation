@@ -11,7 +11,7 @@ The Stable Diffusion Task Framework has two components:
 
 The task definition is represented in the key-value pairs that can be transformed into, among many other formats, a JSON string, which can be validated using a JSON schema. And the validation tools exist for most of the popular programming languages.
 
-The execution engine is integrated into the Node of the Hydrogen Network, and the JSON string format of the task definition is used to send tasks in the Hydrogen Network.
+The execution engine is integrated into the node of the Hydrogen Network, and the JSON string format of the task definition is used to send tasks in the Hydrogen Network.
 
 The following is an intuitive look at a task definition:
 
@@ -149,7 +149,7 @@ The image preprocessing function is implemented using the [`controlnet_aux`](htt
 ```json
 {
    "controlnet": {
-      "model": "lllyasviel/control_v11p_sd15_openpose",
+      "model": "lllyasviel/sd-controlnet-canny",
       "weight": 90,
       "image_dataurl": "base64,image/png:...",
       "preprocess": {
@@ -242,7 +242,7 @@ There are also some config options that can be tuned:
 ```
 
 {% hint style="info" %}
-Hydrogen Network requires a deterministic image generation process, which means the images generated on the different Nodes should be as close as possible, given the same task definition, which is required for the consensus protocol to work. So the seed is left as a required argument in the task definition so that all the Nodes could use the same seed to initialize their random number generators, which will hopefully produce the same random numbers across all the Nodes.
+Hydrogen Network requires a deterministic image generation process, which means the images generated on the different nodes, given the same task definition, should be as close as possible. This is a requirement for the consensus protocol to work. The seed is left as a required argument in the task definition so that all the nodes could use the same seed to initialize their random number generators, which will hopefully produce the same random numbers across all the nodes.
 
 Beside the seed, the Stable Diffusion Task Framework has been implemented to maximize the reproducibility, for all the components used, across the whole image generation process.&#x20;
 {% endhint %}
