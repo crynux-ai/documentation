@@ -50,7 +50,7 @@ The reason for this process is explained in the consensus protocol:
 [consensus-protocol.md](consensus-protocol.md)
 {% endcontent-ref %}
 
-The disclosure process starts by submitting a hash of the combination of the pHash and a random number, and then submitting the actual pHash to the Blockchain.
+The disclosure process for a node starts by submitting a hash of the combination of the pHash and a random number, and then disclosing the actual pHash to the Blockchain after receiving the `CommitmentsReady` events from the Blockchain, which will only be emitted when the Blockchain receives all the 3 commitments.
 
 The Blockchain compares the pHashes from all the 3 nodes to determine whether the result is correct, and whether the nodes are cheating.
 
@@ -69,3 +69,11 @@ The orange color indicates all the possible states and transitions of the task c
 ## Result Retrieval
 
 <figure><img src="../.gitbook/assets/ce7d4b2201ae738da60128e058f5a1c.png" alt=""><figcaption><p>The Sequential Graph of Result Retrieval</p></figcaption></figure>
+
+The application will monitor the Blockchain for the events, after the initial creation of the task on-chain. If the `TaskSuccess` event is received, the application could get the images from the relay.
+
+{% hint style="info" %}
+Since the images are uploaded by the node after the node receives the `TaskSuccess` event as well, there is a short delay between the event has been emitted and the images have been uploaded. Before the images are uploaded, the relay will return `400 File not found` to the application. The application should take it into consideration.&#x20;
+{% endhint %}
+
+If the `TaskAborted` event is received, the application could receive the abort reason as the argument in the event. The application will have to retry the task if needed.
