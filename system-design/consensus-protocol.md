@@ -170,7 +170,7 @@ $$
 
 Recall that _**k**_ is the price of a single task.
 
-To reach the fixed probability _**p**_, the attacker has to start _**d**_ malicious nodes, for each of which he has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
+To reach the fixed probability _**p**_, the attacker has to start _**d**_ malicious nodes, for each of the nodes he has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
 
 $$
 T(p) = s * d = \frac{p * k * d}{1-p}
