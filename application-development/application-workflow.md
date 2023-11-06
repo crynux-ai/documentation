@@ -14,6 +14,12 @@ The high level workflow is illustrated in the sequential graph below:
 
 <figure><img src="../.gitbook/assets/22751d940926cfd0f02816980929bbb (1).png" alt=""><figcaption><p>The Sequential Graph of the Workflow</p></figcaption></figure>
 
+A more detailed and complete workflow involving all the network participants can be found in the task lifecycle:
+
+{% content-ref url="../system-design/task-lifecycle.md" %}
+[task-lifecycle.md](../system-design/task-lifecycle.md)
+{% endcontent-ref %}
+
 The application starts the workflow by invoking the `CreateTask` method of the smart contract using the prepared wallet. The hash of the task arguments is passed to the method, which is used by the Nodes to verify the actual task arguments received from the Relay.
 
 The smart contract transfers the required amount of the CNX tokens from the application wallet to its own address. The tokens will be transferred to the Nodes after the task is completed, and will be returned to the application wallet if the task is not completed successfully.
