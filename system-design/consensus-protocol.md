@@ -182,4 +182,4 @@ $$
 IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{t * d}
 $$
 
-Where _**t**_ is the period of timeout in seconds. By extending the period _**t**_, we could reduce the interest rate to a value that no one will be interested.
+Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could reduce the interest rate to a value that no one will be interested.
