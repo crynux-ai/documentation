@@ -12,21 +12,15 @@ The goal of the the consensus protocol in the Hydrogen Network is to find out wh
 
 The consensus protocol must be implemented using the smart contracts, and executed on the Blockchain, so that we don't need a trusted central party to enforce the execution of the protocol, who will be cheating himself given so much power.
 
-## Lifecycle of a Task
+Before diving deep into the discussions of the design and choices of each part, make sure you have already familiar with the overall task lifecycle:
 
-Let's start by having a look at the whole lifecycle of a task.
-
-The task is firstly created on the Blockchain, by the application. The Blockchain dispatches the task to 3 randomly selected nodes. The nodes execute the task, and report the results to the Blockchain. The Blockchain validates the results, if correct, pays tokens to the nodes. After the images are uploaded to the Relay, the task is finished.
-
-The node joins the Hydrogen Network by staking certain amount of tokens. After the staking, the node will be in the candidate list to be selected by the Blockchain.
-
-The following is a sequential graph that illustrates the whole lifecycle of a task.
-
-
+{% content-ref url="task-lifecycle.md" %}
+[task-lifecycle.md](task-lifecycle.md)
+{% endcontent-ref %}
 
 ## Result Validation by Voting
 
-The result validation is simply implemented by comparing 3 results from 3 randomly selected Nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available Nodes, and notifies them to start the task. The Nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the Nodes are cheating or not.
+The result validation is simply implemented by comparing 3 results from 3 randomly selected nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available nodes, and notifies them to start the task. The nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the nodes are cheating or not.
 
 ### Similarity Comparison of the Images
 
@@ -34,23 +28,23 @@ Due to some technical limitations, such as [this](https://github.com/pytorch/pyt
 
 Luckily, we don't need the images to be exactly the same. If we could compute a similarity score between two results, and the score is high, the results are already **satisfied** to the application.
 
-And yes, there will be some lower cost methods to generate a similar image than performing the actual SD computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
+And yes, there will be some lower cost methods to generate a similar image than performing the actual Stable Diffusion computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
 
-The Hydrogen Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The Node submits the pHash of the images to the Blockchain, and the Blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
+The Hydrogen Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The node submits the pHash of the images to the Blockchain, and the Blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
 
 {% hint style="info" %}
-The similarity algorithms exist for not only the images, but also the texts, audios, videos  and even files. The truth is we can calculate similarities between all kinds of the digital data, it is just the accuracy and the efficiency that must be carefully considered. So the consensus protocol adopted in the Hydrogen Network could also be extended to support SD training tasks and GPT tasks. Which is exactly what we will do in the next versions of the Crynux Network.
+The similarity algorithms exist for not only the images, but also the texts, audios, videos  and even files. The truth is we can calculate similarities between all kinds of the digital data, it is just the accuracy and the efficiency that must be carefully considered. So the consensus protocol adopted in the Hydrogen Network could also be extended to support the Stable Diffusion training tasks and GPT tasks. Which is exactly what we will do in the next versions of the Crynux Network.
 {% endhint %}
 
 ### Two Phases Result Disclosure On-Chain
 
-The pHash should not be submitted to the Blockchain directly, since a malicious Node might intercept the pHash from other nodes, and submit it to the Blockchain as it is generated by itself.
+The pHash should not be submitted to the Blockchain directly, since a malicious node might intercept the pHash from other nodes, and submit it to the Blockchain as it is generated by itself.
 
-A two phase commitment-disclosure process is used to tackle this problem.
+A two-phase commitment-disclosure process is used to tackle this problem.
 
 #### **Phase 1 - Submit the commitment on-chain**
 
-The Node should generated a random number locally, calculate the hash of the pHash concatenated by the random number, as the commitment, and then submit the commitment and the random number on-chain.
+The node should generated a random number locally, calculate the hash of the pHash concatenated by the random number, as the commitment, and then submit the commitment and the random number on-chain.
 
 ```javascript
 random_number = generate_random_number()
@@ -58,55 +52,57 @@ commitment = hash(p_hash + random_number)
 submit_to_the_blockchain(commitment, random_number)
 ```
 
-The commitment will not leak any information about the pHash. And the Blockchain will wait for all the 3 Nodes to submit their commitments and the corresponding random numbers on-chain, and then go into phase 2.
+The commitment will not leak any information about the pHash. And the Blockchain will wait for all the 3 nodes to submit their commitments and the corresponding random numbers on-chain, and then go into phase 2.
 
 #### **Phase 2 - Disclose the pHash on-chain**
 
-The honest Nodes could safely submit their pHash to the Blockchain now. The Blockchain will validate the pHash using the commitment and the random number that have been submitted on-chain in the last step. If the validation passes, the Blockchain goes into the next step to compare the pHashes between the Nodes, otherwise, the Blockchain will reject the pHash.
+The honest nodes could safely submit their pHash to the Blockchain now.&#x20;
 
-The malicious Node could not learn anything about the pHashes of other nodes in the last step, before it has to submit a wrong commitment on-chain. Now that the malicious Node has already submitted a wrong commitment, even if the malicious Node could intercept a correct pHash from another Node at phase 2, it is too late since he can not use the correct pHash to pass the validation with the wrong commitment on-chain.
+The Blockchain will validate the pHash using the commitment and the random number that have been submitted on-chain in the last step. If the validation passes, the Blockchain goes into the next step to compare the pHashes between the Nodes, otherwise, the Blockchain will reject the pHash.
+
+The malicious node could not learn anything about the pHashes of other nodes in the last step, before it has to submit a wrong commitment on-chain. Now that the malicious node has already submitted a wrong commitment, even if the malicious node could intercept a correct pHash from another node at phase 2, it is too late since he can not use the correct pHash to pass the validation with the wrong commitment on-chain.
 
 ### Random Number Generation on the Blockchain
 
-Generating random numbers on the Blockchain is then a critical step to the security of the whole network. Ethereum now has the support of `prevrando`, which can be used as the source of the random number. On the other Blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the [Verifiable Random Functions](https://en.wikipedia.org/wiki/Verifiable\_random\_function). However, strictly speaking, none of these methods are safe enough in our scenario.
+Generating random numbers on the Blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other Blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the [Verifiable Random Functions](https://en.wikipedia.org/wiki/Verifiable\_random\_function). Strictly speaking, however, none of these methods are safe enough in our scenario.
 
-The attack one could perform, given that the result validation is effective, is for an attacker to host more Nodes by himself, and try to have two or more of his own Nodes selected for a single task. In which case the attacker could submit two identical fake results to cheat the Blockchain.
+The attack one could perform, given that the result validation is effective, is for an attacker to host more nodes by himself, and try to have two or more of his own nodes selected for a single task. In which case the attacker could submit two identical fake results to cheat the Blockchain.
 
-If a Hydrogen Node is hosting the Blockchain node (and producing the blocks) itself, the last block hash, or `prevrando`, or the selection of the VRF, is known to the Node before the `CreateTask` transaction has been confirmed by the next block.  Which leaves a chance for the Node to find out if it is selected for a task ahead of time.
+If an attacker is hosting the Blockchain node (and producing the blocks) himself, the last block hash, or `prevrando`, or the selection of the VRF, is known to him before the `CreateTask` transaction has been confirmed by the next block.  This leaves a chance for the attacker to find out if his nodes are selected for a task ahead of time.
 
-Given the attacking method above, the Node could then reject the `CreateTask` transactions in which it can not cheat, i.e. not having two or more of his own Nodes selected in the task.
+The attacker could then reject the `CreateTask` transactions in which it can not cheat, i.e. not having two or more of his own nodes selected in the task.
 
-By carefully constructing and organizing more adjacent blocks, the Node could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the Blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
+By carefully constructing and organizing more adjacent blocks, the attacker could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the Blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
 
-Considering that to make this attack **practical**, the attacker must control a significant large number of Nodes in the whole network by himself. The Hydrogen Network chooses to ignore this situation and uses a simple system architecture of using the `prevrando` on the supported Blockchains, and the last block hash on other platforms.
+Considering that to make this attack **practical**, the attacker must control a significant large number of nodes in the whole network by himself. The Hydrogen Network chooses to ignore this problem and uses the `prevrando` on the supported Blockchains, and uses the last block hash on other Blockchains.
 
 ### Sequential Node Selection
 
-Even if the attacker can not manipulate the selection result of the task, he could adopt the strategy that when he has only one node selected in a task, he will perform the computation honestly. However, he will skip the computation and submit fake results when he has two or more Nodes selected. The system has no way to identify this behavior.
+Even if the attacker can not manipulate the selection result of the task, he could use the strategy that when he has only one node selected in a task, he will perform the computation honestly. However, he will skip the computation and submit fake results when he has two or more Nodes selected. The network has no way to identify this behavior.
 
-The idea is to avoid any chance, for anyone, to find out whether two of his Nodes are executing the same task. The selected addresses could be hidden from the public by using the VRF, the task ID could even be hidden from the selected Nodes by using the ZKP. The malicious attacker could still find out whether two of his Nodes are executing the same task by comparing the task arguments.
+The idea is to avoid any chance, for anyone, to find out whether two of his nodes are executing the same task. The selected addresses could be hidden from the public by using the VRF, the task ID could even be hidden from the selected nodes by using the ZKP. The malicious attacker could still find out whether two of his nodes are executing the same task by comparing the task arguments.
 
-The only option left for us is the sequential node selection. The Blockchain will select one node at a time, and wait until the selected node has submitted the commitment, and then start the selection again. When a Node of the attacker has been selected to run the task, the attacker has no way to find out if his Node will be selected again in the next round. Then the attacker does not have the confidence to submit a fake result at this step.
+The only option left for us is the sequential node selection. The Blockchain will select one node at a time, and wait until the selected node has submitted the commitment, and then start the selection again. When a node of the attacker has been selected to run the task, the attacker has no way to find out if his nodes will be selected again in the next round. Then the attacker does not have the confidence to submit a fake result at this step.
 
-Even if the Node of the attacker has been selected twice in a single task. When the attacker finds out that he is selected again in the second round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
+If the nodes of the attacker have been selected twice in a single task. When the attacker finds out that he is selected again in the second round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
 
-The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of the time required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of Nodes in the whole network by himself, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
+The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
 ## Staking based Penalization
 
 After the malicious behaviors could all be identified using the validation schema above, it is now time to panelize the malicious behaviors.&#x20;
 
-The penalization is implemented by asking the Nodes to stake certain amount of tokens on the Blockchain before joining the network. If the malicious behavior of a Node is identified, the tokens it staked will be slashed.
+The penalization is implemented by asking the nodes to stake certain amount of tokens on the Blockchain before joining the network. If the malicious behavior of a node is identified, the tokens will be slashed.
 
-If the malicious behaviors are not penalized, there will always be Nodes that are submitting fake results to the network. Even if the behaviors could be identified and handled by the Blockchain, this will increase the chances of the task failure, reducing the efficiency of the network.
+If the malicious behaviors are not penalized, there will always be nodes that are submitting fake results to the network. Even if the behaviors could be identified and handled by the Blockchain, it will increase the chances of the task failure, reducing the efficiency of the network.
 
-And more importantly, if not panelized properly, the attackers could still attack the system from the statistical aspect.
+And more importantly, if not panelized properly, the attackers could still attack the system from a statistical perspective.
 
 ### Attack based on the Probability
 
-Now that the attacker can not do anything undiscoverable in a single task, he can still perform attacks by starting as many Nodes as he could. All the malicious Nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious Nodes have been selected in a task, in which case the attacker wins regardless of the validation method used on the Blockchain.
+Now that the attacker can not do anything malicious that is undiscoverable in a single task, he can still perform attacks by starting as many nodes as he could. All the malicious nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious nodes have been selected in a same task, in which case the attacker wins regardless of the validation method used on the Blockchain.
 
-Let's call this a success of the attacker. It is then the number of the probability of success that should be considered. If the probability is high, even if the malicious behavior is panelized, there will still be rooms for the attacker to make profit.
+Let's call this a success of the attacker. It is then the number of the probability of success that should be considered. If the probability is high, even if the malicious behavior is panelized, there will still be room for the attacker to make profit.
 
 ### Expectation of the Income
 
@@ -124,11 +120,11 @@ $$
 E = p * k - (1-p) * s
 $$
 
-Where _**k**_ is the price of the task, and _**s**_ is the number of the staked tokens for a Node.
+Where _**k**_ is the price of the task, and _**s**_ is the number of the staked tokens for a node.
 
 By increasing the number of the staked tokens _**s**_, we could decrease the expectation _**E**_ down to zero or even below. If _**E**_ is below zero, there is no benefit to attack the system by starting more fake nodes. The attacking is highly likely to cause the attacker to loose money rather than earn.
 
-The safety of the network now depends on the calculated value of the amount of the staked tokens _**s**_. Given a network size (the number of the total nodes in the network), and a target ratio of the malicious nodes (under which the network is safe), the probability of a successful attack _**p**_ is then fixed. Setting _**E**_ to zero, the amount of the staked tokens required for a single Node _**s**_ is determined by:
+The safety of the network now depends on the calculated value of the amount of the staked tokens _**s**_. Given a network size (the number of the total nodes in the network), and a target ratio of the malicious nodes (under which the network is safe), the probability of a successful attack _**p**_ is then fixed. Setting _**E**_ to zero, the amount of the staked tokens required for a single node _**s**_ is determined by:
 
 $$
 s = \frac{p * k}{1-p}
