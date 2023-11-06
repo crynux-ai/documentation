@@ -12,6 +12,18 @@ The goal of the the consensus protocol in the Hydrogen Network is to find out wh
 
 The consensus protocol must be implemented using the smart contracts, and executed on the Blockchain, so that we don't need a trusted central party to enforce the execution of the protocol, who will be cheating himself given so much power.
 
+## Lifecycle of a Task
+
+Let's start by having a look at the whole lifecycle of a task.
+
+The task is firstly created on the Blockchain, by the application. The Blockchain dispatches the task to 3 randomly selected nodes. The nodes execute the task, and report the results to the Blockchain. The Blockchain validates the results, if correct, pays tokens to the nodes. After the images are uploaded to the Relay, the task is finished.
+
+The node joins the Hydrogen Network by staking certain amount of tokens. After the staking, the node will be in the candidate list to be selected by the Blockchain.
+
+The following is a sequential graph that illustrates the whole lifecycle of a task.
+
+
+
 ## Result Validation by Voting
 
 The result validation is simply implemented by comparing 3 results from 3 randomly selected Nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available Nodes, and notifies them to start the task. The Nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the Nodes are cheating or not.
