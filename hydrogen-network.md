@@ -20,6 +20,30 @@ If you are an application developer, get started from here:
 [application-workflow.md](application-development/application-workflow.md)
 {% endcontent-ref %}
 
+#### Stable Diffusion Task Framework
+
+A general framework to define and execute the Stable Diffusion tasks is developed to be used in the Hydrogen Network. A wide range of the common task types and configurations are supported. Just describe the task using JSON, and send it to the inference API:
+
+* Unified task definition for Stable Diffusion 1.5, 2.1 and Stable Diffusion XL
+* SDXL - Base + Refiner ([ensemble of expert denoisers](https://research.nvidia.com/labs/dir/eDiff-I/)) and standalone Refiner
+* Controlnet and various preprocessing methods
+* LoRA
+* VAE
+* Textual Inversion
+* Long prompt
+* Prompt weighting using [Compel](https://github.com/damian0815/compel)
+* Auto LoRA and Textual Inversion model downloading from non-Huggingface URL
+
+The following document gives more information on how to write a Stable Diffusion task:
+
+{% content-ref url="application-development/stable-diffusion-task.md" %}
+[stable-diffusion-task.md](application-development/stable-diffusion-task.md)
+{% endcontent-ref %}
+
+And more examples can be found in the GitHub repository:
+
+{% embed url="https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples" %}
+
 #### The Image Generator
 
 The Image Generator is a showcase application that provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser.&#x20;
@@ -28,7 +52,7 @@ The users could select between different versions of the Stable Diffusion models
 
 Thanks to the Hydrogen Network, the application could be used on the devices that do not have a capable GPU integrated. If the browser exists, the Image Generator could be used.
 
-Play with it yourself at:
+Give it a try:
 
 {% embed url="https://ig.crynux.ai" %}
 
@@ -42,15 +66,39 @@ The Image Generator also serves as a reference implementation for the traditiona
 
 {% embed url="https://github.com/crynux-ai/ig-web" %}
 
+## Node Hosting
+
+The contributor of the spared computation power could join the network by hosting a node on the local computer. The node could be easily started using Docker, in just a few steps.
+
+#### Home Computers
+
+A web user interface is provided inside the node, for the users who are hosting the node on the home computers. The WebUI could be used to monitor the running status of the node, and to control the node to join or quit the network. A getting started guide can be found in the follow document:
+
+{% content-ref url="node-hosting/join-the-network.md" %}
+[join-the-network.md](node-hosting/join-the-network.md)
+{% endcontent-ref %}
+
+#### Servers
+
+For the server operators, the node could be hosted in a headless mode where no WebUI is accessible. The node will automatically join the network on startup, and quit the network before termination. Follow the document below to start a node in headless mode:
+
+{% content-ref url="node-hosting/headless-deployment.md" %}
+[headless-deployment.md](node-hosting/headless-deployment.md)
+{% endcontent-ref %}
+
 ## Consensus Protocol
 
-The consensus protocol ensures that&#x20;
+The consensus protocol ensures that all the malicious behaviors could be identified and panelized in the network. Thanks to the consensus protocol, the Hydrogen Network allows everyone to join freely as the computation power contributor, without asking for permissions.
 
-## Stable Diffusion Task Framework
+The consensus protocol works by asking the node to stake certain amount of tokens before joining the network, and if the malicious behavior is detected from the node, the staked tokens will be slashed. By a calculation based on the probability, the attacking against the network will highly likely to cause the attacker to loose money rather than earn.
 
-#### Model Selection
+The malicious behaviors are discovered by dispatching the same task to 3 nodes randomly at the same time, and compare the results returned by the nodes on the Blockchain. A similarity score is used to overcome the randomness problem in the inference computation.
 
-All the components in the SD pipeline, such as the LoRA model, Controlnet model and textual inversion model, can be specified, either as a Huggingface ID, or an external download link.
+The consensus protocol is described in detail in the following doc:
+
+{% content-ref url="system-design/consensus-protocol.md" %}
+[consensus-protocol.md](system-design/consensus-protocol.md)
+{% endcontent-ref %}
 
 ## The Blockchain In Use
 
