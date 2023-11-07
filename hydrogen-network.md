@@ -12,7 +12,7 @@ The computation power comes from a decentralized network of home computers and s
 
 To the applications, Hydrogen Network is an inference API service that could be used to generate images using the Stable Diffusion.
 
-The application should prepare a wallet, to pay the tokens for the inference task. But other than that, the invocation of the API is no different than the invocation of a traditional API service.
+The application should prepare a wallet, to pay the tokens for the inference task. But other than that, the invocation of the API is no different than the invocation of a traditional API service on AWS. The decentralized execution process is completely invisible to the applications.
 
 If you are an application developer, get started from here:
 
@@ -21,6 +21,26 @@ If you are an application developer, get started from here:
 {% endcontent-ref %}
 
 #### The Image Generator
+
+The Image Generator is a showcase application that provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser.&#x20;
+
+The users could select between different versions of the Stable Diffusion models, such as Stable Diffusion 1.5 and Stable Diffusion XL, and apply a LoRA model on it by specifying the download link of the LoRA model on Civitai.
+
+Thanks to the Hydrogen Network, the application could be used on the devices that do not have a capable GPU integrated. If the browser exists, the Image Generator could be used.
+
+Play with it yourself at:
+
+{% embed url="https://ig.crynux.ai" %}
+
+The Image Generator also serves as a reference implementation for the traditional centralized applications who want to integrate the inference API. The source code of the Image Generator is also hosted on GitHub:
+
+**The backend:**
+
+{% embed url="https://github.com/crynux-ai/ig-server" %}
+
+**The frontend:**
+
+{% embed url="https://github.com/crynux-ai/ig-web" %}
 
 ## Consensus Protocol
 
@@ -44,11 +64,7 @@ The Blockchain is built using the [Frontier project](https://paritytech.github.i
 
 The Hydrogen Network is coordinated by three smart contracts on the Blockchain:
 
-```
-Token Contract: "0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb"
-Task Contract: "0xba2489a25A5f542877D3825Ab802651f28878C4a"
-Node Contract: "0xB0E9A451Ce0CC181EA9888C7B42BB8Ad90b73C78"
-```
+<table><thead><tr><th width="186">Contract</th><th>Address</th></tr></thead><tbody><tr><td>Token</td><td>0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb</td></tr><tr><td>Node</td><td>0xB0E9A451Ce0CC181EA9888C7B42BB8Ad90b73C78</td></tr><tr><td>Task</td><td>0xba2489a25A5f542877D3825Ab802651f28878C4a</td></tr></tbody></table>
 
 The CNX token is just an standard ERC20 token. The tokens will be operated by the other contracts to implement the required functions.
 
