@@ -165,12 +165,12 @@ By controlling the length of the timeout period, we could limit the maximum numb
 Under a fixed probability _**p**_ of a successful attack (i.e. a fixed number of the honest and the dishonest nodes), we could calculate the maximum income an attacker could get in a day, given a value of the timeout period _**t**_:
 
 $$
-I_{max}(p, t) = \frac{86400}{t} * p * k
+I_{max}(p, t) = \frac{86400}{t} * p * k * d
 $$
 
-Recall that _**k**_ is the price of a single task.
+Recall that _**k**_ is the price of a single task, and _**d**_ is the number of the malicious nodes the attacker have to start to reach the probability _**p**_.
 
-To reach the fixed probability _**p**_, the attacker has to start _**d**_ malicious nodes, for each of the nodes he has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
+For each of the _**d**_ nodes the attacker has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
 
 $$
 T(p) = s * d = \frac{p * k * d}{1-p}
@@ -179,7 +179,7 @@ $$
 We could then treat the income as the interest of staking so many tokens for a day. The daily interest rate is given by:
 
 $$
-IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{t * d}
+IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{t }
 $$
 
 Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the interest rate to a value that no one will ever be interested.
