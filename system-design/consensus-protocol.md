@@ -154,7 +154,7 @@ The consensus protocol requires the submission of the commitments of all the 3 n
 
 The timeout mechanism is introduced to solve this problem. After a pre-defined period, all the 3 nodes, and the application, are allowed to submit the request to cancel the task on the Blockchain. Once submitted, the Blockchain will abort the task immediately.
 
-### Expectation of the Income by Exploiting the Timeout
+### Expectation of the Income by Timeout Attack
 
 The timeout mechanism introduces a new vulnerability to the network. The attacker, starting as many nodes as he could, will wait for the timeout if he finds out that he has no more than two nodes of his own selected in a task, to escape from the penalization, and submit fake results in other cases.
 
@@ -212,3 +212,27 @@ $$
 
 We can then choose a fit $$s_t$$ value to balance between the attacking risk and the network efficiency.
 
+According to our calculation (see the figure below), the number of tokens required to stake to prevent the timeout attack is magnitudes larger than the number required to prevent the attack we mentioned above of submitting fake results regardless of the node selection result.
+
+#### Conspiracy between the attackers
+
+The malicious nodes must be controlled by a single attacker to increase the success probability. Two attackers can not easily conspire to perform the timeout attack together, which requires one attacker to know if a selected node is honest, or a malicious node of another attacker for sure, who will submit the same fake result as his own. The safe choice is of course to assume that it is an honest node.
+
+That's a good news to us. The malicious nodes of one attacker can be seen as the honest nodes to another attacker. The probability of successful attack decreases as the number of attackers rises.
+
+Below is an example of the calculated numbers on different network sizes and malicious nodes:
+
+The settings are given as:
+
+| Item                               | Value       |
+| ---------------------------------- | ----------- |
+| Task price                         | 3 CNX       |
+| Estimated execution time of a task | 60 seconds  |
+| Timeout period                     | 180 seconds |
+| No. of staking for timeout attack  | 5,000 CNX   |
+
+The staking required is listed below, assuming all the malicious nodes belong to the single attacker:
+
+<table><thead><tr><th width="132" align="right">No. honest</th><th width="135" align="right">No. malicious</th><th width="205" align="right">No. staking for timeout</th><th width="183" align="right">No. staking total (T)</th><th width="143" align="right">Max No. tasks</th><th width="147" align="right">Annually IR (%)</th></tr></thead><tbody><tr><td align="right">7</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.67</td><td align="right">100.25</td><td align="right">731.82</td></tr><tr><td align="right">70</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,008.14</td><td align="right">119.43</td><td align="right">871.83</td></tr><tr><td align="right">700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,082.53</td><td align="right">120.96</td><td align="right">882.93</td></tr><tr><td align="right">7000</td><td align="right">3000</td><td align="right">15,000,000</td><td align="right">15,000,826.41</td><td align="right">121.10</td><td align="right">884.02</td></tr><tr><td align="right">9970</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.01</td><td align="right">0.09</td></tr><tr><td align="right">9900</td><td align="right">100</td><td align="right">500,000</td><td align="right">500,000.03</td><td align="right">0.14</td><td align="right">1.03</td></tr><tr><td align="right">9700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,000.80</td><td align="right">1.27</td><td align="right">9.26</td></tr><tr><td align="right">70000</td><td align="right">30000</td><td align="right">150,000,000</td><td align="right">150,008,265.20</td><td align="right">121.12</td><td align="right">884.13</td></tr></tbody></table>
+
+As the figure shows, when the network reaches 10,000 total nodes, under the settings of the 3-minute timeout, and the required 5,000 CNX staking, the network is safe when an attacker starts 100 \~ 200 nodes, which will cost him 500,000 \~ 1,000,000 CNX tokens.
