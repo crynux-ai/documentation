@@ -168,7 +168,7 @@ $$
 I_{max}(p, t) = \frac{86400}{t} * p * k * d
 $$
 
-Recall that _**k**_ is the price of a single task, and _**d**_ is the number of the malicious nodes the attacker have to start to reach the probability _**p**_.
+Recall that _**k**_ is the price of a single task, and _**d**_ is the number of the malicious nodes the attacker has to start to reach the probability _**p**_.
 
 For each of the _**d**_ nodes the attacker has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
 
