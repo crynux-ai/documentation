@@ -162,15 +162,29 @@ We can never tell between an intended offline and an accidental one. As long as 
 
 By controlling the length of the timeout period, we could limit the maximum number of the tasks a malicious node could receive in a fixed range of time.
 
-Under a fixed probability _**p**_ of a successful attack (i.e. a fixed number of the honest and the dishonest nodes), we could calculate the maximum income an attacker could get in a day, given a value of the timeout period _**t**_:
+Under a fixed probability $$p$$ of a successful attack (i.e. a fixed number of the honest and the dishonest nodes), and given a value of the timeout period $$t$$ in seconds, assume the total number of the tasks a malicious node could execute in a day is $$n$$, we have:
 
 $$
-I_{max}(p, t) = \frac{86400}{t} * p * k * d
+\hat{t} * n * p + t * n * (1-p) = 86400
 $$
 
-Recall that _**k**_ is the price of a single task, and _**d**_ is the number of the malicious nodes the attacker has to start to reach the probability _**p**_.
+Where $$\hat{t}$$ is an estimated constant of the time required for a normal task execution. Since the attacker will have to wait for the other honest node to submit commitment when he has only two nodes selected in the task. And if all the three nodes are from the attacker in a task, the Blockchain confirmation still requires time.
 
-For each of the _**d**_ nodes the attacker has to stake _**s**_ tokens. The total amount of tokens the attacker has to stake, for one day, is:
+The maximum number of the malicious tasks $$n_m$$ a malicious node could cheat successfully in a day is then:
+
+$$
+n_m = n * p = \frac{86400 * p}{\hat{t} * p + t * (1-p)}
+$$
+
+The total income an attacker could get in a day, by starting $$d$$ nodes, is then:
+
+$$
+I_{max}(p, t) = n_m * k * d = \frac{86400 * p * k * d}{\hat{t} * p + t * (1-p)}
+$$
+
+Recall that $$k$$ is the price of a single task, and $$d$$ is the number of the malicious nodes the attacker has to start to reach the probability $$p$$.
+
+For each of the $$d$$ nodes the attacker has to stake $$s$$ tokens. The total amount of tokens the attacker has to stake, for one day, is:
 
 $$
 T(p) = s * d = \frac{p * k * d}{1-p}
@@ -179,7 +193,22 @@ $$
 We could then treat the income as the interest of staking so many tokens for a day. The daily interest rate is given by:
 
 $$
-IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{t }
+IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
 $$
 
 Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the interest rate to a value that no one will ever be interested.
+
+#### Add more staking to decrease the timeout
+
+A longer timeout period gives a lower interest rate, which makes the network safer, but the applications and the honest nodes will have to wait longer.
+
+By increasing the required amount of staking, we can further reduce the timeout period.
+
+Let's introduce a number $$s_t$$ , which will be added to the staking amount. The total amount of tokens the attacker has to stake, for one day, becomes:
+
+$$
+T(p) = (s + s_t) * d = \frac{p * k * d}{1-p} + s_t * d
+$$
+
+We can then choose a fit $$s_t$$ value to balance between the attacking risk and the network efficiency.
+
