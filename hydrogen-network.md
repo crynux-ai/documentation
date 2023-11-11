@@ -102,13 +102,23 @@ The consensus protocol is described in detail in the following doc:
 
 ## The Blockchain In Use
 
-The Hydrogen Network is running on a private Blockchain whose node can be access using the RPC endpoint:
+The Hydrogen Network is running on a private blockchain whose node can be access using the RPC endpoint:
 
 ```url
 https://block-node.crynux.ai/rpc
 ```
 
-The Blockchain is built using the [Frontier project](https://paritytech.github.io/frontier/), which contains an EVM running on top of the [Substrate Blockchain](https://substrate.io/). The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
+The reason for a private Blockchain is that public Blockchains with strong consensus protocol, such as Ethereum, is not fast enough alone to support the throughput of the Hydrogen Network, or any other networks of Crynux in the future. The solution will be a layer 2 scaling tech such as [ZK-Rollups](https://blockworks.co/news/zk-rollups-future-of-smart-contract-blockchains). We will be either using a generalized solution that is well known to the industry, or developing our own for better performance(under the limit of our use cases).
+
+Our focus right now, however, is to support more features, such as the GPT tasks and training tasks.  And we will launch a network on the public blockchain when the network has a rich set of features, and is ready to be used by a large number of applications. The layer 2 solution will be implemented when we are close to it.
+
+When the test networks are running on the private blockchain, the test tokens are free to acquire from our community. The node providers are contributing their computation power for free in a belief of the open and democratized future. And their contributions are recorded by the private blockchain. We believe their efforts will be paid out eventually.
+
+The test tokens are required for both starting a node, or calling the inference API. To get the tokens, just join the Discord of Crynux:
+
+{% embed url="https://discord.gg/Ug2AHUbrrm" %}
+
+The private blockchain in use in the Hydrogen Network is built using the [Frontier project](https://paritytech.github.io/frontier/), which contains an EVM running on top of the [Substrate Blockchain](https://substrate.io/). The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
 
 The Hydrogen Network is coordinated by three smart contracts on the Blockchain:
 
@@ -119,10 +129,6 @@ The CNX token is just an standard ERC20 token. The tokens will be operated by th
 The source code of the smart contracts is hosted on the GitHub:
 
 {% embed url="https://github.com/crynux-ai/h-contracts" %}
-
-To get the test tokens to start the node, or run an application, join the Discord of Crynux:
-
-{% embed url="https://discord.gg/Ug2AHUbrrm" %}
 
 ## The Relay In Use
 
