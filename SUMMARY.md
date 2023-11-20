@@ -8,6 +8,7 @@
 * [Network Architecture](system-design/network-architecture.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
+* [Token Economy](system-design/token-economy.md)
 
 ## Node Hosting
 
