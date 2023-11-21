@@ -4,6 +4,10 @@ description: Incentivization Mechanism
 
 # Token Economy
 
+{% hint style="info" %}
+The token economy is still a work-in-progress. A lot of simulations and discussions around the mechanism are taking place. The coefficients in the equations are subject to change. The estimations might be adjusted as well.
+{% endhint %}
+
 CNX token is the utility token that enables the trading of the computation power (and the models and dataset later) inside the Crynux Network. The applications pay CNXs to execute their AI tasks, and the nodes earn CNXs by executing the tasks.
 
 The CNX token has a total supply of <mark style="color:blue;">**8,617,333,262**</mark>. Which is the first 10 digits of the Boltzmann constant.
@@ -41,6 +45,10 @@ Where $$\hat{T}_A$$ is the total number of tokens given for the node mining.
 <figure><img src="https://lh7-us.googleusercontent.com/IIAT27cWiHzSbG3zy8Ia1kPnhNsMhMjyB0lr-DZJidzCnwwh4STjmTNdR6RAWIRh26O3FOAo83CPZ9TRtrzmn49fUYYf7bF72-Pdh-qYosCYtWSxLCK_ghvvCklaUEH-yqby0QaeCe-FIBoFQLSIahw" alt=""><figcaption></figcaption></figure>
 
 The Avrami equation will enforce a healthier node growth in the long term. Compared to the exponential decay, the Avrami equation increases slower at the very beginning of the time, which avoids the problem of distributing too many tokens to just a few nodes. The increasing speed goes higher at the middle age of the time, which contributes more power to the effective growth of the network. Less tokens will be generated at the ending time, since we have enough nodes in the network already, and hopefully the nodes are getting enough rewards from executing the tasks.
+
+{% hint style="info" %}
+The [Avrami equation](https://en.wikipedia.org/wiki/Avrami\_equation) describes how solids transform from one phase to another at constant temperature. It can specifically describe the kinetics of [Crystallization ](https://en.wikipedia.org/wiki/Crystallization)and [Nucleation](https://en.wikipedia.org/wiki/Nucleation). Which is also the source of the project name Crynux (Cry-Nux).
+{% endhint %}
 
 ## Task Mining
 
