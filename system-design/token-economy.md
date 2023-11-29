@@ -22,7 +22,7 @@ At the mainnet release, <mark style="color:blue;">**2,585,199,979 (30%)**</mark>
 
 At the bootstrapping of the network, there must be enough nodes joining the network, before the applications could use the network to execute their tasks.
 
-<mark style="color:blue;">**1,809,639,985 (21%)**</mark> tokens will be given to the nodes in 12 years regardless of the number of the tasks they have executed.
+<mark style="color:blue;">**1,206,426,657(14%)**</mark> tokens will be given to the nodes regardless of the number of the tasks they have executed.
 
 Every month, a certain amount of tokens will be generated. The tokens will be distributed to the nodes according to their accumulative online time. And the tokens will be locked for 3 months before the nodes can freely transfer them.
 
@@ -34,21 +34,15 @@ $$
 
 Where $$T_a$$ is the total number of tokens generated for month $$a$$, and $$o_i$$ is the total online time of the $$i$$'s node in this month, $$m$$ is the number of the current node, and $$n$$ is the total number of nodes in the network.
 
-The exact number of the tokens to be generated each month is calculated by the Avrami equation below:
+The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
 
 $$
-T_A^a = \hat{T}_A * (1 - e^{-0.0005 * (a + 0.75) ^ 2})
+T_A^a = \hat{T}_A * (1 - e^{\frac{-a * \ln{2}}{60}})
 $$
 
 Where $$\hat{T}_A$$ is the total number of tokens given for the node mining.
 
-<figure><img src="https://lh7-us.googleusercontent.com/IIAT27cWiHzSbG3zy8Ia1kPnhNsMhMjyB0lr-DZJidzCnwwh4STjmTNdR6RAWIRh26O3FOAo83CPZ9TRtrzmn49fUYYf7bF72-Pdh-qYosCYtWSxLCK_ghvvCklaUEH-yqby0QaeCe-FIBoFQLSIahw" alt=""><figcaption></figcaption></figure>
-
-The Avrami equation will enforce a healthier node growth in the long term. Compared to the exponential decay, the Avrami equation increases slower at the very beginning of the time, which avoids the problem of distributing too many tokens to just a few nodes. The increasing speed goes higher at the middle age of the time, which contributes more power to the effective growth of the network. Less tokens will be generated at the ending time, since we have enough nodes in the network already, and hopefully the nodes are getting enough rewards from executing the tasks.
-
-{% hint style="info" %}
-The [Avrami equation](https://en.wikipedia.org/wiki/Avrami\_equation) describes how solids transform from one phase to another at constant temperature. It can specifically describe the kinetics of [Crystallization ](https://en.wikipedia.org/wiki/Crystallization)and [Nucleation](https://en.wikipedia.org/wiki/Nucleation). Which is also the source of the project name Crynux (Cry-Nux).
-{% endhint %}
+<figure><img src="../.gitbook/assets/306c9873b7ba80a0375a1f63adfd6b8.png" alt=""><figcaption><p>Total tokens mined for a month in the node mining </p></figcaption></figure>
 
 ## Task Mining
 
@@ -86,17 +80,23 @@ $$
 K = \sum_{i=1}^a K_i
 $$
 
-As the graph shows above. In which we choose the busy ratio $$\alpha$$ to be 1%, and the task execution time $$\hat{t}$$ to be 60 seconds. $$b_0$$ is set to be 100, and $$g$$ 0.07.
+As the graph shows above. In which we choose the busy ratio $$\alpha$$ to be 1%, and the task execution time $$\hat{t}$$ to be 60 seconds. $$b_0$$ is set to be 2000, and $$g$$ 0.05.
 
-When a month ends, and the total number of the tasks that have been executed has been determined. We could find the corresponding effective network time $$t$$ in the graph above. Given the time $$t$$, if it has increased by 1, discretely, the network will generate new tokens, the number of the tokens is determined by:
+When a month ends, and the total number of the tasks that have been executed has been determined. We could find the corresponding effective network time $$t$$ in the graph above. Given the time $$t$$, if it has increased by 1, discretely, the network will generate new tokens, the number of the tokens to generate is determined by the Avrami equation below:
 
 $$
-T_B^a = \hat{T}_B * (1 - e^{-0.0005 * (a + 0.75) ^ 2})
+T_B^a = \hat{T}_B * (1 - e^{-0.0003 * (0.5 * a + 0.8) ^ 2})
 $$
 
 Where $$\hat{T}_B$$ is the total number of tokens given for the task mining.
 
+The Avrami equation will enforce a healthier network growth in the long term. Compared to the exponential decay, the Avrami equation increases slower at the very beginning of the time, which avoids the problem of distributing too many tokens to just a few nodes. The increasing speed goes higher at the middle age of the time, which contributes more power to the effective growth of the network. Less tokens will be generated at the ending time, since we have enough nodes in the network already, and hopefully the nodes are getting enough rewards from executing the tasks.
+
 <figure><img src="https://lh7-us.googleusercontent.com/ONSPkhA3w7NjMdqh9MpQ0IRcKnVF79oxIhXSxcq_tPzNwAhenpJuUtJwV0JmXgqXkPo5l47PUmgY31673uiVdUAXlHp23eXlzTZOaLvBoWXXfv9IRxm0rSnOxzrDTJZlNTVeCUe8-nimYZh_M4dLC2Y" alt=""><figcaption></figcaption></figure>
+
+{% hint style="info" %}
+The [Avrami equation](https://en.wikipedia.org/wiki/Avrami\_equation) describes how solids transform from one phase to another at constant temperature. It can specifically describe the kinetics of [Crystallization ](https://en.wikipedia.org/wiki/Crystallization)and [Nucleation](https://en.wikipedia.org/wiki/Nucleation). Which is also the source of the project name Crynux (Cry-Nux).
+{% endhint %}
 
 Note that if the effective network time $$t$$ is increased not larger than 1, no tokens will be generated under task mining.
 
