@@ -13,7 +13,7 @@
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
 * [Token Economy](system-design/token-economy.md)
-* [GPU and Task Grading](system-design/gpu-and-task-grading.md)
+* [Card and Task Grading](system-design/card-and-task-grading.md)
 * [Task Pricing](system-design/task-pricing.md)
 
 ## Node Hosting
@@ -30,7 +30,7 @@
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
 * [GPT Task](application-development/gpt-task.md)
 * [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
-* [Hydrogen Network SDK](application-development/hydrogen-network-sdk.md)
+* [Crynux Network SDK](application-development/crynux-network-sdk.md)
 
 ## Troubleshooting
 
