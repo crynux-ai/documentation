@@ -4,11 +4,11 @@ description: Decentralize the Infrastructure
 
 # Consensus Protocol
 
-The consensus protocol in the Hydrogen Network makes sure no one could cheat the network, where everyone could freely join the network, and do whatever they want.
+The consensus protocol in the Crynux Network makes sure no one could cheat the network, where everyone could freely join the network, and do whatever they want.
 
 For example, a malicious node could submit a random image to the network without actually perform the computation. If we leave the mission of discovering the cheating to the user, i.e. allowing the user to pay only after he verified the result image, then a malicious user could deny all the payment to use the network for free.
 
-The goal of the the consensus protocol in the Hydrogen Network is to find out whether an image is the correct output of a task, given the task arguments and the image. And if the image is correct, make sure the Node who summited the correct image get paid.
+The goal of the the consensus protocol in the Crynux Network is to find out whether the result is the correct output of a task, given the task arguments and the result. And if the result is correct, make sure the Node who summited the correct result get paid.
 
 The consensus protocol must be implemented using the smart contracts, and executed on the Blockchain, so that we don't need a trusted central party to enforce the execution of the protocol, who will be cheating himself given so much power.
 
@@ -88,9 +88,9 @@ If the nodes of the attacker have been selected twice in a single task. When the
 
 The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
-## Staking based Penalization
+## Collateral based Penalization
 
-After the malicious behaviors could all be identified using the validation schema above, it is now time to panelize the malicious behaviors.&#x20;
+After the malicious behaviors could all be identified using the validation schema above, it is now time to panelize the malicious behaviors.
 
 The penalization is implemented by asking the nodes to stake certain amount of tokens on the Blockchain before joining the network. If the malicious behavior of a node is identified, the tokens will be slashed.
 

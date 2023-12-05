@@ -2,7 +2,7 @@
 description: Decentralized AI Infrastructure for Everyone
 ---
 
-# About Crynux
+# Crynux Network
 
 Crynux is an open and democratic AI Infrastructure.
 
@@ -30,7 +30,7 @@ The Blockchain and token stuff are handled at the application backend. To the en
 
 Give it a try at [https://ig.crynux.ai](https://ig.crynux.ai)
 
-To know more about the Hydrogen Network, start from the [Hydrogen Network introduction](hydrogen-network.md).
+To know more about the Hydrogen Network, start from the [Hydrogen Network introduction](releases/hydrogen-network.md).
 
 To join the network as a node, contributing the local computation power, check the [tutorial on starting the Docker container](node-hosting/join-the-network.md).
 

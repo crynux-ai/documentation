@@ -16,8 +16,8 @@ The application should prepare a wallet, to pay the tokens for the inference tas
 
 If you are an application developer, get started from here:
 
-{% content-ref url="application-development/application-workflow.md" %}
-[application-workflow.md](application-development/application-workflow.md)
+{% content-ref url="../application-development/application-workflow.md" %}
+[application-workflow.md](../application-development/application-workflow.md)
 {% endcontent-ref %}
 
 #### Stable Diffusion Task Framework
@@ -36,8 +36,8 @@ A general framework to define and execute the Stable Diffusion tasks is develope
 
 The following document gives more information on how to write a Stable Diffusion task:
 
-{% content-ref url="application-development/stable-diffusion-task.md" %}
-[stable-diffusion-task.md](application-development/stable-diffusion-task.md)
+{% content-ref url="../application-development/stable-diffusion-task.md" %}
+[stable-diffusion-task.md](../application-development/stable-diffusion-task.md)
 {% endcontent-ref %}
 
 And more examples can be found in the GitHub repository:
@@ -74,16 +74,16 @@ The contributor of the spared computation power could join the network by hostin
 
 A web user interface is provided inside the node, for the users who are hosting the node on the home computers. The WebUI could be used to monitor the running status of the node, and to control the node to join or quit the network. A getting started guide can be found in the follow document:
 
-{% content-ref url="node-hosting/join-the-network.md" %}
-[join-the-network.md](node-hosting/join-the-network.md)
+{% content-ref url="../node-hosting/join-the-network.md" %}
+[join-the-network.md](../node-hosting/join-the-network.md)
 {% endcontent-ref %}
 
 #### Servers
 
 For the server operators, the node could be hosted in a headless mode where no WebUI is accessible. The node will automatically join the network on startup, and quit the network before termination. Follow the document below to start a node in headless mode:
 
-{% content-ref url="node-hosting/headless-deployment.md" %}
-[headless-deployment.md](node-hosting/headless-deployment.md)
+{% content-ref url="../node-hosting/headless-deployment.md" %}
+[headless-deployment.md](../node-hosting/headless-deployment.md)
 {% endcontent-ref %}
 
 ## Consensus Protocol
@@ -96,8 +96,8 @@ The malicious behaviors are discovered by dispatching the same task to 3 nodes r
 
 The consensus protocol is described in detail in the following doc:
 
-{% content-ref url="system-design/consensus-protocol.md" %}
-[consensus-protocol.md](system-design/consensus-protocol.md)
+{% content-ref url="../system-design/consensus-protocol.md" %}
+[consensus-protocol.md](../system-design/consensus-protocol.md)
 {% endcontent-ref %}
 
 ## The Blockchain In Use
