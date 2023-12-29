@@ -14,9 +14,7 @@ The CNX token has a total supply of <mark style="color:blue;">**8,617,333,262**<
 
 ## Pre-mining
 
-At the mainnet release, <mark style="color:blue;">**2,585,199,979 (30%)**</mark> tokens will be pre-mined for the bootstrapping of the project which will be distributed according to the vesting schedule below:
-
-<figure><img src="https://lh7-us.googleusercontent.com/mkDZ17Lg3F8ZjkxmUQdNFj0MgOrHwsSjXSxY0m4o-ocXhygOmX4DqRrQ00t7lInIg-SOfTAhu3-kLB9du2ob5vmyFJwKEDXrIbnfHodO5fD_nHSxYoXw6lKUhOQv_zNL9MczPfOY9Aud3Nl4EpsDHpU" alt=""><figcaption></figcaption></figure>
+At the mainnet release, <mark style="color:blue;">**2,585,199,979 (30%)**</mark> tokens will be pre-mined for the bootstrapping of the project.
 
 ## Node Mining
 
@@ -48,7 +46,7 @@ Where $$\hat{T}_A$$ is the total number of tokens given for the node mining.
 
 The node mining schema above tends to encourage the nodes to join the network regardless of the number of the applications, and tasks. It is required as a bootstrapping strategy for the network, however, if there are not enough applications following, in a very long time, to join the network, use tokens to purchase the computation power, there will be no one to purchase the tokens from the nodes, who will be getting too many tokens with no one to sell them to. The tokens will become worthless, and the ecosystem will crash eventually.
 
-To avoid the problem, only a small portion (14%) of the tokens are given in the node mining schema above. The rest, which is <mark style="color:blue;">**4,825,706,627**</mark><mark style="color:blue;">** **</mark><mark style="color:blue;">**(56%)**</mark> tokens, will be distributed to the nodes as rewards, only when the actual computation happens.
+To avoid the problem, only a small portion (14%) of the tokens are given in the node mining schema above. The rest, which is <mark style="color:blue;">**4,825,706,627 (56%)**</mark> tokens, will be distributed to the nodes as rewards, only when the actual computation happens.
 
 The tokens will be generated every month. The number is determined by the total number of the tasks that have been executed in the whole network during the past month. The tokens will be distributed equally to every successful task, and then equally to the 3 nodes participating in the task.
 
