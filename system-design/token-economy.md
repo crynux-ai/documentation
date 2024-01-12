@@ -5,7 +5,7 @@ description: Incentivization Mechanism
 # Token Economy
 
 {% hint style="info" %}
-The token economy is still a work-in-progress. A lot of simulations and discussions around the mechanism are taking place. The coefficients in the equations are subject to change. The estimations might be adjusted as well.
+The token economy is still a work-in-progress. A lot of simulations and discussions around the mechanism are taking place. Dramatic changes around every aspect of the design are expected.
 {% endhint %}
 
 CNX token is the utility token that enables the trading of the computation power (and the models and dataset later) inside the Crynux Network. The applications pay CNXs to execute their AI tasks, and the nodes earn CNXs by executing the tasks.
@@ -14,23 +14,39 @@ The CNX token has a total supply of <mark style="color:blue;">**8,617,333,262**<
 
 ## Pre-mining
 
-At the mainnet release, <mark style="color:blue;">**2,585,199,979 (30%)**</mark> tokens will be pre-mined for the bootstrapping of the project.
+At the mainnet release, <mark style="color:blue;">**1,723,466,652 (20%)**</mark> tokens will be pre-mined for the bootstrapping of the project.
 
 ## Node Mining
 
 At the bootstrapping of the network, there must be enough nodes joining the network, before the applications could use the network to execute their tasks.
 
-<mark style="color:blue;">**1,206,426,657(14%)**</mark> tokens will be given to the nodes regardless of the number of the tasks they have executed.
+<mark style="color:blue;">**3,446,933,305 (40%)**</mark> tokens will be given to the nodes regardless of the number of the tasks they have executed.
 
 Every month, a certain amount of tokens will be generated. The tokens will be distributed to the nodes according to their accumulative online time. And the tokens will be locked for 3 months before the nodes can freely transfer them.
+
+### QoS Weighted Online Time
+
+To encourage the nodes to provide better service to the network, i.e. faster response time, faster execution and shorter timeout period, a QoS (Quality of Service) score is introduced to evaluate the overall quality of the node. The QoS score is used to weight the online time of the node so that under the same online time, the node providing higher quality service gets more rewards.
 
 The number of the tokens one node could get in a month is given by:
 
 $$
-t_m^a = \frac{o_m * T_a}{\sum_{i=1}^n o_i}
+t_m^a = \frac{s_m * T_a}{\sum_{i=1}^n s_i}
 $$
 
-Where $$T_a$$ is the total number of tokens generated for month $$a$$, and $$o_i$$ is the total online time of the $$i$$'s node in this month, $$m$$ is the number of the current node, and $$n$$ is the total number of nodes in the network.
+Where $$T_a$$ is the total number of tokens generated for month $$a$$, and $$s_i$$ is the QoS weighted online time of the $$i$$'s node in this month, $$m$$ is the number of the current node, and $$n$$ is the total number of nodes in the network.
+
+The QoS weighted online time $$s_i$$ is calculated as following:
+
+$$
+s_i = Q_i * A_i
+$$
+
+Where $$Q_i$$ is the QoS score of the node this month, and $$A_i$$ is the total online time of the node in hours.
+
+<figure><img src="../.gitbook/assets/1f6e4c9f394ff73bc25e07b4940003f.png" alt=""><figcaption><p>QoS Score Calculation</p></figcaption></figure>
+
+### Staking for Shorter Timeout Period
 
 The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
 
