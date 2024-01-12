@@ -88,7 +88,7 @@ If the nodes of the attacker have been selected twice in a single task. When the
 
 The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
-## Collateral based Penalization
+## Staking based Penalization
 
 After the malicious behaviors could all be identified using the validation schema above, it is now time to panelize the malicious behaviors.
 
