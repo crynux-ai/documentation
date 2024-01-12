@@ -5,7 +5,7 @@ description: Incentivization Mechanism
 # Token Economy
 
 {% hint style="info" %}
-The token economy is still a work-in-progress. A lot of simulations and discussions around the mechanism are taking place. Dramatic changes around every aspect of the design are expected.
+The token economy is still a work-in-progress. A lot of simulations and discussions around the mechanism are taking place. Dramatic changes around every aspect of the design should be expected.
 {% endhint %}
 
 CNX token is the utility token that enables the trading of the computation power (and the models and dataset later) inside the Crynux Network. The applications pay CNXs to execute their AI tasks, and the nodes earn CNXs by executing the tasks.
@@ -44,9 +44,41 @@ $$
 
 Where $$Q_i$$ is the QoS score of the node this month, and $$A_i$$ is the total online time of the node in hours.
 
+$$Q_i$$ is normalized to be in the range $$[0, 1]$$, three factors are taken into consideration: the VRAM size of the node, the timeout period setting of the node and the average submission speed of the tasks.
+
+$$
+Q_i = \alpha R_i + \beta P_i + \gamma B_i
+$$
+
+Where $$R_i$$, $$P_i$$, $$B_i$$ are the normalized scores of the VRAM size, the timeout period and the submission speed respectively. And $$\alpha$$, $$\beta$$, $$\gamma$$ are the weights of the factors.
+
 <figure><img src="../.gitbook/assets/1f6e4c9f394ff73bc25e07b4940003f.png" alt=""><figcaption><p>QoS Score Calculation</p></figcaption></figure>
 
-### Staking for Shorter Timeout Period
+
+
+#### The VRAM Size
+
+The VRAM size is a critical factor that determines how many types of the AI tasks a node could support. For example, an SDXL image generation task will require roughly 12GB of VRAM. If running on an NVIDIA graphic card that has only 6GB of VRAM, the task will fail with a CUDA OOM error.
+
+Comparing to the VRAM, the GPU frequency (and bandwidth) affects only the speed of the execution. For example, both NVIDIA RTX 4060 and RTX 3060 have the same VRAM size of 8GB. They will be able to run the same set of the tasks in the Crynux Network, it is just the execution time will be longer for the old 3060 card.
+
+By including the VRAM size in the QoS score, Crynux Network will give more rewards to the nodes who has spent more money on the larger cards, which will allow the Crynux Network to run the larger tasks.
+
+The VRAM size score $$R_i$$ is calculated by dividing the VRAM size of the node by the max VRAM size in the network:
+
+$$
+R_i = \frac{V_i}{max(V_j | j \in N )}
+$$
+
+Where $$V_i$$ is the VRAM size of the $$i$$th node in bytes, and $$N$$ is the collection of all the nodes in the network.
+
+#### The Timeout Setting
+
+**More Staking for Shorter Timeout Period**
+
+#### The Submission Speed
+
+####
 
 The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
 
@@ -60,9 +92,9 @@ Where $$\hat{T}_A$$ is the total number of tokens given for the node mining.
 
 ## Task Mining
 
-The node mining schema above tends to encourage the nodes to join the network regardless of the number of the applications, and tasks. It is required as a bootstrapping strategy for the network, however, if there are not enough applications following, in a very long time, to join the network, use tokens to purchase the computation power, there will be no one to purchase the tokens from the nodes, who will be getting too many tokens with no one to sell them to. The tokens will become worthless, and the ecosystem will crash eventually.
+The node mining schema above tends to encourage the nodes to join the network regardless of the number of the applications, and tasks. It is required as a bootstrapping strategy for the network, however, if there are not enough applications following, in a very long time, to join the network, using tokens to purchase the computation power, there will be no one to purchase the tokens from the nodes, who will be getting too many tokens with no one to sell them to. The tokens will become worthless, and the ecosystem will crash eventually.
 
-To avoid the problem, only a small portion (14%) of the tokens are given in the node mining schema above. The rest, which is <mark style="color:blue;">**4,825,706,627 (56%)**</mark> tokens, will be distributed to the nodes as rewards, only when the actual computation happens.
+To avoid the problem, only a portion (40%) of the tokens are given in the node mining schema above. The rest, which is <mark style="color:blue;">**3,446,933,305 (40%)**</mark> tokens, will be distributed to the nodes as rewards, only when the actual computation happens.
 
 The tokens will be generated every month. The number is determined by the total number of the tasks that have been executed in the whole network during the past month. The tokens will be distributed equally to every successful task, and then equally to the 3 nodes participating in the task.
 
