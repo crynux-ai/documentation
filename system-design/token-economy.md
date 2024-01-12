@@ -34,7 +34,7 @@ $$
 t_m^a = \frac{s_m * T_a}{\sum_{i=1}^n s_i}
 $$
 
-Where $$T_a$$ is the total number of tokens generated for month $$a$$, and $$s_i$$ is the QoS weighted online time of the $$i$$'s node in this month, $$m$$ is the number of the current node, and $$n$$ is the total number of nodes in the network.
+Where $$T_a$$ is the total number of the tokens generated for month $$a$$, and $$s_i$$ is the QoS weighted online time of the $$i$$'s node in this month, $$m$$ is the index of the current node, and $$n$$ is the total number of nodes in the network.
 
 The QoS weighted online time $$s_i$$ is calculated as following:
 
@@ -54,15 +54,13 @@ Where $$R_i$$, $$P_i$$, $$B_i$$ are the normalized scores of the VRAM size, the 
 
 <figure><img src="../.gitbook/assets/1f6e4c9f394ff73bc25e07b4940003f.png" alt=""><figcaption><p>QoS Score Calculation</p></figcaption></figure>
 
-
-
 #### The VRAM Size
 
 The VRAM size is a critical factor that determines how many types of the AI tasks a node could support. For example, an SDXL image generation task will require roughly 12GB of VRAM. If running on an NVIDIA graphic card that has only 6GB of VRAM, the task will fail with a CUDA OOM error.
 
 Comparing to the VRAM, the GPU frequency (and bandwidth) affects only the speed of the execution. For example, both NVIDIA RTX 4060 and RTX 3060 have the same VRAM size of 8GB. They will be able to run the same set of the tasks in the Crynux Network, it is just the execution time will be longer for the old 3060 card.
 
-By including the VRAM size in the QoS score, Crynux Network will give more rewards to the nodes who has spent more money on the larger cards, which will allow the Crynux Network to run the larger tasks.
+By including the VRAM size in the QoS score, Crynux Network will give more rewards to the nodes who have spent more money on the larger cards, which will allow the Crynux Network to run the larger tasks.
 
 The VRAM size score $$R_i$$ is calculated by dividing the VRAM size of the node by the max VRAM size in the network:
 
@@ -74,7 +72,19 @@ Where $$V_i$$ is the VRAM size of the $$i$$th node in bytes, and $$N$$ is the co
 
 #### The Timeout Setting
 
-**More Staking for Shorter Timeout Period**
+According to the [Consensus Protocol](consensus-protocol.md), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the interest rate by increasing the timeout period and the staking amount.
+
+However, longer timeout period makes the applications wait longer if something is wrong with the task,   which is bad for the user experience. And the nodes will also be hurt since they could run less tasks in the same time range.
+
+By staking more tokens, the node could decrease its timeout period while still maintaining a safe interest rate that is acceptable by the network. Crynux Network encourages the nodes to set a shorter timeout by giving more incentives to them, thus increasing the overall responsiveness of the whole network.
+
+The timeout settings score $$P_i$$ is calculated by normalizing the timeout period between the minimum timeout period allowed in the network, and the maximum timeout period set by the node in the network.
+
+$$
+P_i = 1 - \frac{O_i}{max(O_j | j \in N) - O_{min}}
+$$
+
+$$O_i$$ is the timeout period in seconds, and $$O_{min}$$ is the minimum timeout period allowed by the network.
 
 #### The Submission Speed
 
@@ -136,7 +146,7 @@ $$
 T_B^a = \hat{T}_B * (1 - e^{-0.0003 * (0.5 * a + 0.8) ^ 2})
 $$
 
-Where $$\hat{T}_B$$ is the total number of tokens given for the task mining.
+Where $$\hat{T}_B$$ is the total number of the tokens given for the task mining.
 
 The Avrami equation will enforce a healthier network growth in the long term. Compared to the exponential decay, the Avrami equation increases slower at the very beginning of the time, which avoids the problem of distributing too many tokens to just a few nodes. The increasing speed goes higher at the middle age of the time, which contributes more power to the effective growth of the network. Less tokens will be generated at the ending time, since we have enough nodes in the network already, and hopefully the nodes are getting enough rewards from executing the tasks.
 
