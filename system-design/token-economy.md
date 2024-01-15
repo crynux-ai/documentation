@@ -88,7 +88,7 @@ $$O_i$$ is the timeout period in seconds, and $$O_{min}$$ is the minimum timeout
 
 #### The Submission Speed
 
-####
+There are quite a lot of factors that affect the submission speed of the node. Such as the network quality, the GPU frequency, the number of the tensor cores, and even the system memory speed. Crynux Network encourages faster submission of the tasks to improve the application's experience.  By introducing competition between the nodes who are selected for the same task, giving different rewards to the nodes according to their submission order, Crynux Network rewards the improvement on all the submission speed related factors for a node as a whole.
 
 The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
 
