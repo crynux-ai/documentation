@@ -94,9 +94,31 @@ There are quite a lot of factors that affect the submission speed of the node. S
 
 <figure><img src="../.gitbook/assets/96ba525e88bb1faabe5d1c376193601.png" alt=""><figcaption><p>The round score of a node by its submission order and status</p></figcaption></figure>
 
-**Task score:** the task score a node gets is calculated simply by summing up the scores the node gets for all the rounds in the task.
+**Task score:** the task score a node gets for the $$i$$th task $${ts}_i$$ is calculated simply by summing up the scores the node gets for all the rounds in the task:
 
-**Node score:** the node score is finally calculated by averaging all the scores the node gets for all the tasks it received in the month. And then the score is normalized to be a fraction between the max score in the network and zero.
+$$
+{ts}_i = {rs}_c + {rs}_d
+$$
+
+where $${rs}_c$$ is the round score of the commitment round, and $${rs}_d$$ is the round score of the disclosure round.
+
+**Node score:** the node score is calculated by averaging all the scores the node gets for all the tasks it received in the month:
+
+$$
+{ns}_i = \frac{\sum_{j=1}^n {ts}_j}{n}
+$$
+
+Where $$n$$ is the total number of the tasks the node has executed in this month.
+
+{% hint style="info" %}
+Note that if there are no nodes that have submitted result in a task. It is highly likely that the task is itself misconfigured, and the task score is simply ignored, and will not be included in the average score calculation.
+{% endhint %}
+
+Finally, the score a node gets for the submission speed factor is calculated by normalizing the node score above to be a fraction between the max node score in the network and zero:
+
+$$
+B_i = \frac{ {ns}_i} {{ns}_{max}}
+$$
 
 The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
 
