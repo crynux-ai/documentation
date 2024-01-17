@@ -10,11 +10,9 @@ The token economy is still a work-in-progress. A lot of simulations and discussi
 
 CNX token is the utility token that enables the trading of the computation power (and the models and dataset later) inside the Crynux Network. The applications pay CNXs to execute their AI tasks, and the nodes earn CNXs by executing the tasks.
 
-The CNX token has a total supply of <mark style="color:blue;">**8,617,333,262**</mark>. Which is the first 10 digits of the Boltzmann constant.
+Beside receiving the task fees paid by the applications, the nodes get extra rewards from the token mining mechanism as well. By providing higher quality service and longer serving time, the nodes will get more shares from the newly minted tokens.
 
-## Pre-mining
-
-At the mainnet release, <mark style="color:blue;">**1,723,466,652 (20%)**</mark> tokens will be pre-mined for the bootstrapping of the project.
+The CNX token has a total supply of <mark style="color:blue;">**8,617,333,262**</mark>. Which is the first 10 digits of the Boltzmann constant.  <mark style="color:blue;">**1,723,466,652 (20%)**</mark>  of the tokens will be minted at the mainnet release, which will be used to bootstrap the network. And the rest part, 80%, will be minted and distributes to the nodes according to the 2 rules below:
 
 ## Node Mining
 
@@ -117,7 +115,7 @@ Note that if there are no nodes that have submitted result in a task. It is high
 Finally, the score a node gets for the submission speed factor is calculated by normalizing the node score above to be a fraction between the max node score in the network and zero:
 
 $$
-B_i = \frac{ {ns}_i} {{ns}_{max}}
+B_i = \frac{ {ns}_i} {max({ns}_j | j \in N )}
 $$
 
 The exact number of the tokens to be generated each month is calculated by the exponential decay equation of 5-year half-life below:
