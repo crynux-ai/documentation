@@ -190,17 +190,17 @@ $$
 T(p) = s * d = \frac{p * k * d}{1-p}
 $$
 
-We could then treat the income as the interest of staking so many tokens for a day. The daily interest rate is given by:
+We could then treat the income as the interest of staking so many tokens for a day. The daily percentage rate is given by:
 
 $$
-IR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
+DPR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
 $$
 
-Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the interest rate to a value that no one will ever be interested.
+Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the percentage rate to a value that no one will ever be interested.
 
 #### Add more staking to decrease the timeout
 
-A longer timeout period gives a lower interest rate, which makes the network safer, but the applications and the honest nodes will have to wait longer.
+A longer timeout period gives a lower percentage rate, which makes the network safer, but the applications and the honest nodes will have to wait longer.
 
 By increasing the required amount of staking, we can further reduce the timeout period.
 
@@ -233,8 +233,8 @@ The settings are given as:
 
 The staking required and the corresponding annual IR are listed below, assuming all the malicious nodes belong to the single attacker:
 
-<table><thead><tr><th width="107" align="right">No. honest</th><th width="123" align="right">No. malicious</th><th width="161" align="right">No. staking for timeout</th><th width="183" align="right">No. staking total (T)</th><th width="175" align="right">Annual IR (%)</th></tr></thead><tbody><tr><td align="right">7</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.67</td><td align="right">451.67</td></tr><tr><td align="right">70</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.01</td><td align="right">7.15</td></tr><tr><td align="right">700</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.14</td><td align="right">10.09</td></tr><tr><td align="right">7000</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.11</td></tr><tr><td align="right">9970</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.05</td></tr><tr><td align="right">9900</td><td align="right">100</td><td align="right">500,000</td><td align="right">500,000.03</td><td align="right">0.62</td></tr><tr><td align="right">9700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,000.80</td><td align="right">5.56</td></tr><tr><td align="right">9500</td><td align="right">500</td><td align="right">2,500,000</td><td align="right">2,500,003.65</td><td align="right">15.30</td></tr></tbody></table>
+<table><thead><tr><th width="107" align="right">No. honest</th><th width="123" align="right">No. malicious</th><th width="161" align="right">No. staking for timeout</th><th width="183" align="right">No. staking total (T)</th><th width="175" align="right">APR (%)</th></tr></thead><tbody><tr><td align="right">7</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.67</td><td align="right">451.67</td></tr><tr><td align="right">70</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.01</td><td align="right">7.15</td></tr><tr><td align="right">700</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.14</td><td align="right">10.09</td></tr><tr><td align="right">7000</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.11</td></tr><tr><td align="right">9970</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.05</td></tr><tr><td align="right">9900</td><td align="right">100</td><td align="right">500,000</td><td align="right">500,000.03</td><td align="right">0.62</td></tr><tr><td align="right">9700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,000.80</td><td align="right">5.56</td></tr><tr><td align="right">9500</td><td align="right">500</td><td align="right">2,500,000</td><td align="right">2,500,003.65</td><td align="right">15.30</td></tr></tbody></table>
 
 As the figure shows, when the network reaches 10,000 total nodes, under the settings of the 5-minute timeout, and the required 5,000 CNX staking, the network is safe when an attacker starts \~ 300 nodes, which will cost him 1,500,000 CNX tokens.
 
-And the IR can be reached only when the network is running at its maximum capacity, i.e. every node is running tasks one after another without idle time. The IR will drop if we do not have so many tasks to execute.
+And the APR can be reached only when the network is running at its maximum capacity, i.e. every node is running tasks one after another without idle time. The APR will drop if we do not have so many tasks to execute.
