@@ -193,7 +193,7 @@ $$
 We could then treat the income as the interest of staking so many tokens for a day. The daily percentage rate is given by:
 
 $$
-DPR_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
+{DPR}_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
 $$
 
 Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the percentage rate to a value that no one will ever be interested.
@@ -231,7 +231,7 @@ The settings are given as:
 | Timeout period                     | 300 seconds |
 | No. of staking for timeout attack  | 5,000 CNX   |
 
-The staking required and the corresponding annual IR are listed below, assuming all the malicious nodes belong to the single attacker:
+The staking required and the corresponding APR are listed below, assuming all the malicious nodes belong to the single attacker:
 
 <table><thead><tr><th width="107" align="right">No. honest</th><th width="123" align="right">No. malicious</th><th width="161" align="right">No. staking for timeout</th><th width="183" align="right">No. staking total (T)</th><th width="175" align="right">APR (%)</th></tr></thead><tbody><tr><td align="right">7</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.67</td><td align="right">451.67</td></tr><tr><td align="right">70</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.01</td><td align="right">7.15</td></tr><tr><td align="right">700</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.14</td><td align="right">10.09</td></tr><tr><td align="right">7000</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.11</td></tr><tr><td align="right">9970</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.05</td></tr><tr><td align="right">9900</td><td align="right">100</td><td align="right">500,000</td><td align="right">500,000.03</td><td align="right">0.62</td></tr><tr><td align="right">9700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,000.80</td><td align="right">5.56</td></tr><tr><td align="right">9500</td><td align="right">500</td><td align="right">2,500,000</td><td align="right">2,500,003.65</td><td align="right">15.30</td></tr></tbody></table>
 
