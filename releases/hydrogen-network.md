@@ -60,7 +60,9 @@ The Image Generator also serves as a reference implementation for the traditiona
 
 **The backend:**
 
-{% embed url="https://github.com/crynux-ai/ig-server" %}
+The Crynux Bridge is serving as the backend of the Image Generator. The bridge transparently handles the blockchain transaction processing and wallet signatures at the backend, and provides simple traditional APIs to the web UI:
+
+{% embed url="https://github.com/crynux-ai/crynux-bridge" %}
 
 **The frontend:**
 
