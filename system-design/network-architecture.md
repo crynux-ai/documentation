@@ -64,7 +64,7 @@ A detailed explanation of the application workflow is described here:
 
 The source code of the Image Generator could be found at:
 
-Backend: [https://github.com/crynux-ai/ig-server](https://github.com/crynux-ai/ig-server)
+Backend: [https://github.com/crynux-ai/crynux-bridge](https://github.com/crynux-ai/crynux-bridge)
 
 Web UI: [https://github.com/crynux-ai/ig-web](https://github.com/crynux-ai/ig-web)
 
