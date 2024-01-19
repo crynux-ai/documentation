@@ -22,7 +22,9 @@ Before diving deep into the discussions of the design and choices of each part, 
 
 The result validation is simply implemented by comparing 3 results from 3 randomly selected nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available nodes, and notifies them to start the task. The nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the nodes are cheating or not.
 
-### Similarity Comparison of the Images
+### Similarity Comparison
+
+#### Similarity Comparison of the Images
 
 Due to some technical limitations, such as [this](https://github.com/pytorch/pytorch/issues/87992) ,and [this](https://pytorch.org/docs/stable/notes/randomness.html). It it nearly impossible to generate two exactly same images on two different devices. We could say that the randomness is the nature in the machine learning world.
 
@@ -30,11 +32,15 @@ Luckily, we don't need the images to be exactly the same. If we could compute a 
 
 And yes, there will be some lower cost methods to generate a similar image than performing the actual Stable Diffusion computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
 
-The Hydrogen Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The node submits the pHash of the images to the Blockchain, and the Blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
+The Crynux Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The node submits the pHash of the images to the Blockchain, and the Blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
 
-{% hint style="info" %}
-The similarity algorithms exist for not only the images, but also the texts, audios, videos  and even files. The truth is we can calculate similarities between all kinds of the digital data, it is just the accuracy and the efficiency that must be carefully considered. So the consensus protocol adopted in the Hydrogen Network could also be extended to support the Stable Diffusion training tasks and GPT tasks. Which is exactly what we will do in the next versions of the Crynux Network.
-{% endhint %}
+#### Similarity Comparison of the Texts
+
+In GPT text generation tasks, the words are generated one after another. Each output word will be used as the input for the next word. If two different words are generated on two different cards in the middle of a text sequence, the rest parts of the sequence will highly likely to be completely different.
+
+To make the texts comparison work, the same GPT task must be executed on 3 cards that are exactly the same, such as 3 of the RTX 4090s, rather than two of the 4090s and one of the 3090s. The text generation result will be exactly the same when running on cards that are in the same model, given the same random seed.
+
+The Crynux Network will randomly choose 3 nodes that are equipped with the same cards when distributing a GPT task. The node will have to report the card model when joining the network. Note that there is no benefit to report a different card model to the network other than the one the node possesses, which will cause nothing else but the node being slashed when executing tasks.
 
 ### Two Phases Result Disclosure On-Chain
 
