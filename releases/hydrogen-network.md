@@ -130,7 +130,7 @@ The CNX token is just an standard ERC20 token. The tokens will be operated by th
 
 The source code of the smart contracts is hosted on the GitHub:
 
-{% embed url="https://github.com/crynux-ai/h-contracts" %}
+{% embed url="https://github.com/crynux-ai/crynux-contracts" %}
 
 ## The Relay In Use
 
@@ -142,4 +142,4 @@ https://relay.h.crynux.ai
 
 The source code of the relay is hosted at:
 
-{% embed url="https://github.com/crynux-ai/h-relay" %}
+{% embed url="https://github.com/crynux-ai/crynux-relay" %}

@@ -36,7 +36,7 @@ More explanations about the design of the consensus protocol can be found here:
 [consensus-protocol.md](consensus-protocol.md)
 {% endcontent-ref %}
 
-The source code of the Node of the Hydrogen Network could be found in the repository [https://github.com/crynux-ai/h-node](https://github.com/crynux-ai/h-node).
+The source code of the Node of the Hydrogen Network could be found in the repository [https://github.com/crynux-ai/crynux-node](https://github.com/crynux-ai/h-node).
 
 ## The Application
 
@@ -78,7 +78,7 @@ Certain amount of tokens must be staked on-chain in order to join the network. I
 
 Hydrogen Network could be deployed on any Blockchain system that supports the smart contracts. The source code of the smart contracts is in this repository:
 
-[https://github.com/crynux-ai/h-contracts](https://github.com/crynux-ai/h-contracts)
+[https://github.com/crynux-ai/crynux-contracts](https://github.com/crynux-ai/h-contracts)
 
 ## The Relay
 
@@ -98,5 +98,5 @@ The relay in the Hydrogen Network is located at the public network, where everyo
 
 The source code of the relay could be found at:
 
-[https://github.com/crynux-ai/h-relay](https://github.com/crynux-ai/h-relay)
+[https://github.com/crynux-ai/crynux-relay](https://github.com/crynux-ai/h-relay)
 

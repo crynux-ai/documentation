@@ -41,7 +41,7 @@ Hydrogen Network is deployed on an Ethereum compatible **private** Blockchain. *
 Make sure the Docker daemon is started, and run the following command in a terminal:
 
 ```sh
-docker pull ghcr.io/crynux-ai/h-node:latest
+docker pull ghcr.io/crynux-ai/crynux-node:latest
 ```
 
 #### b. Start the Docker container
@@ -49,7 +49,7 @@ docker pull ghcr.io/crynux-ai/h-node:latest
 Run the following command in a terminal:
 
 ```sh
-docker run -d -p 127.0.0.1:7412:7412 --gpus all ghcr.io/crynux-ai/h-node:latest
+docker run -d -p 127.0.0.1:7412:7412 --gpus all ghcr.io/crynux-ai/crynux-node:latest
 ```
 
 The port `7412` is exposed for the WebUI. And GPUs must be provided to the container.

@@ -46,7 +46,7 @@ The Image Generator is written in `Golang`, and all the source code can be found
 
 The backend:
 
-{% embed url="https://github.com/crynux-ai/ig-server" %}
+{% embed url="https://github.com/crynux-ai/crynux-bridge" %}
 
 The web UI:
 

@@ -2,7 +2,7 @@
 description: Start the Node using Docker Compose
 ---
 
-# Docker Compose
+# Docker Compose Options
 
 The Docker container of the Node could also be started using Docker Compose, for more convenient configurations.
 
@@ -20,12 +20,12 @@ $ cd h_node
 ```yaml
 ---
 version: "3.8"
-name: "h_node"
+name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/h-node:latest
-    container_name: h_node
+    image: ghcr.io/crynux-ai/crynux-node:latest
+    container_name: crynux_node
     restart: unless-stopped
     ports:
       - "127.0.0.1:7412:7412"
@@ -67,12 +67,12 @@ data/ docker-compose.yml
 ```yaml
 ---
 version: "3.8"
-name: "h_node"
+name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/h-node:latest
-    container_name: h_node
+    image: ghcr.io/crynux-ai/crynux-node:latest
+    container_name: crynux_node
     restart: unless-stopped
     ports:
       - "127.0.0.1:7412:7412"
@@ -113,12 +113,12 @@ config/ data/ docker-compose.yml
 ```yaml
 ---
 version: "3.8"
-name: "h_node"
+name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/h-node:latest
-    container_name: h_node
+    image: ghcr.io/crynux-ai/crynux-node:latest
+    container_name: crynux_node
     restart: unless-stopped
     ports:
       - "127.0.0.1:7412:7412"

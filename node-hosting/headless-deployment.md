@@ -33,7 +33,7 @@ config/
 
 An example config file could be found in the repository of the Node:
 
-{% embed url="https://github.com/crynux-ai/h-node/blob/main/config/config.yml.example" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/blob/main/config/config.yml.example" %}
 
 Create a file named `config.yml` inside the config folder, and copy the content of the example config file into it.
 
