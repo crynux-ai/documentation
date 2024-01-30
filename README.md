@@ -36,6 +36,12 @@ To join the network as a node, contributing the local computation power, check t
 
 To use the inference API, connect your application to the Hydrogen Network, go to the[ application workflow.](application-development/application-workflow.md)
 
+## Research
+
+Checkout our paper about Hydrogen Network here:
+
+{% embed url="http://dx.doi.org/10.13140/RG.2.2.32697.54884" %}
+
 ## Links
 
 Join the Crynux community on Discord:
