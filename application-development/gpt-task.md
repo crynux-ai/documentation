@@ -45,7 +45,7 @@ The following is an intuitive look at a task definition:
 
 More examples of the different GPT tasks can be found [in the GitHub repository](https://github.com/crynux-ai/gpt-task/tree/main/examples).
 
-### model
+### Model
 
 The base model could be any large language model suitable for text generation task.
 
@@ -61,7 +61,7 @@ For example:
 }
 ```
 
-### messages
+### Messages
 
 Messages is a list of message objects comprising the conversation so far.
 
@@ -78,7 +78,7 @@ For example:
 }
 ```
 
-#### message object
+#### Message Object
 
 Message object has two fields: `role` and `content`.
 
@@ -89,7 +89,7 @@ The field `content` is the message content.
 During execution, the messages will be formatted to a plain string using the model's chat template, and then be send to the model as input prompt. Accroding to the different message role, different tags defined by the model will be added around each message. However, some models have no chat template, in this situation all the message contents will be simply joined to a single string.
 
 
-### generation_config
+### Generation Config
 
 Generation config is a set of parameters to control the text generation behavior of the model.
 
@@ -149,7 +149,7 @@ The parameter for repetition penalty. 1.0 means no penalty. See [this paper](htt
 
 The number of independently computed returned sequences for each element in the batch.
 
-### seed
+### Seed
 
 The seed used to initialize the random processes. 
 
@@ -159,12 +159,12 @@ Helium Network requires a deterministic algorithm for text generation, which mea
 Beside the seed, the GPT Task Framework has been implemented to maximize the reproducibility.&#x20;
 {% endhint %}
 
-### dtype
+### Dtype
 
 Optional. Control the data precision for the model. Can be `float16`, `bfloat16`, `float32` or `auto`.
 When `dtype=auto`, the parameter `dtype` will be determined by the model's config file.
 
-### quantize_bits
+### Quantize_bits
 
 Optional. Control the model quantization type. Can be `4` or `8`. `4` means the INT4 quantization, `8` means the INT8 quantization.
 
@@ -191,15 +191,15 @@ The following is an intuitive look at a task response:
 }
 ```
 
-## model
+## Model
 
 The model used for text generation.
 
-## choices
+## Choices
 
 A list of choice object. The count of choices equals the the parameter `num_return_sequences` in `generation_config` of task definition.
 
-### choice object
+### Choice Object
 
 A choice object has three fields, `finish_reason`, `message` and `index`.
 
@@ -210,7 +210,7 @@ A choice object has three fields, `finish_reason`, `message` and `index`.
 `index` is the index of the choice object in all choices, begins from 0.
 
 
-## usage
+## Usage
 
 Usage represents the token used of this text generation task. It has three fields, `prompt_tokens`, `completion_tokens` and `total_tokens`.
 
