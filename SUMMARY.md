@@ -27,8 +27,8 @@
 ## Application Development
 
 * [Application Workflow](application-development/application-workflow.md)
-* [Stable Diffusion Task](application-development/stable-diffusion-task.md)
 * [GPT Task](application-development/gpt-task.md)
+* [Stable Diffusion Task](application-development/stable-diffusion-task.md)
 * [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
 * [Crynux Network SDK](application-development/crynux-network-sdk.md)
 

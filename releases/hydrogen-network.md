@@ -1,5 +1,5 @@
 ---
-description: Decentralized Stable Diffusion Task Execution Engine
+description: '[Nov 8, 2023] Decentralized Stable Diffusion Task Execution Engine'
 ---
 
 # Hydrogen Network
