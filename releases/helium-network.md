@@ -6,11 +6,21 @@ description: '[Jan 30, 2024] Decentralized GPT Task Execution Engine'
 
 Helium Network adds the support of the GPT text generation tasks. The Crynux Network now supports running both the Stable Diffusion image generation tasks and the GPT text generation tasks.
 
-Now the applications could use the inference APIs to generate texts with [most of the LLM models on the Huggingface](https://huggingface.co/models?pipeline\_tag=text-generation\&sort=trending). AI Chatbots could have already been built on top of the Crynux Network. To get started, follow the guide:
+Now the applications could use the inference APIs to generate texts with [most of the LLM models on the Huggingface](https://huggingface.co/models?pipeline\_tag=text-generation\&sort=trending). AI Chatbot applications could have already been built on top of the Crynux Network. To get started, follow the guide below:
 
 {% content-ref url="../application-development/application-workflow.md" %}
 [application-workflow.md](../application-development/application-workflow.md)
 {% endcontent-ref %}
+
+## AI Chatbot Application
+
+An AI chatbot application has been released to demonstrate the abilities. The app provides a simple chat UI in the browser, and the text generation task is sent to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend, and then sent to the Crynux Network for execution. The task fees are paid from the wallet inside the Crynux Bridge so that the users won't have to deal with the wallet themselves.
+
+Try the application yourself at: [https://chat.crynux.ai](https://chat.crynux.ai)
+
+The source code of the application is located on the GitHub:
+
+[https://github.com/crynux-ai/chat-web](https://github.com/crynux-ai/chat-web)
 
 ## GPT Task Framework
 
@@ -28,13 +38,13 @@ To find out more about how to write a GPT task, go to the following page:
 [gpt-task.md](../application-development/gpt-task.md)
 {% endcontent-ref %}
 
-## Mac Support
+## GPT Task Verification On-chain
 
+The consensus protocol now supports the validation of the GPT tasks.
 
+To support the validation of the GPT tasks, the network will select 3 nodes with the same card model to run a single task, which ensures the results will be exactly the same on all the 3 nodes.
 
-## Consensus Protocol Upgrade
-
-
+The node selection for stable diffusion tasks remain the same, which does not require the same cards, which gives the task more candidates to use and makes the network safer.
 
 ## The Blockchain In Use
 
