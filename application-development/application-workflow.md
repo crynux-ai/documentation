@@ -1,18 +1,36 @@
 ---
-description: Connect the application to the Hydrogen Network
+description: Use the Crynux Network as the inference API
 ---
 
 # Application Workflow
 
-The Application could use the Hydrogen Network as an API service. The application sends the Stable Diffusion image generation task to the network, and get the result images back.
+The Application could use the Crynux Network as an API service. The application sends the inference task to the network, and get the result back directly. Two types of the inference task are supported: the Stable Diffusion image generation task and the GPT text generation task.
 
 The application will be talking to 2 components in the Network: a Blockchain node, and the Relay.
 
-The task is created on the Blockchain first. In order to create the task on-chain, the application must have a wallet filled with enough CNX tokens to pay for the task execution, and a little bit of ETH to pay the gas fee.
+The application must have a wallet with enough CNX tokens to pay for the tasks, and a little bit of ETH to pay the gas fee.
 
-The high level workflow is illustrated in the sequential graph below:
+## High Level Overview
 
-<figure><img src="../.gitbook/assets/22751d940926cfd0f02816980929bbb (1).png" alt=""><figcaption><p>The Sequential Graph of the Workflow</p></figcaption></figure>
+The application workflow is illustrated in the graph below:
+
+<figure><img src="../.gitbook/assets/8ee0732297c74a6a66fd3d7a6d3382b.png" alt=""><figcaption><p>High level application workflow</p></figcaption></figure>
+
+The application starts the workflow by invoking the `CreateTask` method of the smart contract using the prepared wallet. The hash of the task arguments is passed to the method, which is used by the Nodes to verify the actual task arguments received from the Relay.
+
+The smart contract transfers the required amount of the CNX tokens from the application wallet to its own address. The tokens will be transferred to the Nodes after the task is completed, and will be returned to the application wallet if the task is not completed successfully.
+
+After the transaction is confirmed on-chain, the application should then send the actual task arguments to the Relay.
+
+> The task arguments will be fetched by the selected nodes from the Relay, and then the task will be started on the nodes.
+>
+> When the images/texts are generated, the nodes will generate proofs and send them to the Blockchain, who will verify the correctness of the proofs, and transfer the tokens to the nodes after the verification.
+>
+> The nodes will also upload the result images/texts to the Relay, who will compare the results with the proofs on-chain to make sure the results are correct.
+
+After sending the task arguments to the Relay, the application should simply wait for the `TaskSuccess` event from the Blockchain. When the event arrives, the application could get the images/texts from the Relay, and the task workflow is completed.
+
+Note that there is no need to verify the results by the application itself, since they have been verified by the Relay already.
 
 A more detailed and complete workflow involving all the network participants can be found in the task lifecycle:
 
@@ -20,45 +38,37 @@ A more detailed and complete workflow involving all the network participants can
 [task-lifecycle.md](../system-design/task-lifecycle.md)
 {% endcontent-ref %}
 
-The application starts the workflow by invoking the `CreateTask` method of the smart contract using the prepared wallet. The hash of the task arguments is passed to the method, which is used by the Nodes to verify the actual task arguments received from the Relay.
+## The Reference Applications
 
-The smart contract transfers the required amount of the CNX tokens from the application wallet to its own address. The tokens will be transferred to the Nodes after the task is completed, and will be returned to the application wallet if the task is not completed successfully.
+The workflow has been fully implemented in the showcase applications: the Image Generator and the AI Chatbot. Which can be accessed at:
 
-The smart contract then selects 3 nodes randomly, and emits 3 `TaskCreated` events (each one with a different node address as the argument) to notify the nodes.
+The Image Generator: [https://ig.crynux.ai](https://ig.crynux.ai)
 
-After the transaction is confirmed on-chain, the application sends the actual task arguments to the Relay.
+The AI Chatbot: [https://chat.crynux.ai](https://chat.crynux.ai)
 
-> The task arguments will be fetched from the Relay by the selected Nodes, and then the task will be started on the Nodes.
->
-> When the images are generated, the Nodes will generate proofs and send them to the Blockchain, who will verify the correctness of the proofs, and transfer the tokens to the Nodes after the verification.
->
-> The Nodes will also upload the result images to the Relay, who will compare the images with the proofs on-chain to make sure the images are the correct ones.
+Both applications are using the Crynux Bridge as the backend. Crynux Bridge has a built-in wallet to pay for the task fees, so that the application doesn't need to prepare a wallet itself. The Crynux Bridge also isolates the Blockchain and Relay from the applications. The applications could simply submit the task arguments through API, and wait for the result without doing anything else.
 
-From the application's perspective, it simply waits for the `TaskSuccess` event from the Blockchain. When the event arrives, the application could get the images from the Relay, and the task workflow is completed.
-
-Note that there is no need to verify the images by the application, since the images have been verified by the Relay already.
-
-The workflow has been fully implemented in the showcase application: the Image Generator. Which can be accessed at:
-
-{% embed url="https://ig.crynux.ai" %}
-
-The Image Generator is written in `Golang`, and all the source code can be found in the following GitHub repositories:
-
-The backend:
+The source code of the Crynux Bridge can be found at:
 
 {% embed url="https://github.com/crynux-ai/crynux-bridge" %}
 
-The web UI:
+The source code of the web UI of the Image Generator:
 
 {% embed url="https://github.com/crynux-ai/ig-web" %}
 
-## Prepare the Application Wallet
+The source code of the web UI of the AI Chatbot
+
+{% embed url="https://github.com/crynux-ai/chat-web" %}
+
+## Application Workflow Step by Step
+
+### 1. Prepare the application wallet
 
 {% hint style="info" %}
-Hydrogen Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/Ug2AHUbrrm) to get the test tokens.
+Crynux Network is currently deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/Ug2AHUbrrm) to get the test tokens.
 {% endhint %}
 
-An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.&#x20;
+An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.
 
 Enough CNX tokens must be present in the wallet. The tokens will be used to pay for the tasks. The application should keep monitoring the balance of the wallet, and notify the admins to transfer more tokens into the wallet before it is not enough to pay for the next task.
 
@@ -72,15 +82,17 @@ In order to achieve this, the Task Contract must be approved to spend the CNX to
 
 If the application is expected to create a lot of tasks frequently, a larger number of tokens could be approved at once to save gas fees. This is still safe, since the Task Contract can not do anything else other than the hard-coded behaviors.
 
-The source code of the Image Generator that automatically approves all the remaining balance of the application wallet to the Task Contract [can be found here](https://github.com/crynux-ai/ig-server/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/blockchain/task.go#L177).
+As a reference, the source code that automatically approves all the remaining balance of the application wallet to the Task Contract in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/blockchain/task.go#L177).
 
 {% hint style="info" %}
-For the DApp, the application wallet is not required. The DApp will construct the transaction, and send it to the Metamask to be signed directly by the user. The user's wallet will have to approve the CNX tokens to the Task Contract as well, before signing and sending the `CreateTask` transaction.
+For the DApp, the application wallet is not required. The DApp will construct the transaction, and send it to the Metamask to be signed directly by the user, in the browser. The user's wallet will have to approve the CNX tokens to the Task Contract as well, before signing and sending the `CreateTask` transaction.
 {% endhint %}
 
-## Create the Stable Diffusion Task on the Blockchain
+### 2. Create the Task on the Blockchain
 
-The arguments of a Stable Diffusion task are organized as a JSON string. An example is given below:
+#### Construct the task arguments
+
+The arguments of the task are organized as a JSON string. An example of the arguments of an image generation task is given below:
 
 ```json
 {
@@ -106,15 +118,23 @@ The arguments of a Stable Diffusion task are organized as a JSON string. An exam
 }
 ```
 
-The task definition follows the schema given in the [Stable Diffusion Task Framework](https://github.com/crynux-ai/stable-diffusion-task). A wide range of the common configurations are supported. The framework also provides the JSON schema to be used to validate the task arguments. More introduction of the framework can be found in this doc:
+The task definition above follows the schema given in the [Stable Diffusion Task Framework](https://github.com/crynux-ai/stable-diffusion-task). A wide range of the common configurations are supported. The framework also provides the JSON schema to be used to validate the task arguments. More introduction of the framework can be found in this doc:
 
 {% content-ref url="stable-diffusion-task.md" %}
 [stable-diffusion-task.md](stable-diffusion-task.md)
 {% endcontent-ref %}
 
+The GPT text generation task is quite similar to the image generation task. The supported task arguments and the JSON schema can be found in the following doc:
+
+{% content-ref url="gpt-task.md" %}
+[gpt-task.md](gpt-task.md)
+{% endcontent-ref %}
+
 {% hint style="info" %}
 The application should always validate the task arguments against the schema before sending it to the network, especially when the arguments are generated by the user in the application's frontend.
 {% endhint %}
+
+#### Send the task arguments to the Blockchain
 
 After the JSON string of the task arguments is prepared, the application should send the `CreateTask` transaction to the Blockchain.
 
@@ -138,7 +158,7 @@ All the possible reasons a transaction could be reverted for can be found [in th
 
 If the transaction is reverted, no event will be emitted. So the creation result could only be queried using the transaction hash, or the receipt from the transaction creation.
 
-## Upload the Task Arguments to the Relay
+### 3. Upload the Task Arguments to the Relay
 
 When the transaction of the task creation is confirmed, the next step is to upload the actual JSON string of the task arguments to the Relay. The API endpoint to be used is:
 
@@ -156,7 +176,7 @@ The signature is generated using ECDSA with the same curve that Ethereum uses, o
 
 A reference implementation of the signing method, in `Golang`, [can be found here](https://github.com/crynux-ai/ig-server/blob/main/relay/sign\_data.go). The code to upload the task arguments to the Relay can also be found [in the source code](https://github.com/crynux-ai/ig-server/blob/main/relay/inference\_task.go).
 
-## Wait for the Task to Finish
+### 4. Wait for the Task to Finish
 
 When the task is finished, either the `TaskSuccess` or the `TaskAborted` event will be emitted. If the `TaskSuccess` event is emitted, the application could get the result images from the Relay. If the `TaskAborted` event is emitted, the task is failed.
 
@@ -172,7 +192,7 @@ The other method is to extract the task ID from the task creation transaction an
 
 The Image Generator uses the first method, the source code of the block synchronization [can be found here](https://github.com/crynux-ai/ig-server/blob/main/tasks/sync\_block.go).
 
-## Fetch the Images from the Relay
+### 5. Fetch the result from the Relay
 
 The last step is to get the images from the Relay. This is done by calling the following API of the Relay:
 
