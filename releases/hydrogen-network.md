@@ -104,7 +104,7 @@ The consensus protocol is described in detail in the following doc:
 
 ## The Blockchain In Use
 
-The Hydrogen Network is running on a private blockchain whose node can be access using the RPC endpoint:
+The Hydrogen Network is running on a private blockchain whose node can be accessed using the RPC endpoint:
 
 ```url
 https://block-node.crynux.ai/rpc
