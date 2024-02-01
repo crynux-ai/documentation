@@ -12,9 +12,21 @@ Now the applications could use the inference APIs to generate texts with [most o
 [application-workflow.md](../application-development/application-workflow.md)
 {% endcontent-ref %}
 
-## GPT Task
+## GPT Task Framework
 
+A general framework to define and execute the GPT tasks is developed to be used in the Helium Network. A wide range of the common task types and configurations are supported. Just describe the task using JSON, and send it to the inference API:
 
+* Unified task definition for various different large language model
+* Apply model specific chat templates to input prompts automatically
+* Model quantizing (INT4 or INT8)
+* Fine grained control text generation arguments
+* ChatGPT style response
+
+To find out more about how to write a GPT task, go to the following page:
+
+{% content-ref url="../application-development/gpt-task.md" %}
+[gpt-task.md](../application-development/gpt-task.md)
+{% endcontent-ref %}
 
 ## Mac Support
 
