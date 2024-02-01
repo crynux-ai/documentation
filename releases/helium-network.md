@@ -48,9 +48,26 @@ The node selection for stable diffusion tasks remain the same, which does not re
 
 ## The Blockchain In Use
 
+The Helium Network is still running on the [same private blockchain](hydrogen-network.md#the-blockchain-in-use) as the Hydrogen Network. The contracts used is listed below:
 
+| Contract | Address |
+| -------- | ------- |
+| Token    |         |
+| Node     |         |
+| Task     |         |
+
+Again, both the test ETH and CNX tokens are required to start a node, or call the inference API. To get the test tokens, join the Discord of Crynux:
+
+{% embed url="https://discord.gg/Ug2AHUbrrm" %}
 
 ## The Relay In Use
 
+The relay server used is also the same as the Hydrogen Network, which could be accessed at:
 
+```url
+https://relay.h.crynux.ai
+```
 
+The source code of the relay is hosted at:
+
+{% embed url="https://github.com/crynux-ai/crynux-relay" %}
