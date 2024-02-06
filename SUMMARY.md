@@ -10,11 +10,10 @@
 ## System Design
 
 * [Network Architecture](system-design/network-architecture.md)
-* [Task Lifecycle](system-design/task-lifecycle.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
 * [Token Economy](system-design/token-economy.md)
-* [Card and Task Grading](system-design/card-and-task-grading.md)
-* [Task Pricing](system-design/task-pricing.md)
+* [Task Lifecycle](system-design/task-lifecycle.md)
+* [Task Dispatching](system-design/task-dispatching.md)
 
 ## Node Hosting
 
