@@ -34,11 +34,24 @@ If there are not enough candidate nodes to be selected from, the task will be pu
 
 ## Task Queue
 
-When a task is sent to the blockchain by an application, if there are enough nodes available, the task is sent to the nodes immediately.&#x20;
+When a task is sent to the blockchain by an application, if there are enough available nodes to execute the task, the task is sent to the nodes immediately. Otherwise the task will be put into the task queue.
+
+The blockchain will try to get a task from the task queue when one of the following situations happens:
+
+* A running task is finished
+* A new node joins the network
+
+> When a new task is sent to the blockchain, the blockchain will try to dispatch the task immediately to the nodes regardless of whether the task queue is empty or not. There is only one possibility that the tasks are pending in the task queue: there are not enough **matching** nodes to execute the tasks. There might still be available nodes left in the network while the task queue is not empty, and there is a chance that the new task could find matching nodes to execute first.
+
+### &#x20;Select the Best Task from the Task Queue for the Newly Available Node
+
+
 
 ## Task Pricing
 
 ##
 
 ## QoS Penalization on the Node Selection Probability&#x20;
+
+To maintain a high quality of service, nodes that consistently underperform or are frequently offline without notifying the blockchain are subject to penalization. This penalization decreases their probability of being selected for future tasks. This mechanism ensures that higher-quality nodes have a higher chance of selection, improving the overall network performance.
 
