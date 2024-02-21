@@ -14,6 +14,7 @@
 * [Token Economy](system-design/token-economy.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Task Dispatching](system-design/task-dispatching.md)
+* [Quality of Service (QoS)](system-design/quality-of-service-qos.md)
 
 ## Node Hosting
 
