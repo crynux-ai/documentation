@@ -1,12 +1,44 @@
 # Quality of Service (QoS)
 
-To encourage the nodes to provide better service to the network, i.e. faster response time, faster execution time and shorter timeout period, several QoS (Quality of Service) scores are introduced to evaluate the overall quality of the node. The QoS score of a node is continuously updated when the node is executing tasks. The blockchain will then use the QoS score to adjust several strategies that will affect the task distribution among the nodes and the income of the nodes.
+To encourage the nodes to provide better service to the network, i.e. faster response time, faster execution time and shorter timeout period, several QoS (Quality of Service) scores are introduced to evaluate the overall quality of the node:
+
+* the VRAM size
+* the timeout setting
+* the submission speed
+
+The QoS score of a node is continuously updated when the node is executing tasks. The scores are then directly utilized to influence several key aspects of the network's operation.
 
 By giving more advantages to the nodes with higher QoS scores, the nodes are encouraged to improve their hardware and network environment, thus improving the overall service quality of the whole network to the applications.
 
+## QoS Scores Usage
+
+### Task Fee Distribution
+
+The task fee distribution among the 3 participating nodes is heavily influenced by the Submission Speed score. Nodes with higher scores are rewarded with a larger portion of the task fees, encouraging nodes to not only complete tasks accurately but also as quickly as possible. This distribution mechanism ensures that nodes are motivated to maintain high performance to maximize their earnings.
+
+### Penalization on the Node Selection Probability
+
+Nodes with consistently low Submission Speed score will face penalization in terms of their probability of being selected for future tasks. This approach ensures that higher-performing nodes are given priority in task allocation, thereby maintaining the overall quality and efficiency of the network.
+
+### Bad Node Kicking Out
+
+If a node’s performance falls below a certain threshold for a prolonged period, the network has mechanisms to remove (kick out) this node from participating further. This is crucial to prevent underperforming nodes from negatively impacting the network’s performance and reliability.
+
+For instance, if a node is shutdown without sending the transaction to inform the blockchain, it will still receive new tasks. However, all these upcoming tasks will be aborted, leading to a negative experience for the applications that issued the tasks.
+
+Now that we have the Submission Speed score, which will drop dramatically during the first several aborts of the tasks, after the threshold is reached, the node will be forced to quit the network by the blockchain, and no more tasks will be sent to the node.
+
+### Token Incentivization Distribution
+
+A combination (weighed sum) of all the 3 QoS scores is used to decide the portion of the token incentivization given to each node in the node mining mechanism. A node with higher QoS scores will get more tokens as extra reward from the node mining. The details can be found in the following document:
+
+{% content-ref url="token-economy.md" %}
+[token-economy.md](token-economy.md)
+{% endcontent-ref %}
+
 ## QoS Scores Calculation
 
-There are 3 QoS scores that are calculated for each node: the VRAM size, the timeout setting and the submission speed. The scores are calculated using the data collected in a time window. The size of the time windows vary among different use cases.
+The QoS scores of a node at a certain time are calculated using the node data (mostly task execution related) collected in a time window. The size of the time windows vary among different use cases.
 
 Some of the use cases require the scores exist even if no task has been executed in the whole time window. To support such use cases, the Blockchain will randomly send system generated tasks to the nodes at random times, to ensure that every node gets at least 1 task at each time window.
 
@@ -18,8 +50,6 @@ The VRAM size is a critical factor that determines how many types of the AI task
 
 Comparing to the VRAM, the GPU frequency (and bandwidth) affects only the speed of the execution. For example, both NVIDIA RTX 4060 and RTX 3060 have the same VRAM size of 8GB. They will be able to run the same set of the tasks in the Crynux Network, it is just the execution time will be longer for the old 3060 card.
 
-By including the VRAM size in the QoS score, Crynux Network will give more rewards to the nodes who have spent more money on the larger cards, which will allow the Crynux Network to run the larger tasks.
-
 The VRAM size score $$R_i$$ is calculated by dividing the VRAM size of the node by the max VRAM size in the network:
 
 $$
@@ -30,11 +60,11 @@ Where $$V_i$$ is the VRAM size of the $$i$$th node in bytes, and $$N$$ is the co
 
 ### The Timeout Setting
 
-According to the [Consensus Protocol](consensus-protocol.md), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the interest rate by increasing the timeout period and the staking amount.
+According to the [Consensus Protocol](consensus-protocol.md), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the percentage rate by increasing the timeout period and the staking amount.
 
-However, longer timeout period makes the applications wait longer if something is wrong with the task,   which is bad for the user experience. And the nodes will also be hurt since they could run less tasks in the same time range.
+However, longer timeout period makes the applications wait longer if something is wrong with the task,   which leads to the poor user experience. And the nodes will get less incomes since they could run less tasks in the same time range.
 
-By staking more tokens, the node could decrease its timeout period while still maintaining a safe interest rate that is acceptable by the network. Crynux Network encourages the nodes to set a shorter timeout by giving more incentives to them, thus increasing the overall responsiveness of the whole network.
+By staking more tokens, the node could decrease its timeout period while still maintaining a safe percentage rate that is acceptable by the network. Crynux Network encourages the nodes to set a shorter timeout by giving more incentives to them, thus increasing the overall responsiveness of the whole network.
 
 The timeout settings score $$P_i$$ is calculated by normalizing the timeout period between the minimum timeout period allowed in the network, and the maximum timeout period set by the node in the network.
 
@@ -78,10 +108,4 @@ $$
 B_i = \frac{ {ns}_i} {max({ns}_j | j \in N )}
 $$
 
-## QoS Scores Usage
-
-### Incentivization
-
-### Penalization on the Node Selection Probability&#x20;
-
-### Bad Node Kicking Out&#x20;
+##

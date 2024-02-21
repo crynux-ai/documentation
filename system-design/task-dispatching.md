@@ -47,11 +47,3 @@ The blockchain will try to get a task from the task queue when one of the follow
 
 
 
-## Task Pricing
-
-##
-
-## QoS Penalization on the Node Selection Probability&#x20;
-
-To maintain a high quality of service, nodes that consistently underperform or are frequently offline without notifying the blockchain are subject to penalization. This penalization decreases their probability of being selected for future tasks. This mechanism ensures that higher-quality nodes have a higher chance of selection, improving the overall network performance.
-
