@@ -40,9 +40,13 @@ $$
 s_i = Q_i * A_i
 $$
 
-Where $$Q_i$$ is the QoS score of the $$i$$'s node this month, and $$A_i$$ is the total online time of the node in hours.
+Where $$Q_i$$ is the weighted sum of all the QoS scores of the $$i$$'s node this month, and $$A_i$$ is the total online time of the node in hours:
 
-The calculation of the QoS score is described in the following documentation:
+$$
+Q_i = \alpha R_i + \beta P_i + \gamma B_i
+$$
+
+The definations of the QoS scores $$R_i$$, $$P_i$$ and $$B_i$$ are described in the following documentation:
 
 {% content-ref url="quality-of-service-qos.md" %}
 [quality-of-service-qos.md](quality-of-service-qos.md)
