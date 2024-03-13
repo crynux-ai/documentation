@@ -19,8 +19,8 @@
 
 ## Node Hosting
 
-* [Join the Network - Win/Linux](node-hosting/join-the-network.md)
-* [Join the Network - Mac](node-hosting/join-the-network-mac.md)
+* [Start a Node - Win/Linux](node-hosting/start-a-node-win-linux.md)
+* [Start a Node - Mac](node-hosting/start-a-node-mac.md)
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Headless Deployment](node-hosting/headless-deployment.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)

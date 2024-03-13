@@ -48,7 +48,7 @@ To read more about the Helium Network release, go to the following page:
 
 ## Getting Started
 
-To join the network as a node, contributing the local computation power, check the [tutorial on starting the Docker container](node-hosting/join-the-network.md).
+To join the network as a node, contributing the local computation power, check the [tutorial on starting the Docker container](node-hosting/start-a-node-win-linux.md).
 
 To use the inference API, connect your application to the Hydrogen Network, go to the[ application workflow.](application-development/application-workflow.md)
 
