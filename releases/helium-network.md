@@ -50,7 +50,7 @@ The node selection for stable diffusion tasks remain the same, which does not re
 
 The order of the task execution is now determined by the task price set by the task creator. In general, tasks with higher prices will be executed first. Task with a lower priority will be put into the task queue to be executed later.
 
-The order is not simply determined by the total price of a task. Instead, the task execution time is also taken into account to maximize the total income of a node in a fixed time range. The network will estimate a unit value in "CNX per second" of the task to determine the actual order of the task. The details can be find in the following docs:
+The order is not simply determined by the total price of a task. Instead, the task execution time is also taken into account to maximize the total income of a node in a fixed time range. The network will estimate a unit value in "CNX per second" of the task to determine the actual order of the task. The details can be found in the following docs:
 
 {% content-ref url="../system-design/task-dispatching.md" %}
 [task-dispatching.md](../system-design/task-dispatching.md)
@@ -62,7 +62,26 @@ The order is not simply determined by the total price of a task. Instead, the ta
 
 ## Quality of Service (QoS)
 
+The Helium Network will calculate the Submission Speed score for each node. The score will be used in the following 2 scenarios:
+
+* **Task fee distribution among the participating nodes**: the node that submits the result faster will get larger portion of the task fee.
+* **Bad node kick out**: the node that has a lower score below the threshold will be forced to quit the network.
+
+The details can be found in the following doc:
+
+{% content-ref url="../system-design/quality-of-service-qos.md" %}
+[quality-of-service-qos.md](../system-design/quality-of-service-qos.md)
+{% endcontent-ref %}
+
 ## Mac Support
+
+The Crynux Node could now be started on Mac with Apple Silicon Chips (m1, m2 and m3 series). Both the Stable Diffusion and GPT tasks are supported. All the mac users could now join the network to earn CNX tokens.
+
+To start a node on Mac, just follow the tutorial below:
+
+{% content-ref url="../node-hosting/join-the-network-mac.md" %}
+[join-the-network-mac.md](../node-hosting/join-the-network-mac.md)
+{% endcontent-ref %}
 
 ## The Blockchain In Use
 

@@ -1,5 +1,5 @@
 ---
-description: Start a node to join the Crynux Network
+description: Start a node to join the Crynux Network on Windows
 ---
 
 # Join the Network - Windows

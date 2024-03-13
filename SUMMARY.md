@@ -21,6 +21,7 @@
 
 * [Join the Network - Windows](node-hosting/join-the-network.md)
 * [Join the Network - Mac](node-hosting/join-the-network-mac.md)
+* [Join the Network - Linux](node-hosting/join-the-network-linux.md)
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Headless Deployment](node-hosting/headless-deployment.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)
