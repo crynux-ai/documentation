@@ -1,38 +1,44 @@
 ---
-description: Start a node to join the Crynux Network on Windows
+description: Start a node to join the Crynux Network on Windows or Linux
 ---
 
-# Join the Network - Windows
+# Join the Network - Win/Linux
 
 ## 1. Prerequisite
 
-#### a. Hardware requirements
+Before you start, make sure your device meets the following requirements:
+
+### Hardware requirements
 
 <table><thead><tr><th width="187">Hardware</th><th>Requirements</th></tr></thead><tbody><tr><td>GPU</td><td>NVIDIA GPU with 8GB VRAM</td></tr><tr><td>Memory</td><td>16GB</td></tr><tr><td>Disk Space</td><td>60GB</td></tr><tr><td>Network</td><td>Public network access to Huggingface and Civitai</td></tr></tbody></table>
 
-#### b. Software requirements
+### Wallet requirements
 
-* Linux or Windows 11 with [WSL 2 enabled](https://pureinfotech.com/install-wsl-windows-11/).
-* Latest version of the [NVIDIA driver](https://www.nvidia.com/Download/index.aspx?lang=en-us) corresponding to your hardware.
-* Latest version of [Docker](https://docs.docker.com/get-docker/).
+* the private key or keystore of an Ethereum wallet
+* \~**0.1 ETH** Test Tokens
+* **400 CNX** Test Tokens
+
+{% hint style="info" %}
+Crynux Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/Ug2AHUbrrm) to get the test tokens.
+{% endhint %}
+
+## 2. Install the software
+
+### Install the latest NVIDIA driver
+
+Download the latest NVIDIA driver from the [NVIDIA official website](https://www.nvidia.com/Download/index.aspx?lang=en-us), and finish the installation.
+
+### Install the latest version of Docker
+
+Download the latest version of the [Docker Desktop](https://docs.docker.com/get-docker/), and finish the installation.
 
 <details>
 
 <summary>If you have 16GB of memory and use Docker with WSL2 on Windows</summary>
 
-The memory limit for WSL is default to 8GB, which is not enough to run the Node. You will have to change the default settings using a [`.wslconfig`](https://learn.microsoft.com/en-us/answers/questions/1296124/how-to-increase-memory-and-cpu-limits-for-wsl2-win) file
+The memory limit for WSL is default to 8GB, which is not enough to run the Node. You will have to change the default settings using a [`.wslconfig`](https://learn.microsoft.com/en-us/answers/questions/1296124/how-to-increase-memory-and-cpu-limits-for-wsl2-win) file to allow WSL to use 16GB memory.
 
 </details>
-
-#### c. Wallet requirements
-
-{% hint style="info" %}
-Hydrogen Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/Ug2AHUbrrm) to get the test tokens.
-{% endhint %}
-
-* the private key or keystore of an Ethereum wallet
-* \~**0.1 ETH** Test Tokens
-* **400 CNX** Test Tokens
 
 ## 2. Start the node using the Docker image
 
