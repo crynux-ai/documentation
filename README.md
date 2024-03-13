@@ -48,9 +48,27 @@ To read more about the Helium Network release, go to the following page:
 
 ## Getting Started
 
-To join the network as a node, contributing the local computation power, check the [tutorial on starting the Docker container](node-hosting/start-a-node-win-linux.md).
+### Start a Node
 
-To use the inference API, connect your application to the Hydrogen Network, go to the[ application workflow.](application-development/application-workflow.md)
+To start a node on your local computer to earn tokens, follow the tutorial below:
+
+{% content-ref url="node-hosting/start-a-node-win-linux.md" %}
+[start-a-node-win-linux.md](node-hosting/start-a-node-win-linux.md)
+{% endcontent-ref %}
+
+If you are using Mac with Apple Silicon Chips, follow this tutorial:
+
+{% content-ref url="node-hosting/start-a-node-mac.md" %}
+[start-a-node-mac.md](node-hosting/start-a-node-mac.md)
+{% endcontent-ref %}
+
+### Develop an application
+
+If you are an application developer who want to utilize the AI abilities provided by the Crynux Network, follow the tutorial below:
+
+{% content-ref url="application-development/application-workflow.md" %}
+[application-workflow.md](application-development/application-workflow.md)
+{% endcontent-ref %}
 
 ## Research
 
