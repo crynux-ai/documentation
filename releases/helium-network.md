@@ -46,6 +46,24 @@ To support the validation of the GPT tasks, the network will select 3 nodes with
 
 The node selection for stable diffusion tasks remain the same, which does not require the same cards, which gives the task more candidates to use and makes the network safer.
 
+## Task Queue & Task Pricing
+
+The order of the task execution is now determined by the task price set by the task creator. In general, tasks with higher prices will be executed first. Task with a lower priority will be put into the task queue to be executed later.
+
+The order is not simply determined by the total price of a task. Instead, the task execution time is also taken into account to maximize the total income of a node in a fixed time range. The network will estimate a unit value in "CNX per second" of the task to determine the actual order of the task. The details can be find in the following docs:
+
+{% content-ref url="../system-design/task-dispatching.md" %}
+[task-dispatching.md](../system-design/task-dispatching.md)
+{% endcontent-ref %}
+
+{% content-ref url="../system-design/task-pricing.md" %}
+[task-pricing.md](../system-design/task-pricing.md)
+{% endcontent-ref %}
+
+## Quality of Service (QoS)
+
+## Mac Support
+
 ## The Blockchain In Use
 
 The Helium Network is still running on the [same private blockchain](hydrogen-network.md#the-blockchain-in-use) as the Hydrogen Network. The contracts used is listed below:

@@ -1,8 +1,8 @@
 ---
-description: Start a node to join the Hydrogen Network
+description: Start a node to join the Crynux Network
 ---
 
-# Join the Network
+# Join the Network - Windows
 
 ## 1. Prerequisite
 
