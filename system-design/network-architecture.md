@@ -1,10 +1,10 @@
 ---
-description: Hydrogen Network Overview
+description: Crynux Network Overview
 ---
 
 # Network Architecture
 
-The Hydrogen Network is illustrated in the graph below:
+Crynux Network is illustrated in the graph below:
 
 <figure><img src="../.gitbook/assets/hydrogen-architecture.png" alt=""><figcaption><p>The Hydrogen Network Architecture</p></figcaption></figure>
 
