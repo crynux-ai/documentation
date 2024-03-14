@@ -94,5 +94,5 @@ $$
 
 Where $$N$$ is the number of nodes in the network, and $$\alpha$$ is a fixed multiplier that will be set as the network parameter.
 
-If the max size is reached, the task sent to the blockchain will be aborted immediately rather than putting into the task queue.
+If the max size is reached, when a new task is sent to the task queue, the task with the lowest task value in the queue will be removed and aborted. The task creator of the removed task will receive the `TaskAborted` event.
 
