@@ -65,7 +65,7 @@ The source code of the web UI of the AI Chatbot
 ### 1. Prepare the application wallet
 
 {% hint style="info" %}
-Crynux Network is currently deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/Ug2AHUbrrm) to get the test tokens.
+Crynux Network is currently deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/C5Uj9kAr) to get the test tokens.
 {% endhint %}
 
 An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.

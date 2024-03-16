@@ -95,7 +95,7 @@ The Helium Network is still running on the [same private blockchain](hydrogen-ne
 
 Again, both the test ETH and CNX tokens are required to start a node, or call the inference API. To get the test tokens, join the Discord of Crynux:
 
-{% embed url="https://discord.gg/Ug2AHUbrrm" %}
+{% embed url="https://discord.gg/C5Uj9kAr" %}
 
 ## The Relay In Use
 

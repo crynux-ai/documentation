@@ -118,7 +118,7 @@ When the test networks are running on the private blockchain, the test tokens ar
 
 The test tokens are required for both starting a node, or calling the inference API. To get the tokens, just join the Discord of Crynux:
 
-{% embed url="https://discord.gg/Ug2AHUbrrm" %}
+{% embed url="https://discord.gg/C5Uj9kAr" %}
 
 The private blockchain in use in the Hydrogen Network is built using the [Frontier project](https://paritytech.github.io/frontier/), which contains an EVM running on top of the [Substrate Blockchain](https://substrate.io/). The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
 

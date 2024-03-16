@@ -80,7 +80,7 @@ Checkout our latest research paper about Crynux Network here:
 
 Join the Crynux community on Discord:
 
-{% embed url="https://discord.gg/Ug2AHUbrrm" %}
+{% embed url="https://discord.gg/C5Uj9kAr" %}
 
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
