@@ -6,9 +6,9 @@ description: Start a node to join the Crynux Network on Mac
 
 ## 1. Prerequisite
 
-The Crynux Node supports only the Macs with the Apple Silicon Chips, such as the M1, M2 and M3 series. Make sure your device meets the requirement before running the node.
+The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Make sure your device meets the requirement before running the node.
 
-<table><thead><tr><th width="187">Hardware</th><th>Requirements</th></tr></thead><tbody><tr><td>Architecture</td><td>Mac with the Apple Silicon Chips</td></tr><tr><td>Memory</td><td>16GB</td></tr><tr><td>Disk Space</td><td>60GB</td></tr><tr><td>Network</td><td>Public network access to Huggingface and Civitai</td></tr></tbody></table>
+<table><thead><tr><th width="187">Hardware</th><th>Requirements</th></tr></thead><tbody><tr><td>Model</td><td>Mac M1, M2, M3 or newer</td></tr><tr><td>Memory</td><td>16GB</td></tr><tr><td>Disk Space</td><td>60GB</td></tr><tr><td>Network</td><td>Public network access to Huggingface and Civitai</td></tr></tbody></table>
 
 ## 2. Download the Crynux Node software
 
@@ -52,7 +52,7 @@ After the command is finished successfully, the test tokens should have already 
 
 If this is the first time you start a node, it could take quite a long while for the system to initialize. The most time consuming step is to download \~40GB of the commonly used model files from the Huggingface. The time may vary depending on your network speed.
 
-After the models are downloaded, a test image generation task will be executed locally to examine the ability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
+After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
 <figure><img src="../.gitbook/assets/76f579d117c5d6c882c5e89aa378a11.png" alt=""><figcaption></figcaption></figure>
 
