@@ -20,7 +20,7 @@ The SDK in Go will be released shortly.
 
 ### Crynux SDK in JavaScript
 
-The source code of the SDK in Python can be found on the GitHub:
+The source code of the SDK in JavaScript can be found on the GitHub:
 
 {% embed url="https://github.com/crynux-ai/crynux-sdk-js" %}
 
