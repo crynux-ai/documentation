@@ -1,5 +1,5 @@
 ---
-description: Decentralized AI Infrastructure for Everyone
+description: The Real Decentralized AI you can Join and Use
 ---
 
 # Crynux Network
@@ -14,7 +14,7 @@ The applications could easily connect to the Crynux Network using API, bring AI 
 
 The developers could write codes to train/fine-tune their models on the dataset provided by the network, using the computing power of the network. The developed model could also be hosted on the network as a service for others.
 
-By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustworthy infrastructure that is always accessible to everyone.
+By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
 ## Helium Network
 
