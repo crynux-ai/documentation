@@ -34,7 +34,7 @@ In a DM window of the HappyAIGen bot, paste in the tweet link:
 /credit tweet {tweet_link}
 ```
 
-### Bind the wallet address to get the initial test tokens and future credit rewards
+### Bind the wallet address
 
 In a DM window of the HappyAIGen bot, type in the following command, and paste in the wallet address:
 
