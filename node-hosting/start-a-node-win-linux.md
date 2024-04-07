@@ -15,11 +15,11 @@ Before you start, make sure your device meets the following requirements:
 ### Wallet requirements
 
 * the private key or keystore of an Ethereum wallet
-* \~**0.1 ETH** Test Tokens
+* \~**0.1** Test Gas Tokens
 * **400 CNX** Test Tokens
 
 {% hint style="info" %}
-Crynux Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/C5Uj9kAr) to get the test tokens.
+Crynux Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could[ join the Discord Server of Crynux and bind your wallet address](https://docs.crynux.ai/happyaigen#bind-the-wallet-address) using the bot to get the test tokens.
 {% endhint %}
 
 ## 2. Install the software

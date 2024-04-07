@@ -85,17 +85,20 @@ To start a node on Mac, just follow the tutorial below:
 
 ## The Blockchain In Use
 
-The Helium Network is still running on the [same private blockchain](hydrogen-network.md#the-blockchain-in-use) as the Hydrogen Network. The contracts used is listed below:
+The Helium Network is still running on the [same private blockchain](hydrogen-network.md#the-blockchain-in-use) as the Hydrogen Network. The contracts used are listed below:
 
-| Contract | Address |
-| -------- | ------- |
-| Token    |         |
-| Node     |         |
-| Task     |         |
+| Contract           | Address                                    |
+| ------------------ | ------------------------------------------ |
+| Token              | 0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb |
+| Node               | 0xc674d7d3599Cb566eC8027767f410dd8cD7Bd36D |
+| Task               | 0x9b483dc4D18a35802DD4fB0fE9f02A8b32FaD906 |
+| Task Queue         | 0xeA44D3565B48e4791529F591C0bBDA2AC8958258 |
+| QoS                | 0x91754172B22b4ba8ff2F34C2A7C90cA7ce96B806 |
+| Network Statistics | 0xaa0F19cb42a19415591003Ed9D99c40cE69B0224 |
 
-Again, both the test ETH and CNX tokens are required to start a node, or call the inference API. To get the test tokens, join the Discord of Crynux:
+Again, both the test ETH and CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux:
 
-{% embed url="https://discord.gg/C5Uj9kAr" %}
+{% embed url="https://docs.crynux.ai/happyaigen#bind-the-wallet-address" %}
 
 ## The Relay In Use
 

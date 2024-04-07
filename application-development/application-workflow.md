@@ -65,14 +65,14 @@ The source code of the web UI of the AI Chatbot
 ### 1. Prepare the application wallet
 
 {% hint style="info" %}
-Crynux Network is currently deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could join the [Discord Server of Crynux](https://discord.gg/C5Uj9kAr) to get the test tokens.
+Crynux Network is currently deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could[ join the Discord Server of Crynux and use the bot](https://docs.crynux.ai/happyaigen#bind-the-wallet-address) to get the test tokens.
 {% endhint %}
 
 An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.
 
 Enough CNX tokens must be present in the wallet. The tokens will be used to pay for the tasks. The application should keep monitoring the balance of the wallet, and notify the admins to transfer more tokens into the wallet before it is not enough to pay for the next task.
 
-ETH tokens are also required in the wallet, to pay for the gas fees of sending the transaction.
+Some test gas tokens are also required in the wallet, to pay for the gas fees of sending the transaction.
 
 #### Approve the Task Contract to spend the CNX tokens in the wallet
 
@@ -212,7 +212,7 @@ The URL could be treated like an image downloading link as it returns the binary
 
 #### Get texts
 
-
+The API endpoint to get text results from the Relay is the same as the endpoint above, except that the `image_num` should be set to zero.
 
 {% hint style="info" %}
 When the application accesses the above URL after the `TaskSuccess` event is received, it could keep getting `404 not found` for a short while before it gets the correct images. The reason is that the Node will start to upload images/texts to the Relay only after the `TaskSuccess` event is received. So before the uploading is done, the application can not find the results on the Relay. Several times of retrying is required at this place.

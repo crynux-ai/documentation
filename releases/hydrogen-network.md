@@ -116,9 +116,9 @@ Our focus right now, however, is to support more features, such as the GPT tasks
 
 When the test networks are running on the private blockchain, the test tokens are free to acquire from our community. The node providers are contributing their computation power for free in a belief of the open and democratized future. And their contributions are recorded by the private blockchain. We believe their efforts will be paid out eventually.
 
-The test tokens are required for both starting a node, or calling the inference API. To get the tokens, just join the Discord of Crynux:
+The test tokens are required for both starting a node, or calling the inference API. To get the test tokens, just join the Discord of Crynux and bind your wallet address using the bot:
 
-{% embed url="https://discord.gg/C5Uj9kAr" %}
+{% embed url="https://docs.crynux.ai/happyaigen#bind-the-wallet-address" %}
 
 The private blockchain in use in the Hydrogen Network is built using the [Frontier project](https://paritytech.github.io/frontier/), which contains an EVM running on top of the [Substrate Blockchain](https://substrate.io/). The Blockchain is Ethereum compatible, most of the existing tools for the Ethereum can be used directly.
 

@@ -34,7 +34,7 @@ The rendered documents of the specifications can also be accessed at:
 [https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
 {% endswagger %}
 
-#### Get the images from the Relay:
+#### Get the images and the texts from the Relay:
 
 {% swagger src="https://relay.h.crynux.ai/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
 [https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
