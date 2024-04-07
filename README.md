@@ -52,8 +52,8 @@ To read more about the Helium Network release, go to the following page:
 
 To start a node on your local computer to earn tokens, follow the tutorial below:
 
-{% content-ref url="node-hosting/start-a-node-win-linux.md" %}
-[start-a-node-win-linux.md](node-hosting/start-a-node-win-linux.md)
+{% content-ref url="node-hosting/start-a-node-windows.md" %}
+[start-a-node-windows.md](node-hosting/start-a-node-windows.md)
 {% endcontent-ref %}
 
 If you are using Mac with Apple Silicon Chips, follow this tutorial:

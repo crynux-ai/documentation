@@ -12,7 +12,7 @@ This documentation describes the usage of the HappyAIGen bot inside the Discord 
 
 ### Claim the welcome credits
 
-In a DM window of the HappyAIGen bot, type in the following command:
+In the message input bar, type in the following command:
 
 ```
 /user join
@@ -20,7 +20,7 @@ In a DM window of the HappyAIGen bot, type in the following command:
 
 ### Create a personal invitation link
 
-In a DM window of the HappyAIGen bot, type in the following command, and you will get a personal invitation link to the Discord server:
+In the message input bar, type in the following command, and you will get a personal invitation link to the Discord server:
 
 ```
 /credit invite
@@ -28,7 +28,7 @@ In a DM window of the HappyAIGen bot, type in the following command, and you wil
 
 ### Submit tweet link
 
-In a DM window of the HappyAIGen bot, paste in the tweet link:
+In the message input bar, type in the following command, and paste in the tweet link:
 
 ```
 /credit tweet {tweet_link}
@@ -36,7 +36,7 @@ In a DM window of the HappyAIGen bot, paste in the tweet link:
 
 ### Bind the wallet address
 
-In a DM window of the HappyAIGen bot, type in the following command, and paste in the wallet address:
+In the message input bar, type in the following command, and paste in the wallet address:
 
 ```
 /node wallet {wallet_address} 
@@ -46,8 +46,16 @@ The wallet address will be bind to the Discord user to receive future credit rew
 
 ### Generate the image
 
-In any group channel of the Discord server, type in the following command to generate an image using text prompt:
+In the message input bar, type in the following command to generate an image using the given text prompt:
 
 ```
 /credit image {prompt}
 ```
+
+### Check the credit balance
+
+```
+/credit show
+```
+
+And more commands could be found by typing in a single `/` in the Discord server, and navigate through the dropdown menu.

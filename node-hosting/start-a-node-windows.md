@@ -1,8 +1,8 @@
 ---
-description: Start a node to join the Crynux Network on Windows or Linux
+description: Start a node to join the Crynux Network on Windows
 ---
 
-# Start a Node - Win/Linux
+# Start a Node - Windows
 
 ## 1. Prerequisite
 
