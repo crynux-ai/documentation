@@ -6,7 +6,7 @@ description: Boost the Community
 
 HappyAIGen is the community boosting project that brings more fun to the members by utilizing the AI tools provided by the Crynux Network.
 
-The detailed rules of the project can be found inside the [Discord server of Crynux](https://discord.gg/C5Uj9kAr).
+The detailed rules of the project can be found inside the [Discord server of Crynux](https://discord.gg/y8YKxb7uZk).
 
 This documentation describes the usage of the HappyAIGen bot inside the Discord server.
 

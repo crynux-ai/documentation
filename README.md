@@ -50,7 +50,7 @@ To read more about the Helium Network release, go to the following page:
 
 ### Start a Node
 
-To start a node on your local computer to earn tokens, follow the tutorial below:
+To start a node on your Windows computer to earn tokens, follow the tutorial below:
 
 {% content-ref url="node-hosting/start-a-node-windows.md" %}
 [start-a-node-windows.md](node-hosting/start-a-node-windows.md)
@@ -60,6 +60,18 @@ If you are using Mac with Apple Silicon Chips, follow this tutorial:
 
 {% content-ref url="node-hosting/start-a-node-mac.md" %}
 [start-a-node-mac.md](node-hosting/start-a-node-mac.md)
+{% endcontent-ref %}
+
+On other systems such as Linux, you could start the node using Docker:
+
+{% content-ref url="node-hosting/start-a-node-docker.md" %}
+[start-a-node-docker.md](node-hosting/start-a-node-docker.md)
+{% endcontent-ref %}
+
+If you want to start the node on your server, try the headless deployment using Docker:
+
+{% content-ref url="node-hosting/headless-deployment.md" %}
+[headless-deployment.md](node-hosting/headless-deployment.md)
 {% endcontent-ref %}
 
 ### Develop an application
@@ -80,7 +92,7 @@ Checkout our latest research paper about Crynux Network here:
 
 Join the Crynux community on Discord:
 
-{% embed url="https://discord.gg/C5Uj9kAr" %}
+{% embed url="https://discord.gg/y8YKxb7uZk" %}
 
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 

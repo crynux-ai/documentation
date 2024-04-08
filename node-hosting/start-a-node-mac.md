@@ -32,7 +32,7 @@ After the backup is completed, it is time to fill the wallet with some test toke
 
 The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
 
-{% embed url="https://discord.gg/C5Uj9kAr" %}
+{% embed url="https://discord.gg/y8YKxb7uZk" %}
 
 In the chat input bar of any channel, type in the following command:
 
