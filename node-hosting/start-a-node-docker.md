@@ -8,19 +8,7 @@ description: Start a node to join the Crynux Network using Docker images
 
 Before you start, make sure your device meets the following requirements:
 
-### Hardware requirements
-
 <table><thead><tr><th width="187">Hardware</th><th>Requirements</th></tr></thead><tbody><tr><td>GPU</td><td>NVIDIA GPU with 8GB VRAM</td></tr><tr><td>Memory</td><td>16GB</td></tr><tr><td>Disk Space</td><td>60GB</td></tr><tr><td>Network</td><td>Public network access to Huggingface and Civitai</td></tr></tbody></table>
-
-### Wallet requirements
-
-* the private key or keystore of an Ethereum wallet
-* \~**0.1** Test Gas Tokens
-* **400 CNX** Test Tokens
-
-{% hint style="info" %}
-Crynux Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could[ join the Discord Server of Crynux and bind your wallet address](https://docs.crynux.ai/happyaigen#bind-the-wallet-address) using the bot to get the test tokens.
-{% endhint %}
 
 ## 2. Install the software
 
@@ -40,7 +28,7 @@ The memory limit for WSL is default to 8GB, which is not enough to run the Node.
 
 </details>
 
-## 2. Start the node using the Docker image
+## 3. Start the node using the Docker image
 
 #### a. Pull the Docker image from GitHub
 
@@ -66,31 +54,47 @@ Open the browser and go to [http://localhost:7412](http://localhost:7412)
 
 You should see the WebUI of the Node:
 
-<figure><img src="../.gitbook/assets/initial.png" alt=""><figcaption><p>The Initial Interface of the WebUI of the Node</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/1d2593321953160bab0838ed3d54748.png" alt=""><figcaption></figcaption></figure>
 
-The Node has been started successfully. But the node is not yet ready to join the network and accept tasks before the next steps are completed.
+## 4. Prepare the wallet
 
-## 3. Configure the wallet in the WebUI
+A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-The node is waiting for a wallet to be configured at this time. Paste the private key of the wallet, or the keystore, into the form:
+<figure><img src="../.gitbook/assets/7b8bf34cf8eb9b7e850aad28e44b587.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/enter_pk.png" alt=""><figcaption><p>Input the Private Key of the Wallet</p></figcaption></figure>
+After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
 
-After clicking Submit, the address of the wallet should be displayed on the webpage, which means the wallet has been configured successfully:
+The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
 
-<figure><img src="../.gitbook/assets/preparing.png" alt=""><figcaption><p>Preparing</p></figcaption></figure>
+{% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-The Node is now downloading the frequently used models such as the Stable Diffusion 1.5. About 30GB of models will be downloaded during this preparing phase. And this is a one-time operation, please be patient to wait.&#x20;
+In the chat input bar of any channel, type in the following command:
 
-After the downloading is finished, you will be able to control the node to join the network:
+```
+/node wallet {address}
+```
 
-<figure><img src="../.gitbook/assets/start.png" alt=""><figcaption><p>Ready to Start</p></figcaption></figure>
+Remember to replace the `{address}` with the real wallet address from the node:
 
-## 4. Control the node in the WebUI
+<figure><img src="../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
 
-&#x20;Click the Start button, after a short while, the Node will be added to the network, waiting for incoming tasks:
+After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
-<figure><img src="../.gitbook/assets/running.png" alt=""><figcaption><p>Node is Running and Waiting for the Tasks</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
+
+## 5. Wait for the system initialization to finish
+
+If this is the first time you start a node, it could take quite a long while for the system to initialize. The most time consuming step is to download \~40GB of the commonly used model files from the Huggingface. The time may vary depending on your network speed.
+
+After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
+
+<figure><img src="../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
+
+## 6. Join the Crynux Network
+
+Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
+
+<figure><img src="../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
 
 Now the Node is fully up and running. You could just leave it there to run tasks automatically.
 
