@@ -4,96 +4,74 @@ description: Start a node to join the Crynux Network on Windows
 
 # Start a Node - Windows
 
+{% hint style="info" %}
+Starting a node on Windows using the binary release package, as described in this page, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
+{% endhint %}
+
 ## 1. Prerequisite
 
 Before you start, make sure your device meets the following requirements:
 
-### Hardware requirements
-
 <table><thead><tr><th width="187">Hardware</th><th>Requirements</th></tr></thead><tbody><tr><td>GPU</td><td>NVIDIA GPU with 8GB VRAM</td></tr><tr><td>Memory</td><td>16GB</td></tr><tr><td>Disk Space</td><td>60GB</td></tr><tr><td>Network</td><td>Public network access to Huggingface and Civitai</td></tr></tbody></table>
-
-### Wallet requirements
-
-* the private key or keystore of an Ethereum wallet
-* \~**0.1** Test Gas Tokens
-* **400 CNX** Test Tokens
-
-{% hint style="info" %}
-Crynux Network is deployed on an Ethereum compatible **private** Blockchain. **No real ETH and CNX tokens are used**. You could[ join the Discord Server of Crynux and bind your wallet address](https://docs.crynux.ai/happyaigen#bind-the-wallet-address) using the bot to get the test tokens.
-{% endhint %}
 
 ## 2. Install the software
 
 ### Install the latest NVIDIA driver
 
-Download the latest NVIDIA driver from the [NVIDIA official website](https://www.nvidia.com/Download/index.aspx?lang=en-us), and finish the installation.
+Make sure you have already installed the latest NVIDIA driver from the [NVIDIA official website](https://www.nvidia.com/Download/index.aspx?lang=en-us).
 
-### Install the latest version of Docker
+### Download the Crynux Node
 
-Download the latest version of the [Docker Desktop](https://docs.docker.com/get-docker/), and finish the installation.
+Download the binary release version of the Crynux Node from the link below:
 
-<details>
-
-<summary>If you have 16GB of memory and use Docker with WSL2 on Windows</summary>
-
-The memory limit for WSL is default to 8GB, which is not enough to run the Node. You will have to change the default settings using a [`.wslconfig`](https://learn.microsoft.com/en-us/answers/questions/1296124/how-to-increase-memory-and-cpu-limits-for-wsl2-win) file to allow WSL to use 16GB memory.
-
-</details>
-
-## 2. Start the node using the Docker image
-
-#### a. Pull the Docker image from GitHub
-
-Make sure the Docker daemon is started, and run the following command in a terminal:
-
-```sh
-docker pull ghcr.io/crynux-ai/crynux-node:latest
+```
+// Coming shortly
 ```
 
-#### b. Start the Docker container
+## 3. Start the node
 
-Run the following command in a terminal:
+Unzip the downloaded package, double click on the `Crynux Node.exe` to start the node:
 
-```sh
-docker run -d -p 127.0.0.1:7412:7412 --gpus all ghcr.io/crynux-ai/crynux-node:latest
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095319.png" alt=""><figcaption></figcaption></figure>
+
+## 4. Prepare the wallet
+
+A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
+
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095417.png" alt=""><figcaption></figcaption></figure>
+
+After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
+
+The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
+
+{% embed url="https://discord.gg/y8YKxb7uZk" %}
+
+In the chat input bar of any channel, type in the following command:
+
+```
+/node wallet {address}
 ```
 
-The port `7412` is exposed for the WebUI. And GPUs must be provided to the container.
+Remember to replace the `{address}` with the real wallet address from the node:
 
-#### c. Visit the WebUI in the browser
+<figure><img src="../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
 
-Open the browser and go to [http://localhost:7412](http://localhost:7412)
+After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
-You should see the WebUI of the Node:
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095617.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/initial.png" alt=""><figcaption><p>The Initial Interface of the WebUI of the Node</p></figcaption></figure>
+## 5. Wait for the system initialization to finish
 
-The Node has been started successfully. But the node is not yet ready to join the network and accept tasks before the next steps are completed.
+If this is the first time you start a node, it could take quite a long while for the system to initialize. The most time consuming step is to download \~40GB of the commonly used model files from the Huggingface. The time may vary depending on your network speed.
 
-## 3. Configure the wallet in the WebUI
+After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-The node is waiting for a wallet to be configured at this time. Paste the private key of the wallet, or the keystore, into the form:
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 101435.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/enter_pk.png" alt=""><figcaption><p>Input the Private Key of the Wallet</p></figcaption></figure>
+## 6. Join the Crynux Network
 
-After clicking Submit, the address of the wallet should be displayed on the webpage, which means the wallet has been configured successfully:
+Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../.gitbook/assets/preparing.png" alt=""><figcaption><p>Preparing</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 101415.png" alt=""><figcaption></figcaption></figure>
 
-The Node is now downloading the frequently used models such as the Stable Diffusion 1.5. About 30GB of models will be downloaded during this preparing phase. And this is a one-time operation, please be patient to wait.&#x20;
-
-After the downloading is finished, you will be able to control the node to join the network:
-
-<figure><img src="../.gitbook/assets/start.png" alt=""><figcaption><p>Ready to Start</p></figcaption></figure>
-
-## 4. Control the node in the WebUI
-
-&#x20;Click the Start button, after a short while, the Node will be added to the network, waiting for incoming tasks:
-
-<figure><img src="../.gitbook/assets/running.png" alt=""><figcaption><p>Node is Running and Waiting for the Tasks</p></figcaption></figure>
-
-Now the Node is fully up and running. You could just leave it there to run tasks automatically.
-
-The Node could be paused or stopped at any time by clicking the control buttons. If the node is in the middle of running a task, after clicking the buttons, the node will go into the "pending" status and continue with the running task. When the task is finished, the node will pause/stop automatically.
-
-The difference between pausing and stopping is that pausing will not cause the staked CNX tokens to be returned, so that the transaction costs less gas fee than stopping. If you have a plan of going back, you could use pausing rather than stopping.&#x20;
+Now you could just leave it there to execute the tasks. When you shutdown the Crynux Node app, it will try to quit the network before exiting, so that new tasks will not be sent to the node any more. And the next time the app is started, it will join the network to receive new tasks automatically.
