@@ -50,13 +50,17 @@ To read more about the Helium Network release, go to the following page:
 
 ### Start a Node
 
-To start a node on your Windows computer to earn tokens, follow the tutorial below:
+Download the package according to your platform, and follow the tutorials below:
+
+<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/file/d/1wGMEqrKyc7StZPvMiuAH737oBKFf193g/view?usp=sharing">https://drive.google.com/file/d/1wGMEqrKyc7StZPvMiuAH737oBKFf193g/view?usp=sharing</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.1/crynux-node-helium-v2.0.1-mac-apple-silicon.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.1/crynux-node-helium-v2.0.1-mac-apple-silicon.dmg</a></td></tr><tr><td>Docker</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node">https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node</a></td></tr></tbody></table>
+
+To start a node on your Windows computer:
 
 {% content-ref url="node-hosting/start-a-node-windows.md" %}
 [start-a-node-windows.md](node-hosting/start-a-node-windows.md)
 {% endcontent-ref %}
 
-If you are using Mac with Apple Silicon Chips, follow this tutorial:
+If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 
 {% content-ref url="node-hosting/start-a-node-mac.md" %}
 [start-a-node-mac.md](node-hosting/start-a-node-mac.md)
