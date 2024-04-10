@@ -30,13 +30,13 @@ Download the binary release version of the Crynux Node from the link below:
 
 Unzip the downloaded package, double click on the `Crynux Node.exe` to start the node:
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095319.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 092150.png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Prepare the wallet
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095417.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 092216.png" alt=""><figcaption></figcaption></figure>
 
 After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
 
@@ -56,7 +56,7 @@ Remember to replace the `{address}` with the real wallet address from the node:
 
 After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 095617.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093004.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Wait for the system initialization to finish
 
@@ -64,12 +64,12 @@ If this is the first time you start a node, it could take quite a long while for
 
 After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 101435.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093116.png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Join the Crynux Network
 
 Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-09 101415.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093051.png" alt=""><figcaption></figcaption></figure>
 
 Now you could just leave it there to execute the tasks. When you shutdown the Crynux Node app, it will try to quit the network before exiting, so that new tasks will not be sent to the node any more. And the next time the app is started, it will join the network to receive new tasks automatically.
