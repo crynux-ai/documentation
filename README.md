@@ -10,7 +10,7 @@ As the foundation layer, Crynux Network is composed of the decentralized nodes w
 
 On top of the computing network, a decentralized model/dataset hosting service is provided to better support the various AI use cases.
 
-The applications could easily connect to the Crynux Network using API, bring AI power to their users with no extra need for the hardware and development.
+The applications could easily connect to the Crynux Network using API, use Crynux Network to generate images or texts, and bring AI power to their users with no extra need for the hardware and development.
 
 The developers could write codes to train/fine-tune their models on the dataset provided by the network, using the computing power of the network. The developed model could also be hosted on the network as a service for others.
 
@@ -20,7 +20,7 @@ By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Comput
 
 Helium Network is the latest testnet of the Crynux Network. Helium Network implements a decentralized AI task execution engine that supports running the Stable Diffusion image generation tasks and the GPT text generation tasks.
 
-Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment. Everyone has an Nvidia GPU, or Mac with the Apple Silicon chips (M1, M2 and M3 series), could have already joined the network by starting a Docker container.
+Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment. Everyone has an Nvidia GPU, or Mac with the Apple Silicon chips (M1, M2 and M3 series), could have already joined the network using our node software.
 
 ### Stable Diffusion Image Generation
 
