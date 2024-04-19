@@ -24,7 +24,7 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-{% embed url="https://drive.google.com/file/d/1wGMEqrKyc7StZPvMiuAH737oBKFf193g/view?usp=sharing" %}
+{% embed url="https://drive.google.com/file/d/1EoNPVO5USYLtSmsgYA5_Z7spR_PCTqh2/view?usp=sharing" %}
 
 ## 3. Start the node
 

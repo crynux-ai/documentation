@@ -80,7 +80,7 @@ The attacker could then reject the `CreateTask` transactions in which it can not
 
 By carefully constructing and organizing more adjacent blocks, the attacker could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the Blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
 
-Considering that to make this attack **practical**, the attacker must control a significant large number of nodes in the whole network by himself. The Hydrogen Network chooses to ignore this problem and uses the `prevrando` on the supported Blockchains, and uses the last block hash on other Blockchains.
+Considering that to make this attack **practical**, the attacker must control a significant large number of nodes in the whole network by himself. The Crynux Network chooses to ignore this problem and uses the `prevrando` on the supported Blockchains, and uses the last block hash on other Blockchains.
 
 ### Sequential Node Selection
 
@@ -92,7 +92,7 @@ The only option left for us is the sequential node selection. The Blockchain wil
 
 If the nodes of the attacker have been selected twice in a single task. When the attacker finds out that he is selected again in the second round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
 
-The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Hydrogen Network, using a parallel execution schema, which makes the experience better for the applications and their users.
+The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Crynux Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
 ## Staking based Penalization
 
@@ -148,7 +148,7 @@ When an exception occurred during the task execution on the node, if the excepti
 
 The error reporting is treated as a normal task result on the Blockchain. If more than 2 nodes has reported the error to the Blockchain, the task is aborted. If a node reported the error while the other 2 nodes submitted the computation results correctly, the node will be slashed.
 
-The Hydrogen Network allows the model to be downloaded from an external link. However, there might be network issues during the downloading of the model. It is hard to tell whether the network issue is common to all the 3 nodes, or whether the network issue is temporary.
+Crynux Network allows the model to be downloaded from an external link. However, there might be network issues during the downloading of the model. It is hard to tell whether the network issue is common to all the 3 nodes, or whether the network issue is temporary.
 
 To avoid the slashing of the honest nodes by mistake, reporting error should be used only when the node is 100% sure it is the error of the task arguments, rather than the network issue. The rest of the cases should be taken care of by the timeout mechanism.
 
