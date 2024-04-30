@@ -51,7 +51,7 @@ The base model could be any large language model suitable for text generation ta
 
 The model should be a Huggingface model ID.
 
-All huggingface models list in the [huggingface models page](https://huggingface.co/models?pipeline_tag=text-generation&sort=trending) can be used for base model.
+All huggingface models list in the [huggingface models page](https://huggingface.co/models?pipeline\_tag=text-generation\&sort=trending) can be used for base model.
 
 For example:
 
@@ -82,12 +82,11 @@ For example:
 
 Message object has two fields: `role` and `content`.
 
-The field `role` represents the role of message author, can be `user`, `assistant` and `system`. 
+The field `role` represents the role of message author, can be `user`, `assistant` and `system`.
 
 The field `content` is the message content.
 
 During execution, the messages will be formatted to a plain string using the model's chat template, and then be send to the model as input prompt. Accroding to the different message role, different tags defined by the model will be added around each message. However, some models have no chat template, in this situation all the message contents will be simply joined to a single string.
-
 
 ### Generation Config
 
@@ -111,17 +110,17 @@ For example:
 }
 ```
 
- The meaning of each parameters in generation config can be found in the [huggingface generation config](https://huggingface.co/docs/transformers/main_classes/text_generation#transformers.GenerationConfig).
+The meaning of each parameters in generation config can be found in the [huggingface generation config](https://huggingface.co/docs/transformers/main\_classes/text\_generation#transformers.GenerationConfig).
 
-#### max_new_tokens
+#### max\_new\_tokens
 
 The maximum numbers of tokens to generate, ignoring the number of tokens in the input prompt.
 
-#### do_sample
+#### do\_sample
 
 Whether or not to use sampling ; use greedy decoding otherwise.
 
-#### num_beams
+#### num\_beams
 
 Number of beams for beam search. 1 means no beam search.
 
@@ -129,45 +128,43 @@ Number of beams for beam search. 1 means no beam search.
 
 The value used to modulate the next token probabilities. The higher the temperature, the flattering the next token probabilities. When the temperature equals 0, the sampling will be downgraded to greedy decoding.
 
-#### typical_p
+#### typical\_p
 
-Local typicality measures how similar the conditional probability of predicting a target token next is to the expected conditional probability of predicting a random token next, given the partial text already generated. If set to float < 1, the smallest set of the most locally typical tokens with probabilities that add up to typical_p or higher are kept for generation. See [this paper](https://arxiv.org/pdf/2202.00666.pdf) for more details.
+Local typicality measures how similar the conditional probability of predicting a target token next is to the expected conditional probability of predicting a random token next, given the partial text already generated. If set to float < 1, the smallest set of the most locally typical tokens with probabilities that add up to typical\_p or higher are kept for generation. See [this paper](https://arxiv.org/pdf/2202.00666.pdf) for more details.
 
-#### top_k
+#### top\_k
 
 The number of highest probability vocabulary tokens to keep for top-k-filtering.
 
-#### top_p
+#### top\_p
 
-If set to float < 1, only the smallest set of most probable tokens with probabilities that add up to top_p or higher are kept for generation.
+If set to float < 1, only the smallest set of most probable tokens with probabilities that add up to top\_p or higher are kept for generation.
 
-#### repetition_penalty
+#### repetition\_penalty
 
 The parameter for repetition penalty. 1.0 means no penalty. See [this paper](https://arxiv.org/pdf/1909.05858.pdf) for more details.
 
-#### num_return_sequences
+#### num\_return\_sequences
 
 The number of independently computed returned sequences for each element in the batch.
 
 ### Seed
 
-The seed used to initialize the random processes. 
+The seed used to initialize the random processes.
 
 {% hint style="info" %}
 Helium Network requires a deterministic algorithm for text generation, which means the text generated on the different nodes of the same deivces, given the same task definition, should be the same. This is a requirement for the consensus protocol to work. The seed is left as a required argument in the task definition so that all the nodes could use the same seed to initialize their random number generators, which will hopefully produce the same random numbers across all the nodes.
 
-Beside the seed, the GPT Task Framework has been implemented to maximize the reproducibility.&#x20;
+Beside the seed, the GPT Task Framework has been implemented to maximize the reproducibility.
 {% endhint %}
 
 ### Dtype
 
-Optional. Control the data precision for the model. Can be `float16`, `bfloat16`, `float32` or `auto`.
-When `dtype=auto`, the parameter `dtype` will be determined by the model's config file.
+Optional. Control the data precision for the model. Can be `float16`, `bfloat16`, `float32` or `auto`. When `dtype=auto`, the parameter `dtype` will be determined by the model's config file.
 
-### Quantize_bits
+### Quantize\_bits
 
 Optional. Control the model quantization type. Can be `4` or `8`. `4` means the INT4 quantization, `8` means the INT8 quantization.
-
 
 ## GPT Task Response
 
@@ -208,7 +205,6 @@ A choice object has three fields, `finish_reason`, `message` and `index`.
 `message` is a message object which is the same with message object used in task definition. The `role` of response message will always be `assistant`.
 
 `index` is the index of the choice object in all choices, begins from 0.
-
 
 ## Usage
 

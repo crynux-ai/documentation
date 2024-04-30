@@ -4,9 +4,11 @@ description: Start a node to join the Crynux Network on Windows
 
 # Start a Node - Windows
 
-{% hint style="info" %}
-Starting a node on Windows using the binary release package, as described in this page, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
-{% endhint %}
+## 0. Overview
+
+* ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
+* ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
+* Follow the steps below:
 
 ## 1. Prerequisite
 
@@ -24,7 +26,11 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-{% embed url="https://drive.google.com/file/d/1EoNPVO5USYLtSmsgYA5_Z7spR_PCTqh2/view?usp=sharing" %}
+{% embed url="https://drive.google.com/file/d/1ycFGUfOQt4hJc4UMF-dtJBxmonSSq77F/view?usp=sharing" %}
+
+{% hint style="info" %}
+Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
+{% endhint %}
 
 ## 3. Start the node
 

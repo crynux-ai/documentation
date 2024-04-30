@@ -4,6 +4,12 @@ description: Start a node to join the Crynux Network on Mac
 
 # Start a Node - Mac
 
+## 0. Overview
+
+* ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
+* ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
+* Follow the steps below:
+
 ## 1. Prerequisite
 
 The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Make sure your device meets the requirement before running the node.
@@ -14,7 +20,7 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 Download the DMG file using the following link, double click the file, and drag the app to the application's folder:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.2/crynux-node-helium-v2.0.2-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.3/crynux-node-helium-dym-rollapp-x-v2.0.3-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 
