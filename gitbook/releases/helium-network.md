@@ -85,27 +85,32 @@ To start a node on Mac, just follow the tutorial below:
 
 ## The Blockchain In Use
 
-The Helium Network is still running on the [same private blockchain](hydrogen-network.md#the-blockchain-in-use) as the Hydrogen Network. The contracts used are listed below:
+Thanks to [Dymension](https://dymension.xyz/), the Helium Network is using a [testnet rollapp of Dymension](https://testnet.dymension.xyz/rollapp/crynux\_10000-1/metrics) as an L2 blockchain. An EVM is running on the rollapp to support the smart contracts of Crynux.
+
+The base layer token (think of it as the ETH in the testnet rollapp) is now used as the Crynux token. The old ERC20 token is deprecated.
+
+The block explorer of the testnet rollapp can be accessed at:
+
+{% embed url="https://bb.dym.fyi/r/dev-crynux" %}
 
 | Contract           | Address                                    |
 | ------------------ | ------------------------------------------ |
-| Token              | 0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb |
-| Node               | 0xc674d7d3599Cb566eC8027767f410dd8cD7Bd36D |
-| Task               | 0x9b483dc4D18a35802DD4fB0fE9f02A8b32FaD906 |
-| Task Queue         | 0xeA44D3565B48e4791529F591C0bBDA2AC8958258 |
-| QoS                | 0x91754172B22b4ba8ff2F34C2A7C90cA7ce96B806 |
-| Network Statistics | 0xaa0F19cb42a19415591003Ed9D99c40cE69B0224 |
+| Node               | 0x662d296cae3f1Be2ed5803227dAd6435f1ffC438 |
+| Task               | 0x07E149A0e372C2F54Df6358d021d700703D222D1 |
+| Task Queue         | 0xeD4cbf24978AD18d73ee6190e361E71095E857A7 |
+| QoS                | 0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb |
+| Network Statistics | 0xC2c060f8C46640394E0937D75Ea977207E6df130 |
 
-Again, both the test ETH and CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux:
+The test CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux:
 
 {% embed url="https://docs.crynux.ai/happyaigen#bind-the-wallet-address" %}
 
 ## The Relay In Use
 
-The relay server used is also the same as the Hydrogen Network, which could be accessed at:
+The relay server used is:
 
 ```url
-https://relay.h.crynux.ai
+https://dy.relay.crynux.ai
 ```
 
 The source code of the relay is hosted at:
