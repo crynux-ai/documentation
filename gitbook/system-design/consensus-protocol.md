@@ -4,13 +4,15 @@ description: Decentralize the Infrastructure
 
 # Consensus Protocol
 
-The consensus protocol in the Crynux Network makes sure no one could cheat the network, where everyone could freely join the network, and do whatever they want.
+The consensus protocol in a decentralized system ensures the integrity of the network, allowing permissionless participation without the possibility of fraudulent activities. The consensus protocol is the most important component in any decentralized system, since it is where "decentralization" comes from.
 
-For example, a malicious node could submit a random image to the network without actually perform the computation. If we leave the mission of discovering the cheating to the user, i.e. allowing the user to pay only after he verified the result image, then a malicious user could deny all the payment to use the network for free.
+The hardest part about the consensus protocol design is that **Everyone Could Be Malicious**. If a leader is selected, the leader could be malicious. If validators are chosen, the validators could be malicious. The goal of every participant is the same: maximizing the income while at the same time reducing the cost as much as possible. If vulnerability exists, even a minor one, it will be exploited, resulting in the losses for the honest participants. This situation can compel these participants to exit the network, potentially leading to a network downfall eventually.
 
-The goal of the the consensus protocol in the Crynux Network is to find out whether the result is the correct output of a task, given the task arguments and the result. And if the result is correct, make sure the Node who summited the correct result get paid.
+For example, consider a scenario in Crynux Network, where a malicious node submits a random image to the network without actually performing any computation. If we rely on the user to detect this fraud, allowing them to withhold payment until they have verified the result, it opens a loophole. A dishonest user could exploit this by denying all payments, effectively using the network services without paying.
 
-The consensus protocol must be implemented using the smart contracts, and executed on the Blockchain, so that we don't need a trusted central party to enforce the execution of the protocol, who will be cheating himself given so much power.
+The consensus protocol in the Crynux Network aims to verify the correctness of a task's output based on its input arguments. Additionally, it ensures that the Node submitting the correct result gets the payment.
+
+The consensus protocol must be enforced by the blockchain, which eliminates the need for a centralized authority. This decentralized approach safeguards against potential abuse of power by removing the temptation for any single party to cheat, given their control.
 
 Before diving deep into the discussions of the design and choices of each part, make sure you have already familiar with the overall task lifecycle:
 
@@ -18,7 +20,7 @@ Before diving deep into the discussions of the design and choices of each part, 
 [task-lifecycle.md](task-lifecycle.md)
 {% endcontent-ref %}
 
-## Result Validation by Voting
+## Result Validation by Multiple Result Comparison
 
 The result validation is simply implemented by comparing 3 results from 3 randomly selected nodes. When the task is submitted to the Blockchain by the application, the Blockchain randomly selects 3 available nodes, and notifies them to start the task. The nodes run the task locally, and submit the results to the Blockchain. The Blockchain will compare the results to find out whether the nodes are cheating or not.
 
