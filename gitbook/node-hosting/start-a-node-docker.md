@@ -58,7 +58,7 @@ version: "3.8"
 name: "crynux_node"
 
 services:
-  h_node:
+  crynux_node:
     image: ghcr.io/crynux-ai/crynux-node:latest
     container_name: crynux_node
     restart: unless-stopped
