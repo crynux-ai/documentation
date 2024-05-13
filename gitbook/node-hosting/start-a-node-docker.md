@@ -34,27 +34,56 @@ The memory limit for WSL is default to 8GB, which is not enough to run the Node.
 
 </details>
 
-## 3. Start the node using the Docker image
+## 3. Start the node using the Docker Compose
 
-#### a. Pull the Docker image from GitHub
+#### a. Create the working directory for the project
 
-Make sure the Docker daemon is started, and run the following command in a terminal:
+```bash
+# Create the working directory
+$ mkdir crynux_node
 
-```sh
-docker pull ghcr.io/crynux-ai/crynux-node:latest
+# Create the config and data folder
+$ cd crynux_node
+$ mkdir config
+$ mkdir data
 ```
 
-#### b. Start the Docker container
+#### b. Create the Docker Compose file
 
-Run the following command in a terminal:
+Create a file with name `docker-compose.yml` inside the working directory `crynux_node`, and paste the following content:
 
-```sh
-docker run -d -p 127.0.0.1:7412:7412 --gpus all ghcr.io/crynux-ai/crynux-node:latest
+```yaml
+---
+version: "3.8"
+name: "crynux_node"
+
+services:
+  h_node:
+    image: ghcr.io/crynux-ai/crynux-node:latest
+    container_name: crynux_node
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7412:7412"
+    volumes:
+      - "./data:/app/data"
+      - "./config:/app/config"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
 ```
 
-The port `7412` is exposed for the WebUI. And GPUs must be provided to the container.
+#### c. Start the container with
 
-#### c. Visit the WebUI in the browser
+```shell
+# In the working directory
+
+$ docker compose up -d
+```
+
+#### d. Visit the WebUI in the browser
 
 Open the browser and go to [http://localhost:7412](http://localhost:7412)
 
