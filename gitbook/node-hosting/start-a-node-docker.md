@@ -34,16 +34,77 @@ The memory limit for WSL is default to 8GB, which is not enough to run the Node.
 
 </details>
 
+<details>
+
+<summary>If you are running on Linux (Ubuntu/Fedora/CentOS/...)</summary>
+
+Install the latest version of NVIDIA Container Toolkit:
+
+[https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+
+</details>
+
+### Check the installation
+
+**a. Run the following command in the terminal to check the version of the docker engine:**
+
+```bash
+$ docker --version
+```
+
+Make sure the returned version number is greater than 19.03.0:
+
+```
+Docker version 26.0.0, build 2ae903e
+```
+
+**b. Run the following command in the terminal:**
+
+<pre class="language-bash"><code class="lang-bash"><strong>$ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+</strong></code></pre>
+
+You should get the info of the GPU from `nvidia-smi` like this:
+
+```
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 535.86.10    Driver Version: 535.86.10    CUDA Version: 12.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
+| N/A   34C    P8     9W /  70W |      0MiB / 15109MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+```
+
 ## 3. Start the node using the Docker Compose
 
 #### a. Create the working directory for the project
 
 ```bash
 # Create the working directory
-$ mkdir crynux_node
 
-# Create the config and data folder
+$ mkdir crynux_node
 $ cd crynux_node
+```
+
+#### b. Create the config and data directory
+
+The config and the data directory are created on the host machine, and will be mounted into the container so that the container state persists across container recreation:
+
+```bash
+# In the working directory
+
 $ mkdir config
 $ mkdir data
 ```
