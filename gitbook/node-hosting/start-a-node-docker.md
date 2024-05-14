@@ -109,7 +109,7 @@ $ mkdir config
 $ mkdir data
 ```
 
-#### b. Create the Docker Compose file
+#### c. Create the Docker Compose file
 
 Create a file with name `docker-compose.yml` inside the working directory `crynux_node`, and paste the following content:
 
@@ -136,7 +136,7 @@ services:
               capabilities: [gpu]
 ```
 
-#### c. Start the container with
+#### d. Start the container with
 
 ```shell
 # In the working directory
@@ -144,7 +144,7 @@ services:
 $ docker compose up -d
 ```
 
-#### d. Visit the WebUI in the browser
+#### e. Visit the WebUI in the browser
 
 Open the browser and go to [http://localhost:7412](http://localhost:7412)
 
