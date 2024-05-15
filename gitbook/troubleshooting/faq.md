@@ -43,3 +43,17 @@ After the hot/cold wallet architecture is implemented, [as described in this doc
 </details>
 
 ## Node is not Working as Expected
+
+<details>
+
+<summary>The node status shows <code>Stopped</code> after running for a while</summary>
+
+If there is no other error messages shown, the node is probably kicked out of the network due to frequent timeout on tasks.
+
+If the node has a slow GPU, or poor network, the task submission will be slow. If the time required to finish a task exceeds the timeout period, other nodes will abort the task since they do not want to waste more time on the waiting.
+
+More timeout on the tasks will decrease the QoS score of the timeout node, which will eventually cause the node being kicked out of the network. It is not a slashing though, the staked tokens are still safe. The details can be found in the doc:
+
+[Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
+
+</details>
