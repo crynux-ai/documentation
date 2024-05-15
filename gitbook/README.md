@@ -92,6 +92,8 @@ If you are an application developer who want to utilize the AI abilities provide
 
 Checkout our latest research paper about Crynux Network here:
 
+{% embed url="http://dx.doi.org/10.13140/RG.2.2.29365.08166" %}
+
 {% embed url="http://dx.doi.org/10.13140/RG.2.2.32697.54884" %}
 
 ## Links
