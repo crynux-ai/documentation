@@ -24,6 +24,7 @@
 * [Start a Node - Mac](node-hosting/start-a-node-mac.md)
 * [Start a Node - Docker](node-hosting/start-a-node-docker.md)
 * [Private Key Security](node-hosting/private-key-security.md)
+* [Proxy Settings](node-hosting/proxy-settings.md)
 * [Headless Deployment](node-hosting/headless-deployment.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
