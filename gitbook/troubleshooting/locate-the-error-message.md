@@ -4,6 +4,8 @@ description: Find out what exactly goes wrong
 
 # Locate the Error Message
 
+To identify the cause of the problem, refer to the log file for the detailed error message and full stack trace. If seeking community help, providing these details initially can save a lot of time.
+
 ## Locate the log file
 
 {% tabs %}
@@ -26,7 +28,12 @@ $ docker ps
 
 The output should be similar to:
 
+```
+CONTAINER ID   IMAGE                                COMMAND              CREATED          STATUS          PORTS                      NAMES
+77e559a0d707   ghcr.io/crynux-ai/crynux-node:2.0.4  "bash start.sh run"  33 minutes ago   Up 32 minutes   127.0.0.1:7412->7412/tcp   ecstatic_chatterjee
+```
 
+In this case, the container name is `ecstatic_chatterjee`.
 
 In a terminal, type in the following command:
 
@@ -34,7 +41,7 @@ In a terminal, type in the following command:
 $ docker logs {container_name}
 ```
 
-If you want to save the logs to file, use the following command:
+If you want to save the logs to a file, use the following command:
 
 ```bash
 $ docker logs {container_name} >> crynux.log
@@ -42,17 +49,71 @@ $ docker logs {container_name} >> crynux.log
 
 ### Find the log file inside the container
 
-
+The log file can also be found under `/app/logs/crynux-server.log` inside the container.
 {% endtab %}
 
 {% tab title="Linux" %}
-If you downloaded the binary release version of Linux server, the config file `config.yml` can be found in the `config` folder of the project root.
+If you downloaded the binary release version of Linux server, the log file `crynux-server.log` can be found in the `logs` folder of the project root.
 {% endtab %}
 
 {% tab title="Source Code" %}
-The log file is located at `logs/crynux_server.log`, relative to the project root folder.
+The log file is located at `logs/crynux-server.log`, relative to the project root folder.
 {% endtab %}
 {% endtabs %}
 
 ## Locate the error message
+
+Open the log file in a text editor. Navigate to the time where you encountered the error, and find the lines with `[ERROR]`, which is usually the error message. And there will be a stack trace around the error message. **If you are asking for help, remember to provide the full stack trace from the first line to the last**.
+
+Here is an example of a log file with error message and the stack trace:
+
+```
+[2024-05-15 18:08:27] [INFO    ] crynux_worker.prefetch: Start worker process: worker, data/huggingface, data/external
+[2024-05-15 18:08:27] [INFO    ] crynux_worker.prefetch: Start prefetching models
+[2024-05-15 18:08:35] [ERROR   ] crynux_server.node_manager.node_manager: Node manager init error: init task cancelled
+Traceback (most recent call last):
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 454, in _run
+    async with create_task_group() as init_tg:
+  File "anyio\_backends\_asyncio.py", line 597, in __aexit__
+  File "anyio\_backends\_asyncio.py", line 668, in task_done
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 262, in _init
+    async for attemp in AsyncRetrying(
+  File "tenacity\_asyncio.py", line 71, in __anext__
+  File "tenacity\__init__.py", line 314, in iter
+  File "concurrent\futures\_base.py", line 449, in result
+  File "concurrent\futures\_base.py", line 401, in __get_result
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 269, in _init
+    await to_thread.run_sync(
+  File "anyio\to_thread.py", line 33, in run_sync
+  File "anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+asyncio.exceptions.CancelledError
+[2024-05-15 18:08:35] [INFO    ] crynux_server.node_manager.state_manager: Node status is NodeStatus.Stopped, cannot leave the network automatically
+```
+
+In this case, the error message is:
+
+```
+crynux_server.node_manager.node_manager: Node manager init error: init task cancelled
+```
+
+And the full stack trace is:
+
+```
+Traceback (most recent call last):
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 454, in _run
+    async with create_task_group() as init_tg:
+  File "anyio\_backends\_asyncio.py", line 597, in __aexit__
+  File "anyio\_backends\_asyncio.py", line 668, in task_done
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 262, in _init
+    async for attemp in AsyncRetrying(
+  File "tenacity\_asyncio.py", line 71, in __anext__
+  File "tenacity\__init__.py", line 314, in iter
+  File "concurrent\futures\_base.py", line 449, in result
+  File "concurrent\futures\_base.py", line 401, in __get_result
+  File "D:\Crynux Node\_internal\crynux_server\node_manager\node_manager.py", line 269, in _init
+    await to_thread.run_sync(
+  File "anyio\to_thread.py", line 33, in run_sync
+  File "anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+asyncio.exceptions.CancelledError
+```
 
