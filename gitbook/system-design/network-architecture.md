@@ -40,13 +40,13 @@ The source code of the Node of the Hydrogen Network could be found in the reposi
 
 ## The Application
 
-The applications are developed by the third-parties. The applications treat Hydrogen Network as an API service to enhance their abilities.&#x20;
+The applications are developed by the third-parties. The applications treat Crynux Network as an API service to enhance their abilities.&#x20;
 
-The application constructs the arguments of the Stable Diffusion task, and sends the hash of the task arguments to the blockchain to create the task, alongside with the tokens to be paid to the nodes.
+The application constructs the arguments of the Stable Diffusion/GPT task, and sends the hash of the task arguments to the blockchain to create the task, alongside with the tokens to be paid to the nodes.
 
 After the blockchain confirmation, the application sends the task arguments to the relay, and then wait for the notification of task success on the blockchain.
 
-Once the task success event has been emitted on the blockchain, the application could fetch the images from the relay, and continue with its own subsequent business logics.
+Once the task success event has been emitted on the blockchain, the application could fetch the images/texts from the relay, and continue with its own subsequent business logics.
 
 A showcase application, the [Image Generator](https://ig.crynux.ai), has been developed to demonstrate the workflow. The showcase application is quite similar to the [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), which is a web interface for the users to generate images using different models and text prompt. The difference is that, our application does not require the presence of a local GPU, thus could be used on any devices.
 
