@@ -4,6 +4,10 @@ description: Start a node to join the Crynux Network using Docker images
 
 # Start a Node - Docker
 
+{% hint style="info" %}
+This guide is used to start the Crynux Docker container on Windows and Linux (Ubuntu, etc), or on a cloud based VM such as AWS EC2. **DO NOT** use this guide on Docker based clouds such as Vast, on which you could simply use the [image link of Crynux Node](https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node) to start the container directly.
+{% endhint %}
+
 ## 0. Overview
 
 * ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
@@ -87,64 +91,34 @@ You should get the info of the GPU from `nvidia-smi` like this:
 +-----------------------------------------------------------------------------+
 ```
 
+{% hint style="danger" %}
+If something goes wrong on the above steps, the problem is on the Docker or your operating system, please search the error message online for solutions.
+{% endhint %}
+
 ## 3. Start the node using the Docker Compose
 
-#### a. Create the working directory for the project
+#### a. Get the Crynux Docker Compose project
+
+you can use git to clone the project
 
 ```bash
-# Create the working directory
-
-$ mkdir crynux_node
-$ cd crynux_node
+$ git clone git@github.com:crynux-ai/crynux-node-docker-compose.git
 ```
 
-#### b. Create the config and data directory
+or simply download the files from GitHub:
 
-The config and the data directory are created on the host machine, and will be mounted into the container so that the container state persists across container recreation:
+{% embed url="https://github.com/crynux-ai/crynux-node-docker-compose" %}
 
-```bash
-# In the working directory
+#### b. Start the container
 
-$ mkdir config
-$ mkdir data
-```
-
-#### c. Create the Docker Compose file
-
-Create a file with name `docker-compose.yml` inside the working directory `crynux_node`, and paste the following content:
-
-```yaml
----
-version: "3.8"
-name: "crynux_node"
-
-services:
-  crynux_node:
-    image: ghcr.io/crynux-ai/crynux-node:latest
-    container_name: crynux_node
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:7412:7412"
-    volumes:
-      - "./data:/app/data"
-      - "./config:/app/config"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-```
-
-#### d. Start the container with
+In a terminal, navigate to the folder you just cloned or downloaded, and run the following command
 
 ```shell
-# In the working directory
-
+$ cd crynux-node-docker-compose
 $ docker compose up -d
 ```
 
-#### e. Visit the WebUI in the browser
+#### c. Visit the WebUI in the browser
 
 Open the browser and go to [http://localhost:7412](http://localhost:7412)
 
