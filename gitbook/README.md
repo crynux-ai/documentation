@@ -26,9 +26,9 @@ Although called a testnet, the featured consensus protocol is robust enough to a
 
 The applications could now send the Stable Diffusion image generation tasks to the network using the inference API, and get the images back instantly.
 
-A showcase application has been developed to demonstrate the abilities. The app provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. Thanks to the Hydrogen Network, the users could use the application on any devices that do not have a capable GPU integrated.
+A showcase application has been developed to demonstrate the abilities. The app provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. Thanks to the Helium Network, the users could use the application on any devices that do not have a capable GPU integrated.
 
-The Blockchain and token stuff are handled at the application backend using [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
+The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
 Give it a try at [https://ig.crynux.ai](https://ig.crynux.ai)
 
