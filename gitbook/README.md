@@ -4,7 +4,9 @@ description: The Real Decentralized AI you can Join and Use
 
 # Crynux Network
 
-Crynux is an open and democratic AI Infrastructure.
+Crynux is the REAL decentralized AI infrastructure everyone can join and use right away.
+
+The key component of Crynux is a robust consensus protocol that enables the permissionless joining and using of the decentralized network by millions. The ability to identify and penalize all the malicious behaviors ensures the ecosystem's sustainability and facilitates healthy growth in a long term.
 
 As the foundation layer, Crynux Network is composed of the decentralized nodes who contribute their spare AI computing power to the network in exchange for token rewards. The computing power is then grouped and dispatched to run the AI tasks from the developers and applications.
 
