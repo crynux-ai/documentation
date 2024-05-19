@@ -50,6 +50,16 @@ After the hot/cold wallet architecture is implemented, [as described in this doc
 
 </details>
 
+<details>
+
+<summary>Can I use AMD Radeon cards to run a node</summary>
+
+Nope. The AMD GPUs are not supported at this moment. Only Nvidia GPU and Apple M1/M2/M3 are supported.
+
+We will add support for AMD GPUs in a future release.
+
+</details>
+
 ## Node is not Working as Expected
 
 <details>
@@ -63,5 +73,17 @@ If the node has a slow GPU, or poor network, the task submission will be slow. I
 More timeout on the tasks will decrease the QoS score of the timeout node, which will eventually cause the node being kicked out of the network. It is not a slashing though, the staked tokens are still safe. The details can be found in the doc:
 
 [Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
+
+</details>
+
+<details>
+
+<summary>Failed to execute script 'main' ... 5 validation errors for Config</summary>
+
+If the following popup shows when starting the node on Windows:
+
+<img src="../.gitbook/assets/image (1).png" alt="" data-size="original">
+
+Please check your anti-virus software for deletion or quarantine of the files of the Node. The config file might have be deleted.
 
 </details>
