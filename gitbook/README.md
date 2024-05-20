@@ -94,9 +94,9 @@ If you are an application developer who want to utilize the AI abilities provide
 
 Checkout our latest research paper about Crynux Network here:
 
-{% embed url="http://dx.doi.org/10.13140/RG.2.2.29365.08166" %}
+{% embed url="https://www.researchgate.net/publication/380564678_A_Review_on_Decentralized_Artificial_Intelligence_in_the_Era_of_Large_Models" %}
 
-{% embed url="http://dx.doi.org/10.13140/RG.2.2.32697.54884" %}
+{% embed url="https://www.researchgate.net/publication/377567611_Crynux_Hydrogen_Network_H-Net_Decentralized_AI_Serving_Network_on_Blockchain" %}
 
 ## Links
 
