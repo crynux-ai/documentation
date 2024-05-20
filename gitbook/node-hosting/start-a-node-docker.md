@@ -140,25 +140,9 @@ Instead, set the private key in the config file directly. Or secure the connecti
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-<figure><img src="../.gitbook/assets/7b8bf34cf8eb9b7e850aad28e44b587.png" alt=""><figcaption></figcaption></figure>
-
-After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
-
-The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
+The test tokens will be transferred to the newly created wallet automatically. Just wait for a short while before the test tokens appear in the wallet. In case something goes wrong, ask for help in the Discord server:
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
-
-In the chat input bar of any channel, type in the following command:
-
-```
-/node wallet {address}
-```
-
-Remember to replace the `{address}` with the real wallet address from the node:
-
-<figure><img src="../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
-
-After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
 <figure><img src="../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
 
@@ -172,7 +156,7 @@ After the models are downloaded, a test image generation task will be executed l
 
 ## 6. Join the Crynux Network
 
-Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
+The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
 <figure><img src="../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
 

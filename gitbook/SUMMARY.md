@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Crynux Network](README.md)
-* [HappyAIGen](happyaigen.md)
 
 ## Releases
 

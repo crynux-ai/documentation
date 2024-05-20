@@ -26,7 +26,7 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-{% embed url="https://drive.google.com/file/d/1oiZI3DQF5rWV06-vL0PaCksA_sQ6-Ae8/view?usp=sharing" %}
+{% embed url="https://drive.google.com/file/d/1yXHY2RjEXaP5EhF3D3QjseCqEAXBEEP6/view?usp=sharing" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
@@ -42,25 +42,9 @@ Unzip the downloaded package, double click on the `Crynux Node.exe` to start the
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 092216.png" alt=""><figcaption></figcaption></figure>
-
-After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
-
-The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
+The test tokens will be transferred to the newly created wallet automatically. Just wait for a short while before the test tokens appear in the wallet. In case something goes wrong, ask for help in the Discord server:
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
-
-In the chat input bar of any channel, type in the following command:
-
-```
-/node wallet {address}
-```
-
-Remember to replace the `{address}` with the real wallet address from the node:
-
-<figure><img src="../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
-
-After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
 <figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093004.png" alt=""><figcaption></figcaption></figure>
 
@@ -74,7 +58,7 @@ After the models are downloaded, a test image generation task will be executed l
 
 ## 6. Join the Crynux Network
 
-Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
+The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
 <figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093051.png" alt=""><figcaption></figcaption></figure>
 

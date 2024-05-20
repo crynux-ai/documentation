@@ -4,7 +4,7 @@ description: The Real Decentralized AI you can Join and Use
 
 # Crynux Network
 
-Crynux is the REAL decentralized AI infrastructure everyone can join and use right away.
+Crynux is the truly permissionless AI infrastructure everyone can join and use right away.
 
 The key component of Crynux is a robust consensus protocol that enables the permissionless joining and using of the decentralized network by millions. The ability to identify and penalize all the malicious behaviors ensures the ecosystem's sustainability and facilitates healthy growth in a long term.
 
@@ -56,7 +56,7 @@ To read more about the Helium Network release, go to the following page:
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/file/d/1oiZI3DQF5rWV06-vL0PaCksA_sQ6-Ae8/view?usp=sharing">https://drive.google.com/file/d/1oiZI3DQF5rWV06-vL0PaCksA_sQ6-Ae8/view?usp=sharing</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.4/crynux-node-helium-v2.0.4-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.4/crynux-node-helium-v2.0.4-mac-arm64-signed.dmg</a></td></tr><tr><td>Docker</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node">https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node</a></td></tr></tbody></table>
+<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/file/d/1yXHY2RjEXaP5EhF3D3QjseCqEAXBEEP6/view?usp=sharing">https://drive.google.com/file/d/1yXHY2RjEXaP5EhF3D3QjseCqEAXBEEP6/view?usp=sharing</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg</a></td></tr><tr><td>Docker</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node">https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node</a></td></tr></tbody></table>
 
 To start a node on your Windows computer:
 

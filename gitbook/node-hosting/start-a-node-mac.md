@@ -20,7 +20,7 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 Download the DMG file using the following link, double click the file, and drag the app to the application's folder:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.4/crynux-node-helium-v2.0.4-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 
@@ -32,25 +32,9 @@ Double click on the icon of the newly installed app to start the node:
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-<figure><img src="../.gitbook/assets/9672eedeb92ea29f79be5aa66c5eee5.png" alt=""><figcaption></figcaption></figure>
-
-After the backup is completed, it is time to fill the wallet with some test tokens, the test tokens will be used to pay for the gas fees and the staking.
-
-The test tokens can be acquired for free from the Discord server of Crynux, using the HappyAIGen bot. Go to the Discord server:
+The test tokens will be transferred to the newly created wallet automatically. Just wait for a short while before the test tokens appear in the wallet. In case something goes wrong, ask for help in the Discord server:
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
-
-In the chat input bar of any channel, type in the following command:
-
-```
-/node wallet {address}
-```
-
-Remember to replace the `{address}` with the real wallet address from the node:
-
-<figure><img src="../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
-
-After the command is finished successfully, the test tokens should have already been transferred to your wallet. You could check the wallet balance in the UI of the node:
 
 <figure><img src="../.gitbook/assets/8d57ad8e029d6de1cc4fcbe9f0c96c3.png" alt=""><figcaption></figcaption></figure>
 
@@ -64,7 +48,7 @@ After the models are downloaded, a test image generation task will be executed l
 
 ## 6. Join the Crynux Network
 
-Click the "Start" button to join the Crynux Network. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
+The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
 <figure><img src="../.gitbook/assets/fef056a30e2e10930b863743fb34282.png" alt=""><figcaption></figcaption></figure>
 
