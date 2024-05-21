@@ -102,7 +102,7 @@ If something goes wrong on the above steps, the problem is on the Docker or your
 you can use git to clone the project
 
 ```bash
-$ git clone git@github.com:crynux-ai/crynux-node-docker-compose.git
+$ git clone https://github.com/crynux-ai/crynux-node-docker-compose.git
 ```
 
 or simply download the files from GitHub:
