@@ -78,6 +78,20 @@ More timeout on the tasks will decrease the QoS score of the timeout node, which
 
 <details>
 
+<summary>Node manager init error: The initial inference task exceeded the timeout limit(5 min)</summary>
+
+Your computer is too slow to run a Crynux Node. If the time required for your node to finish a task exceeds the timeout period, other nodes will abort the task since they do not want to waste more time on the waiting. And your node will get no reward at all.
+
+Besides, more timeout on the tasks will decrease the QoS score of your node, which will eventually cause your node being kicked out of the network.
+
+Please use a more powerful device to run the node instead. To understand the details, please refer to:
+
+[Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
+
+</details>
+
+<details>
+
 <summary>Node error: Node manager init error: prefetch failed</summary>
 
 "Prefetch" means to download all the popular models from Huggingface before task execution. Prefetch failure can only happen when the download is interrupted.
