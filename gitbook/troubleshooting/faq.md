@@ -78,6 +78,18 @@ More timeout on the tasks will decrease the QoS score of the timeout node, which
 
 <details>
 
+<summary>Node error: Node manager init error: prefetch failed</summary>
+
+"Prefetch" means to download all the popular models from Huggingface before task execution. Prefetch failure can only happen when the download is interrupted.
+
+Make sure you could connect to Huggingface on the device running the node. If you are using a proxy, please provide the proxy config to the node according to the doc:
+
+[Proxy Settings](../node-hosting/proxy-settings.md)
+
+</details>
+
+<details>
+
 <summary>Failed to execute script 'main' ... 5 validation errors for Config</summary>
 
 If the following popup shows when starting the node on Windows:
