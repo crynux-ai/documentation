@@ -18,11 +18,25 @@ In case something goes wrong, go to the Discord server to ask for help:
 
 <summary>Can I start multiple node instances on a single GPU</summary>
 
+**TLDR: you may get even less rewards by starting multiple nodes on a single device**
+
 No one can stop you doing that.
 
 If your GPU is powerful enough, the bottleneck becomes the consensus process (you will be waiting for other nodes to submit results), in such cases you could start multiple nodes to fully utilize the power of the GPU.
 
-However, if your nodes are executing too many tasks simultaneously, the submission of each task will become slower (due to the bottleneck on GPU or network bandwidth), and there will be less tokens you can earn from a single task. Further more, slower tasks will increase the chance of task timeout, which will cause the node being kicked out of the network. It is not a slashing though, the staked tokens are still safe. The details can be found in the doc:
+However, if your nodes are executing too many tasks simultaneously, the task execution will become slower (due to the bottleneck on GPU or network bandwidth). And if you are slower than the other 2 nodes in a task,&#x20;
+
+* You will get a smaller portion from the task fee.&#x20;
+
+<!---->
+
+* Your chance of receiving tasks will decrease, and you will get less tasks.&#x20;
+
+<!---->
+
+* Your node could be kicking out of the network. It is not a slashing though, the staked tokens are still safe.&#x20;
+
+The details can be found in the doc:
 
 [Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
 
@@ -67,6 +81,12 @@ We will add support for AMD GPUs in a future release.
 <summary>The node status shows <code>Stopped</code> after running for a while</summary>
 
 If there is no other error messages shown, the node is probably kicked out of the network due to frequent timeout on tasks.
+
+* You may be running more nodes than your GPU could handle
+
+<!---->
+
+* Your device may not be powerful enough to run a node
 
 If the node has a slow GPU, or poor network, the task submission will be slow. If the time required to finish a task exceeds the timeout period, other nodes will abort the task since they do not want to waste more time on the waiting.
 
