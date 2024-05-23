@@ -48,7 +48,9 @@ Meanwhile, we are developing the new feature to support the concurrent task exec
 
 <summary>Can I start a node on multiple GPUs</summary>
 
-No. The node can execute one task on one GPU at the same time. If you have Multiple GPUs, you can start multiple nodes on the device, and assign the GPUs to different nodes.
+No. The node can execute one task on one GPU at the same time. If you have Multiple GPUs, you can start multiple nodes on the device, and assign each GPU to a different node. The tutorial can be found at:
+
+[Assign GPU to the Node](../node-hosting/assign-gpu-to-the-node.md)
 
 </details>
 
