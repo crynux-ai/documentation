@@ -70,16 +70,16 @@ If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 [start-a-node-mac.md](node-hosting/start-a-node-mac.md)
 {% endcontent-ref %}
 
+You could also start the node on the cloud services using Docker, such as Vast.ai:
+
+{% content-ref url="node-hosting/start-a-node-vast.md" %}
+[start-a-node-vast.md](node-hosting/start-a-node-vast.md)
+{% endcontent-ref %}
+
 On other systems such as Linux, you could start the node using Docker:
 
 {% content-ref url="node-hosting/start-a-node-docker.md" %}
 [start-a-node-docker.md](node-hosting/start-a-node-docker.md)
-{% endcontent-ref %}
-
-If you want to start the node on your server, try the headless deployment using Docker:
-
-{% content-ref url="node-hosting/headless-deployment.md" %}
-[headless-deployment.md](node-hosting/headless-deployment.md)
 {% endcontent-ref %}
 
 ### Develop an application

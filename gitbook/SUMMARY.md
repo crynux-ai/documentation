@@ -26,7 +26,6 @@
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Assign GPU to the Node](node-hosting/assign-gpu-to-the-node.md)
 * [Proxy Settings](node-hosting/proxy-settings.md)
-* [Headless Deployment](node-hosting/headless-deployment.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
 
