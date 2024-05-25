@@ -129,13 +129,13 @@ You should see the WebUI of the Node:
 ## 4. Prepare the wallet
 
 {% hint style="danger" %}
-**DO NOT** **use the Web UI to paste an existing private key if you're accessing the Web UI from a remote machine.**
+**DO NOT** **use the Web UI to create or import private keys if you're accessing the Web UI from a remote machine.**
 
-If you're using HTTP protocol to access the WebUI, the connection is not encrypted. The private key might be intercepted by malicious middle man if transferred through the HTTP connection.
+**You will loose your token!**
 
-Instead, set the private key in the config file directly. Or secure the connection using HTTPS.
+If you're using HTTP protocol to access the WebUI, the connection is not encrypted, and the private key might be intercepted by a malicious middle man.
 
-`Create New Wallet` is always fine to use though, since no private key is transferred during the creation process.&#x20;
+Instead, use an SSH connection in the terminal to transfer your private key to the node.
 {% endhint %}
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
