@@ -131,7 +131,7 @@ You should see the WebUI of the Node:
 {% hint style="danger" %}
 **DO NOT** **use the Web UI to create or import private keys if you're accessing the Web UI from a remote machine.**
 
-**You will loose your token!**
+**You will loose your tokens!**
 
 If you're using HTTP protocol to access the WebUI, the connection is not encrypted, and the private key might be intercepted by a malicious middle man.
 
