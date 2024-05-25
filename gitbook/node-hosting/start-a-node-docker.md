@@ -5,7 +5,7 @@ description: Start a node to join the Crynux Network using Docker images
 # Start a Node - Docker
 
 {% hint style="info" %}
-This guide is used to start the Docker container on Windows and Linux (Ubuntu, etc), or on a cloud based VM such as AWS EC2. **DO NOT** use this guide on Docker based clouds such as Vast, on which you could simply use the [image link of Crynux Node](https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node) to start the container directly.
+This guide is used to start the Docker container on Windows and Linux (Ubuntu, etc), or on a cloud based VM such as AWS EC2. **DO NOT** use this guide on Docker based clouds such as Vast, [follow the instructions in this doc instead](start-a-node-vast.md).
 {% endhint %}
 
 ## 0. Overview
