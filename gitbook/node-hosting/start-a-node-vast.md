@@ -10,6 +10,26 @@ We DON'T encourage to rent a GPU on the cloud to run Crynux Node in general. The
 **Use at your own risk!**
 {% endhint %}
 
+{% hint style="danger" %}
+**DO NOT** **use the Web UI to create or import private keys on Vast!**
+
+**You will lose your tokens!**
+
+If you're using HTTP protocol to access the WebUI, the connection is not encrypted, and the private key might be intercepted by a malicious middle man.
+
+Instead, use an [SSH connection in the terminal](https://vast.ai/docs/gpu-instances/ssh?\_gl=1\*ye4y7p\*\_gcl\_au\*OTc1MTUwMTIwLjE3MTY2MTA3OTkuMzAyNTUxNjAzLjE3MTY2NDIxMzkuMTcxNjY0MjEzOA..\*\_ga\*NTc0NjQxMDIwLjE3MTY2MTA3OTk.\*\_ga\_DG15WC8WXG\*MTcxNjYxMDc5OS4xLjEuMTcxNjY0Nzg1MC42MC4wLjA.) to transfer your private key to the node.
+{% endhint %}
+
+{% hint style="danger" %}
+**Your private key is not secure on Vast!**
+
+**You will lose your tokens!**
+
+The docker containers started on Vast are running on the local computers of the individual node providers, who could retrieve your private key easily from the container, and steal your funds.
+
+**DO NOT** use Vast unless [Cold Wallet](private-key-security.md) is enabled.
+{% endhint %}
+
 The Crynux Node can be easily started on cloud services, such as [Vast.ai](https://vast.ai/), who supports starting a VM using Docker images directly. The steps to start a node on those services are quite similar. We will use Vast.ai as an example to show the complete steps to start a Crynux Node.
 
 ## Start the container using template
@@ -56,7 +76,7 @@ In this case, the URL of the WebUI is `http://213.181.122.2:40021`. Just open it
 {% hint style="danger" %}
 **DO NOT** **use the Web UI to create or import private keys on Vast!**
 
-**You will loose your tokens!**
+**You will lose your tokens!**
 
 If you're using HTTP protocol to access the WebUI, the connection is not encrypted, and the private key might be intercepted by a malicious middle man.
 
@@ -66,14 +86,14 @@ Instead, use an [SSH connection in the terminal](https://vast.ai/docs/gpu-instan
 {% hint style="danger" %}
 **Your private key is not secure on Vast!**
 
-**You will loose your tokens!**
+**You will lose your tokens!**
 
-The docker containers started on Vast are running on the individual node providers, who could retrieve your private key easily from the container, and steel your funds.
+The docker containers started on Vast are running on the local computers of the individual node providers, who could retrieve your private key easily from the container, and steal your funds.
 
 **DO NOT** use Vast unless [Cold Wallet](private-key-security.md) is enabled.
 {% endhint %}
 
-Use an SSH connection to the Docker container you started, and set the private key in the config file at:`/app/config/config.yml`, and the field name is `privkey`:
+[Use an SSH connection](https://vast.ai/docs/gpu-instances/ssh?\_gl=1\*ye4y7p\*\_gcl\_au\*OTc1MTUwMTIwLjE3MTY2MTA3OTkuMzAyNTUxNjAzLjE3MTY2NDIxMzkuMTcxNjY0MjEzOA..\*\_ga\*NTc0NjQxMDIwLjE3MTY2MTA3OTk.\*\_ga\_DG15WC8WXG\*MTcxNjYxMDc5OS4xLjEuMTcxNjY0Nzg1MC42MC4wLjA.) to login to the Docker container you started, and set the private key in the config file at:`/app/config/config.yml`, and the field name is `privkey`:
 
 ```
 ethereum:
