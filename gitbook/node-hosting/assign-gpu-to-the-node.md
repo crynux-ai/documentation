@@ -41,15 +41,14 @@ deploy:
 
 And add another line below:
 
-```
-deploy:
-      resources:
+<pre><code><strong>deploy:
+</strong>      resources:
         reservations:
           devices:
             - driver: nvidia
               capabilities: [gpu]
               device_ids: ["0"]
-```
+</code></pre>
 
 ## GPU assignment using command line
 
@@ -84,14 +83,46 @@ crynux_node_docker_compose_1  crynux_node_docker_compose_2  crynux_node_docker_c
 
 In each of the working folders, find the `docker-compose.yml` file, and edit the content:
 
-1. Add a line to specify the GPU id as mentioned above.
-2. Change the exposing port. So that every container is using a different port:
+#### 1. Change the name, service name and the container name, so that every container is using a different one:
+
+&#x20;from:
+
+```
+name: "crynux_node"
+services:
+  crynux_node:
+    container_name: crynux_node
+```
+
+to:
+
+```
+name: "crynux_node_2"
+services:
+  crynux_node_2:
+    container_name: crynux_node_2
+```
+
+#### 2. Add a line to specify the GPU id as mentioned above:
+
+<pre><code><strong>deploy:
+</strong>      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ["0"]
+</code></pre>
+
+#### 3. Change the exposing port. So that every container is using a different port:
 
 from:
 
 ```
-ports:
-  - "127.0.0.1:7412:7412"
+name: "crynux_node"
+services:
+  crynux_node:
+    container_name: crynux_node
 ```
 
 to:
@@ -140,12 +171,12 @@ services:
 ```
 ---
 version: "3.8"
-name: "crynux_node"
+name: "crynux_node_2"
 
 services:
-  crynux_node:
+  crynux_node_2:
     image: ghcr.io/crynux-ai/crynux-node:latest
-    container_name: crynux_node
+    container_name: crynux_node_2
     restart: unless-stopped
     ports:
       - "127.0.0.1:7413:7412"
@@ -168,12 +199,12 @@ services:
 ```
 ---
 version: "3.8"
-name: "crynux_node"
+name: "crynux_node_3"
 
 services:
-  crynux_node:
+  crynux_node_3:
     image: ghcr.io/crynux-ai/crynux-node:latest
-    container_name: crynux_node
+    container_name: crynux_node_3
     restart: unless-stopped
     ports:
       - "127.0.0.1:7414:7412"
