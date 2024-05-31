@@ -23,15 +23,21 @@ The application can not cheat on the `Sampling Number` either, since the `Sampli
 
 ### Uploading Task Params to the DA/Relay
 
-Knowing the node to execute the task, the application will encrypt the task params, such as the prompt and image sizes, using the public key of the node, and send the encrypted params to the DA/Relay service.
+Knowing which node will execute the task, the application encrypts the task parameters, like the prompt and image sizes, using the node's public key. It then sends the encrypted parameters to the DA/Relay service.
 
-The task params could only be decrypted by the selected node. Neither could a node decrypt the params of other tasks, there is no chance a node could find out whether a task will be validated by comparing the task params.
+The task parameters can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
 
 {% hint style="info" %}
-The DA/Relay will periodically update its Merkle Root to the blockchain, the smart contracts could then use it to validate the integrity of certain data on chain.&#x20;
+The DA/Relay will periodically update its Merkle Root on the blockchain. Smart contracts can then use this to validate the integrity of specific off-chain data.
 
-Crynux will use the Merkle Root, together with Zero-Knowledge Proofs to validate the task params and task results. More on this later.
+Crynux will leverage the Merkle Root and Zero-Knowledge Proofs to validate task parameters and results. More details will follow.
 {% endhint %}
 
-### Sending the validation tasks
+### Sending the Validation Tasks
+
+If the task is not selected for validation, the application will simply stop and await the computing results. However, if the task is selected, the application must send two additional tasks with the same parameters for validation purposes.
+
+The application will not get the computing result if the following validation tasks are not submitted or if they are submitted with inconsistent parameters. More details are provided in the next section.
+
+
 
