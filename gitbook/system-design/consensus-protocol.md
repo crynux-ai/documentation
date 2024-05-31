@@ -22,6 +22,16 @@ Before diving deep into the discussions of the design and choices of each part, 
 
 ## Result Validation by Multiple Result Comparison
 
+{% hint style="success" %}
+In the latest version of the Consensus Protocol, only a small portion of tasks will undergo the validation process. Most tasks will be executed by a single node, who will still be unable to cheat.&#x20;
+
+This is achieved using our latest tech innovation: VRF Task Sampling. Detailed information can be found in the following documents:
+
+[VRF Task Sampling](vrf-task-sampling.md)
+
+The VRF Task Sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless, effectively preventing fraudulent activities.
+{% endhint %}
+
 The result validation is simply implemented by comparing 3 results from 3 randomly selected nodes. When the task is submitted to the blockchain by the application, the blockchain randomly selects 3 available nodes, and notifies them to start the task. The nodes run the task locally, and submit the results to the blockchain. The blockchain will compare the results to find out whether the nodes are cheating or not.
 
 ### Similarity Comparison
@@ -83,18 +93,6 @@ The attacker could then reject the `CreateTask` transactions in which it can not
 By carefully constructing and organizing more adjacent blocks, the attacker could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
 
 Considering that to make this attack **practical**, the attacker must control a significant large number of nodes in the whole network by himself. The Crynux Network chooses to ignore this problem and uses the `prevrando` on the supported blockchains, and uses the last block hash on other blockchains.
-
-### Sequential Node Selection
-
-Even if the attacker can not manipulate the selection result of the task, he could use the strategy that when he has only one node selected in a task, he will perform the computation honestly. However, he will skip the computation and submit fake results when he has two or more Nodes selected. The network has no way to identify this behavior.
-
-The idea is to avoid any chance, for anyone, to find out whether two of his nodes are executing the same task. The selected addresses could be hidden from the public by using the VRF, the task ID could even be hidden from the selected nodes by using the ZKP. The malicious attacker could still find out whether two of his nodes are executing the same task by comparing the task arguments.
-
-The only option left for us is the sequential node selection. The blockchain will select one node at a time, and wait until the selected node has submitted the commitment, and then start the selection again. When a node of the attacker has been selected to run the task, the attacker has no way to find out if his nodes will be selected again in the next round. Then the attacker does not have the confidence to submit a fake result at this step.
-
-If the nodes of the attacker have been selected twice in a single task. When the attacker finds out that he is selected again in the second round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
-
-The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Crynux Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
 ## Staking based Penalization
 
