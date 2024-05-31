@@ -119,10 +119,8 @@ services:
 from:
 
 ```
-name: "crynux_node"
-services:
-  crynux_node:
-    container_name: crynux_node
+ports:
+  - "127.0.0.1:7412:7412"
 ```
 
 to:
