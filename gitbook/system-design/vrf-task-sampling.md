@@ -15,11 +15,9 @@ The application uses VRF locally to generate the `Sampling Number`, giving the `
 
 With a 10% sampling probability, we could select the tasks for validation if their `Sampling Number` ends in 0.
 
-{% hint style="info" %}
 The `Sampling Number` is only known to the application, since no one else knows the private key.
 
 The application can not cheat on the `Sampling Number` either, since the `Sampling Seed` is fixed on the blockchain, and the public key of the application is fixed prior to the task, and is known to the blockchain.
-{% endhint %}
 
 ### Uploading Task Params to the DA/Relay
 
@@ -37,7 +35,11 @@ Crynux will leverage the Merkle Root and Zero-Knowledge Proofs to validate task 
 
 If the task is not selected for validation, the application will simply stop and await the computing results. However, if the task is selected, the application must send two additional tasks with the same parameters for validation purposes.
 
+{% hint style="info" %}
 The application will not get the computing result if the following validation tasks are not submitted or if they are submitted with inconsistent parameters. More details are provided in the next section.
+{% endhint %}
+
+The Task ID for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real task ID combined with a random number. For three tasks, each `Task ID Commitment` is derived from the same task ID but uses different random numbers, making them appear unrelated in public data. After execution, the application can reveal the real task ID on the blockchain so that the blockchain can find the related tasks and compare the results.
 
 
 
