@@ -103,3 +103,14 @@ The [Sampling Number Validation](vrf-task-sampling.md#sampling-number-validation
 ## Task Result Disclosure
 
 <figure><img src="../.gitbook/assets/70a6f0b41ecf0491f7f04502d4758af.png" alt=""><figcaption></figcaption></figure>
+
+After the node receives the notification of result disclosure from the blockchain, it encrypts the task result using the public key of the application, and sends the cipher text to the DA/Relay service.&#x20;
+
+After the `Merkle Root` is updated on the blockchain, the node generates a `ZK Proof` and submits it to the blockchain. The `ZK Proof` uses the `Task Result` as the private input, and publicly outputs the `SimHash`, and the hash of the cipher text of the `Task Result`. A valid ZK Proof makes sure:
+
+1. The `Task Result` has the given `SimHash`.
+2. The `Task Result` is encrypted using the application's public key, and the cipher text has the given hash.
+
+The blockchain verifies the hash of the cipher text from the `Task Result` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the application.
+
+In the final step, the blockchain distributes the task fee to all participating nodes based on their [QoS scores](quality-of-service-qos.md) and notifies the application to retrieve the task result. Once the application retrieves the result, the task is marked as complete.
