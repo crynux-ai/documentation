@@ -6,7 +6,7 @@ description: Reduce the Task Validation Overhead
 
 ## Task Creation
 
-<figure><img src="../.gitbook/assets/2ebea41961ea30e6c0ceca38448f724.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/ccea559c7a0f4cc3c32fbf90fbe2c6b.png" alt=""><figcaption></figcaption></figure>
 
 ### Secret Selection of Validation Tasks
 
@@ -57,7 +57,7 @@ The node cannot send the task result to the DA/Relay service at this stage. If t
 
 ### Tasks Require Validation
 
-<figure><img src="../.gitbook/assets/c57bb3f5b043e3fd5b96afa3f5386b7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/9697992bcef9dd3c42f7856ce6f8b5a.png" alt=""><figcaption></figcaption></figure>
 
 The application will wait for the submission of all the 3 `SimHash` on the blockchain, and then disclose the relationship of the tasks, and the relevant proofs for the blockchain to validate:
 
@@ -90,6 +90,16 @@ The blockchain verifies the three hashes of the cipher text from the `Task Param
 
 #### Task Result Validation
 
+The blockchain uses three `SimHash` values to verify task results. If one node submits a `SimHash` significantly different from the other two, it will be penalized.
+
 ### Tasks Do Not Require Validation
 
+<figure><img src="../.gitbook/assets/3d6889feb3919a7540a90bfc141ae61.png" alt=""><figcaption></figcaption></figure>
+
+The validation of the tasks that do not require result validation is much simpler. The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
+
+The [Sampling Number Validation](vrf-task-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
+
 ## Task Result Disclosure
+
+<figure><img src="../.gitbook/assets/70a6f0b41ecf0491f7f04502d4758af.png" alt=""><figcaption></figcaption></figure>
