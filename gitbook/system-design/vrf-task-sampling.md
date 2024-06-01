@@ -4,6 +4,8 @@ description: Reduce the Task Validation Overhead
 
 # VRF Task Sampling
 
+
+
 ## Task Creation
 
 <figure><img src="../.gitbook/assets/ccea559c7a0f4cc3c32fbf90fbe2c6b.png" alt=""><figcaption></figcaption></figure>
@@ -44,6 +46,12 @@ The application will not get the computing result if the validation tasks are no
 {% endhint %}
 
 The Task ID for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real task ID combined with a random number. For three tasks, each `Task ID Commitment` is derived from the same task ID but uses different random numbers, making them appear unrelated in public data. After execution, the application can reveal the real task ID on the blockchain so that the blockchain can find the related tasks and compare the results.
+
+The fees charged for the validation tasks will be refunded once the task is completed. This extra charge ensures that the validation tasks appear identical to regular tasks, preventing nodes from distinguishing them based on the fees.
+
+If an application sends tasks infrequently, such as a human sending tasks to the blockchain via a browser-based DApp and Metamask, the node can monitor the user's address for new tasks. If no additional tasks are sent from the same address in a short period, the task is likely non-validation. However, if tasks are sent frequently, it becomes impossible for the node to determine if a task is for validation.
+
+The higher probability of guessing correctly increases the chance of a node performing a successful [statistical attack](consensus-protocol.md#expectation-of-the-income). Increasing the required amount of staking could solve this issue. A task mixer can also be designed to combine tasks from all applications before dispatching them to the nodes, thereby concealing the origin of the tasks from the nodes.
 
 ## Task Execution
 
@@ -113,4 +121,4 @@ After the `Merkle Root` is updated on the blockchain, the node generates a `ZK P
 
 The blockchain verifies the hash of the cipher text from the `Task Result` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the application.
 
-In the final step, the blockchain distributes the task fee to all participating nodes based on their [QoS scores](quality-of-service-qos.md) and notifies the application to retrieve the task result. Once the application retrieves the result, the task is marked as complete.
+In the final step, the blockchain distributes the task fee to all participating nodes based on their [QoS scores](quality-of-service-qos.md) and notifies the application to retrieve the task result. Once the application retrieves the result, the task is marked as completed.
