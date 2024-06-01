@@ -1,10 +1,14 @@
+---
+description: Reduce the Task Validation Overhead
+---
+
 # VRF Task Sampling
 
 ## Task Creation
 
-<figure><img src="../.gitbook/assets/bc14108f59f8164136fdd0d9cdf344e.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/2ebea41961ea30e6c0ceca38448f724.png" alt=""><figcaption></figcaption></figure>
 
-### Secret Selection of Tasks
+### Secret Selection of Validation Tasks
 
 The sampling process begins when the application sends a task to the blockchain. Upon receiving the task, the blockchain:
 
@@ -19,9 +23,9 @@ The `Sampling Number` is only known to the application, since no one else knows 
 
 The application can not cheat on the `Sampling Number` either, since the `Sampling Seed` is fixed on the blockchain, and the public key of the application is fixed prior to the task, and is known to the blockchain.
 
-### Uploading Task Params to the DA/Relay
+### Uploading Task Parameters to the DA/Relay
 
-Knowing which node will execute the task, the application encrypts the task parameters, like the prompt and image sizes, using the node's public key. It then sends the encrypted parameters to the DA/Relay service.
+Knowing which node will execute the task, the application encrypts the task parameters, like the prompt and image size, using the node's public key. It then sends the encrypted parameters to the DA/Relay service.
 
 The task parameters can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
 
@@ -41,5 +45,22 @@ The application will not get the computing result if the following validation ta
 
 The Task ID for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real task ID combined with a random number. For three tasks, each `Task ID Commitment` is derived from the same task ID but uses different random numbers, making them appear unrelated in public data. After execution, the application can reveal the real task ID on the blockchain so that the blockchain can find the related tasks and compare the results.
 
+## Tasks Require Validation
+
+<figure><img src="../.gitbook/assets/c57bb3f5b043e3fd5b96afa3f5386b7.png" alt=""><figcaption></figcaption></figure>
+
+### Task Execution
+
+Upon receiving a task from the blockchain, the node retrieves the task parameters from the DA/Relay service, decrypt it and execute it on the local GPU.
+
+After the computation is finished, the node will calculate the `SimHash` of the result, and send the `SimHash` to the blockchain.
 
 
+
+### Task Relationship Disclosure
+
+### Task Validation On-Chain
+
+### Task Result Disclosure
+
+## Tasks Do Not Require Validation
