@@ -51,15 +51,23 @@ The Task ID for each task is obscured by generating a `Task ID Commitment`. This
 
 ### Task Execution
 
-Upon receiving a task from the blockchain, the node retrieves the task parameters from the DA/Relay service, decrypt it and execute it on the local GPU.
+Upon receiving a task from the blockchain, the node retrieves the task parameters from the DA/Relay service, decrypts them, and executes the task on the local GPU.
 
-After the computation is finished, the node will calculate the `SimHash` of the result, and send the `SimHash` to the blockchain.
+After the computation is finished, the node will calculate the `SimHash` of the result, and send the `SimHash` to the blockchain. Then the node should wait for a future notification from the blockchain. If the wait exceeds the timeout period, the node may abort the task. The task fee will then be refunded to the application.
 
-
-
-### Task Relationship Disclosure
+The node cannot send the task result to the DA/Relay service at this stage. If the result is transmitted, the application could retrieve it prematurely and disrupt subsequent processes. The blockchain lacks mechanisms to identify and penalize the application in such scenarios.
 
 ### Task Validation On-Chain
+
+The application will wait for the submission of all the 3 `SimHash` on the blockchain, and then disclose the relationship of the tasks, and the relevant proofs for the blockchain to validate:
+
+#### Sampling Number Validation
+
+#### Task Relationship Validation
+
+#### Task Parameters Validation
+
+#### Task Result Validation
 
 ### Task Result Disclosure
 
