@@ -1,0 +1,24 @@
+# Build the binary release version for Mac
+
+name: Update binary release names and links in the doc
+
+on:
+  repository_dispatch:
+    types: [node-released]
+
+jobs:
+  node-released:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run the update script
+        run: |
+          chmod +x update-release-link.sh
+          ./update-release-link.sh "${{ github.event.client_payload.release-version }}" "${{ github.event.client_payload.mac-link }}" "${{ github.event.client_payload.windows-link }}" "${{ github.event.client_payload.linux-link }}"
+      - name: Commit the changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "GitHub Action"
+          author_email: "hi@crynux.ai"
+          message: "Update node release to ${{ github.event.client_payload.release-version }}"

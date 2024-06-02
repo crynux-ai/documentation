@@ -56,7 +56,47 @@ To read more about the Helium Network release, go to the following page:
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/file/d/1yXHY2RjEXaP5EhF3D3QjseCqEAXBEEP6/view?usp=sharing">https://drive.google.com/file/d/1yXHY2RjEXaP5EhF3D3QjseCqEAXBEEP6/view?usp=sharing</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg</a></td></tr><tr><td>Docker</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node">https://github.com/crynux-ai/crynux-node/pkgs/container/crynux-node</a></td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th width="131">Platform</th>
+            <th width="261">Requirements</th>
+            <th data-type="content-ref">Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td>
+                <a href="https://drive.google.com/uc?id=1gq6z_v_FRdKx29jxjLayO1edkkTSM5O4&export=download">crynux-node-helium-v2.0.5-windows-x64.zip</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td>
+                <a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg">crynux-node-helium-v2.0.5-mac-arm64-signed.dmg</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Linux</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td>
+                <a href="https://drive.google.com/uc?id=1LwBV5hDP-0URMKsrswgeirh1ByFIVgZB&export=download">crynux-node-helium-v2.0.5-linux-bin-x64.tar.gz</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Docker</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td>
+                {% content-ref url="node-hosting/start-a-node-docker.md" %}
+                [start-a-node-docker.md](node-hosting/start-a-node-docker.md)
+                {% endcontent-ref %}
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 To start a node on your Windows computer:
 
@@ -70,13 +110,19 @@ If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 [start-a-node-mac.md](node-hosting/start-a-node-mac.md)
 {% endcontent-ref %}
 
+To start a node on Linux (such as Ubuntu):
+
+{% content-ref url="node-hosting/start-a-node-linux.md" %}
+[start-a-node-linux.md](node-hosting/start-a-node-linux.md)
+{% endcontent-ref %}
+
 You could also start the node on the cloud services using Docker, such as Vast.ai:
 
 {% content-ref url="node-hosting/start-a-node-vast.md" %}
 [start-a-node-vast.md](node-hosting/start-a-node-vast.md)
 {% endcontent-ref %}
 
-On other systems such as Linux, you could start the node using Docker:
+On other systems, you could start the node using Docker:
 
 {% content-ref url="node-hosting/start-a-node-docker.md" %}
 [start-a-node-docker.md](node-hosting/start-a-node-docker.md)
