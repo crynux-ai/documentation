@@ -68,58 +68,49 @@ To read more about the Helium Network release, go to the following page:
         <tr>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td>
-                <a href="WINDOWS_LINK">crynux-node-helium-vRELEASE_VERSION-windows-x64.zip</a>
-            </td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK">crynux-node-helium-vRELEASE_VERSION-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td>
-                <a href="MAC_LINK">crynux-node-helium-vRELEASE_VERSION-mac-arm64-signed.dmg</a>
-            </td>
+            <td><a href="MAC_LINK">crynux-node-helium-vRELEASE_VERSION-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td>
-                <a href="LINUX_LINK">crynux-node-helium-vRELEASE_VERSION-linux-bin-x64.tar.gz</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Docker</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td>
-                {% content-ref url="node-hosting/start-a-node-docker.md" %}
-                [start-a-node-docker.md](node-hosting/start-a-node-docker.md)
-                {% endcontent-ref %}
-            </td>
+            <td><a href="LINUX_DOWNLOAD_LINK">crynux-node-helium-vRELEASE_VERSION-linux-bin-x64.tar.gz</a></td>
         </tr>
     </tbody>
 </table>
 
 To start a node on your Windows computer:
 
-{% content-ref url="node-hosting/start-a-node-windows.md" %}
-[start-a-node-windows.md](node-hosting/start-a-node-windows.md)
+{% content-ref url="node-hosting/start-a-node/start-a-node-windows.md" %}
+[start-a-node-windows.md](node-hosting/start-a-node/start-a-node-windows.md)
 {% endcontent-ref %}
 
 If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 
-{% content-ref url="node-hosting/start-a-node-mac.md" %}
-[start-a-node-mac.md](node-hosting/start-a-node-mac.md)
+{% content-ref url="node-hosting/start-a-node/start-a-node-mac.md" %}
+[start-a-node-mac.md](node-hosting/start-a-node/start-a-node-mac.md)
 {% endcontent-ref %}
 
 To start a node on Linux (such as Ubuntu):
 
-{% content-ref url="node-hosting/start-a-node-linux.md" %}
-[start-a-node-linux.md](node-hosting/start-a-node-linux.md)
+{% content-ref url="node-hosting/start-a-node/start-a-node-linux.md" %}
+[start-a-node-linux.md](node-hosting/start-a-node/start-a-node-linux.md)
 {% endcontent-ref %}
 
-You could also start the node using Docker:
+To start a node on cloud services based on Docker, such as Vast.ai:
 
-{% content-ref url="node-hosting/start-a-node-docker.md" %}
-[start-a-node-docker.md](node-hosting/start-a-node-docker.md)
+{% content-ref url="node-hosting/start-a-node/start-a-node-vast.md" %}
+[start-a-node-vast.md](node-hosting/start-a-node/start-a-node-vast.md)
+{% endcontent-ref %}
+
+You can also start the node using Docker:
+
+{% content-ref url="node-hosting/start-a-node/start-a-node-docker.md" %}
+[start-a-node-docker.md](node-hosting/start-a-node/start-a-node-docker.md)
 {% endcontent-ref %}
 
 ### Develop an application
