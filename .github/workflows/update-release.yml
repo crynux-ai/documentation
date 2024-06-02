@@ -17,7 +17,13 @@ jobs:
       - name: Run the update script
         run: |
           chmod +x update-release-link.sh
-          ./update-release-link.sh "${{ github.event.client_payload.release-version }}" "${{ github.event.client_payload.mac-link }}" "${{ github.event.client_payload.windows-link }}" "${{ github.event.client_payload.linux-link }}"
+          ./update-release-link.sh \
+              "${{ github.event.client_payload.release-version }}" \
+              "${{ github.event.client_payload.mac-link }}" \
+              "${{ github.event.client_payload.windows-download-link }}" \
+              "${{ github.event.client_payload.windows-preview-link }}" \
+              "${{ github.event.client_payload.linux-download-link }}" \
+              "${{ github.event.client_payload.linux-preview-link }}"
       - name: Commit the changes
         uses: EndBug/add-and-commit@v9
         with:
