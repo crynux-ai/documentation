@@ -18,13 +18,13 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 ## 2. Download the Crynux Node software
 
-Download the DMG file using the following link, then double click the file, and drag the app to the application's folder:
+Download the DMG file using the following link, then double-click the file, and drag the app to the application's folder:
 
 {% embed url="MAC_LINK" %}
 
 ## 3. Start the node
 
-Double click on the icon of the newly installed app to start the node:
+Double-click on the icon of the newly installed app to start the node:
 
 <figure><img src="../.gitbook/assets/7e232c34e399d55cc08ded5f20f68df.png" alt=""><figcaption></figcaption></figure>
 

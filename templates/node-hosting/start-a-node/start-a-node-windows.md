@@ -26,7 +26,7 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-{% embed url="WINDOWS_LINK" %}
+{% embed url="WINDOWS_PREVIEW_LINK" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
@@ -34,7 +34,7 @@ Starting a node on Windows using the binary release package, as described here, 
 
 ## 3. Start the node
 
-Unzip the downloaded package, double click on the `Crynux Node.exe` to start the node:
+Unzip the downloaded package, double-click on the `Crynux Node.exe` to start the node:
 
 <figure><img src="../.gitbook/assets/Screenshot 2024-04-10 092150.png" alt=""><figcaption></figcaption></figure>
 
