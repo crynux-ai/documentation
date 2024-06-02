@@ -20,11 +20,12 @@
 
 ## Node Hosting
 
-* [Start a Node - Windows](node-hosting/start-a-node-windows.md)
-* [Start a Node - Mac](node-hosting/start-a-node-mac.md)
-* [Start a Node - Linux](node-hosting/start-a-node-linux.md)
-* [Start a Node - Docker](node-hosting/start-a-node-docker.md)
-* [Start a Node - Vast](node-hosting/start-a-node-vast.md)
+* [Start a Node](node-hosting/start-a-node/README.md)
+  * [Start a Node - Windows](node-hosting/start-a-node/start-a-node-windows.md)
+  * [Start a Node - Mac](node-hosting/start-a-node/start-a-node-mac.md)
+  * [Start a Node - Linux](node-hosting/start-a-node/start-a-node-linux.md)
+  * [Start a Node - Docker](node-hosting/start-a-node/start-a-node-docker.md)
+  * [Start a Node - Vast](node-hosting/start-a-node/start-a-node-vast.md)
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Assign GPU to the Node](node-hosting/assign-gpu-to-the-node.md)
 * [Proxy Settings](node-hosting/proxy-settings.md)

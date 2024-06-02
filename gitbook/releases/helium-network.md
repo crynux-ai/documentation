@@ -79,8 +79,8 @@ The Crynux Node could now be started on Mac with Apple Silicon Chips (m1, m2 and
 
 To start a node on Mac, just follow the tutorial below:
 
-{% content-ref url="../node-hosting/start-a-node-mac.md" %}
-[start-a-node-mac.md](../node-hosting/start-a-node-mac.md)
+{% content-ref url="../node-hosting/start-a-node/start-a-node-mac.md" %}
+[start-a-node-mac.md](../node-hosting/start-a-node/start-a-node-mac.md)
 {% endcontent-ref %}
 
 ## The Blockchain In Use

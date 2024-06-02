@@ -27,7 +27,7 @@ Instead, use an [SSH connection in the terminal](https://vast.ai/docs/gpu-instan
 
 The docker containers started on Vast are running on the local computers of the individual node providers, who could retrieve your private key easily from the container, and steal your funds.
 
-**DO NOT** use Vast unless [Cold Wallet](private-key-security.md) is enabled.
+**DO NOT** use Vast unless [Cold Wallet](../private-key-security.md) is enabled.
 {% endhint %}
 
 The Crynux Node can be easily started on cloud services, such as [Vast.ai](https://vast.ai/), who supports starting a VM using Docker images directly. The steps to start a node on those services are quite similar. We will use Vast.ai as an example to show the complete steps to start a Crynux Node.
@@ -40,7 +40,7 @@ We have already created the template for the Crynux Node on Vast, just use this 
 
 The content of the template is shown below:
 
-<figure><img src="../.gitbook/assets/e2e99275247966afe9197eee2f70218.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/e2e99275247966afe9197eee2f70218.png" alt=""><figcaption></figcaption></figure>
 
 Some highlights in case you are starting the container using other cloud services:
 
@@ -53,7 +53,7 @@ Some highlights in case you are starting the container using other cloud service
 
 After selecting your desired hardware, and starting the instance, find the instance in the `INSTANCES` tab:
 
-<figure><img src="../.gitbook/assets/c35f22fdcc91d9906363314ce7ff526.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/c35f22fdcc91d9906363314ce7ff526.png" alt=""><figcaption></figcaption></figure>
 
 Wait until the container finishes initialization, and shows the `RUNNING` status.
 
@@ -61,15 +61,15 @@ Wait until the container finishes initialization, and shows the `RUNNING` status
 
 Click on the network info button to show the detailed ip address and ports:
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 The URL to access the WebUI will be shown in the popup:
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 In this case, the URL of the WebUI is `http://213.181.122.2:40021`. Just open it in a browser window, you should see the WebUI of the Node:
 
-<figure><img src="../.gitbook/assets/1d2593321953160bab0838ed3d54748.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1d2593321953160bab0838ed3d54748.png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Prepare the wallet
 
@@ -90,7 +90,7 @@ Instead, use an [SSH connection in the terminal](https://vast.ai/docs/gpu-instan
 
 The docker containers started on Vast are running on the local computers of the individual node providers, who could retrieve your private key easily from the container, and steal your funds.
 
-**DO NOT** use Vast unless [Cold Wallet](private-key-security.md) is enabled.
+**DO NOT** use Vast unless [Cold Wallet](../private-key-security.md) is enabled.
 {% endhint %}
 
 [Use an SSH connection](https://vast.ai/docs/gpu-instances/ssh?\_gl=1\*ye4y7p\*\_gcl\_au\*OTc1MTUwMTIwLjE3MTY2MTA3OTkuMzAyNTUxNjAzLjE3MTY2NDIxMzkuMTcxNjY0MjEzOA..\*\_ga\*NTc0NjQxMDIwLjE3MTY2MTA3OTk.\*\_ga\_DG15WC8WXG\*MTcxNjYxMDc5OS4xLjEuMTcxNjY0Nzg1MC42MC4wLjA.) to login to the Docker container you started, and set the private key in the config file at:`/app/config/config.yml`, and the field name is `privkey`:
@@ -106,7 +106,7 @@ The test tokens will be transferred to the newly created wallet automatically. J
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-<figure><img src="../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Wait for the system initialization to finish
 
@@ -114,13 +114,13 @@ If this is the first time you start a node, it could take quite a long while for
 
 After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-<figure><img src="../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
 
 Now the Node is fully up and running. You could just leave it there to run tasks automatically.
 

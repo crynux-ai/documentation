@@ -76,8 +76,8 @@ The contributor of the spared computation power could join the network by hostin
 
 A web user interface is provided inside the node, for the users who are hosting the node on the home computers. The WebUI could be used to monitor the running status of the node, and to control the node to join or quit the network. A getting started guide can be found in the follow document:
 
-{% content-ref url="../node-hosting/start-a-node-windows.md" %}
-[start-a-node-windows.md](../node-hosting/start-a-node-windows.md)
+{% content-ref url="../node-hosting/start-a-node/start-a-node-windows.md" %}
+[start-a-node-windows.md](../node-hosting/start-a-node/start-a-node-windows.md)
 {% endcontent-ref %}
 
 #### Servers

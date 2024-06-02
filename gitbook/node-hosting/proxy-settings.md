@@ -16,7 +16,7 @@ Open a Finder window, go to the `Applications` folder, right click on the `Crynu
 {% tab title="Docker" %}
 **If you have mounted the config directory outside of the container**
 
-find the config file `config.yml` in the mounted config directory on the host machine. Which should be `config` folder inside the project root, if you have followed the tutorial [Start a Node - Docker](start-a-node-docker.md).
+find the config file `config.yml` in the mounted config directory on the host machine. Which should be `config` folder inside the project root, if you have followed the tutorial [Start a Node - Docker](start-a-node/start-a-node-docker.md).
 
 **If you have not mounted the config directory**
 

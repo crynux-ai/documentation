@@ -124,7 +124,7 @@ Open the browser and go to [http://localhost:7412](http://localhost:7412)
 
 You should see the WebUI of the Node:
 
-<figure><img src="../.gitbook/assets/1d2593321953160bab0838ed3d54748.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1d2593321953160bab0838ed3d54748.png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Prepare the wallet
 
@@ -144,7 +144,7 @@ The test tokens will be transferred to the newly created wallet automatically. J
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-<figure><img src="../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Wait for the system initialization to finish
 
@@ -152,13 +152,13 @@ If this is the first time you start a node, it could take quite a long while for
 
 After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-<figure><img src="../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/6c659fa275de50dfa6fa82fae3f97d6.png" alt=""><figcaption></figcaption></figure>
 
 Now the Node is fully up and running. You could just leave it there to run tasks automatically.
 

@@ -8,8 +8,8 @@ If you have multiple GPUs in a single computer, you can optimize performance by 
 
 To enable GPU assignment, use the Docker version of Crynux Node. For a guide on the basics of starting a Crynux Node as a Docker container, please refer to the tutorial below:
 
-{% content-ref url="start-a-node-docker.md" %}
-[start-a-node-docker.md](start-a-node-docker.md)
+{% content-ref url="start-a-node/start-a-node-docker.md" %}
+[start-a-node-docker.md](start-a-node/start-a-node-docker.md)
 {% endcontent-ref %}
 
 ## Find the ID of the specific GPU
@@ -70,8 +70,8 @@ The change is on the `--gpus` argument, from `all`, which provides all the GPUs 
 
 For each of the GPUs, follow the tutorial to clone the docker compose project:
 
-{% content-ref url="start-a-node-docker.md" %}
-[start-a-node-docker.md](start-a-node-docker.md)
+{% content-ref url="start-a-node/start-a-node-docker.md" %}
+[start-a-node-docker.md](start-a-node/start-a-node-docker.md)
 {% endcontent-ref %}
 
 For example, if you have 3 GPUs on the same computer, just clone the docker compose project 3 times, after renaming the folders, you have 3 working folders locally:
