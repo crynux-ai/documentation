@@ -69,21 +69,21 @@ To read more about the Helium Network release, go to the following page:
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
             <td>
-                <a href="https://drive.google.com/uc?id=1gq6z_v_FRdKx29jxjLayO1edkkTSM5O4&export=download">crynux-node-helium-v2.2.5-windows-x64.zip</a>
+                <a href="https://drive.google.com/uc?id=1gq6z_v_FRdKx29jxjLayO1edkkTSM5O4&export=download">crynux-node-helium-v2.0.5-windows-x64.zip</a>
             </td>
         </tr>
         <tr>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
             <td>
-                <a href="https://github.com/lukewwww/crynux-node/releases/download/v2.2.5/crynux-node-helium-v2.2.5-mac-arm64-signed.dmg">crynux-node-helium-v2.2.5-mac-arm64-signed.dmg</a>
+                <a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.5/crynux-node-helium-v2.0.5-mac-arm64-signed.dmg">crynux-node-helium-v2.0.5-mac-arm64-signed.dmg</a>
             </td>
         </tr>
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
             <td>
-                <a href="https://drive.google.com/uc?id=1LwBV5hDP-0URMKsrswgeirh1ByFIVgZB&export=download">crynux-node-helium-v2.2.5-linux-bin-x64.tar.gz</a>
+                <a href="https://drive.google.com/uc?id=1LwBV5hDP-0URMKsrswgeirh1ByFIVgZB&export=download">crynux-node-helium-v2.0.5-linux-bin-x64.tar.gz</a>
             </td>
         </tr>
         <tr>
@@ -116,7 +116,13 @@ To start a node on Linux (such as Ubuntu):
 [start-a-node-linux.md](node-hosting/start-a-node-linux.md)
 {% endcontent-ref %}
 
-You could also start the node using Docker:
+You could also start the node on the cloud services using Docker, such as Vast.ai:
+
+{% content-ref url="node-hosting/start-a-node-vast.md" %}
+[start-a-node-vast.md](node-hosting/start-a-node-vast.md)
+{% endcontent-ref %}
+
+On other systems, you could start the node using Docker:
 
 {% content-ref url="node-hosting/start-a-node-docker.md" %}
 [start-a-node-docker.md](node-hosting/start-a-node-docker.md)

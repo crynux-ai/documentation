@@ -40,10 +40,14 @@ Open the `config.yml` file with a text editor, and find the section below:
 ---
 task_config:
   proxy:
-    host: '127.0.0.1'
-    password: 'pass'
+    host: ''
+    password: ''
     port: 8080
-    username: 'user'
+    username: ''
 ```
 
-Just fill in your proxy settings as shown, save the file, and restart the node.
+Just fill in the fields according to your proxy settings, and restart the node.
+
+If your proxy requires authentication, fill in the `username` and `password` fields accordingly, otherwise just leave the fields empty.
+
+If the `host` is not set, the node will try to use the proxy settings in the environment variables, which will be the value given in `HTTPS_PROXY`. No proxy will be used if this environment variable is not set.

@@ -114,6 +114,16 @@ Please use a more powerful device to run the node instead. To understand the det
 
 <details>
 
+<summary>Relay getTask failed: 400 {"field_name": "signature", "message": "Invalid signature"}</summary>
+
+Check if the time on your computer is correct.
+
+This error is usually due to the big difference on the time between the relay and the computer on which the node is running. &#x20;
+
+</details>
+
+<details>
+
 <summary>Node error: Node manager init error: prefetch failed</summary>
 
 "Prefetch" means to download all the popular models from Huggingface before task execution. Prefetch failure can only happen when the download is interrupted.

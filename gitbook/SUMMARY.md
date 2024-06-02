@@ -11,6 +11,7 @@
 
 * [Network Architecture](system-design/network-architecture.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
+* [VRF Task Sampling](system-design/vrf-task-sampling.md)
 * [Token Economy](system-design/token-economy.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Task Dispatching](system-design/task-dispatching.md)
@@ -22,10 +23,10 @@
 * [Start a Node - Windows](node-hosting/start-a-node-windows.md)
 * [Start a Node - Mac](node-hosting/start-a-node-mac.md)
 * [Start a Node - Docker](node-hosting/start-a-node-docker.md)
+* [Start a Node - Vast](node-hosting/start-a-node-vast.md)
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Assign GPU to the Node](node-hosting/assign-gpu-to-the-node.md)
 * [Proxy Settings](node-hosting/proxy-settings.md)
-* [Headless Deployment](node-hosting/headless-deployment.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
 

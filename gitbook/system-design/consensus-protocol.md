@@ -6,27 +6,31 @@ description: Decentralize the Infrastructure
 
 The consensus protocol in a decentralized system ensures the integrity of the network, allowing permissionless participation without the possibility of fraudulent activities. The consensus protocol is the most important component in any decentralized system, since it is where "decentralization" comes from.
 
-The hardest part about the consensus protocol design is that **Everyone Could Be Malicious**. If a leader is selected, the leader could be malicious. If validators are chosen, the validators could be malicious. The goal of every participant is the same: maximizing the income while at the same time reducing the cost as much as possible. If vulnerability exists, even a minor one, it will be exploited, resulting in the losses for the honest participants. This situation can compel these participants to exit the network, potentially leading to a network downfall eventually.
+The hardest part about the consensus protocol design is that **Everyone Could Be Malicious**. If a leader is selected, the leader could be malicious. If validators are chosen, the validators could be malicious. The goal of every participant is the same: maximizing the income while at the same time reducing the cost as much as possible. If vulnerability exists, even a minor one, it will be exploited, resulting in the losses for the honest participants. This situation can compel these participants to exit the network, leading to a network downfall eventually.
 
 For example, consider a scenario in Crynux Network, where a malicious node submits a random image to the network without actually performing any computation. If we rely on the user to detect this fraud, allowing them to withhold payment until they have verified the result, it opens a loophole. A dishonest user could exploit this by denying all payments, effectively using the network services without paying.
 
-The consensus protocol in the Crynux Network aims to verify the correctness of a task's output based on its input arguments. Additionally, it ensures that the Node submitting the correct result gets the payment.
+The consensus protocol in the Crynux Network aims to verify the correctness of a task's output based on its input arguments. Additionally, it ensures that the node submitting the correct result gets the payment.
 
 The consensus protocol must be enforced by the blockchain, which eliminates the need for a centralized authority. This decentralized approach safeguards against potential abuse of power by removing the temptation for any single party to cheat, given their control.
 
-Before diving deep into the discussions of the design and choices of each part, make sure you have already familiar with the overall task lifecycle:
+## Random Sampling of Tasks for On-Chain Validation
 
-{% content-ref url="task-lifecycle.md" %}
-[task-lifecycle.md](task-lifecycle.md)
+When the application sends a task to the blockchain, the blockchain will decide whether to validate the task based on a pre-defined probability (e.g., 10%). If chosen for validation, the task is sent to 3 nodes for independent execution. The computation results from all 3 nodes will be cross-validated on-chain to prevent cheating. If a node submits a fake result, it will be punished by slashing its staked tokens on the blockchain.
+
+The random sampling result should be kept private from nodes until they submit their computation results. If a node knows in advance whether a task will be validated, it could cheat by submitting fake results for tasks that won't be validated.
+
+Hiding the random sampling process from the public while keeping it verifiable on-chain is a challenging task, given that all data on the Blockchain is public and transparent. Crynux achieved this using a combination of VRF (Verifiable Random Function) and ZKP (Zero-Knowledge Proofs).
+
+Comparing to validating all the tasks on chain, the random task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless, effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
+
+{% content-ref url="vrf-task-sampling.md" %}
+[vrf-task-sampling.md](vrf-task-sampling.md)
 {% endcontent-ref %}
 
-## Result Validation by Multiple Result Comparison
+## On-Chain Task Validation by Multiple Result Comparison
 
-The result validation is simply implemented by comparing 3 results from 3 randomly selected nodes. When the task is submitted to the blockchain by the application, the blockchain randomly selects 3 available nodes, and notifies them to start the task. The nodes run the task locally, and submit the results to the blockchain. The blockchain will compare the results to find out whether the nodes are cheating or not.
-
-### Similarity Comparison
-
-#### Similarity Comparison of the Images
+### Similarity Comparison of the Images
 
 Due to some technical limitations, such as [this](https://github.com/pytorch/pytorch/issues/87992) ,and [this](https://pytorch.org/docs/stable/notes/randomness.html). It is currently impossible to generate two exactly same images on two different devices.
 
@@ -36,7 +40,7 @@ And yes, there will be some lower cost methods to generate a similar image than 
 
 The Crynux Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The node submits the pHash of the images to the blockchain, and the blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
 
-#### Similarity Comparison of the Texts
+### Similarity Comparison of the Texts
 
 In GPT text generation tasks, the words are generated one after another. Each output word will be used as the input for the next word. If two different words are generated on two different cards in the middle of a text sequence, the rest parts of the sequence will highly likely to be completely different.
 
@@ -44,31 +48,7 @@ To make the texts comparison work, the same GPT task must be executed on 3 cards
 
 The Crynux Network will randomly choose 3 nodes that are equipped with the same cards when distributing a GPT task. The node will have to report the card model when joining the network. Note that there is no benefit to report a different card model to the network other than the one the node possesses, which will cause nothing else but the node being slashed when executing tasks.
 
-### Two Phases Result Disclosure On-Chain
 
-The similarity hash should not be submitted to the blockchain directly, since a malicious node might intercept the result from other nodes, and submit it to the blockchain as it is generated by himself.
-
-A two-phase commitment-disclosure process is used to tackle this problem.
-
-#### **Phase 1 - Submit the commitment on-chain**
-
-The node should generate a random number locally, calculate the hash of the similarity hash, concatenated by the random number, as the commitment, and then submit the commitment and the random number on-chain.
-
-```javascript
-random_number = generate_random_number()
-commitment = hash(p_hash + random_number)
-submit_to_the_blockchain(commitment, random_number)
-```
-
-The commitment will not leak any information about the plain text result. And the blockchain will wait for all the 3 nodes to submit their commitments and the corresponding random numbers on-chain, and then go into phase 2. If the same random number is submitted again by a node, the submission will be rejected.
-
-#### **Phase 2 - Disclose the similarity hash on-chain**
-
-The honest nodes could safely submit their similarity hash to the blockchain now.&#x20;
-
-The blockchain will validate the similarity hash using the commitment and the random number  submitted before. If the validation passes, the blockchain goes into the next step to compare the pHashes between the Nodes, otherwise, the blockchain will reject the pHash.
-
-The malicious node could not learn anything about the pHashes of other nodes in the last step, before it has to submit a wrong commitment on-chain. Now that the malicious node has already submitted a wrong commitment, even if the malicious node could intercept a correct pHash from another node at phase 2, it is too late since he can not use the correct pHash to pass the validation with the wrong commitment on-chain.
 
 ### Random Number Generation on the Blockchain
 
@@ -83,18 +63,6 @@ The attacker could then reject the `CreateTask` transactions in which it can not
 By carefully constructing and organizing more adjacent blocks, the attacker could even control who will be selected in the next task. Note that this does not apply to the VRF method, where the source of the randomness is not from the blockchain. Which is immune to this kind of attack, but introduces other risks which we will not cover in this article.
 
 Considering that to make this attack **practical**, the attacker must control a significant large number of nodes in the whole network by himself. The Crynux Network chooses to ignore this problem and uses the `prevrando` on the supported blockchains, and uses the last block hash on other blockchains.
-
-### Sequential Node Selection
-
-Even if the attacker can not manipulate the selection result of the task, he could use the strategy that when he has only one node selected in a task, he will perform the computation honestly. However, he will skip the computation and submit fake results when he has two or more Nodes selected. The network has no way to identify this behavior.
-
-The idea is to avoid any chance, for anyone, to find out whether two of his nodes are executing the same task. The selected addresses could be hidden from the public by using the VRF, the task ID could even be hidden from the selected nodes by using the ZKP. The malicious attacker could still find out whether two of his nodes are executing the same task by comparing the task arguments.
-
-The only option left for us is the sequential node selection. The blockchain will select one node at a time, and wait until the selected node has submitted the commitment, and then start the selection again. When a node of the attacker has been selected to run the task, the attacker has no way to find out if his nodes will be selected again in the next round. Then the attacker does not have the confidence to submit a fake result at this step.
-
-If the nodes of the attacker have been selected twice in a single task. When the attacker finds out that he is selected again in the second round, since the commitment of a correct result has already been submitted in the previous round, it is already too late for the attacker to submit fake results.
-
-The sequential node selection could solve the problem, but it significantly increases the execution time of a task by \~3 times of what is required in the parallel selection. And just like the random number manipulation attack above, to make this attack practical, the attacker must control a significant large number of nodes in the whole network, so we decide to ignore it in the Crynux Network, using a parallel execution schema, which makes the experience better for the applications and their users.
 
 ## Staking based Penalization
 

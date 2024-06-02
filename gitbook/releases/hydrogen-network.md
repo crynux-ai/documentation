@@ -84,8 +84,8 @@ A web user interface is provided inside the node, for the users who are hosting 
 
 For the server operators, the node could be hosted in a headless mode where no WebUI is accessible. The node will automatically join the network on startup, and quit the network before termination. Follow the document below to start a node in headless mode:
 
-{% content-ref url="../node-hosting/headless-deployment.md" %}
-[headless-deployment.md](../node-hosting/headless-deployment.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Consensus Protocol
