@@ -14,7 +14,7 @@ The consensus protocol in the Crynux Network aims to verify the correctness of a
 
 The consensus protocol must be enforced by the blockchain, which eliminates the need for a centralized authority. This decentralized approach safeguards against potential abuse of power by removing the temptation for any single party to cheat, given their control.
 
-## Secret Sampling of Tasks for On-Chain Validation
+## Verifiable Secret Sampling of Tasks for On-Chain Validation
 
 When the application sends a task to the blockchain, the blockchain will decide whether to validate the task based on a pre-defined probability (e.g., 10%). If chosen for validation, the task is sent to 3 nodes for independent execution. The computation results from all 3 nodes will be cross-validated on-chain to prevent cheating. If a node submits a fake result, it will be punished by slashing its staked tokens on the blockchain.
 
@@ -24,8 +24,8 @@ Hiding the random sampling process from the public while keeping it verifiable o
 
 Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
 
-{% content-ref url="secret-task-sampling.md" %}
-[secret-task-sampling.md](secret-task-sampling.md)
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 ## On-Chain Task Validation by Multiple Result Comparison

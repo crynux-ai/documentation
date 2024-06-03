@@ -11,7 +11,7 @@
 
 * [Network Architecture](system-design/network-architecture.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
-* [Secret Task Sampling](system-design/secret-task-sampling.md)
+* [Verifiable Secret Sampling](system-design/verifiable-secret-sampling.md)
 * [Token Economy](system-design/token-economy.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Task Dispatching](system-design/task-dispatching.md)

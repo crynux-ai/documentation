@@ -2,7 +2,7 @@
 description: Reduce the Task Validation Overhead
 ---
 
-# Secret Task Sampling
+# Verifiable Secret Sampling
 
 
 
@@ -106,7 +106,7 @@ The blockchain uses three `SimHash` values to verify task results. If one node s
 
 The validation of the tasks that do not require result validation is much simpler. The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
 
-The [Sampling Number Validation](secret-task-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
+The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
 
 ## Task Result Disclosure
 
