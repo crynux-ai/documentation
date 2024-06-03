@@ -11,7 +11,7 @@
 
 * [Network Architecture](system-design/network-architecture.md)
 * [Consensus Protocol](system-design/consensus-protocol.md)
-* [VRF Task Sampling](system-design/vrf-task-sampling.md)
+* [Secret Task Sampling](system-design/secret-task-sampling.md)
 * [Token Economy](system-design/token-economy.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Task Dispatching](system-design/task-dispatching.md)
