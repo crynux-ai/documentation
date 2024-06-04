@@ -4,7 +4,15 @@ description: Reduce the Task Validation Overhead
 
 # Verifiable Secret Sampling
 
+To prevent any malicious node from sending fake computing results to the network for free rewards, Crynux Network validates task results by selecting three random nodes to independently execute the same task and compare their outputs to detect any cheating.
 
+However, using triple computing power for every task wastes resources, cutting network capacity by two-thirds and increasing wait times. This inefficiency is compounded if one node is slow due to network issues, further lengthening task execution times.
+
+Instead of validating every task, an effective approach is to randomly sample a small portion of tasks for validation. As long as the node is unaware of whether its task will be validated, it cannot execute any attacks.
+
+The random sampling process must be enforced by the blockchain using smart contracts to ensure no participants can manipulate the selection or alter the sampling rate for personal gain. The challenge then is to conceal the sampling results from the public despite the transparency of blockchain data.
+
+The complexity of the problem further increases because the task arguments and results are too large to store directly on the blockchain. This makes it difficult for the blockchain to verify the correctness and delivery of certain data, increasing the risk of participants cheating.
 
 ## Task Creation
 
