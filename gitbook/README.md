@@ -68,7 +68,7 @@ To read more about the Helium Network release, go to the following page:
         <tr>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1Rq4mmYvfipmI-XI-UFHx6pHU7ZbrfhAS&export=download">crynux-node-helium-v2.0.6-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O&export=download">crynux-node-helium-v2.0.6-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Mac</td>
@@ -78,7 +78,7 @@ To read more about the Helium Network release, go to the following page:
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=17haPncv02nLiwtHnYpvb4_1l5ZavEOoO&export=download">crynux-node-helium-v2.0.6-linux-bin-x64.tar.gz</a></td>
+            <td><a href="https://drive.google.com/uc?id=1OlRYwskYMFt2Oiw1aBQQ7bSL2TMlNwCl&export=download">crynux-node-helium-v2.0.6-linux-bin-x64.tar.gz</a></td>
         </tr>
     </tbody>
 </table>
