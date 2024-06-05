@@ -14,6 +14,16 @@ The random sampling process must be enforced by the blockchain using smart contr
 
 The complexity of the problem further increases because the task arguments and results are too large to store directly on the blockchain. This makes it difficult for the blockchain to verify the correctness and delivery of certain data, increasing the risk of participants cheating.
 
+Crynux implements a Verifiable Secret Sampling algorithm using the [VRF (Verifiable Random Function)](https://en.wikipedia.org/wiki/Verifiable\_random\_function) and [ZKP (Zero-Knowledge Proofs)](https://en.wikipedia.org/wiki/Zero-knowledge\_proof).&#x20;
+
+When a task is sent to the blockchain, it determines secretly whether the task will be validated based on a pre-defined sampling rate. If the task is selected for validation, three tasks will be sent to the nodes.
+
+Nodes cannot know the sampling results before submitting their computations to the blockchain. Once the task execution is complete, the sampling results are revealed on-chain for verification. This ensures the sampling were generated prior to the task and prevents manipulation.
+
+Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities.
+
+The detailed description of the algorithm will be provided in the next section.
+
 ## Task Creation
 
 <figure><img src="../.gitbook/assets/ccea559c7a0f4cc3c32fbf90fbe2c6b.png" alt=""><figcaption></figcaption></figure>

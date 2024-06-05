@@ -52,7 +52,7 @@ The Crynux Network will randomly choose 3 nodes that are equipped with the same 
 
 ### Random Number Generation on the Blockchain
 
-Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the [Verifiable Random Functions](https://en.wikipedia.org/wiki/Verifiable\_random\_function). Strictly speaking, however, none of these methods are safe enough in our scenario.
+Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the Verifiable Random Functions. Strictly speaking, however, none of these methods are safe enough in our scenario.
 
 The attack one could perform, given that the result validation is effective, is for an attacker to host more nodes by himself, and try to have two or more of his own nodes selected for a single task. In which case the attacker could submit two identical fake results to cheat the blockchain.
 
