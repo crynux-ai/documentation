@@ -17,41 +17,41 @@ The following is an intuitive look at a task definition:
 
 ```json
 {
-        "version": "2.0.0",
-        "base_model": {
-            "name": "stabilityai/sdxl-turbo"
+    "version": "2.0.0",
+    "base_model": {
+        "name": "stabilityai/sdxl-turbo"
+    },
+    "prompt": "best quality, ultra high res, photorealistic++++, 1girl, desert, full shot, dark stillsuit, "
+              "stillsuit mask up, gloves, solo, highly detailed eyes,"
+              "hyper-detailed, high quality visuals, dim Lighting, ultra-realistic, sharply focused, octane render,"
+              "8k UHD",
+    "negative_prompt": "no moon++, buried in sand, bare hands, figerless gloves, "
+                       "blue stillsuit, barefoot, weapon, vegetation, clouds, glowing eyes++, helmet, "
+                       "bare handed, no gloves, double mask, simplified, abstract, unrealistic, impressionistic, "
+                       "low resolution,",
+    "task_config": {
+        "num_images": 9,
+        "steps": 1,
+        "cfg": 0
+    },
+    "lora": {
+        "model": "https://civitai.com/api/download/models/178048"
+    },
+    "controlnet": {
+        "model": "diffusers/controlnet-canny-sdxl-1.0",
+        "image_dataurl": "data:image/png;base64,12FE1373...",
+        "preprocess": {
+            "method": "canny"
         },
-        "prompt": "best quality, ultra high res, photorealistic++++, 1girl, desert, full shot, dark stillsuit, "
-                  "stillsuit mask up, gloves, solo, highly detailed eyes,"
-                  "hyper-detailed, high quality visuals, dim Lighting, ultra-realistic, sharply focused, octane render,"
-                  "8k UHD",
-        "negative_prompt": "no moon++, buried in sand, bare hands, figerless gloves, "
-                           "blue stillsuit, barefoot, weapon, vegetation, clouds, glowing eyes++, helmet, "
-                           "bare handed, no gloves, double mask, simplified, abstract, unrealistic, impressionistic, "
-                           "low resolution,",
-        "task_config": {
-            "num_images": 9,
-            "steps": 1,
-            "cfg": 0
-        },
-        "lora": {
-            "model": "https://civitai.com/api/download/models/178048"
-        },
-        "controlnet": {
-            "model": "diffusers/controlnet-canny-sdxl-1.0",
-            "image_dataurl": "data:image/png;base64,12FE1373...",
-            "preprocess": {
-                "method": "canny"
-            },
-            "weight": 70
-        },
-        "scheduler": {
-            "method": "EulerAncestralDiscreteScheduler",
-            "args": {
-                "timestep_spacing": "trailing"
-            }
+        "weight": 70
+    },
+    "scheduler": {
+        "method": "EulerAncestralDiscreteScheduler",
+        "args": {
+            "timestep_spacing": "trailing"
         }
     }
+}
 ```
 
 More examples of the different Stable Diffusion tasks can be found [in the GitHub repository](https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples).
