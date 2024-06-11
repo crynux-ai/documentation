@@ -84,7 +84,7 @@ Hydrogen Network could be deployed on any blockchain system that supports the sm
 
 The relay is actually a compromization on the decentralization of the network, in exchange for the network usability and efficiency.
 
-Since the task arguments and the result images are too large to be stored directly on-chain, the data can only be stored at some other place that is accessible by the nodes. However, if the data becomes unavailable, due to for example, the storage system crashing, the nodes cannot retrieve the task arguments and thus cannot finish the task. Since the blockchain has no way to verify whether the data is accessible by the node or not, it can not tell whether the node is cheating, which is a situation that the system fails to handle. This is known as the data availability problem of the blockchain system.
+Since the task arguments and the result images are too large to be stored directly on-chain, the data can only be stored at some other place that is accessible by the nodes. However, if the data becomes unavailable, due to for example, the storage system crashing, the nodes cannot retrieve the task arguments and thus cannot finish the task. Since the blockchain has no way to verify whether the data is accessible by the node or not, it can not tell whether the node is cheating, which is a situation that the system fails to handle. This is known as the data availability problem of the blockchain.
 
 Ideally a decentralized storage network that is closely coupled with the blockchain could solve the problem. The data, once stored, can never be lost, and the smart contract could invoke a function such as `getData(hash)` to verify the integrity of these data. Unfortunately we don't have such a solution at this time.
 

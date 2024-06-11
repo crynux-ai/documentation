@@ -103,7 +103,7 @@ The task relationship validation ensures the application does not send misleadin
 
 This validation ensures the `Task Parameters` provided by the application are consistent across all three nodes. Inconsistent parameters given to different nodes result in different `SimHash` being submitted to the blockchain, causing honest nodes to be penalized.
 
-The validation is implemented using `Zero-Knowledge Proofs`. The application sends the hash of the `Task Parameters`, along with a `ZK Proof` to the blockchain.
+The validation is implemented using Zero-Knowledge Proofs. The application sends the hash of the `Task Parameters`, along with a `ZK Proof` to the blockchain.
 
 The `ZK Proof` is constructed to use the plain text `Task Parameters` as the private input, and publicly outputs the hash of the `Task Parameters` and the hash of the cipher text of the `Task Parameters`. A valid `ZK Proof` ensures that:
 

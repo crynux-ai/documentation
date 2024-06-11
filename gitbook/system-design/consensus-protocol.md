@@ -14,13 +14,13 @@ The consensus protocol in the Crynux Network aims to verify the correctness of a
 
 The consensus protocol must be enforced by the blockchain, which eliminates the need for a centralized authority. This decentralized approach safeguards against potential abuse of power by removing the temptation for any single party to cheat, given their control.
 
-## Verifiable Secret Sampling of Tasks for On-Chain Validation
+## Verifiable Secret Sampling (VSS) of Validation Tasks
 
 When the application sends a task to the blockchain, the blockchain will decide whether to validate the task based on a pre-defined probability (e.g., 10%). If chosen for validation, the task is sent to 3 nodes for independent execution. The computation results from all 3 nodes will be cross-validated on-chain to prevent cheating. If a node submits a fake result, it will be punished by slashing its staked tokens on the blockchain.
 
 The random sampling result should be kept secret from nodes until they submit their computation results. If a node knows in advance whether a task will be validated, it could cheat by submitting fake results for tasks that won't be validated.
 
-Hiding the random sampling process from the public while keeping it verifiable on-chain is a challenging task, given that all data on the Blockchain is public and transparent. Crynux achieved this using a combination of VRF (Verifiable Random Function) and ZKP (Zero-Knowledge Proofs).
+Hiding the random sampling process from the public while keeping it verifiable on-chain is a challenging task, given that all data on the blockchain is public and transparent. Crynux achieved this using a combination of VRF (Verifiable Random Function) and ZKP (Zero-Knowledge Proofs).
 
 Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
 
@@ -28,7 +28,7 @@ Comparing to validating all the tasks on chain, the secret task sampling signifi
 [verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
-## On-Chain Task Validation by Multiple Result Comparison
+## Task Validation by Multiple Result Comparison
 
 ### Similarity Comparison of the Images
 
@@ -48,8 +48,6 @@ To make the texts comparison work, the same GPT task must be executed on 3 cards
 
 The Crynux Network will randomly choose 3 nodes that are equipped with the same cards when distributing a GPT task. The node will have to report the card model when joining the network. Note that there is no benefit to report a different card model to the network other than the one the node possesses, which will cause nothing else but the node being slashed when executing tasks.
 
-
-
 ### Random Number Generation on the Blockchain
 
 Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the Verifiable Random Functions. Strictly speaking, however, none of these methods are safe enough in our scenario.
@@ -66,15 +64,11 @@ Considering that to make this attack **practical**, the attacker must control a 
 
 ## Staking based Penalization
 
-After the malicious behaviors could all be identified using the validation schema above, it is now time to panelize the malicious behaviors.
+Nodes are required to stake a certain amount of tokens on the blockchain before joining the network. If a node exhibits malicious behavior, its tokens will be slashed.
 
-The penalization is implemented by asking the nodes to stake certain amount of tokens on the blockchain before joining the network. If the malicious behavior of a node is identified, the tokens will be slashed.
+Given the VSS
 
-If the malicious behaviors are not penalized, there will always be nodes that are submitting fake results to the network. Even if the behaviors could be identified and handled by the blockchain, it will increase the chances of the task failure, reducing the efficiency of the network.
-
-And more importantly, if not panelized properly, the attackers could still attack the system from a statistical perspective.
-
-### Attack based on the Probability
+### Statistical Sybil Attacking
 
 Now that the attacker can not do anything malicious that is undiscoverable in a single task, he can still perform attacks by starting as many nodes as he could. All the malicious nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious nodes have been selected in a same task, in which case the attacker wins regardless of the validation method used on the blockchain.
 
