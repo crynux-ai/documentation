@@ -17,29 +17,150 @@ The following is an intuitive look at a task definition:
 
 ```json
 {
-    "base_model": "emilianJR/chilloutmix_NiPrunedFp32Fix",
-    "prompt": "a realistic portrait photo of a beautiful girl, blonde hair+++, smiling, facing the viewer",
-    "negative_prompt": "low resolution++, bad hands",
+    "version": "2.0.0",
+    "base_model": {
+        "name": "stabilityai/sdxl-turbo"
+    },
+    "prompt": "best quality, ultra high res, photorealistic++++, 1girl, desert, full shot, dark stillsuit, "
+              "stillsuit mask up, gloves, solo, highly detailed eyes,"
+              "hyper-detailed, high quality visuals, dim Lighting, ultra-realistic, sharply focused, octane render,"
+              "8k UHD",
+    "negative_prompt": "no moon++, buried in sand, bare hands, figerless gloves, "
+                       "blue stillsuit, barefoot, weapon, vegetation, clouds, glowing eyes++, helmet, "
+                       "bare handed, no gloves, double mask, simplified, abstract, unrealistic, impressionistic, "
+                       "low resolution,",
     "task_config": {
         "num_images": 9,
-        "safety_checker": False
+        "steps": 1,
+        "cfg": 0
     },
     "lora": {
-        "model": "https://civitai.com/api/download/models/34562",
-        "weight": 80
+        "model": "https://civitai.com/api/download/models/178048"
     },
     "controlnet": {
-        "model": "lllyasviel/control_v11p_sd15_openpose",
-        "weight": 90,
-        "image_dataurl": "base64,image/png:...",
+        "model": "diffusers/controlnet-canny-sdxl-1.0",
+        "image_dataurl": "data:image/png;base64,12FE1373...",
         "preprocess": {
-            "method": "openpose_face"
+            "method": "canny"
+        },
+        "weight": 70
+    },
+    "scheduler": {
+        "method": "EulerAncestralDiscreteScheduler",
+        "args": {
+            "timestep_spacing": "trailing"
         }
     }
 }
 ```
 
 More examples of the different Stable Diffusion tasks can be found [in the GitHub repository](https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples).
+
+## Acceleration of the Image Generation
+
+### SDXL Turbo
+
+SDXL Turbo is an adversarial time-distilled [Stable Diffusion XL](https://huggingface.co/papers/2307.01952) (SDXL) model capable of running inference in as little as 1 step. To use SDXL Turbo in your task:
+
+#### 1. Use the SDXL Turbo model as the base model:
+
+```
+"base_model": {
+    "name": "stabilityai/sdxl-turbo"
+},
+```
+
+#### 2. Set the `timestep_spacing` scheduler argument:
+
+```
+"scheduler": {
+    "method": "EulerAncestralDiscreteScheduler",
+    "args": {
+        "timestep_spacing": "trailing"
+    }
+}
+```
+
+#### 3. Set `cfg` to zero, and set steps to 1-4:
+
+```
+"task_config": {
+    "steps": 1,
+    "cfg": 0
+}
+```
+
+### Latent Consistency Models (LCM)
+
+{% hint style="danger" %}
+Negative prompts won't work with LCM methods.
+{% endhint %}
+
+[Latent Consistency Models (LCMs)](https://hf.co/papers/2310.04378) enable fast high-quality image generation by directly predicting the reverse diffusion process in the latent rather than pixel space. In other words, LCMs try to predict the noiseless image from the noisy image in contrast to typical diffusion models that iteratively remove noise from the noisy image. By avoiding the iterative sampling process, LCMs are able to generate high-quality images in 2-4 steps instead of 20-30 steps.
+
+There are two ways LCM could be used in a Stable Diffusion task: LCM and LCM-LoRA:
+
+{% tabs %}
+{% tab title="LCM" %}
+#### 1.Load the LCM model corresponding to your base model using the `unet` argument:
+
+```
+"base_model": {
+    "name": "stabilityai/stable-diffusion-xl-base-1.0"
+},
+"unet": "latent-consistency/lcm-sdxl",
+```
+
+#### 2.Use the `LCMScheduler`:
+
+```
+"scheduler": {
+    "method": "LCMScheduler"
+}
+```
+
+#### 3.Set `cfg` to 3-13, and set `steps` to 4:
+
+```
+"task_config": {
+    "steps": 4,
+    "cfg": 5
+},
+```
+{% endtab %}
+
+{% tab title="LCM-LoRA" %}
+#### 1. Load the LCM-LoRA model corresponding to your base model using `lora` argument:
+
+```
+"base_model": {
+    "name": "runwayml/stable-diffusion-v1-5"
+},
+"lora": {
+    "model": "latent-consistency/lcm-lora-sdv1-5"
+},
+```
+
+#### 2. Use the `LCMScheduler`:
+
+```
+"scheduler": {
+    "method": "LCMScheduler"
+}
+```
+
+#### 2. Set the cfg to 1-2, and steps to 4:
+
+```
+"task_config": {
+    "steps": 4,
+    "cfg": 1
+},
+```
+{% endtab %}
+{% endtabs %}
+
+
 
 ## Base Model
 

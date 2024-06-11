@@ -2,9 +2,27 @@
 description: Reduce the Task Validation Overhead
 ---
 
-# VRF Task Sampling
+# Verifiable Secret Sampling
 
+To prevent any malicious node from sending fake computing results to the network for free rewards, Crynux Network validates task results by selecting three random nodes to independently execute the same task and compare their outputs to detect any cheating.
 
+However, using triple computing power for every task wastes resources, cutting network capacity by two-thirds and increasing wait times. This inefficiency is compounded if one node is slow due to network issues, further lengthening task execution times.
+
+Instead of validating every task, an effective approach is to randomly sample a small portion of tasks for validation. As long as the node is unaware of whether its task will be validated, it cannot execute any attacks.
+
+The random sampling process must be enforced by the blockchain using smart contracts to ensure no participants can manipulate the selection or alter the sampling rate for personal gain. The challenge then is to conceal the sampling results from the public despite the transparency of blockchain data.
+
+The complexity of the problem further increases because the task arguments and results are too large to store directly on the blockchain. This makes it difficult for the blockchain to verify the correctness and delivery of certain data, increasing the risk of participants cheating.
+
+Crynux implements a Verifiable Secret Sampling algorithm using the [VRF (Verifiable Random Function)](https://en.wikipedia.org/wiki/Verifiable\_random\_function) and [ZKP (Zero-Knowledge Proofs)](https://en.wikipedia.org/wiki/Zero-knowledge\_proof).&#x20;
+
+When a task is sent to the blockchain, it determines secretly whether the task will be validated based on a pre-defined sampling rate. If the task is selected for validation, three tasks will be sent to the nodes.
+
+Nodes cannot know the sampling results before submitting their computations to the blockchain. Once the task execution is complete, the sampling results are revealed on-chain for verification. This ensures the sampling were generated prior to the task and prevents manipulation.
+
+Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities.
+
+The detailed description of the algorithm will be provided in the next section.
 
 ## Task Creation
 
@@ -106,7 +124,7 @@ The blockchain uses three `SimHash` values to verify task results. If one node s
 
 The validation of the tasks that do not require result validation is much simpler. The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
 
-The [Sampling Number Validation](vrf-task-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
+The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
 
 ## Task Result Disclosure
 

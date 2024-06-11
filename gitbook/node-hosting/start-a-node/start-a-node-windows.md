@@ -26,7 +26,7 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-{% embed url="https://drive.google.com/uc?id=1T2ogxVaQnldgV_bl7GWVAAxjsUtQxM52&export=download" %}
+{% embed url="https://drive.google.com/file/d/1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O/view?usp=drivesdk" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
@@ -34,9 +34,9 @@ Starting a node on Windows using the binary release package, as described here, 
 
 ## 3. Start the node
 
-Unzip the downloaded package, double click on the `Crynux Node.exe` to start the node:
+Unzip the downloaded package, double-click on the `Crynux Node.exe` to start the node:
 
-<figure><img src="../../.gitbook/assets/Screenshot 2024-04-10 092150.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 092150.png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Prepare the wallet
 
@@ -46,7 +46,7 @@ The test tokens will be transferred to the newly created wallet automatically. J
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-<figure><img src="../../.gitbook/assets/Screenshot 2024-04-10 093004.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093004.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Wait for the system initialization to finish
 
@@ -54,12 +54,12 @@ If this is the first time you start a node, it could take quite a long while for
 
 After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-<figure><img src="../../.gitbook/assets/Screenshot 2024-04-10 093116.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093116.png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2024-04-10 093051.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2024-04-10 093051.png" alt=""><figcaption></figcaption></figure>
 
 Now you could just leave it there to execute the tasks. When you shutdown the Crynux Node app, it will try to quit the network before exiting, so that new tasks will not be sent to the node any more. And the next time the app is started, it will join the network to receive new tasks automatically.

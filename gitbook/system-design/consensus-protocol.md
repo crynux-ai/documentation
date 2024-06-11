@@ -14,18 +14,18 @@ The consensus protocol in the Crynux Network aims to verify the correctness of a
 
 The consensus protocol must be enforced by the blockchain, which eliminates the need for a centralized authority. This decentralized approach safeguards against potential abuse of power by removing the temptation for any single party to cheat, given their control.
 
-## Random Sampling of Tasks for On-Chain Validation
+## Verifiable Secret Sampling of Tasks for On-Chain Validation
 
 When the application sends a task to the blockchain, the blockchain will decide whether to validate the task based on a pre-defined probability (e.g., 10%). If chosen for validation, the task is sent to 3 nodes for independent execution. The computation results from all 3 nodes will be cross-validated on-chain to prevent cheating. If a node submits a fake result, it will be punished by slashing its staked tokens on the blockchain.
 
-The random sampling result should be kept private from nodes until they submit their computation results. If a node knows in advance whether a task will be validated, it could cheat by submitting fake results for tasks that won't be validated.
+The random sampling result should be kept secret from nodes until they submit their computation results. If a node knows in advance whether a task will be validated, it could cheat by submitting fake results for tasks that won't be validated.
 
 Hiding the random sampling process from the public while keeping it verifiable on-chain is a challenging task, given that all data on the Blockchain is public and transparent. Crynux achieved this using a combination of VRF (Verifiable Random Function) and ZKP (Zero-Knowledge Proofs).
 
-Comparing to validating all the tasks on chain, the random task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless, effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
+Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
 
-{% content-ref url="vrf-task-sampling.md" %}
-[vrf-task-sampling.md](vrf-task-sampling.md)
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 ## On-Chain Task Validation by Multiple Result Comparison
@@ -52,7 +52,7 @@ The Crynux Network will randomly choose 3 nodes that are equipped with the same 
 
 ### Random Number Generation on the Blockchain
 
-Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the [Verifiable Random Functions](https://en.wikipedia.org/wiki/Verifiable\_random\_function). Strictly speaking, however, none of these methods are safe enough in our scenario.
+Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the Verifiable Random Functions. Strictly speaking, however, none of these methods are safe enough in our scenario.
 
 The attack one could perform, given that the result validation is effective, is for an attacker to host more nodes by himself, and try to have two or more of his own nodes selected for a single task. In which case the attacker could submit two identical fake results to cheat the blockchain.
 

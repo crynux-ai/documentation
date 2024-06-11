@@ -56,7 +56,32 @@ To read more about the Helium Network release, go to the following page:
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1T2ogxVaQnldgV_bl7GWVAAxjsUtQxM52&#x26;export=download">https://drive.google.com/uc?id=1T2ogxVaQnldgV_bl7GWVAAxjsUtQxM52&#x26;export=download</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg</a></td></tr><tr><td>Linux</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1fywy7_LwDRprm_Amfpd2moftf_s9h8Iu&#x26;export=download">https://drive.google.com/uc?id=1fywy7_LwDRprm_Amfpd2moftf_s9h8Iu&#x26;export=download</a></td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th width="131">Platform</th>
+            <th width="261">Requirements</th>
+            <th data-type="content-ref">Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O&export=download">crynux-node-helium-v2.0.6-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg">crynux-node-helium-v2.0.6-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
+            <td>Linux</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1OlRYwskYMFt2Oiw1aBQQ7bSL2TMlNwCl&export=download">crynux-node-helium-v2.0.6-linux-bin-x64.tar.gz</a></td>
+        </tr>
+    </tbody>
+</table>
 
 To start a node on your Windows computer:
 
