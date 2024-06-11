@@ -66,38 +66,41 @@ Considering that to make this attack **practical**, the attacker must control a 
 
 Nodes are required to stake a certain amount of tokens on the blockchain before joining the network. If a node exhibits malicious behavior, its tokens will be slashed.
 
-Given the VSS
+Given the VSS task validation scheme above, it is then a calculation of the required number of tokens to stake to prevent attacking attempts. If the staked tokens are not enough, the attacker can still make profit even if some tokens will be slashed.
 
-### Statistical Sybil Attacking
+### Sybil Attack
 
-Now that the attacker can not do anything malicious that is undiscoverable in a single task, he can still perform attacks by starting as many nodes as he could. All the malicious nodes will do one thing: submitting the same fake result to the network. There will always be chances that two malicious nodes have been selected in a same task, in which case the attacker wins regardless of the validation method used on the blockchain.
+The attacker will start as many malicious nodes as he could. All the malicious nodes will do one thing: submitting the same fake result for every task they received.
 
-Let's call this a success of the attacker. It is then the number of the probability of success that should be considered. If the probability is high, even if the malicious behavior is panelized, there will still be room for the attacker to make profit.
+1. If the task is not selected for validation, the attacker gets the reward for free.&#x20;
+2. If the task is selected for validation:
+   1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free
+   2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.&#x20;
 
-### Expectation of the Income
+### Expectation of the Rewards from Sybil Attack
 
-The probability of a successful attack (an attacker getting more than 2 nodes of himself selected in a task) could be calculated as:
+The probability of an attacker getting more than 2 nodes of himself selected in a task could be calculated as:
 
 $$
 p(h, d) = \frac{ C_d^2 * C_h^1 + C_d^3}{C_{d+h}^3}
 $$
 
-Where _**h**_ is the number of the honest nodes, and _**d**_ is the number of the dishonest nodes the attacker possesses.
+Where $$h$$ is the number of the honest nodes, and $$d$$ is the number of the dishonest nodes the attacker starts.
 
-And the expectation of the income from cheating is given by:
-
-$$
-E = p * k - (1-p) * s
-$$
-
-Where _**k**_ is the price of the task, and _**s**_ is the number of the staked tokens for a node.
-
-By increasing the number of the staked tokens _**s**_, we could decrease the expectation _**E**_ down to zero or even below. If _**E**_ is below zero, there is no benefit to attack the system by starting more fake nodes. The attacking is highly likely to cause the attacker to loose money rather than earn.
-
-The safety of the network now depends on the calculated value of the amount of the staked tokens _**s**_. Given a network size (the number of the total nodes in the network), and a target ratio of the malicious nodes (under which the network is safe), the probability of a successful attack _**p**_ is then fixed. Setting _**E**_ to zero, the amount of the staked tokens required for a single node _**s**_ is determined by:
+And the expectation of the rewards from sybil attack is given by:
 
 $$
-s = \frac{p * k}{1-p}
+E =  (1 - r) * k + r * (p * k - (1-p) * s)
+$$
+
+Where $$r$$ is the sampling rate given in VSS, $$k$$ is the price of the task, and $$s$$ is the number of the staked tokens for a node.
+
+By increasing the number of the staked tokens $$s$$, we could decrease the expectation $$E$$ down to zero or even below. If $$E$$ is below zero, there is no benefit to attack the system by starting more malicious nodes. The attacking will highly likely cause the attacker to lose money rather than earn.
+
+The safety of the network now depends on the calculated value of the amount of the staked tokens $$s$$. Given a network size (the number of the total nodes in the network), and a target ratio of the malicious nodes (under which the network is safe), the probability of a successful attack $$p$$ is then fixed. Setting $$E$$ to zero, the amount of the staked tokens required for a single node $$s$$ is determined by:
+
+$$
+s = \frac{(1-r) * k  + r * p * k}{r * (1-p)}
 $$
 
 ## Task Error and Timeout
