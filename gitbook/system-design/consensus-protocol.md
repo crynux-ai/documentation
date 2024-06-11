@@ -103,14 +103,6 @@ $$
 s = \frac{(1-r) * k  + r * p * k}{r * (1-p)}
 $$
 
-### Identify Validation Task Groups
-
-An attacker could also monitor all the malicious nodes to identify the identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker could always return fake results in such cases, which will further reduce the possibility of penalization in the Sybil Attack.
-
-However, even if the task parameters are the same, the attacker cannot be sure that the tasks belong to the same validation group. There is still a chance they are independent tasks, and the node will be penalized for submitting two fake results.
-
-Besides, since only a small portion of the tasks are validation tasks, and the probability of the attacker having 2 nodes selected in the same task is even smaller, this situation is ignored in the consensus protocol.
-
 ## Task Error and Timeout
 
 Given that the network is a loosely coupled P2P system composed of home computers and laptops, we cannot assume the nodes are reliable. A node may lose contact with the network at any moment, even if it is still marked as available or executing a task on the blockchain.
@@ -137,6 +129,10 @@ The timeout mechanism is introduced to solve this problem. After a pre-defined p
 
 ### Timeout Attack under VSS
 
-The timeout mechanism introduces a vulnerability to the network. [Just like above](consensus-protocol.md#identify-validation-task-groups), an attacker can start multiple nodes and monitor the task parameters for identical ones. The difference this time is that if there is only one node is selected for a task, the attacker will wait for timeout to escape from penalization, and submit identical fake results when more than two nodes are selected.
+The timeout mechanism introduces a new vulnerability to the network.
 
-And similar to the Sybil Attack above, the guessing of validation groups is not accurate, and the probability of the attacker having more than two nodes selected in a validation task is small under VSS, this situation is ignored.
+An attacker could monitor all the malicious nodes to identify the identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker will return fake results in this case to get rewards for free, and in other cases wait for the timeout to skip from the penalization.
+
+However, even if the task parameters are the same, the attacker cannot be sure that the tasks belong to the same validation group. There is still a chance they are independent tasks, and the attacker will be penalized for submitting two fake results.
+
+Besides, since only a small portion of the tasks are validation tasks, and the probability of the attacker having 2 nodes selected in the same task is even smaller, this situation is ignored in the consensus protocol.
