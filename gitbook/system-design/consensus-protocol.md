@@ -105,21 +105,21 @@ $$
 
 ## Task Error and Timeout
 
-Since the network is a loosely coupled P2P network formed by the home computers and even the laptops, we can not put any assumptions on the reliability of the nodes. A node could lost contact to the network at any minute, while on the blockchain, it is still marked as available, or executing a task.
+Given that the network is a loosely coupled P2P system composed of home computers and laptops, we cannot assume the nodes are reliable. A node may lose contact with the network at any moment, even if it is still marked as available or executing a task on the blockchain.
 
-Neither are the applications reliable. The tasks submitted by the applications might not be executable at all, such as a mismatched combination of the SD1.5 base model and a LoRA model for the SDXL.
+The applications are also unreliable. Tasks submitted might be entirely inexecutable, such as combining the SD1.5 base model with an SDXL LoRA model.
 
 ### Task Error Reporting
 
 When an exception occurred during the task execution on the node, if the exception is not recoverable, the node will report the error to the blockchain.
 
-The error reporting is treated as a normal task result on the blockchain. If more than 2 nodes has reported the error to the blockchain, the task is aborted. If a node reported the error while the other 2 nodes submitted the computation results correctly, the node will be slashed.
+Error reporting is treated as a normal task result on the blockchain. If more than two nodes report an error to the blockchain, the task is aborted. If one node reports an error while the other two nodes submit the computation results correctly, the node will be penalized.
 
-Crynux Network allows the model to be downloaded from an external link. However, there might be network issues during the downloading of the model. It is hard to tell whether the network issue is common to all the 3 nodes, or whether the network issue is temporary.
+Crynux Network allows model downloads through an external link. However, network issues may occur during the download. It's challenging to determine if these issues affect all three nodes or if they are temporary.
 
-To avoid the slashing of the honest nodes by mistake, reporting error should be used only when the node is 100% sure it is the error of the task arguments, rather than the network issue. The rest of the cases should be taken care of by the timeout mechanism.
+To prevent mistakenly slashing honest nodes, reporting errors should only be used when the node is certain it's an issue with the task arguments, not a network problem. All other cases should be handled by the timeout mechanism below.
 
-If the task is aborted due to error reporting, the tokens will not be returned to the application, since  the nodes have already spend some resources on the task, and it is the application to blame for the task error.
+If the task is aborted due to error reporting, tokens will not be returned to the application. This is because the nodes have already expended resources on the task, and the application is responsible for the error.
 
 ### Task Cancellation on Timeout
 
