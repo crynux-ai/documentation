@@ -26,7 +26,7 @@ Download the DMG file using the following link, then double-click the file, and 
 
 Double-click on the icon of the newly installed app to start the node:
 
-<figure><img src="../.gitbook/assets/7e232c34e399d55cc08ded5f20f68df.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/7e232c34e399d55cc08ded5f20f68df.png" alt=""><figcaption></figcaption></figure>
 
 ## 4. Prepare the wallet
 
@@ -36,7 +36,7 @@ The test tokens will be transferred to the newly created wallet automatically. J
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-<figure><img src="../.gitbook/assets/8d57ad8e029d6de1cc4fcbe9f0c96c3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/8d57ad8e029d6de1cc4fcbe9f0c96c3.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Wait for the system initialization to finish
 
@@ -44,12 +44,12 @@ If this is the first time you start a node, it could take quite a long while for
 
 After the models are downloaded, a test image generation task will be executed locally to examine the capability of your device. If the device is not capable to generate images, or the generation speed is too slow, the node will not be able to join the network. If the task is finished successfully, the initialization is completed:
 
-<figure><img src="../.gitbook/assets/76f579d117c5d6c882c5e89aa378a11.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/76f579d117c5d6c882c5e89aa378a11.png" alt=""><figcaption></figcaption></figure>
 
 ## 6. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
-<figure><img src="../.gitbook/assets/fef056a30e2e10930b863743fb34282.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/fef056a30e2e10930b863743fb34282.png" alt=""><figcaption></figcaption></figure>
 
 Now you could just leave it there to execute the tasks. When you shutdown the Crynux Node app, it will try to quit the network before exiting, so that new tasks will not be sent to the node any more. And the next time the app is started, it will join the network to receive new tasks automatically.
