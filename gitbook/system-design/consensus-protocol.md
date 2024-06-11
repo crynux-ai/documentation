@@ -77,8 +77,6 @@ The attacker will start as many malicious nodes as he could. All the malicious n
    1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free
    2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.&#x20;
 
-An attacker could monitor malicious nodes to identify identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker could always return fake results in such case.
-
 ### Expectation of the Rewards from Sybil Attack
 
 The probability of an attacker getting more than 2 nodes of himself selected in a task could be calculated as:
@@ -105,6 +103,14 @@ $$
 s = \frac{(1-r) * k  + r * p * k}{r * (1-p)}
 $$
 
+### Identify Validation Task Groups
+
+An attacker could also monitor all the malicious nodes to identify the identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker could always return fake results in such cases, which will further reduce the possibility of penalization in the Sybil Attack.
+
+However, even if the task parameters are the same, the attacker cannot be sure that the tasks belong to the same validation group. There is still a chance they are independent tasks, and the node will be penalized for submitting two fake results.
+
+Besides, since only a small portion of the tasks are validation tasks, and the probability of the attacker having 2 nodes selected in the same task is even smaller, this situation is ignored in the consensus protocol.
+
 ## Task Error and Timeout
 
 Given that the network is a loosely coupled P2P system composed of home computers and laptops, we cannot assume the nodes are reliable. A node may lose contact with the network at any moment, even if it is still marked as available or executing a task on the blockchain.
@@ -129,87 +135,8 @@ The consensus protocol requires the submission of the commitments of all the 3 n
 
 The timeout mechanism is introduced to solve this problem. After a pre-defined period, all the 3 nodes, and the application, are allowed to submit the request to cancel the task on the blockchain. Once submitted, the blockchain will abort the task immediately.
 
-### Expectation of the Income by Timeout Attack
+### Timeout Attack under VSS
 
-The timeout mechanism introduces a new vulnerability to the network. The attacker, starting as many nodes as he could, will wait for the timeout if he finds out that he has no more than two nodes of his own selected in a task, to escape from the penalization, and submit fake results in other cases.
+The timeout mechanism introduces a vulnerability to the network. [Just like above](consensus-protocol.md#identify-validation-task-groups), an attacker can start multiple nodes and monitor the task parameters for identical ones. The difference this time is that if there is only one node is selected for a task, the attacker will wait for timeout to escape from penalization, and submit identical fake results when more than two nodes are selected.
 
-We can never tell between an intended offline and an accidental one. As long as the timeout mechanism exists, we can not eliminate this behavior technically. What we can do is to limit the intention economically.
-
-By controlling the length of the timeout period, we could limit the maximum number of the tasks a malicious node could receive in a fixed range of time.
-
-Under a fixed probability $$p$$ of a successful attack (i.e. a fixed number of the honest and the dishonest nodes), and given a value of the timeout period $$t$$ in seconds, assume the total number of the tasks a malicious node could execute in a day is $$n$$, we have:
-
-$$
-\hat{t} * n * p + t * n * (1-p) = 86400
-$$
-
-Where $$\hat{t}$$ is an estimated constant of the time required for a normal task execution. Since the attacker will have to wait for the other honest node to submit commitment when he has only two nodes selected in the task. And if all the three nodes are from the attacker in a task, the blockchain confirmation still requires time.
-
-The maximum number of the malicious tasks $$n_m$$ a malicious node could cheat successfully in a day is then:
-
-$$
-n_m = n * p = \frac{86400 * p}{\hat{t} * p + t * (1-p)}
-$$
-
-The total income an attacker could get in a day, by starting $$d$$ nodes, is then:
-
-$$
-I_{max}(p, t) = n_m * k * d = \frac{86400 * p * k * d}{\hat{t} * p + t * (1-p)}
-$$
-
-Recall that $$k$$ is the price of a single task, and $$d$$ is the number of the malicious nodes the attacker has to start to reach the probability $$p$$.
-
-For each of the $$d$$ nodes the attacker has to stake $$s$$ tokens. The total amount of tokens the attacker has to stake, for one day, is:
-
-$$
-T(p) = s * d = \frac{p * k * d}{1-p}
-$$
-
-We could then treat the income as the interest of staking so many tokens for a day. The daily percentage rate is given by:
-
-$$
-{DPR}_{max}(p, t) = \frac{ I_{max}(p,t) }{ T(p) } = \frac{86400*(1-p)}{\hat{t} * p + t * (1-p)}
-$$
-
-Where _**t**_ is the period of timeout in seconds. By increasing the period _**t**_, we could decrease the percentage rate to a value that no one will ever be interested.
-
-#### Add more staking to decrease the timeout
-
-A longer timeout period gives a lower percentage rate, which makes the network safer, but the applications and the honest nodes will have to wait longer.
-
-By increasing the required amount of staking, we can further reduce the timeout period.
-
-Let's introduce a number $$s_t$$ , which will be added to the staking amount. The total amount of tokens the attacker has to stake, for one day, becomes:
-
-$$
-T(p) = (s + s_t) * d = \frac{p * k * d}{1-p} + s_t * d
-$$
-
-We can then choose a fit $$s_t$$ value to balance between the attacking risk and the network efficiency.
-
-According to our calculation (see the figure below), the number of tokens required to stake to prevent the timeout attack is magnitudes larger than the number required to prevent the attack we mentioned above of submitting fake results regardless of the node selection result.
-
-#### Conspiracy between the attackers
-
-The malicious nodes must be controlled by a single attacker to increase the success probability. Two attackers can not easily conspire to perform the timeout attack together, which requires one attacker to know if a selected node is honest, or a malicious node of another attacker for sure, who will submit the same fake result as his own. The safe choice is of course to assume that it is an honest node.
-
-That's a good news to us. The malicious nodes of one attacker can be seen as the honest nodes to another attacker. The probability of successful attack decreases as the number of attackers rises.
-
-Below is an example of the calculated numbers on different network sizes and malicious nodes:
-
-The settings are given as:
-
-| Item                               | Value       |
-| ---------------------------------- | ----------- |
-| Task price                         | 3 CNX       |
-| Estimated execution time of a task | 60 seconds  |
-| Timeout period                     | 300 seconds |
-| No. of staking for timeout attack  | 5,000 CNX   |
-
-The staking required and the corresponding APR are listed below, assuming all the malicious nodes belong to the single attacker:
-
-<table><thead><tr><th width="107" align="right">No. honest</th><th width="123" align="right">No. malicious</th><th width="161" align="right">No. staking for timeout</th><th width="183" align="right">No. staking total (T)</th><th width="175" align="right">APR (%)</th></tr></thead><tbody><tr><td align="right">7</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.67</td><td align="right">451.67</td></tr><tr><td align="right">70</td><td align="right">3</td><td align="right">15,000</td><td align="right">15,000.01</td><td align="right">7.15</td></tr><tr><td align="right">700</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.14</td><td align="right">10.09</td></tr><tr><td align="right">7000</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.11</td></tr><tr><td align="right">9970</td><td align="right">30</td><td align="right">150,000</td><td align="right">150,000.00</td><td align="right">0.05</td></tr><tr><td align="right">9900</td><td align="right">100</td><td align="right">500,000</td><td align="right">500,000.03</td><td align="right">0.62</td></tr><tr><td align="right">9700</td><td align="right">300</td><td align="right">1,500,000</td><td align="right">1,500,000.80</td><td align="right">5.56</td></tr><tr><td align="right">9500</td><td align="right">500</td><td align="right">2,500,000</td><td align="right">2,500,003.65</td><td align="right">15.30</td></tr></tbody></table>
-
-As the figure shows, when the network reaches 10,000 total nodes, under the settings of the 5-minute timeout, and the required 5,000 CNX staking, the network is safe when an attacker starts \~ 300 nodes, which will cost him 1,500,000 CNX tokens.
-
-And the APR can be reached only when the network is running at its maximum capacity, i.e. every node is running tasks one after another without idle time. The APR will drop if we do not have so many tasks to execute.
+And similar to the Sybil Attack above, the guessing of validation groups is not accurate, and the probability of the attacker having more than two nodes selected in a validation task is small under VSS, this situation is ignored.
