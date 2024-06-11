@@ -77,6 +77,8 @@ The attacker will start as many malicious nodes as he could. All the malicious n
    1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free
    2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.&#x20;
 
+An attacker could monitor malicious nodes to identify identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker could always return fake results in such case.
+
 ### Expectation of the Rewards from Sybil Attack
 
 The probability of an attacker getting more than 2 nodes of himself selected in a task could be calculated as:
