@@ -83,7 +83,7 @@ The node cannot send the task result to the DA/Relay service at this stage. If t
 
 ### Tasks Require Validation
 
-<figure><img src="../.gitbook/assets/9697992bcef9dd3c42f7856ce6f8b5a.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/c1a873d3cb808ecc2122e8e08425aed.png" alt=""><figcaption></figcaption></figure>
 
 The application will wait for the submission of all the 3 `SimHash` on the blockchain, and then disclose the relationship of the tasks, and the relevant proofs for the blockchain to validate:
 
