@@ -70,12 +70,24 @@ Given the VSS task validation scheme above, it is then a calculation of the requ
 
 ### Sybil Attack
 
-The attacker will start as many malicious nodes as he could. All the malicious nodes will do one thing: submitting the same fake result for every task they received.
+The attacker will start as many malicious nodes as he could. All the malicious nodes will do one thing: submitting the identical fake result for every task they received.
 
 1. If the task is not selected for validation, the attacker gets the reward for free.&#x20;
 2. If the task is selected for validation:
    1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free
    2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.&#x20;
+
+### Identifying the Validation Task Groups
+
+An attacker could identify the validation task group by decrypting and comparing the task parameters received by all the malicious nodes. If parameters are identical for two adjacent tasks from the same application, they likely belong to the same validation group. The attacker might then return identical fake results to gain rewards without effort.
+
+However, identifying task groups doesn't provide the attacker with additional advantages in a Sybil attack. The attacker already receives rewards by submitting two identical fake results for all tasks, without needing to identify the validation groups.
+
+Another attack method involves submitting fake results only when the validation group is detected, while behaving normally otherwise. The network cannot identify this behavior.
+
+Given that only a small portion of the network's tasks will be validated (targeted by this attack), and the chance of an attacker discovering the identification groups is even smaller, the attacker would need to control a significant portion of the nodes, making the attack impractical with low potential income. This scenario is therefore excluded in the consensus protocol.
+
+Additionally, although the task parameters may be identical, the attacker cannot be certain that the tasks are part of the same validation group. There's still a possibility that they are independent tasks. If the attacker submits two fake results, they will be penalized.
 
 ### Expectation of the Rewards from Sybil Attack
 
@@ -129,10 +141,6 @@ The timeout mechanism is introduced to solve this problem. After a pre-defined p
 
 ### Timeout Attack under VSS
 
-The timeout mechanism introduces a new vulnerability to the network.
+The timeout mechanism introduces a new vulnerability to the network. An attacker could exploit this by returning fake results only when task validation groups are found. In other scenarios, rather than executing the tasks, the node could simply wait for the timeout to avoid penalties.
 
-An attacker could monitor all the malicious nodes to identify the identical task parameters from the same application. Encrypting task parameters does not prevent the attacker from identifying matching sets, which are likely validation tasks. The attacker will return fake results in this case to get rewards for free, and in other cases wait for the timeout to skip from the penalization.
-
-However, even if the task parameters are the same, the attacker cannot be sure that the tasks belong to the same validation group. There is still a chance they are independent tasks, and the attacker will be penalized for submitting two fake results.
-
-Besides, since only a small portion of the tasks are validation tasks, and the probability of the attacker having 2 nodes selected in the same task is even smaller, this situation is ignored in the consensus protocol.
+[Similar to the discussion earlier](consensus-protocol.md#identifying-the-validation-task-groups), the risk of this attack is low and therefore it is excluded from the consensus protocol.
