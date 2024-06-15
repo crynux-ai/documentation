@@ -136,6 +136,24 @@ graph TD
 
 Another attack method involves submitting fake results only when the validation group is detected, while behaving normally otherwise. The network cannot identify this behavior.
 
+```mermaid
+graph TD
+  task(Task) --> sampling{Selected for validation?}
+  sampling -- No --> nogroup(No group identified)
+  nogroup --> normal(Execute normally)
+  normal --> noattack(( No attack ))
+  fake --> attacker((Attacker gets rewards))
+  sampling -- Yes --> twonode{2 or 3 nodes from the same attacker?}
+  twonode -- Yes --> groupidentify(Group identified)
+  groupidentify --> fake(Submit fake result)
+  twonode -- No --> nogroup2(No group identified)
+  nogroup2 --> normal2(Execute normally)
+  normal2 --> noattack2(( No attack ))
+  classDef node fill: #00B0F0, stroke: none, color: #fff
+```
+
+For this attack to be effective, all malicious nodes must be equipped with GPUs, significantly increasing the cost compared to the Sybil attack mentioned earlier.
+
 Given that only a small portion of the network's tasks will be validated (targeted by this attack), and the chance of an attacker discovering the identification groups is even smaller, the attacker would need to control a significant portion of the nodes, making the attack impractical with low potential income. This scenario is therefore excluded in the consensus protocol.
 
 Additionally, although the task parameters may be identical, the attacker cannot be certain that the tasks are part of the same validation group. There's still a possibility that they are independent tasks. If the attacker submits two fake results, they will be penalized.
@@ -166,6 +184,22 @@ The timeout mechanism is introduced to solve this problem. After a pre-defined p
 
 ### Timeout Attack under VSS
 
-The timeout mechanism introduces a new vulnerability to the network. An attacker could exploit this by returning fake results only when task validation groups are found. In other scenarios, rather than executing the tasks, the node could simply wait for the timeout to avoid penalties.
+The timeout mechanism introduces a new vulnerability to the network. An attacker could exploit this by returning fake results only when task validation groups are found. In other scenarios, rather than executing the tasks, the node could simply wait for the timeout to avoid penalties. And similar to a Sybil attack, the attacker can execute this attack without needing GPUs.
+
+```mermaid
+graph TD
+  task(Task) --> sampling{Selected for validation?}
+  sampling -- No --> nogroup(No group identified)
+  nogroup --> timeout(Wait for timeout)
+  timeout--> escape(( Attacker escaped ))
+  fake --> attacker((Attacker gets rewards))
+  sampling -- Yes --> twonode{2 or 3 nodes from the same attacker?}
+  twonode -- Yes --> groupidentify(Group identified)
+  groupidentify --> fake(Submit fake result)
+  twonode -- No --> nogroup2(No group identified)
+  nogroup2 --> timeout2(Wait for timeout)
+  timeout2 --> escape2(( Attacker escaped ))
+  classDef node fill: #00B0F0, stroke: none, color: #fff
+```
 
 [Similar to the discussion earlier](consensus-protocol.md#identifying-the-validation-task-groups), the risk of this attack is low and therefore it is excluded from the consensus protocol.
