@@ -12,23 +12,63 @@ The task lifecycle could be divided into 3 parts:
 
 ## Task Creation
 
-<figure><img src="../.gitbook/assets/8f55d035421c2914b4de11af5f9ca1a.png" alt=""><figcaption><p>The Sequential Graph of Task Creation</p></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant R as DA/Relay
+
+    A ->> B: Create Task
+    activate B
+    Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Fee
+    alt Task Fee == 0 or Nonce is not unique
+        B -->> A: Tx Reverted
+    else
+        B -->> A: Tx Confirmed
+        Note over A,B: Sampling Seed
+        activate A
+        A ->> A: Generate Sampling Number<br/>Using VRF
+        opt Validation required
+            loop Repeat 2 times
+                A ->> B: Create Task
+                deactivate A
+            end
+        end
+        loop When TaskStarted event is received
+            B ->> A: Event: TaskStarted
+            deactivate B
+            activate A
+            Note over A,B: Task ID Commitment<br/>Selected Node
+            loop Until success
+                A ->> R: Send encrypted task parameters
+                Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
+                deactivate A
+                activate R
+                alt Task is ready on the Relay
+                    R -->> A: Success
+                else
+                    R -->> A: Task not ready
+                end
+                deactivate R
+            end
+        end
+    end
+```
 
 The task creation is initiated by the application. The application signs a transaction, invoking the smart contract to create the task on the Blockchain.
 
+The application must set the task fee it is willing to pay as the `value` of the transaction.
+
 The transaction might be reverted, due to several reasons:
 
-* Not enough CNX tokens left in the application's wallet.
-* Not enough CNX allowance left for the task contract to spend.
-* Not enough nodes available in the network.
+* The transaction value is not set (task fee is not paid).
+* The Nonce has already been used before.
 
-The Blockchain will transfer the required amount of CNX tokens from the application's wallet to the address of the task contract, which will be paid to the nodes, by the Blockchain, if the task is completed successfully.
+For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address.
 
-The Blockchain then randomly selects 3 available nodes to execute the task. The transaction is completed with 3 emitted events to notify the selected nodes.
+Upon receiving the `TaskStarted` event, the application should encrypt the task parameters using the node's public key and send them to the DA/relay.
 
-The application will upload the task arguments to the relay when the transaction is confirmed. The relay will allow the uploading only when it receives the task created event from the Blockchain, the application might have to wait for a short period before the uploading can be successful.
-
-After the task arguments are uploaded to the relay, the task creation process is completed.
+The relay permits uploading only upon receiving the `TaskStarted` event from the blockchain. The application might need to wait briefly for the upload to succeed. After the task arguments are uploaded to the relay, the task creation process is completed.
 
 ## Task Execution
 
