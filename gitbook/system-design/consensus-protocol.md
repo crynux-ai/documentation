@@ -119,6 +119,21 @@ An attacker could identify the validation task group by decrypting and comparing
 
 However, identifying task groups doesn't provide the attacker with additional advantages in a Sybil attack. The attacker already receives rewards by submitting two identical fake results for all tasks, without needing to identify the validation groups.
 
+```mermaid
+graph TD
+  task(Task) --> sampling{Selected for validation?}
+  sampling -- No --> nogroup(No group identified)
+  nogroup --> fake(Submit fake result)
+  fake --> attacker((Attacker gets rewards))
+  sampling -- Yes --> twonode{2 or 3 nodes from the same attacker?}
+  twonode -- Yes --> groupidentify(Group identified)
+  groupidentify --> fake
+  twonode -- No --> nogroup2(No group identified)
+  nogroup2 --> fake2(Submit fake result)
+  fake2 --> slash((Attacker penalized))
+  classDef node fill: #00B0F0, stroke: none, color: #fff
+```
+
 Another attack method involves submitting fake results only when the validation group is detected, while behaving normally otherwise. The network cannot identify this behavior.
 
 Given that only a small portion of the network's tasks will be validated (targeted by this attack), and the chance of an attacker discovering the identification groups is even smaller, the attacker would need to control a significant portion of the nodes, making the attack impractical with low potential income. This scenario is therefore excluded in the consensus protocol.
