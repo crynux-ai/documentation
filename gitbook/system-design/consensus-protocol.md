@@ -74,16 +74,17 @@ The attacker will start as many malicious nodes as he could. All the malicious n
 
 1. If the task is not selected for validation, the attacker gets the reward for free.&#x20;
 2. If the task is selected for validation:
-   1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free
-   2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.&#x20;
+   1. If 2 or 3 nodes from the same attacker are selected for the task, the attacker gets the rewards for free.
+   2. If there is only 1 node from the attacker is selected, the attacker loses staked tokens.
 
 ```mermaid
-graph TD
+graph LR
   task(Task) --> sampling{Selected for validation?}
   sampling -- No --> attacker((Attacker gets rewards))
   sampling -- Yes --> twonode{2 or 3 nodes from the same attacker?}
   twonode -- Yes --> attacker
   twonode -- No --> slash((Attacker penalized))
+  classDef node fill: #00B0F0, stroke: none, color: #fff
 ```
 
 ### Expectation of the Rewards from Sybil Attack
