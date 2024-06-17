@@ -32,8 +32,8 @@ Now that we have the Submission Speed score, which will drop dramatically during
 
 A combination (weighed sum) of all the 3 QoS scores is used to decide the portion of the token incentivization given to each node in the node mining mechanism. A node with higher QoS scores will get more tokens as extra reward from the node mining. The details can be found in the following document:
 
-{% content-ref url="token-economy.md" %}
-[token-economy.md](token-economy.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## QoS Scores Calculation
