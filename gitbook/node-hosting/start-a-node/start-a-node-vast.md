@@ -102,9 +102,29 @@ ethereum:
 
 After you filled the value of the private key, restart the Docker container.
 
-The test tokens will be transferred to the newly created wallet automatically. Just wait for a short while before the test tokens appear in the wallet. In case something goes wrong, ask for help in the Discord server:
+### Get the test CNX tokens from the Discord Server
+
+Some test CNX tokens are required to start the node. The test CNX tokens can be acquired for free in the Discord server of Crynux:
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
+
+In the `happy-aigen-discussions` channel of the Discord server, type in the following command in the input bar, **DO NOT copy & paste the command, it only works when typed in using keyboard**:
+
+```
+/user join
+```
+
+Then bind the wallet address using the following command:
+
+```
+/node wallet {wallet_address}
+```
+
+Remember to replace `{wallet_address}` with the wallet address you just created in the Web UI.
+
+<figure><img src="../../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
+
+After a short while, the test CNX tokens should appear in your node wallet:
 
 <figure><img src="../../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
 
