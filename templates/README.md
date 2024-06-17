@@ -1,5 +1,5 @@
 ---
-description: The Real Decentralized AI you can Join and Use
+description: Truly Permissionless DeAI on GPU@home
 ---
 
 # Crynux Network
