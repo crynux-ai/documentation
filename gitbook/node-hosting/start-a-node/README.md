@@ -16,17 +16,17 @@
         <tr>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O&export=download">crynux-node-helium-v2.0.6-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1XtjmAWcdfr8Ogxfq56oKyEgCk_bkz3zj&export=download">crynux-node-helium-v2.0.7-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg">crynux-node-helium-v2.0.6-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg">crynux-node-helium-v2.0.7-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1OlRYwskYMFt2Oiw1aBQQ7bSL2TMlNwCl&export=download">crynux-node-helium-v2.0.6-linux-bin-x64.tar.gz</a></td>
+            <td><a href="https://drive.google.com/uc?id=1co5v58oN9fbBYn74sHY5CpzsUyBVN3Ij&export=download">crynux-node-helium-v2.0.7-linux-bin-x64.tar.gz</a></td>
         </tr>
     </tbody>
 </table>

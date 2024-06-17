@@ -20,7 +20,7 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 Download the DMG file using the following link, then double-click the file, and drag the app to the application's folder:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 
@@ -30,7 +30,7 @@ Double-click on the icon of the newly installed app to start the node:
 
 ## 4. Prepare the wallet
 
-A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
+A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
 <figure><img src="../../.gitbook/assets/9672eedeb92ea29f79be5aa66c5eee5.png" alt=""><figcaption></figcaption></figure>
 

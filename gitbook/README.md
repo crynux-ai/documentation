@@ -1,5 +1,5 @@
 ---
-description: The Real Decentralized AI you can Join and Use
+description: Truly Permissionless DeAI on GPU@home
 ---
 
 # Crynux Network
@@ -16,7 +16,7 @@ The applications could easily connect to the Crynux Network using API, use Crynu
 
 The developers could write codes to train/fine-tune their models on the dataset provided by the network, using the computing power of the network. The developed model could also be hosted on the network as a service for others.
 
-By utilizing the Blockchain, Zero-Knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
+By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
 ## Helium Network
 
@@ -56,7 +56,32 @@ To read more about the Helium Network release, go to the following page:
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O&#x26;export=download">https://drive.google.com/uc?id=1h_tRAZkqrlQkl-MyJGZVk0XypjUA9O2O&#x26;export=download</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.6/crynux-node-helium-v2.0.6-mac-arm64-signed.dmg</a></td></tr><tr><td>Linux</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1OlRYwskYMFt2Oiw1aBQQ7bSL2TMlNwCl&#x26;export=download">https://drive.google.com/uc?id=1OlRYwskYMFt2Oiw1aBQQ7bSL2TMlNwCl&#x26;export=download</a></td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th width="131">Platform</th>
+            <th width="261">Requirements</th>
+            <th data-type="content-ref">Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1XtjmAWcdfr8Ogxfq56oKyEgCk_bkz3zj&export=download">crynux-node-helium-v2.0.7-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg">crynux-node-helium-v2.0.7-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
+            <td>Linux</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1co5v58oN9fbBYn74sHY5CpzsUyBVN3Ij&export=download">crynux-node-helium-v2.0.7-linux-bin-x64.tar.gz</a></td>
+        </tr>
+    </tbody>
+</table>
 
 To start a node on your Windows computer:
 
