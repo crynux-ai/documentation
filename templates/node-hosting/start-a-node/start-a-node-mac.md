@@ -32,9 +32,31 @@ Double-click on the icon of the newly installed app to start the node:
 
 A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
 
-The test tokens will be transferred to the newly created wallet automatically. Just wait for a short while before the test tokens appear in the wallet. In case something goes wrong, ask for help in the Discord server:
+<figure><img src="../../.gitbook/assets/9672eedeb92ea29f79be5aa66c5eee5.png" alt=""><figcaption></figcaption></figure>
+
+### Get the test CNX tokens from the Discord Server
+
+Some test CNX tokens are required to start the node. The test CNX tokens can be acquired for free in the Discord server of Crynux:
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
+
+In the `happy-aigen-discussions` channel of the Discord server, type in the following command in the input bar, **DO NOT copy & paste the command, it only works when typed in using keyboard**:
+
+```
+/user join
+```
+
+Then bind the wallet address using the following command:
+
+```
+/node wallet {wallet_address}
+```
+
+Remember to replace `{wallet_address}` with the wallet address you just created in the Web UI.
+
+<figure><img src="../../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
+
+After a short while, the test CNX tokens should appear in your node wallet:
 
 <figure><img src="../../.gitbook/assets/8d57ad8e029d6de1cc4fcbe9f0c96c3.png" alt=""><figcaption></figcaption></figure>
 
