@@ -94,21 +94,11 @@ If you mean VPS without GPUs, the answer is no. GPU is required to execute the A
 
 <details>
 
-<summary>The node status shows <code>Stopped</code> after running for a while</summary>
+<summary>Node manager init error: Failed to download models due to network issue</summary>
 
-If there is no other error messages shown, the node is probably kicked out of the network due to frequent timeout on tasks.
+Make sure you could connect to Huggingface on the device running the node. If you are using a proxy, please provide the proxy config to the node according to the doc:
 
-* You may be running more nodes than your GPU could handle
-
-<!---->
-
-* Your device may not be powerful enough to run a node
-
-If the node has a slow GPU, or poor network, the task submission will be slow. If the time required to finish a task exceeds the timeout period, other nodes will abort the task since they do not want to waste more time on the waiting.
-
-More timeout on the tasks will decrease the QoS score of the timeout node, which will eventually cause the node being kicked out of the network. It is not a slashing though, the staked tokens are still safe. The details can be found in the doc:
-
-[Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
+[Proxy Settings](../node-hosting/proxy-settings.md)
 
 </details>
 
@@ -128,11 +118,21 @@ Please use a more powerful device to run the node instead. To understand the det
 
 <details>
 
-<summary>Node manager init error: Failed to download models due to network issue</summary>
+<summary>The node status shows <code>Stopped</code> after running for a while</summary>
 
-Make sure you could connect to Huggingface on the device running the node. If you are using a proxy, please provide the proxy config to the node according to the doc:
+If there is no other error messages shown, the node is probably kicked out of the network due to frequent timeout on tasks.
 
-[Proxy Settings](../node-hosting/proxy-settings.md)
+* You may be running more nodes than your GPU could handle
+
+<!---->
+
+* Your device may not be powerful enough to run a node
+
+If the node has a slow GPU, or poor network, the task submission will be slow. If the time required to finish a task exceeds the timeout period, other nodes will abort the task since they do not want to waste more time on the waiting.
+
+More timeout on the tasks will decrease the QoS score of the timeout node, which will eventually cause the node being kicked out of the network. It is not a slashing though, the staked tokens are still safe. The details can be found in the doc:
+
+[Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
 
 </details>
 
