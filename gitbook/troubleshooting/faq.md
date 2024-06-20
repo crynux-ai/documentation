@@ -4,7 +4,7 @@
 
 <details>
 
-<summary>Where to get the test CNX tokens</summary>
+<summary>Where is the faucet? / Where to get the test CNX tokens?</summary>
 
 The test CNX tokens can be acquired using the slash command in the Discord of Crynux, follow the tutorial below:
 
@@ -14,7 +14,7 @@ The test CNX tokens can be acquired using the slash command in the Discord of Cr
 
 <details>
 
-<summary>Can I start multiple node instances on a single GPU</summary>
+<summary>Can I start multiple node instances on a single GPU?</summary>
 
 **TLDR: you may get even less rewards by starting multiple nodes on a single device**
 
@@ -44,7 +44,7 @@ Meanwhile, we are developing the new feature to support the concurrent task exec
 
 <details>
 
-<summary>Can I start a node on multiple GPUs</summary>
+<summary>Can I start a node on multiple GPUs?</summary>
 
 No. The node can execute one task on one GPU at the same time. If you have Multiple GPUs, you can start multiple nodes on the device, and assign each GPU to a different node. The tutorial can be found at:
 
@@ -54,7 +54,7 @@ No. The node can execute one task on one GPU at the same time. If you have Multi
 
 <details>
 
-<summary>Can I use the same wallet on multiple node instances</summary>
+<summary>Can I use the same wallet on multiple node instances?</summary>
 
 No you can't do it.
 
@@ -66,11 +66,27 @@ After the hot/cold wallet architecture is implemented, [as described in this doc
 
 <details>
 
-<summary>Can I use AMD Radeon cards to run a node</summary>
+<summary>Can I use AMD Radeon cards to run a node?</summary>
 
 Nope. The AMD GPUs are not supported at this moment. Only Nvidia GPU and Apple M1/M2/M3 are supported.
 
 We will add support for AMD GPUs in a future release.
+
+</details>
+
+<details>
+
+<summary>Can I start a node without GPU?</summary>
+
+No. GPU is required to execute the AI tasks from the applications, which is the fundamental requirement of a Crynux Node.
+
+</details>
+
+<details>
+
+<summary>Can I start a node on VPS?</summary>
+
+If you mean VPS without GPUs, the answer is no. GPU is required to execute the AI tasks from the applications, which is the fundamental requirement of a Crynux Node.
 
 </details>
 
