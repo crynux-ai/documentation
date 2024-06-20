@@ -6,11 +6,9 @@
 
 <summary>Where to get the test CNX tokens</summary>
 
-Starting from v2.0.5, the test CNX tokens will be transferred to the wallet automatically when a new wallet is created or pasted into the Crynux Node. Just wait a minute or two for the token transfer.&#x20;
+The test CNX tokens can be acquired using the slash command in the Discord of Crynux, follow the tutorial below:
 
-In case something goes wrong, go to the Discord server to ask for help:
-
-[https://discord.gg/y8YKxb7uZk](https://discord.gg/y8YKxb7uZk)
+&#x20;[Get the Test CNX Tokens](../node-hosting/get-the-test-cnx-tokens.md)
 
 </details>
 
