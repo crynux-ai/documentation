@@ -113,41 +113,29 @@ sequenceDiagram
     N ->> B: Submit the score
     Note over N,B: Task ID Commitment<br/>Sim Hash
 
+    break Timeout reached
+        N ->> B: Abort task
+    end
+
     deactivate N
 
 ```
 
 When the node receives the `TaskCreated` event, it will start to execute the task locally.
 
-The execution starts by fetching the `Task Parameters` from the relay. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded.
+The execution starts by fetching the `Task Parameters` from the DA/Relay. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded.
 
 If the model download link or the Huggingface ID is **confirmed** to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
 
-The task is then sent to the execution engine. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the Blockchain.
+The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the Blockchain.
 
-When the task has finished successfully, the node has the result images. It will calculate the pHash of the images, and then goes into a 2-phase result disclosure process to disclose the pHashes on the Blockchain.
+When the task has finished successfully, the node has the computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
 
-The reason for this process is explained in the consensus protocol:
+After submission, the node waits for task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
 
-{% content-ref url="consensus-protocol.md" %}
-[consensus-protocol.md](consensus-protocol.md)
-{% endcontent-ref %}
+## Result Validation
 
-The disclosure process for a node starts by submitting a hash of the combination of the pHash and a random number, and then disclosing the actual pHash to the Blockchain after receiving the `CommitmentsReady` events from the Blockchain, which will only be emitted when the Blockchain receives all the 3 commitments.
 
-The Blockchain compares the pHashes from all the 3 nodes to determine whether the result is correct, and whether the nodes are cheating.
-
-If one of the node have submitted a different pHash (the hamming distance is larger than a threshold) than the others, the node will be slashed. The staked tokens will be transferred to the incentivization pool, and the node will be kicked out of the network. But as long as there are two nodes that have submitted the same pHash, the task is a success to the Blockchain as well as to the applications. If all the 3 pHashes are different, the task is aborted with a `TaskAborted` event emitted.
-
-The `TaskSuccess` event will be emitted to notify the relevant parties to continue the next steps.
-
-Below is a state transition graph to list all the possible state of the task and the nodes:
-
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Task State Transition Graph</p></figcaption></figure>
-
-The orange color indicates all the possible states and transitions of the task containing reported errors. The single-letter tag with blue background on the transition line indicates an emitted event.
-
-&#x20;The `TaskSuccess` event selects one of the nodes to upload the images to the relay. The selected node, after receiving the `TaskSuccess` event, will upload the images to the relay, and then report to the Blockchain that the images have been uploaded. The Blockchain will mark the task as completed then, the state storage for the task on-chain will be cleared.
 
 ## Result Retrieval
 
