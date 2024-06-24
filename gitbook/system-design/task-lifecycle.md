@@ -12,8 +12,6 @@ The `Task Parameters` are not sent to the blockchain due to size constraints. In
 
 To ensure successful cross-validation for the nodes, the blockchain may require the application to send two additional tasks with identical `Task Parameters`. The application will be unable to obtain the computation results if the additional tasks are not sent.
 
-
-
 ## Task Creation
 
 ```mermaid
@@ -59,9 +57,9 @@ sequenceDiagram
     end
 ```
 
-The task creation is initiated by the application. The application signs a transaction, invoking the smart contract to create the task on the Blockchain.
+The application starts a task by signing a transaction, invoking the smart contract to create the task on the Blockchain.
 
-The application must set the task fee it is willing to pay as the `value` of the transaction.
+The application must set the task fee it is willing to pay in the `value` field of the transaction.
 
 The transaction might be reverted, due to several reasons:
 
@@ -75,6 +73,28 @@ Upon receiving the `TaskStarted` event, the application should encrypt the task 
 The relay permits uploading only upon receiving the `TaskStarted` event from the blockchain. The application might need to wait briefly for the upload to succeed. After the task arguments are uploaded to the relay, the task creation process is completed.
 
 ## Task Execution
+
+```mermaid
+sequenceDiagram
+    Participant B as Blockchain
+    Participant N as Node
+    Participant R as DA/Relay
+
+    B ->> N: Event: TaskCreated
+    activate N
+    N ->> R: Get task parameters
+    Note over N,R: Task ID Commitment
+    deactivate N
+    activate R
+
+    alt Task parameters not uploaded
+        R -->> N: Error: task not ready
+    else
+        R -->> N: Send task parameters
+        Note over N,R: Task Parameters
+    end
+    deactivate R
+```
 
 <figure><img src="../.gitbook/assets/b1d94c1193739faf6f29711eda1ec92.png" alt=""><figcaption><p>The Sequential Graph of Task Execution</p></figcaption></figure>
 
