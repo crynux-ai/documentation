@@ -23,36 +23,39 @@ sequenceDiagram
     A ->> B: Create Task
     activate B
     Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Parameters Hash<br/>Task Fee
-    alt Task Fee == 0 or Nonce is not unique
+
+    break Task Fee == 0 or Nonce is not unique
         B -->> A: Tx Reverted
-    else
-        B -->> A: Tx Confirmed
-        Note over A,B: Sampling Seed
-        activate A
-        A ->> A: Generate Sampling Number<br/>Using VRF
-        opt Validation required
-            loop Repeat 2 times
-                A ->> B: Create Task
-                deactivate A
-            end
+    end
+    
+    B -->> A: Tx Confirmed
+    Note over A,B: Sampling Seed
+    activate A
+    B ->> B: Select node
+    A ->> A: Generate Sampling Number<br/>Using VRF
+    opt Validation required
+        loop Repeat 2 times
+            A ->> B: Create Task
+            deactivate A
         end
-        loop When TaskStarted event is received
-            B ->> A: Event: TaskStarted
-            deactivate B
-            activate A
-            Note over A,B: Task ID Commitment<br/>Selected Node
-            loop Until success
-                A ->> R: Send encrypted task parameters
-                Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
-                deactivate A
-                activate R
-                alt Task is ready on the Relay
-                    R -->> A: Success
-                else
-                    R -->> A: Task not ready
-                end
-                deactivate R
+    end
+    B ->> B: Select node
+    loop When TaskStarted event is received
+        B ->> A: Event: TaskStarted
+        deactivate B
+        activate A
+        Note over A,B: Task ID Commitment<br/>Selected Node
+        loop Until success
+            A ->> R: Send encrypted task parameters
+            Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
+            deactivate A
+            activate R
+            alt Task is ready on the Relay
+                R -->> A: Success
+            else
+                R -->> A: Task not ready
             end
+            deactivate R
         end
     end
 ```
@@ -97,17 +100,26 @@ sequenceDiagram
     end
     activate N
     N ->> N: Execute the task locally
-    N ->> N: Calculate the similarity score
+    
+    break Task not executable
+        N ->> B: Report task error
+    end
 
+    break Retrying exceeds timeout
+        N ->> B: Abort task
+    end
+    
+    N ->> N: Calculate the similarity score
     N ->> B: Submit the score
     Note over N,B: Task ID Commitment<br/>Sim Hash
 
+    deactivate N
 
 ```
 
 When the node receives the `TaskCreated` event, it will start to execute the task locally.
 
-The execution starts by fetching the task arguments from the relay. The node will check the local existence of the models specified in the task arguments. If the models are not cached locally, they will be downloaded.
+The execution starts by fetching the `Task Parameters` from the relay. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded.
 
 If the model download link or the Huggingface ID is **confirmed** to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
 
