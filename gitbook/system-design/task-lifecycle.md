@@ -82,21 +82,28 @@ sequenceDiagram
 
     B ->> N: Event: TaskCreated
     activate N
-    N ->> R: Get task parameters
-    Note over N,R: Task ID Commitment
-    deactivate N
-    activate R
-
-    alt Task parameters not uploaded
-        R -->> N: Error: task not ready
-    else
-        R -->> N: Send task parameters
-        Note over N,R: Task Parameters
+    loop Until Task Parameters are received
+        N ->> R: Get task parameters
+        Note over N,R: Task ID Commitment
+        deactivate N
+        activate R
+        alt Task parameters not uploaded
+            R -->> N: Error: task not ready
+        else
+            R -->> N: Send task parameters
+            Note over N,R: Task Parameters
+        end
+        deactivate R
     end
-    deactivate R
-```
+    activate N
+    N ->> N: Execute the task locally
+    N ->> N: Calculate the similarity score
 
-<figure><img src="../.gitbook/assets/b1d94c1193739faf6f29711eda1ec92.png" alt=""><figcaption><p>The Sequential Graph of Task Execution</p></figcaption></figure>
+    N ->> B: Submit the score
+    Note over N,B: Task ID Commitment<br/>Sim Hash
+
+
+```
 
 When the node receives the `TaskCreated` event, it will start to execute the task locally.
 
