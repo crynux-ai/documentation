@@ -263,7 +263,45 @@ If the validation passes, the blockchain will emit `TaskValidated` event to all 
 
 ## Result Retrieval
 
-<figure><img src="../.gitbook/assets/ce7d4b2201ae738da60128e058f5a1c.png" alt=""><figcaption><p>The Sequential Graph of Result Retrieval</p></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant N as Node
+    Participant D as DA/Relay
+
+    B ->> N: Event: TaskValidated
+    activate N
+    Note over B,N: Task ID Commitment
+    N ->> D: Send task result
+    activate D
+    Note over N,D: Task ID Commitment<br/>Encrypted Task Result
+    deactivate N
+    D -->> N: Return Merkle Proof
+    activate N
+    Note over N,D: Merkle Proof
+    deactivate D
+    N ->> B: Report result uploaded
+    activate B
+    Note over B,N: Task ID Commitment<br/>Merkle Proof<br/>ZK Proof
+    deactivate N
+    B ->> B: Validate proofs
+    break Validation failed
+        B -->> N: Validation failed
+    end
+    B ->> B: Settle task fee
+    B ->> A: Event: TaskSuccess 
+    activate A
+    Note over A,B: Task ID Commitment
+    deactivate B
+    A ->> D: Get task result
+    deactivate A
+    activate D
+    D -->> A: Return task result
+    note over A,D: Encrypted Task Result
+    deactivate D
+
+```
 
 The application will monitor the Blockchain for the events, after the initial creation of the task on-chain. If the `TaskSuccess` event is received, the application could get the images from the relay.
 
