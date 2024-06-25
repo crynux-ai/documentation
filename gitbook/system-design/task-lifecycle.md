@@ -38,9 +38,13 @@ sequenceDiagram
         break No available node
             B ->> B: Enqueue task
         end
-        B ->> N: Event: TaskCreated
+
+        B ->> R: Event: TaskStarted
+        Note over B,R: Task ID Commitment<br />Selected Node
+
+        B ->> N: Event: TaskStarted
         activate N
-        Note over B,N: Task ID Commitment
+        Note over B,N: Task ID Commitment<br />Selected Node
     end
 
     
@@ -57,9 +61,13 @@ sequenceDiagram
         break No available node
             B ->> B: Enqueue task
         end
-        B ->> N: Event: TaskCreated
+
+        B ->> R: Event: TaskStarted
+        Note over B,R: Task ID Commitment<br />Selected Node
+
+        B ->> N: Event: TaskStarted
         deactivate N
-        Note over B,N: Task ID Commitment
+        Note over B,N: Task ID Commitment<br />Selected Node
         
     end
 
