@@ -116,8 +116,8 @@ sequenceDiagram
     Participant N as Node
     Participant R as DA/Relay
 
-    B ->> N: Event: TaskCreated
-    Note over B,N: Task ID Commitment
+    B ->> N: Event: TaskStarted
+    Note over B,N: Task ID Commitment<br />Selected Node
     activate N
     loop Until Task Parameters are received
         N ->> R: Get task parameters
@@ -155,15 +155,17 @@ sequenceDiagram
 
 ```
 
-When the node receives the `TaskCreated` event, it will start to execute the task locally.
+When the node receives the `TaskStarted` event, it will start to execute the task locally.
 
-The execution starts by fetching the `Task Parameters` from the DA/Relay. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded.
+The execution starts by fetching the `Encrypted Task Parameters` from the DA/Relay. There will be a chance where the fetching will fail when the task parameters have not been uploaded by the application yet. The node should keep retrying until the parameters are downloaded. Then the node decrypt the task parameters to start the execution.
 
-If the model download link or the Huggingface ID is **confirmed** to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
+The first step is to get the models. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded from the network.
+
+If the model download link is **confirmed** to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
 
 The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the Blockchain.
 
-When the task has finished successfully, the node has the computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
+When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
 
 After submission, the node waits for task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
 
