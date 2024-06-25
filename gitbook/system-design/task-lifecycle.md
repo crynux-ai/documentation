@@ -112,6 +112,7 @@ The relay permits uploading only upon receiving the `TaskStarted` event from the
 
 ```mermaid
 sequenceDiagram
+    Participant A as Application
     Participant B as Blockchain
     Participant N as Node
     Participant R as DA/Relay
@@ -145,7 +146,11 @@ sequenceDiagram
     
     N ->> N: Calculate the similarity score
     N ->> B: Submit the score
+    activate B
     Note over N,B: Task ID Commitment<br/>Sim Hash
+    B ->> A: Event: TaskResultReady
+    Note over A,B: Task ID Commitment<br/>Sim Hash
+    deactivate B
 
     break Waiting exceeds timeout
         N ->> B: Abort task
@@ -167,7 +172,9 @@ The task is then sent to the execution engine of the node. If the execution engi
 
 When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
 
-After submission, the node waits for task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
+The blockchain will emit `TaskResultReady` event to the application, and wait for the application to perform the validation process.
+
+The node will also wait for the task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
 
 ## Result Validation
 
