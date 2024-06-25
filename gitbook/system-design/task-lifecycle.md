@@ -203,13 +203,12 @@ sequenceDiagram
         Note over A,B: Task ID Commitment<br/>Sampling Number<br/>VRF Proof
         deactivate A
         B ->> B: Validate Sampling Number
-        alt Validation failed
+        break Validation failed
             B -->> A: Validation error 
-        else
-            B ->> N: Event: TaskValidated
-            Note over B,N: Task ID Commitment
-            deactivate B
         end
+        B ->> N: Event: TaskValidated
+        Note over B,N: Task ID Commitment
+        deactivate B
     else
         activate A
         activate B
@@ -226,13 +225,12 @@ sequenceDiagram
         Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
         deactivate A
         B ->> B: Validate task
-        alt Validation failed
+        break Validation failed
             B -->> A: Validation error 
-        else
-            B ->> N: Event: TaskValidated
-            Note over B,N: Task ID Commitment
-            deactivate B
         end
+        B ->> N: Event: TaskValidated
+        Note over B,N: Task ID Commitment
+        deactivate B
     end
     
 ```
@@ -253,7 +251,15 @@ For more information on the validation process, please see the following documen
 
 ### Task Requires Validation
 
+If validation is required, the application should wait for the `TaskResultReady` event from the other two tasks in the validation group. Once all three tasks have submitted their similarity hashes, the application will disclose their relationship for blockchain validation.
 
+There are more validations to be performed by the blockchain, comparing to the validation of tasks that do not require validation. For more information on the validation process, please see the following document:
+
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% endcontent-ref %}
+
+If the validation passes, the blockchain will emit `TaskValidated` event to all the three nodes. The transaction will fail if the validation does not pass.
 
 ## Result Retrieval
 
