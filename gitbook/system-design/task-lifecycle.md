@@ -39,10 +39,11 @@ sequenceDiagram
             B ->> B: Enqueue task
         end
         B ->> N: Event: TaskCreated
+        activate N
         Note over B,N: Task ID Commitment
     end
 
-    activate N
+    
     A ->> A: Generate Sampling Number<br/>Using VRF
     opt Validation required
         loop Repeat 2 times
@@ -57,8 +58,9 @@ sequenceDiagram
             B ->> B: Enqueue task
         end
         B ->> N: Event: TaskCreated
-        Note over B,N: Task ID Commitment
         deactivate N
+        Note over B,N: Task ID Commitment
+        
     end
 
     loop When TaskStarted event is received
@@ -66,16 +68,18 @@ sequenceDiagram
         deactivate B
         activate A
         Note over A,B: Task ID Commitment<br/>Selected Node
+        
         loop Until success
+            
             A ->> R: Send encrypted task parameters
-            Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
             deactivate A
             activate R
-            alt Task is ready on the Relay
-                R -->> A: Success
-            else
-                R -->> A: Task not ready
+            Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
+            
+            break Task not ready
+                R -->> A: Error: Task not ready
             end
+            R -->> A: Success
             deactivate R
         end
     end
@@ -112,13 +116,12 @@ sequenceDiagram
         Note over N,R: Task ID Commitment
         deactivate N
         activate R
-        alt Task parameters not uploaded
-            R -->> N: Error: task not ready
-        else
-            R -->> N: Send task parameters
-            activate N
-            Note over N,R: Encrypted Task Parameters
+        break Task parameters not uploaded
+            R -->> N: Error: Task not ready
         end
+        R -->> N: Send task parameters
+        activate N
+        Note over N,R: Encrypted Task Parameters
         deactivate R
     end
 
@@ -136,7 +139,7 @@ sequenceDiagram
     N ->> B: Submit the score
     Note over N,B: Task ID Commitment<br/>Sim Hash
 
-    break Timeout reached
+    break Waiting exceeds timeout
         N ->> B: Abort task
     end
 
