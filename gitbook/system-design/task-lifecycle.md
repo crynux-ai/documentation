@@ -237,6 +237,22 @@ sequenceDiagram
     
 ```
 
+Upon receiving the `TaskResultReady` event, the application's response varies based on the need for task validation:
+
+### Task does not Require Validation
+
+If the task does not require validation, the application should send the "Complete Task" transaction directly to the blockchain, including proofs of the `Sampling Number`.
+
+The blockchain will then validate the proofs. If the validation passes, the blockchain will emit `TaskValidated` event to the node to notify it to disclose the actual computation result. The transaction will fail if the validation does not pass.
+
+For more information on the validation process, please see the following document:
+
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% endcontent-ref %}
+
+### Task Requires Validation
+
 
 
 ## Result Retrieval
