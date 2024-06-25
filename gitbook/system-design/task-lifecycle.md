@@ -138,10 +138,16 @@ sequenceDiagram
 
     break Task not executable
         N ->> B: Report task error
+        activate B
+        B ->> A: Event: TaskAborted
+        deactivate B
     end
 
     break Retrying exceeds timeout
         N ->> B: Abort task
+        activate B
+        B ->> A: Event: TaskAborted
+        deactivate B
     end
     
     N ->> N: Calculate the similarity score
@@ -154,6 +160,9 @@ sequenceDiagram
 
     break Waiting exceeds timeout
         N ->> B: Abort task
+        activate B
+        B ->> A: Event: TaskAborted
+        deactivate B
     end
 
     deactivate N
@@ -166,7 +175,7 @@ The execution starts by fetching the `Encrypted Task Parameters` from the DA/Rel
 
 The first step is to get the models. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded from the network.
 
-If the model download link is **confirmed** to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
+If the model download link is confirmed to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
 
 The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the Blockchain.
 
@@ -177,6 +186,56 @@ The blockchain will emit `TaskResultReady` event to the application, and wait fo
 The node will also wait for the task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
 
 ## Result Validation
+
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant N as Node
+
+    B ->> A: Event: TaskResultReady
+    activate A
+    Note over A,B: Task ID Commitment<br />Sim Hash
+
+    alt Validation not required
+        A ->> B: Finish task
+        activate B
+        Note over A,B: Task ID Commitment<br/>Sampling Number<br/>VRF Proof
+        deactivate A
+        B ->> B: Validate Sampling Number
+        alt Validation failed
+            B -->> A: Validation error 
+        else
+            B ->> N: Event: TaskValidated
+            Note over B,N: Task ID Commitment
+            deactivate B
+        end
+    else
+        activate A
+        activate B
+        A ->> A: Wait for other validation tasks
+        B ->> A: Event: TaskResultReady
+        Note over A,B: Task ID Commitment<br />Sim Hash
+        A ->> A: Wait for other validation tasks
+        B ->> A: Event: TaskResultReady
+        Note over A,B: Task ID Commitment<br />Sim Hash
+        deactivate B
+
+        A ->> B: Finish task
+        activate B
+        Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
+        deactivate A
+        B ->> B: Validate task
+        alt Validation failed
+            B -->> A: Validation error 
+        else
+            B ->> N: Event: TaskValidated
+            Note over B,N: Task ID Commitment
+            deactivate B
+        end
+    end
+    
+```
 
 
 
