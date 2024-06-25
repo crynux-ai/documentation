@@ -96,6 +96,24 @@ If you mean VPS without GPUs, the answer is no. GPU is required to execute the A
 
 <summary>Node manager init error: Failed to download models due to network issue</summary>
 
+### If you are using the Windows binary release
+
+please find the log file according to this document:
+
+[Locate the Error Message](locate-the-error-message.md)
+
+If there are error messages similar to:
+
+```
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\...\\crynux-node-helium-v2.0.7-windows-x64\\crynux-node-helium-v2.0.7-windows-x64\\data\\huggingface\\models--stabilityai--stable-diffusion-xl-base-1.0\\snapshots\\462165984030d82259a11f4367a4eed129e94a7b\\unet\\diffusion_pytorch_model.fp16.safetensors'
+```
+
+It is due the long path limitation on Windows. Please try to enable the long path support according to this guide, and then restart the computer:
+
+[Enable Long Path Support on Windows](https://docs.lucentsky.com/en/avm/how-to/enable-long-path-support)
+
+### Otherwise
+
 Make sure you could connect to Huggingface on the device running the node. If you are using a proxy, please provide the proxy config to the node according to the doc:
 
 [Proxy Settings](../node-hosting/proxy-settings.md)
