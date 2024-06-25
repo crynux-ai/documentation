@@ -19,6 +19,7 @@ sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
     Participant R as DA/Relay
+    Participant N as Node
 
     A ->> B: Create Task
     activate B
@@ -31,7 +32,17 @@ sequenceDiagram
     B -->> A: Tx Confirmed
     Note over A,B: Sampling Seed
     activate A
-    B ->> B: Select node
+    
+    loop Until node is selected
+        B ->> B: Select node
+        break No available node
+            B ->> B: Enqueue task
+        end
+        B ->> N: Event: TaskCreated
+        Note over B,N: Task ID Commitment
+    end
+
+    activate N
     A ->> A: Generate Sampling Number<br/>Using VRF
     opt Validation required
         loop Repeat 2 times
@@ -39,7 +50,17 @@ sequenceDiagram
             deactivate A
         end
     end
-    B ->> B: Select node
+
+    loop Until node is selected
+        B ->> B: Select node
+        break No available node
+            B ->> B: Enqueue task
+        end
+        B ->> N: Event: TaskCreated
+        Note over B,N: Task ID Commitment
+        deactivate N
+    end
+
     loop When TaskStarted event is received
         B ->> A: Event: TaskStarted
         deactivate B
@@ -84,6 +105,7 @@ sequenceDiagram
     Participant R as DA/Relay
 
     B ->> N: Event: TaskCreated
+    Note over B,N: Task ID Commitment
     activate N
     loop Until Task Parameters are received
         N ->> R: Get task parameters
@@ -94,13 +116,14 @@ sequenceDiagram
             R -->> N: Error: task not ready
         else
             R -->> N: Send task parameters
-            Note over N,R: Task Parameters
+            activate N
+            Note over N,R: Encrypted Task Parameters
         end
         deactivate R
     end
-    activate N
+
     N ->> N: Execute the task locally
-    
+
     break Task not executable
         N ->> B: Report task error
     end
