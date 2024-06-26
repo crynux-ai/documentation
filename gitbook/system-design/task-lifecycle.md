@@ -306,7 +306,7 @@ sequenceDiagram
     deactivate D
     N ->> B: Report result uploaded
     activate B
-    Note over B,N: Task ID Commitment<br/>Merkle Proof<br/>ZK Proof
+    Note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Result<br/>Merkle Proof<br/>ZK Proof
     deactivate N
     B ->> B: Validate proofs
     break Validation failed
