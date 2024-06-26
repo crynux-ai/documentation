@@ -189,9 +189,14 @@ sequenceDiagram
     Participant B as Blockchain
     Participant N as Node
 
-    B ->> A: Event: TaskResultReady
-    activate A
-    Note over A,B: Task ID Commitment<br />Sim Hash
+    alt
+        B ->> A: Event: TaskResultReady
+        activate A
+        Note over A,B: Task ID Commitment<br />Sim Hash
+    else
+        B ->> A: Event: TaskErrorReported
+        Note over A,B: Task ID Commitment
+    end
 
     alt Validation not required
         A ->> B: Finish task
@@ -202,18 +207,37 @@ sequenceDiagram
         break Validation failed
             B -->> A: Validation error 
         end
+        break Task error reported
+            B ->> A: Event: TaskAborted
+        end
+
         B ->> N: Event: TaskValidated
         Note over B,N: Task ID Commitment
+        
         deactivate B
-    else
+    else Validation required
         activate A
         activate B
         A ->> A: Wait for other validation tasks
-        B ->> A: Event: TaskResultReady
-        Note over A,B: Task ID Commitment<br />Sim Hash
+        
+        alt
+            B ->> A: Event: TaskResultReady
+            Note over A,B: Task ID Commitment<br />Sim Hash
+        else
+            B ->> A: Event: TaskErrorReported
+            Note over A,B: Task ID Commitment
+        end
+
         A ->> A: Wait for other validation tasks
-        B ->> A: Event: TaskResultReady
-        Note over A,B: Task ID Commitment<br />Sim Hash
+        
+        alt
+            B ->> A: Event: TaskResultReady
+            Note over A,B: Task ID Commitment<br />Sim Hash
+        else
+            B ->> A: Event: TaskErrorReported
+            Note over A,B: Task ID Commitment
+        end
+
         deactivate B
 
         A ->> B: Finish task
@@ -223,6 +247,9 @@ sequenceDiagram
         B ->> B: Validate task
         break Validation failed
             B -->> A: Validation error 
+        end
+        break Task error reported
+            B ->> A: Event: TaskAborted
         end
         B ->> N: Event: TaskValidated
         Note over B,N: Task ID Commitment
@@ -271,11 +298,11 @@ sequenceDiagram
     Note over B,N: Task ID Commitment
     N ->> D: Send task result
     activate D
-    Note over N,D: Task ID Commitment<br/>Encrypted Task Result
+    Note over N,D: Encrypted Task Result
     deactivate N
-    D -->> N: Return Merkle Proof
+    D -->> N: Return Merkle proof
     activate N
-    Note over N,D: Merkle Proof
+    Note over N,D: Hash of Encrypted Task Result<br/>Merkle Proof
     deactivate D
     N ->> B: Report result uploaded
     activate B
