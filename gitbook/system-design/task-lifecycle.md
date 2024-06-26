@@ -23,73 +23,58 @@ sequenceDiagram
 
     A ->> B: Create Task
     activate B
-    Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Parameters Hash<br/>Task Fee
+    Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Fee
 
     break Task Fee == 0 or Nonce is not unique
-        B -->> A: Tx Reverted
+        B -->> A: Tx reverted
     end
     
-    B -->> A: Tx Confirmed
+    B -->> A: Tx confirmed
     Note over A,B: Sampling Seed
-    activate A
-    
-    loop Until node is selected
-        B ->> B: Select node
-        break No available node
-            B ->> B: Enqueue task
-        end
 
-        B ->> R: Event: TaskStarted
-        Note over B,R: Task ID Commitment<br />Selected Node
+    par Upload task parameters
 
-        B ->> N: Event: TaskStarted
-        activate N
-        Note over B,N: Task ID Commitment<br />Selected Node
-    end
-
-    
-    A ->> A: Generate Sampling Number<br/>Using VRF
-    opt Validation required
-        loop Repeat 2 times
-            A ->> B: Create Task
-            deactivate A
-        end
-    end
-
-    loop Until node is selected
-        B ->> B: Select node
-        break No available node
-            B ->> B: Enqueue task
-        end
-
-        B ->> R: Event: TaskStarted
-        Note over B,R: Task ID Commitment<br />Selected Node
-
-        B ->> N: Event: TaskStarted
-        deactivate N
-        Note over B,N: Task ID Commitment<br />Selected Node
-        
-    end
-
-    loop When TaskStarted event is received
-        B ->> A: Event: TaskStarted
-        deactivate B
-        activate A
-        Note over A,B: Task ID Commitment<br/>Selected Node
-        
-        loop Until success
+        loop Until node is selected
+            B ->> B: Select node
             
-            A ->> R: Send encrypted task parameters
-            deactivate A
-            activate R
-            Note over A,R: Task ID Commitment<br/>Encrypted Task Parameters
-            
-            break Task not ready
-                R -->> A: Error: Task not ready
+            break No available node
+                B ->> B: Enqueue task
             end
-            R -->> A: Success
+
+            B ->> A: Event: TaskStarted
+            activate A
+            Note over A,B: Task ID Commitment<br />Selected Node
+            deactivate B
+            A ->> R: Upload task parameters
+            activate R
+            note over A,R: Encrypted Task Parameters
+            deactivate A
+            R ->> B: Update Merkle Root
+            R -->> A: Return hash and Merkle proof
+            activate A
+            note over A,R: Hash of Encrypted Task Parameters<br/>Merkle Proof
             deactivate R
+            A ->> B: Notify task parameters uploaded
+            activate B
+            note over A,B: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Merkle Proof
+            deactivate A
+            break Validation failed
+                B -->> A: Validation failed
+            end
+            B ->> N: Event: TaskParametersUploaded
+            note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Selected Node
+            deactivate B
         end
+
+    and Send validation tasks
+        activate A
+        A ->> A: Generate Sampling Number<br/>Using VRF
+        opt Last digit of the Sampling Number is 0
+            loop Repeat 2 times
+                A ->> B: Create task and upload the task parameters
+                deactivate A
+            end
+        end    
     end
 ```
 
@@ -102,11 +87,17 @@ The transaction might be reverted, due to several reasons:
 * The transaction value is not set (task fee is not paid).
 * The Nonce has already been used before.
 
+If the transaction is confirmed, the application receives a `Sampling Seed`. The application then uses the VRF algorithm with this `Sampling Seed` to generate a `Sampling Number`. If the last digit of the `Sampling Number` is 0, the application should create two additional tasks to form a task validation group. The details of the task validation are described in the following document:
+
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% endcontent-ref %}
+
 For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address.
 
-Upon receiving the `TaskStarted` event, the application should encrypt the task parameters using the node's public key and send them to the DA/relay.
+Upon receiving the `TaskStarted` event, the application should encrypt the task parameters using the node's public key and send them to the DA/Relay. The DA/Relay will update the `Merkle Root` to the blockchain for validation, and return the `Merkle Proof` to the application.
 
-The relay permits uploading only upon receiving the `TaskStarted` event from the blockchain. The application might need to wait briefly for the upload to succeed. After the task arguments are uploaded to the relay, the task creation process is completed.
+The application sends the hash and `Merkle Proof` to the blockchain. The blockchain verifies the proof against the `Merkle Root` submitted by the DA/Relay, ensuring the `Task Parameters` are uploaded. It then emits the `TaskParametersUploaded` event to notify the node to start execution.
 
 ## Task Execution
 
