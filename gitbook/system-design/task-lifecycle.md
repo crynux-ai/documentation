@@ -117,14 +117,17 @@ sequenceDiagram
     deactivate N
     
     R -->> N: Return the encrypted task parameters
-    Note over N,R: Encrypted Task Parameters
-
-    deactivate R
     activate N
+    Note over N,R: Encrypted Task Parameters
+    deactivate R
+    
     N ->> N: Execute the task locally
 
     break Task not executable
         N ->> B: Report task error
+        activate B
+        B ->> A: Event: TaskErrorReported
+        deactivate B
     end
 
     break Retrying exceeds timeout
@@ -144,12 +147,11 @@ sequenceDiagram
 
     break Waiting exceeds timeout
         N ->> B: Abort task
+        deactivate N
         activate B
         B ->> A: Event: TaskAborted
         deactivate B
     end
-
-    deactivate N
 
 ```
 
@@ -168,7 +170,9 @@ The task is then sent to the execution engine of the node. If the execution engi
 {% hint style="info" %}
 The error reporting will also be cross validated in a validation task group to prevent malicious behaviors from the nodes. If one of nodes reports error while the other two nodes send the normal computation result, it will be penalized.
 
-If all the nodes report error, the task will be cancelled, the task fee will still be charged and distributed to the nodes.
+There is no way to penalize the application for submitting invalid task parameters. The application could always escape from the penalization by not sending the validation transaction, and simply waiting for the timeout of the task.
+
+The application will not send invalid tasks intentionally though, since there is a small cost of the transaction fee, and there is no benefit at all.
 {% endhint %}
 
 When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
