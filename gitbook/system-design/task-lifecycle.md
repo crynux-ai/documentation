@@ -303,10 +303,12 @@ sequenceDiagram
 
 ```
 
-The application will monitor the Blockchain for the events, after the initial creation of the task on-chain. If the `TaskSuccess` event is received, the application could get the images from the relay.
+Upon receiving the `TaskValidated` event, the node can upload the computation result to the DA/Relay service and obtain the task fee by proving to the blockchain that the upload was correct. The proving is implemented using ZKP, the details are described in the following section of the documentation:
 
-{% hint style="info" %}
-Since the images are uploaded by the node after the node receives the `TaskSuccess` event as well, there is a short delay between the event has been emitted and the images have been uploaded. Before the images are uploaded, the relay will return `400 File not found` to the application. The application should take it into consideration.&#x20;
-{% endhint %}
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% endcontent-ref %}
 
-If the `TaskAborted` event is received, the application could receive the abort reason as the argument in the event. The application will have to retry the task if needed.
+The computation result is encrypted with the application's public key before being sent to the DA/Relay, ensuring that only the application can decrypt and access the actual result.
+
+Once the node submits the proofs to the blockchain, and they are verified, the blockchain will transfer the task fee to the node and emit a `TaskSuccess` event to the application. The application can then retrieve the computation result from the DA/Relay service, completing the task.
