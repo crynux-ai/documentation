@@ -108,30 +108,23 @@ sequenceDiagram
     Participant N as Node
     Participant R as DA/Relay
 
-    B ->> N: Event: TaskStarted
-    Note over B,N: Task ID Commitment<br />Selected Node
+    B ->> N: Event: TaskParametersUploaded
+    Note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Selected Node
     activate N
-    loop Until Task Parameters are received
-        N ->> R: Get task parameters
-        Note over N,R: Task ID Commitment
-        deactivate N
-        activate R
-        break Task parameters not uploaded
-            R -->> N: Error: Task not ready
-        end
-        R -->> N: Send task parameters
-        activate N
-        Note over N,R: Encrypted Task Parameters
-        deactivate R
-    end
+    N ->> R: Get task parameters
+    activate R
+    Note over N,R: Hash of Encrypted Task Parameters
+    deactivate N
+    
+    R -->> N: Return the encrypted task parameters
+    Note over N,R: Encrypted Task Parameters
 
+    deactivate R
+    activate N
     N ->> N: Execute the task locally
 
     break Task not executable
         N ->> B: Report task error
-        activate B
-        B ->> A: Event: TaskAborted
-        deactivate B
     end
 
     break Retrying exceeds timeout
@@ -162,13 +155,21 @@ sequenceDiagram
 
 When the node receives the `TaskStarted` event, it will start to execute the task locally.
 
-The execution starts by fetching the `Encrypted Task Parameters` from the DA/Relay. There will be a chance where the fetching will fail when the task parameters have not been uploaded by the application yet. The node should keep retrying until the parameters are downloaded. Then the node decrypt the task parameters to start the execution.
+The execution starts by fetching the `Encrypted Task Parameters` from the DA/Relay. After the parameters are received, the node decrypts them using its own private key, and starts the execution.
 
-The first step is to get the models. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded from the network.
+The first step is to download the models. The node will check the local existence of the models specified in the `Task Parameters`. If the models are not cached locally, they will be downloaded from the network.
 
-If the model download link is confirmed to be invalid, such as a 404 response from Civitai, the node will report error to the Blockchain. If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
+If there are network issues during the download, the node will retry the download several times until the timeout period is reached. The task will be cancelled by the node if the timeout is reached.
 
-The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the Blockchain.
+If the model download link is confirmed to be invalid, such as a 404 response from Civitai, the node will report error to the blockchain.
+
+The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the blockchain.
+
+{% hint style="info" %}
+The error reporting will also be cross validated in a validation task group to prevent malicious behaviors from the nodes. If one of nodes reports error while the other two nodes send the normal computation result, it will be penalized.
+
+If all the nodes report error, the task will be cancelled, the task fee will still be charged and distributed to the nodes.
+{% endhint %}
 
 When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
 
