@@ -137,15 +137,15 @@ When a task is created on the blockchain, the blockchain will try to select a no
 
 When a node is selected for the task, the blockchain will emit `TaskStarted` event to notify the application to upload `Task Parameters`.
 
-Knowing which node will execute the task, the application encrypts the `Task Parameters`, such as the prompt and image size, using the node's public key. It then sends the encrypted parameters to the DA/Relay service and gets the `Merkle Proof` in return.
+Knowing which node will execute the task, the application encrypts the `Task Parameters`, such as the prompt and image size, using the node's public key. It then sends the `Encrypted Task Parameters` to the DA/Relay service and gets the `Merkle Proof` in return.
 
 {% hint style="info" %}
 The DA/Relay will save the data and make it publicly available. A [Merkle Tree](https://en.wikipedia.org/wiki/Merkle\_tree) is generated for a collection of recently submitted data, and the Merkle Root is sent to the smart contract on the blockchain. The application receives the Merkle Proof for the data. Using the correct Merkle Proof, the blockchain can verify data availability under a specific hash, confirming its existence and public accessibility.
 {% endhint %}
 
-The encrypted `Task Parameters` can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
+The `Encrypted Task Parameters` can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
 
-After sending the encrypted `Task Parameters` to the DA/Relay and obtaining the `Merkle Proof`, the application notifies the blockchain by sending the `Merkle Proof` to the blockchain. The blockchain verifies the `Merkle Proof`, and emits `TaskParametersUploaded` event to notify the node to start the execution.
+After sending the `Encrypted Task Parameters` to the DA/Relay and obtaining the `Merkle Proof`, the application notifies the blockchain by sending the `Merkle Proof` to the blockchain. The blockchain verifies the `Merkle Proof`, and emits `TaskParametersUploaded` event to notify the node to start the execution.
 
 The verification of the `Merkle Proof` only makes sure **some** **data** is uploaded to the DA/Relay and is claimed to be the encrypted `Task Parameters` for the given `Task ID Commitment`, it doesn't guarantee the correctness of the `Task Parameters`. The task parameters may still be inconsistent across tasks in a validation group, may be in an invalid format, or may be undecryptable by the node at all.
 

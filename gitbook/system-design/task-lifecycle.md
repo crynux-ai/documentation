@@ -173,9 +173,13 @@ If the transaction is confirmed, the application receives a `Sampling Seed`. The
 [verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
-For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address.
+For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address. Details of this process are outlined in the following document:
 
-Upon receiving the `TaskStarted` event, the application should encrypt the task parameters using the node's public key and send them to the DA/Relay. The DA/Relay will update the `Merkle Root` to the blockchain for validation, and return the `Merkle Proof` to the application.
+{% content-ref url="task-dispatching.md" %}
+[task-dispatching.md](task-dispatching.md)
+{% endcontent-ref %}
+
+Upon receiving the `TaskStarted` event, the application should encrypt the `Task Parameters` using the node's public key and send them to the DA/Relay. The DA/Relay will update the `Merkle Root` to the blockchain for validation, and return the `Merkle Proof` to the application.
 
 The application sends the hash and `Merkle Proof` to the blockchain. The blockchain verifies the proof against the `Merkle Root` submitted by the DA/Relay, ensuring the `Task Parameters` are uploaded. It then emits the `TaskParametersUploaded` event to notify the node to start execution.
 
