@@ -145,7 +145,11 @@ The DA/Relay will save the data and make it publicly available. A [Merkle Tree](
 
 The encrypted `Task Parameters` can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
 
+After sending the encrypted `Task Parameters` to the DA/Relay and obtaining the `Merkle Proof`, the application notifies the blockchain by sending the `Merkle Proof` to the blockchain. The blockchain verifies the `Merkle Proof`, and emits `TaskParametersUploaded` event to notify the node to start the execution.
 
+The verification of the `Merkle Proof` only makes sure **some** **data** is uploaded to the DA/Relay and is claimed to be the encrypted `Task Parameters` for the given `Task ID Commitment`, it doesn't guarantee the correctness of the `Task Parameters`. The task parameters may still be inconsistent across tasks in a validation group, may be in an invalid format, or may be undecryptable by the node at all.
+
+The correctness of the `Task Parameters` will be verified later using Zero-Knowledge Proof (ZKP). At this stage, we assume the applications are correct and skip verification to speed up task execution. This simplification does not compromise security, as the task will still be validated eventually. If the `Task Parameters` are invalid, the node will report the error to the blockchain, and the application will forfeit the task fees. Inconsistent `Task Parameters` across the validation group will prevent the application from passing the validation in a later stage.
 
 ## Task Execution
 
