@@ -238,9 +238,9 @@ The `ZK Proof` is constructed to use the plain text `Task Parameters` as the pri
 1. The `Task Parameters` has the given hash value.
 2. The `Task Parameters` are encrypted using the node's public key, and the cipher text has the given hash value.
 
-The blockchain verifies the three hashes of the `Task Parameters` to ensure consistency across all three nodes.
+If the `ZK Proof` is valid, the blockchain verifies that the three hashes of the cipher text match those provided by the application in the **Task Creation** stage. This ensures that the `Task Parameters` referenced in the `ZK Proof` are identical to those actually executed by the nodes.
 
-The blockchain verifies the three hashes of the cipher text from the `Task Parameters` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the nodes.
+The blockchain then compares the three hashes of the `Task Parameters` to ensure they are identical. This prevents the application from submitting inconsistent `Task Parameters`, which could lead to penalization of the honest nodes.
 
 There is no way to penalize the application for submitting inconsistent `Task Parameters` for different tasks in a validation group. The application could always escape from the penalization by not sending the validation transaction, and simply waiting for the timeout of the tasks.
 
@@ -254,7 +254,9 @@ The blockchain uses three `Sim Hash` values to verify task results. If one node 
 
 <figure><img src="../.gitbook/assets/3d6889feb3919a7540a90bfc141ae61.png" alt=""><figcaption></figcaption></figure>
 
-The validation of the tasks that do not require result validation is much simpler. The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
+If the `Sampling Number` does not end in 0, which means the task does not require validation, the validation will be much simpler.&#x20;
+
+The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
 
 The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
 
