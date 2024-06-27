@@ -149,7 +149,9 @@ After sending the encrypted `Task Parameters` to the DA/Relay and obtaining the 
 
 The verification of the `Merkle Proof` only makes sure **some** **data** is uploaded to the DA/Relay and is claimed to be the encrypted `Task Parameters` for the given `Task ID Commitment`, it doesn't guarantee the correctness of the `Task Parameters`. The task parameters may still be inconsistent across tasks in a validation group, may be in an invalid format, or may be undecryptable by the node at all.
 
-The correctness of the `Task Parameters` will be verified later using Zero-Knowledge Proof (ZKP). At this stage, we assume the applications are correct and skip verification to speed up task execution. This simplification does not compromise security, as the task will still be validated eventually. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the task will be aborted. Inconsistent `Task Parameters` across the validation group will prevent the application from passing the validation in a later stage.
+If the `Task Parameters` are invalid, the node will report error to the blockchain, and the task will be aborted. The task fee is returned to the application, but the transaction fee is still charged, which will stop the application from sending the invalid `Task Parameters` intentionally.
+
+The consistency of the `Task Parameters` across the validation group will be verified later using Zero-Knowledge Proof (ZKP).
 
 ## Task Execution
 
