@@ -321,14 +321,22 @@ sequenceDiagram
         Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
         deactivate A
         B ->> B: Validate task
-        break Validation failed
+        break Invalid proofs
             B -->> A: Validation error 
         end
         break Task error reported
             B ->> A: Event: TaskAborted
         end
-        B ->> N: Event: TaskValidated
-        Note over B,N: Task ID Commitment
+        
+        alt Sim Hash identical
+            B ->> N: Event: TaskValidated
+            Note over B,N: Task ID Commitment
+        else One Sim Hash different
+            B ->> N: Event: NodeSlashed
+        else All Sim Hash different
+            B ->> A: Event: TaskAborted
+        end
+
         deactivate B
     end
     
@@ -358,7 +366,9 @@ There are more validations to be performed by the blockchain, comparing to the v
 [verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
-If the validation passes, the blockchain will emit `TaskValidated` event to all the three nodes. The transaction will fail if the validation does not pass.
+If the validation passes, the blockchain will emit `TaskValidated` event to all the three nodes. The transaction will fail if the proofs provided by the application are invalid.
+
+If the `Sim Hash` are different across the nodes, if two of them are identical, the other node will be slashed. If all three `Sim Hash`are different, the task will be aborted.
 
 ## Result Retrieval
 
