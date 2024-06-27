@@ -294,24 +294,16 @@ sequenceDiagram
     else Validation required
         activate A
         activate B
-        A ->> A: Wait for other validation tasks
-        
-        alt
-            B ->> A: Event: TaskResultReady
-            Note over A,B: Task ID Commitment<br />Sim Hash
-        else
-            B ->> A: Event: TaskErrorReported
-            Note over A,B: Task ID Commitment
-        end
 
-        A ->> A: Wait for other validation tasks
-        
-        alt
-            B ->> A: Event: TaskResultReady
-            Note over A,B: Task ID Commitment<br />Sim Hash
-        else
-            B ->> A: Event: TaskErrorReported
-            Note over A,B: Task ID Commitment
+        loop Until events from all three tasks are received
+            A ->> A: Wait for other validation tasks
+            alt
+                B ->> A: Event: TaskResultReady
+                Note over A,B: Task ID Commitment<br />Sim Hash
+            else
+                B ->> A: Event: TaskErrorReported
+                Note over A,B: Task ID Commitment
+            end            
         end
 
         deactivate B
