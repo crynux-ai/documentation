@@ -155,19 +155,65 @@ The consistency of the `Task Parameters` across the validation group will be ver
 
 ## Task Execution
 
-Upon receiving a task from the blockchain, the node retrieves the task parameters from the DA/Relay service, decrypts them, and executes the task on the local GPU.
+Upon receiving the `TaskParametersUploaded` event from the blockchain, the node retrieves the `Encrypted Task Parameters` from the DA/Relay service, decrypts them, and executes the task on the local GPU.
 
-After the computation is finished, the node will calculate the `SimHash` of the result, and send the `SimHash` to the blockchain. Then the node should wait for a future notification from the blockchain. If the wait exceeds the timeout period, the node may abort the task. The task fee will then be refunded to the application.
+After the computation is finished, the node will calculate the `Sim Hash` of the result, and send the `Sim Hash` to the blockchain. Then the node should wait for a future notification from the blockchain. If the wait exceeds the timeout period, the node may abort the task. The task fee will then be refunded to the application.
 
 The node cannot send the task result to the DA/Relay service at this stage. If the result is transmitted, the application could retrieve it prematurely and disrupt subsequent processes. The blockchain lacks mechanisms to identify and penalize the application in such scenarios.
 
+When the `Sim Hash` is sent, the blockchain emits `TaskResultReady` event to notify the application. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the blockchain will emit `TaskErrorReported`. In both cases, the task enters the **Task Validation** stage.
+
 ## Task Validation
+
+When the `TaskResultReady` or `TaskErrorReported` event is received, the application should proceed with one of two different strategies based on the previously generated `Sampling Number`.
 
 ### Tasks Require Validation
 
-<figure><img src="../.gitbook/assets/c1a873d3cb808ecc2122e8e08425aed.png" alt=""><figcaption></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant N as Node
 
-The application will wait for the submission of all the 3 `SimHash` on the blockchain, and then disclose the relationship of the tasks, and the relevant proofs for the blockchain to validate:
+    activate B
+    loop Until events from all three tasks are received
+        alt
+            B ->> A: Event: TaskResultReady
+            activate A
+            Note over A,B: Task ID Commitment<br />Sim Hash
+        else
+            B ->> A: Event: TaskErrorReported
+            activate A
+            Note over A,B: Task ID Commitment
+            deactivate B
+        end
+        A ->> A: Wait for other validation tasks
+    end 
+
+        A ->> B: Finish task
+        activate B
+        Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
+        deactivate A
+        B ->> B: Validate task
+        
+        break Task error reported
+            B ->> A: Event: TaskAborted
+        end
+        
+        alt Sim Hash identical
+            B ->> N: Event: TaskValidated
+            Note over B,N: Task ID Commitment
+        else One Sim Hash different
+            B ->> N: Event: NodeSlashed
+        else All Sim Hash different
+            B ->> A: Event: TaskAborted
+        end
+
+        deactivate B
+    
+```
+
+If the `Sampling Number` ends with 0, the task requires validation. The application will wait for the submission of all the 3 `Sim Hash` (or error reporting) on the blockchain, and then disclose the relationship of the tasks, and other relevant proofs for the blockchain to validate:
 
 #### Sampling Number Validation
 
@@ -202,7 +248,7 @@ The application will not send inconsistent tasks intentionally though, since the
 
 #### Task Result Validation
 
-The blockchain uses three `SimHash` values to verify task results. If one node submits a `SimHash` significantly different from the other two, it will be penalized.
+The blockchain uses three `Sim Hash` values to verify task results. If one node submits a `Sim Hash` significantly different from the other two, it will be penalized. If all the three `Sim Hash` are different, the task will be aborted.
 
 ### Tasks Do Not Require Validation
 
