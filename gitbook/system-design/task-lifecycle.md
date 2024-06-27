@@ -151,7 +151,7 @@ sequenceDiagram
         A ->> A: Generate Sampling Number<br/>Using VRF
         opt Last digit of the Sampling Number is 0
             loop Repeat 2 times
-                A ->> B: Create task and upload the task parameters
+                A ->> B: Create validation task and upload the task parameters
                 deactivate A
             end
         end    

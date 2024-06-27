@@ -22,13 +22,13 @@ Nodes cannot know the sampling results before submitting their computations to t
 
 Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities.
 
-The detailed description of the algorithm will be provided in the next section.
+The algorithm's detailed description will be provided in the next sections.
 
-Note that the following sequence diagrams are not listing all the parameters in each step, only the consensus related ones are listed and explained. For a complete listing of all the parameters, refer to the task lifecycle:
+{% hint style="info" %}
+The sequence diagrams in this document focus solely on consensus-related parameters. For a comprehensive list of all parameters, please refer to the task lifecycle documentation:
 
-{% content-ref url="task-lifecycle.md" %}
-[task-lifecycle.md](task-lifecycle.md)
-{% endcontent-ref %}
+[Task Lifecyle](task-lifecycle.md)
+{% endhint %}
 
 ## Task Creation
 
@@ -85,7 +85,7 @@ sequenceDiagram
         note over A,A: Sampling Number: VRF(Sampling Seed, Private Key)
         opt Last digit of the Sampling Number is 0
             loop Repeat 2 times
-                A ->> B: Create task and upload the task parameters
+                A ->> B: Create validation task and upload the task parameters
                 deactivate A
             end
         end    
@@ -99,7 +99,7 @@ To initiate a task, the application creates a unique `Task GUID`.
 
 The `Task GUID` for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real `Task GUID` combined with a random number `Nonce`.&#x20;
 
-For three tasks within the same validation group, each `Task ID Commitment` is derived from the same `Task GUID` but uses different random numbers, making them appear unrelated in public data. Only the `Task ID Commitment` is sent to the blockchain, and is used to identify the task during the whole task lifecycle.
+For three tasks within the same validation group, each `Task ID Commitment` is derived from the same `Task GUID` but uses different random numbers, making them appear unrelated in public data. Only the `Task ID Commitment` is sent to the blockchain, and is used to identify the task during the whole task lifecycle. This prevents the nodes from knowing whether the task will be validated or not.
 
 After execution, the application will reveal the real `Task GUID` on the blockchain. This allows the blockchain to validate task relationships, preventing the application from fraudulently grouping unrelated tasks. This ensures honest nodes are not penalized.
 
@@ -113,24 +113,12 @@ The `Sampling Number` is only known to the application, since no one else knows 
 
 The application cannot cheat on the `Sampling Number` either, as the `Sampling Seed` is fixed on the blockchain. Additionally, the public key of the application is set before the task and is known to the blockchain.
 
-### Uploading Task Parameters to the DA/Relay
-
-Knowing which node will execute the task, the application encrypts the task parameters, like the prompt and image size, using the node's public key. It then sends the encrypted parameters to the DA/Relay service.
-
-The task parameters can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
-
-{% hint style="info" %}
-The DA/Relay will periodically update its Merkle Root on the blockchain. Smart contracts can then use this to validate the integrity of specific off-chain data.
-
-Crynux will leverage the Merkle Root and Zero-Knowledge Proofs to validate task parameters and results. More details will follow.
-{% endhint %}
-
 ### Sending the Validation Tasks
 
-If the task is not selected for validation, the application will simply stop and await the computing results. However, if the task is selected, the application must send two additional tasks with the same parameters for validation purposes.
+If the task is not selected for validation, the application will simply stop and await for the notification to upload the `Task Parameters`. However, if the task is selected, the application must send two additional tasks with the same `Task Parameters` for validation purposes.
 
 {% hint style="info" %}
-The application will not get the computing result if the validation tasks are not submitted or if they are submitted with inconsistent parameters. More details are provided in the next section.
+The application will not get the computing result if the validation tasks are not submitted or if they are submitted with inconsistent parameters. The blockchain will verify the correctness of the validation tasks before allowing the application to get the computation result. More details are provided in the next section.
 {% endhint %}
 
 The fees charged for the validation tasks will be refunded once the task is completed. This extra charge ensures that the validation tasks appear identical to regular tasks, preventing nodes from distinguishing them based on the fees.
@@ -138,6 +126,26 @@ The fees charged for the validation tasks will be refunded once the task is comp
 If an application sends tasks infrequently, such as a human sending tasks to the blockchain via a browser-based DApp and Metamask, the node can monitor the user's address for new tasks. If no additional tasks are sent from the same address in a short period, the task is likely non-validation. However, if tasks are sent frequently, it becomes impossible for the node to determine if a task is for validation.
 
 The higher probability of guessing correctly increases the chance of a node performing a successful [statistical attack](consensus-protocol.md#expectation-of-the-income). Increasing the required amount of staking could solve this issue. A task mixer can also be designed to combine tasks from all applications before dispatching them to the nodes, thereby concealing the origin of the tasks from the nodes.
+
+### Uploading Task Parameters to the DA/Relay
+
+When a task is created on the blockchain, the blockchain will try to select a node based on the task's criteria. If no node is available, the task is added to a queue. Once a new node becomes available, the task is retrieved from the queue and executed. Details of this process are outlined in the following document:
+
+{% content-ref url="task-dispatching.md" %}
+[task-dispatching.md](task-dispatching.md)
+{% endcontent-ref %}
+
+When a node is selected for the task, the blockchain will emit `TaskStarted` event to notify the application to upload `Task Parameters`.
+
+Knowing which node will execute the task, the application encrypts the `Task Parameters`, such as the prompt and image size, using the node's public key. It then sends the encrypted parameters to the DA/Relay service and gets the `Merkle Proof` in return.
+
+{% hint style="info" %}
+The DA/Relay will save the data and make it publicly available. A [Merkle Tree](https://en.wikipedia.org/wiki/Merkle\_tree) is generated for a collection of recently submitted data, and the Merkle Root is sent to the smart contract on the blockchain. The application receives the Merkle Proof for the data. Using the correct Merkle Proof, the blockchain can verify data availability under a specific hash, confirming its existence and public accessibility.
+{% endhint %}
+
+The encrypted `Task Parameters` can only be decrypted by the assigned node. Nodes cannot decrypt the parameters of other tasks, making it impossible to determine if a task will be validated by comparing task parameters.
+
+
 
 ## Task Execution
 
