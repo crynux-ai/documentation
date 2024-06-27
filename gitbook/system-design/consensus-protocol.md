@@ -168,13 +168,13 @@ The applications are also unreliable. Tasks submitted might be entirely inexecut
 
 When an exception occurred during the task execution on the node, if the exception is not recoverable, the node will report the error to the blockchain.
 
-Error reporting is treated as a normal task result on the blockchain. If more than two nodes report an error to the blockchain, the task is aborted. If one node reports an error while the other two nodes submit the computation results correctly, the node will be penalized.
+The error reporting will also be cross validated in a validation task group to prevent malicious behaviors from the nodes. If one of nodes reports error while the other two send the normal computation results, it will be penalized.
 
 Crynux Network allows model downloads through an external link. However, network issues may occur during the download. It's challenging to determine if these issues affect all three nodes or if they are temporary.
 
 To prevent mistakenly slashing honest nodes, reporting errors should only be used when the node is certain it's an issue with the task arguments, not a network problem. All other cases should be handled by the timeout mechanism below.
 
-If the task is aborted due to error reporting, tokens will not be returned to the application. This is because the nodes have already expended resources on the task, and the application is responsible for the error.
+If errors are reported by the nodes, the task will be aborted. And the task fee will be refunded. The small cost of the transaction fee will prevent the applications from sending the invalid task parameters intentionally.
 
 ### Task Cancellation on Timeout
 

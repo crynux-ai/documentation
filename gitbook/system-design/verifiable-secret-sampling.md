@@ -149,7 +149,7 @@ After sending the encrypted `Task Parameters` to the DA/Relay and obtaining the 
 
 The verification of the `Merkle Proof` only makes sure **some** **data** is uploaded to the DA/Relay and is claimed to be the encrypted `Task Parameters` for the given `Task ID Commitment`, it doesn't guarantee the correctness of the `Task Parameters`. The task parameters may still be inconsistent across tasks in a validation group, may be in an invalid format, or may be undecryptable by the node at all.
 
-The correctness of the `Task Parameters` will be verified later using Zero-Knowledge Proof (ZKP). At this stage, we assume the applications are correct and skip verification to speed up task execution. This simplification does not compromise security, as the task will still be validated eventually. If the `Task Parameters` are invalid, the node will report the error to the blockchain, and the application will forfeit the task fees. Inconsistent `Task Parameters` across the validation group will prevent the application from passing the validation in a later stage.
+The correctness of the `Task Parameters` will be verified later using Zero-Knowledge Proof (ZKP). At this stage, we assume the applications are correct and skip verification to speed up task execution. This simplification does not compromise security, as the task will still be validated eventually. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the task will be aborted. Inconsistent `Task Parameters` across the validation group will prevent the application from passing the validation in a later stage.
 
 ## Task Execution
 
@@ -193,6 +193,10 @@ The `ZK Proof` is constructed to use the plain text `Task Parameters` as the pri
 The blockchain verifies the three hashes of the `Task Parameters` to ensure consistency across all three nodes.
 
 The blockchain verifies the three hashes of the cipher text from the `Task Parameters` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the nodes.
+
+There is no way to penalize the application for submitting inconsistent `Task Parameters` for different tasks in a validation group. The application could always escape from the penalization by not sending the validation transaction, and simply waiting for the timeout of the tasks.
+
+The application will not send inconsistent tasks intentionally though, since there is a small cost of the transaction fee, and there is no benefit at all.
 
 #### Task Result Validation
 

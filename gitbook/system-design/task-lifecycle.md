@@ -247,14 +247,6 @@ If the model download link is confirmed to be invalid, such as a 404 response fr
 
 The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the blockchain.
 
-{% hint style="info" %}
-The error reporting will also be cross validated in a validation task group to prevent malicious behaviors from the nodes. If one of nodes reports error while the other two nodes send the normal computation result, it will be penalized.
-
-There is no way to penalize the application for submitting invalid task parameters. The application could always escape from the penalization by not sending the validation transaction, and simply waiting for the timeout of the task.
-
-The application will not send invalid tasks intentionally though, since there is a small cost of the transaction fee, and there is no benefit at all.
-{% endhint %}
-
 When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
 
 The blockchain will emit `TaskResultReady` event to the application, and wait for the application to perform the validation process.
