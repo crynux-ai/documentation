@@ -24,24 +24,94 @@ Comparing to validating all the tasks on chain, the secret task sampling signifi
 
 The detailed description of the algorithm will be provided in the next section.
 
+Note that the following sequence diagrams are not listing all the parameters in each step, only the consensus related ones are listed and explained. For a complete listing of all the parameters, refer to the task lifecycle:
+
+{% content-ref url="task-lifecycle.md" %}
+[task-lifecycle.md](task-lifecycle.md)
+{% endcontent-ref %}
+
 ## Task Creation
 
-<figure><img src="../.gitbook/assets/ccea559c7a0f4cc3c32fbf90fbe2c6b.png" alt=""><figcaption></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant R as DA/Relay
+    Participant N as Node
+
+    activate A
+    A ->> A: Generate task ID
+    Note over A,A: Task GUID: a unique identifier<br/>Nonce: a random number<br/>Task ID Commmitment: hash(Task GUID, Nonce)
+    A ->> B: Create task
+    activate B
+    Note over A,B: Task ID Commitment<br/>Nonce
+    deactivate A
+
+    B ->> B: Generate sampling seed
+    Note over B,B: Sampling Seed: a random number
+    activate A
+    B -->> A: Return sampling seed
+    Note over A,B: Sampling Seed
+
+    par Upload task parameters
+
+        B ->> B: Select node or enqueue until a node is selected
+
+        B ->> A: Event: TaskStarted
+        activate A
+        Note over A,B: Task ID Commitment<br />Selected Node
+        deactivate B
+        A ->> R: Upload task parameters
+        activate R
+        note over A,R: Encrypted Task Parameters
+        deactivate A
+        R ->> B: Update Merkle Root
+        R -->> A: Return hash and Merkle proof
+        activate A
+        note over A,R: Hash of Encrypted Task Parameters<br/>Merkle Proof
+        deactivate R
+        A ->> B: Notify task parameters uploaded
+        activate B
+        note over A,B: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Merkle Proof
+        deactivate A
+            
+        B ->> N: Event: TaskParametersUploaded
+        note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Selected Node
+        deactivate B
+
+    and Send validation tasks
+        activate A
+        A ->> A: Generate Sampling Number<br/>Using VRF
+        note over A,A: Sampling Number: VRF(Sampling Seed, Private Key)
+        opt Last digit of the Sampling Number is 0
+            loop Repeat 2 times
+                A ->> B: Create task and upload the task parameters
+                deactivate A
+            end
+        end    
+    end
+    
+```
+
+### Task GUID and Task ID Commitment
+
+To initiate a task, the application creates a unique `Task GUID`.
+
+The `Task GUID` for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real `Task GUID` combined with a random number `Nonce`.&#x20;
+
+For three tasks within the same validation group, each `Task ID Commitment` is derived from the same `Task GUID` but uses different random numbers, making them appear unrelated in public data. Only the `Task ID Commitment` is sent to the blockchain, and is used to identify the task during the whole task lifecycle.
+
+After execution, the application will reveal the real `Task GUID` on the blockchain. This allows the blockchain to validate task relationships, preventing the application from fraudulently grouping unrelated tasks. This ensures honest nodes are not penalized.
 
 ### Secret Selection of Validation Tasks
 
-The sampling process begins when the application sends a task to the blockchain. Upon receiving the task, the blockchain:
+The sampling process begins when the application sends the transaction to create a task on the blockchain. Upon receiving the task, the blockchain generates a random number to be used as the `Sampling Seed` for the VRF and return it to the application.
 
-1. Generates a random number to be used as the `Sampling Seed` for the VRF.
-2. &#x20;Randomly selects a qualified node to execute the task.
+The application uses VRF locally to generate the `Sampling Number`, using the `Sampling Seed` and its own private key as the VRF inputs. With a 10% sampling ratio, the task will be selected for validation if the `Sampling Number` ends in 0.
 
-The application uses VRF locally to generate the `Sampling Number`, giving the `Sampling Seed` and its own private key as the VRF inputs.
+The `Sampling Number` is only known to the application, since no one else knows its private key.
 
-With a 10% sampling probability, we could select the tasks for validation if their `Sampling Number` ends in 0.
-
-The `Sampling Number` is only known to the application, since no one else knows the private key.
-
-The application can not cheat on the `Sampling Number` either, since the `Sampling Seed` is fixed on the blockchain, and the public key of the application is fixed prior to the task, and is known to the blockchain.
+The application cannot cheat on the `Sampling Number` either, as the `Sampling Seed` is fixed on the blockchain. Additionally, the public key of the application is set before the task and is known to the blockchain.
 
 ### Uploading Task Parameters to the DA/Relay
 
@@ -62,8 +132,6 @@ If the task is not selected for validation, the application will simply stop and
 {% hint style="info" %}
 The application will not get the computing result if the validation tasks are not submitted or if they are submitted with inconsistent parameters. More details are provided in the next section.
 {% endhint %}
-
-The Task ID for each task is obscured by generating a `Task ID Commitment`. This commitment is a hash of the real task ID combined with a random number. For three tasks, each `Task ID Commitment` is derived from the same task ID but uses different random numbers, making them appear unrelated in public data. After execution, the application can reveal the real task ID on the blockchain so that the blockchain can find the related tasks and compare the results.
 
 The fees charged for the validation tasks will be refunded once the task is completed. This extra charge ensures that the validation tasks appear identical to regular tasks, preventing nodes from distinguishing them based on the fees.
 
