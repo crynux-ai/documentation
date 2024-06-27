@@ -6,11 +6,63 @@ description: From the task creation to the task success
 
 ## Overview
 
-The task is initiated by the application. The details of the task, such as the prompt and the image sizes in the Stable Diffusion image generation, are all included in the `Task Parameters`.&#x20;
+Tasks are central to the Crynux Network. Each application use case is represented as a different task. Applications interact with the network by sending various tasks, and nodes are responsible solely for executing these tasks.
 
-The `Task Parameters` are not sent to the blockchain due to size constraints. Instead, the application sends the task's consensus-related metadata to the blockchain to create the task. Once the task is dispatched to a node, the application encrypts the `Task Parameters` using the node's public key and sends them to the DA/relay.
+A task consists of a group of `Task Parameters`. For instance, in a Stable Diffusion image generation task, the `Task Parameters` might include:
+
+* **Text Prompt:** The description or scene you want to generate.
+* **Image Size:** Dimensions of the generated image.
+* **Guidance Scale:** Controls the strength of the prompt on the image generation.
+* **Controlnet Image:** An image used as the reference in the Controlnet.
+
+Here is a concrete example of the `Task Parameters` of an SD image generation task:
+
+```json
+{
+    "version": "2.0.0",
+    "base_model": {
+        "name": "stabilityai/sdxl-turbo"
+    },
+    "prompt": "best quality, ultra high res, photorealistic++++, 1girl, desert, full shot, dark stillsuit, "
+              "stillsuit mask up, gloves, solo, highly detailed eyes,"
+              "hyper-detailed, high quality visuals, dim Lighting, ultra-realistic, sharply focused, octane render,"
+              "8k UHD",
+    "negative_prompt": "no moon++, buried in sand, bare hands, figerless gloves, "
+                       "blue stillsuit, barefoot, weapon, vegetation, clouds, glowing eyes++, helmet, "
+                       "bare handed, no gloves, double mask, simplified, abstract, unrealistic, impressionistic, "
+                       "low resolution,",
+    "task_config": {
+        "num_images": 9,
+        "steps": 1,
+        "cfg": 0
+    },
+    "lora": {
+        "model": "https://civitai.com/api/download/models/178048"
+    },
+    "controlnet": {
+        "model": "diffusers/controlnet-canny-sdxl-1.0",
+        "image_dataurl": "data:image/png;base64,12FE1373...",
+        "preprocess": {
+            "method": "canny"
+        },
+        "weight": 70
+    },
+    "scheduler": {
+        "method": "EulerAncestralDiscreteScheduler",
+        "args": {
+            "timestep_spacing": "trailing"
+        }
+    }
+}
+```
+
+The lifecycle of a task consists of four stages: **Task Creation**, **Task Execution**, **Result Validation**, and **Result Retrieval**.
+
+In the **Task Creation** stage, the application initiates a task by sending a transaction to the blockchain. The `Task Parameters` are not sent to the blockchain due to size constraints. Instead, the application sends the task's consensus-related metadata to the blockchain to create the task. Once the task is dispatched to a node, the application encrypts the `Task Parameters` using the node's public key and sends them to the DA/Relay.
 
 To ensure successful cross-validation for the nodes, the blockchain may require the application to send two additional tasks with identical `Task Parameters`. The application will be unable to obtain the computation results if the additional tasks are not sent.
+
+In the **Task Execution** stage, the node is notified about the task by the blockchain. It then receives the task metadata from the blockchain, fetches the `Task Parameters` from the DA/Relay, and executes the task locally.
 
 ## Task Creation
 
