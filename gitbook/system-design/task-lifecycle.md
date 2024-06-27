@@ -64,6 +64,34 @@ To ensure successful cross-validation for the nodes, the blockchain may require 
 
 In the **Task Execution** stage, the node is notified about the task by the blockchain. It then receives the task metadata from the blockchain, fetches the `Task Parameters` from the DA/Relay, and executes the task locally.
 
+Upon a successful run, the node computes the similarity hash of the result and submits it to the blockchain for validation.
+
+In the **Result Validation** stage, the application either completes the task directly or waits for other validation tasks to complete, based on the VSS selection result. In both scenarios, it must submit the relevant proofs to the blockchain to initiate validation. The application will not be able to get the computation result if the proofs are not submitted.
+
+The blockchain will perform the validation. Once validation is complete, the task proceeds to the **Result Retrieval** stage.
+
+The node will upload the actual computation result to the DA/Relay, and claim the task fee from the blockchain by proving the availability of the computation result to the application. The node will get the task fee immediately when the validation completes on-chain. No interaction from the application is required.
+
+After the validation, the application is notified to download the result from the DA/Relay, and the task is completed.
+
+The subsequent sections detail all the stages. This document focuses on listing the interaction steps between components, the parameters required for each step, and the possible status and return values. Explanations on why a parameter is required are given in other documents. For the validation related parameters, refer to the following document:
+
+{% content-ref url="verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% endcontent-ref %}
+
+For the node criteria related parameters, refer to the following document:
+
+{% content-ref url="task-dispatching.md" %}
+[task-dispatching.md](task-dispatching.md)
+{% endcontent-ref %}
+
+And the pricing related parameters:
+
+{% content-ref url="task-pricing.md" %}
+[task-pricing.md](task-pricing.md)
+{% endcontent-ref %}
+
 ## Task Creation
 
 ```mermaid
