@@ -163,7 +163,7 @@ The node cannot send the task result to the DA/Relay service at this stage. If t
 
 When the `Sim Hash` is sent, the blockchain emits `TaskResultReady` event to notify the application. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the blockchain will emit `TaskErrorReported`. In both cases, the task enters the **Task Validation** stage.
 
-## Task Validation
+## Result Validation
 
 When the `TaskResultReady` or `TaskErrorReported` event is received, the application should proceed with one of two different strategies based on the previously generated `Sampling Number`.
 
@@ -238,15 +238,15 @@ graph TD
   tp[Task Parameters] --> |ZK Proof| hash[Hash of Task Parameters]
   hash --> |Compare| ot[Other Tasks]
   tp --> |ZK Proof| etp[Encrypted Task Parameters]
-  pk[Application Public Key] --> |ZK Proof| etp
+  pk[Node Public Key] --> |ZK Proof| etp
   etp --> |ZK Proof| hetp[Hash of Encrypted Task Parameters]
   hetp --> |Merkle Proof| bc[Blockchain]
 ```
 
-The `ZK Proof` is constructed to use the plain text `Task Parameters` as the private input, the `Public Key` of the application as the public input, and publicly outputs the hash of the `Task Parameters` and the hash of the `Encrypted Task Parameters`. A valid `ZK Proof` ensures that:
+The `ZK Proof` is constructed to use the plain text `Task Parameters` as the private input, the `Public Key` of the node as the public input, and publicly outputs the hash of the `Task Parameters` and the hash of the `Encrypted Task Parameters`. A valid `ZK Proof` ensures that:
 
 1. The `Task Parameters` has the given hash value `Hash of Task Parameters`.
-2. The `Task Parameters` are encrypted using the `Application Public Key`, and the cipher text has the given hash value `Hash of Encrypted Task Parameters`.
+2. The `Task Parameters` are encrypted using the `Node Public Key`, and the cipher text has the given hash value `Hash of Encrypted Task Parameters`.
 
 If the `ZK Proof` is valid, the blockchain verifies that the three `Hash of Encrypted Task Parameters` match those provided by the application in the **Task Creation** stage, which are previous verified using the `Merkle Proof`. This ensures that the `Task Parameters` referenced in the `ZK Proof` are identical to those actually executed by the nodes.
 
@@ -299,17 +299,67 @@ The [Relationship Validation](verifiable-secret-sampling.md#task-relationship-va
 
 The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
 
-## Task Result Disclosure
+## Result Retrieval
 
-<figure><img src="../.gitbook/assets/70a6f0b41ecf0491f7f04502d4758af.png" alt=""><figcaption></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant N as Node
+    Participant D as DA/Relay
 
-After the node receives the notification of result disclosure from the blockchain, it encrypts the task result using the public key of the application, and sends the cipher text to the DA/Relay service.&#x20;
+    B ->> N: Event: TaskValidated
+    activate N
+    Note over B,N: Task ID Commitment
+    N ->> D: Send task result
+    activate D
+    Note over N,D: Encrypted Task Result
+    deactivate N
+    D -->> N: Return Merkle proof
+    activate N
+    Note over N,D: Hash of Encrypted Task Result<br/>Merkle Proof
+    deactivate D
+    N ->> B: Report result uploaded
+    activate B
+    Note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Result<br/>Merkle Proof<br/>ZK Proof
+    deactivate N
+    B ->> B: Validate proofs
+    B ->> B: Settle task fee
+    B ->> A: Event: TaskSuccess 
+    activate A
+    Note over A,B: Task ID Commitment
+    deactivate B
+    A ->> D: Get task result
+    deactivate A
+    activate D
+    D -->> A: Return task result
+    note over A,D: Encrypted Task Result
+    deactivate D
 
-After the `Merkle Root` is updated on the blockchain, the node generates a `ZK Proof` and submits it to the blockchain. The `ZK Proof` uses the `Task Result` as the private input, and publicly outputs the `SimHash`, and the hash of the cipher text of the `Task Result`. A valid ZK Proof makes sure:
+```
 
-1. The `Task Result` has the given `SimHash`.
-2. The `Task Result` is encrypted using the application's public key, and the cipher text has the given hash.
+After the node receives the `TaskValidated` event, it encrypts the task result using the public key of the application, and sends the cipher text to the DA/Relay service.&#x20;
 
-The blockchain verifies the hash of the cipher text from the `Task Result` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the application.
+After receiving the `Merkle Proof`, the node generates a `ZK Proof` and submits it to the blockchain.
 
-In the final step, the blockchain distributes the task fee to all participating nodes based on their [QoS scores](quality-of-service-qos.md) and notifies the application to retrieve the task result. Once the application retrieves the result, the task is marked as completed.
+```mermaid
+graph TD
+  tr[Task Result] --> |ZK Proof| sh[Sim Hash]
+  tr --> |ZK Proof| etr[Encrypted Task Result]
+  pk[Application Public Key] --> |ZK Proof| etr
+  etr --> |ZK Proof| hetr[Hash of Encrypted Task Result]
+  sh --> bc[Blockchain]
+  hetr --> |Merkle Proof| bc
+
+```
+
+The `ZK Proof` uses the `Task Result` as the private input, the `Application Public Key` as the public input, and publicly outputs the `Sim Hash`, and the `Hash of Encrypted Task Result`. A valid `ZK Proof` makes sure:
+
+1. The `Task Result` has the given `Sim Hash`.
+2. The `Task Result` is encrypted using the `Application Public Key`, and the cipher text has the given hash `Hash of Encrypted Task Result`.
+
+The blockchain verifies the `Sim Hash` against the previously submitted one from the node to pass the result validation. This ensures that the `Task Result` produces the correct `Sim Hash`.
+
+The blockchain verifies the  `Hash of Encrypted Task Result` using the `Merkle Proof` against the `Merkle Root` submitted by the DA/Relay. This ensures that the correct cipher texts have been uploaded to the DA/Relay service and are accessible to the application.
+
+If all the validation passes, the blockchain distributes the task fee to all participating nodes based on their [QoS scores](quality-of-service-qos.md) and notifies the application to retrieve the task result. Once the application retrieves the result, the task is marked as completed.
