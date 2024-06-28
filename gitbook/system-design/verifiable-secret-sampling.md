@@ -65,7 +65,8 @@ sequenceDiagram
         activate R
         note over A,R: Encrypted Task Parameters
         deactivate A
-        R ->> B: Update Merkle Root
+        R ->> B: Update Merkle root
+        note over B,R: Merkle Root
         R -->> A: Return hash and Merkle proof
         activate A
         note over A,R: Hash of Encrypted Task Parameters<br/>Merkle Proof
@@ -323,14 +324,17 @@ sequenceDiagram
     activate D
     Note over N,D: Encrypted Task Result
     deactivate N
+    D ->> B: Update Merkle root
+    Note over B,D: Merkle Root
     D -->> N: Return Merkle proof
     activate N
     Note over N,D: Hash of Encrypted Task Result<br/>Merkle Proof
     deactivate D
     N ->> B: Report result uploaded
+    deactivate N
     activate B
     Note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Result<br/>Merkle Proof<br/>ZK Proof
-    deactivate N
+    
     B ->> B: Validate proofs
     B ->> B: Settle task fee
     B ->> A: Event: TaskSuccess 
