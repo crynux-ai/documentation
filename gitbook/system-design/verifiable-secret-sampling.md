@@ -252,13 +252,42 @@ The blockchain uses three `Sim Hash` values to verify task results. If one node 
 
 ### Tasks Do Not Require Validation
 
-<figure><img src="../.gitbook/assets/3d6889feb3919a7540a90bfc141ae61.png" alt=""><figcaption></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant N as Node
+
+    alt
+        B ->> A: Event: TaskResultReady
+        activate A
+        Note over A,B: Task ID Commitment<br />Sim Hash
+    else
+        B ->> A: Event: TaskErrorReported
+        Note over A,B: Task ID Commitment
+    end
+
+    A ->> B: Finish task
+    activate B
+    Note over A,B: Task ID Commitment<br/>Sampling Number<br/>VRF Proof
+    deactivate A
+    B ->> B: Validate Sampling Number
+    
+    break Task error reported
+        B ->> A: Event: TaskAborted
+    end
+
+    B ->> N: Event: TaskValidated
+    Note over B,N: Task ID Commitment
+        
+    deactivate B
+```
 
 If the `Sampling Number` does not end in 0, which means the task does not require validation, the validation will be much simpler.&#x20;
 
-The Relationship Validation and the Parameters Validation are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
+The [Relationship Validation](verifiable-secret-sampling.md#task-relationship-validation) and the [Parameters Validation](verifiable-secret-sampling.md#task-parameters-validation) are both skipped. Only the `Sampling Number` needs validation to ensure the task doesn't require result validation.
 
-The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) process remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
+The [Sampling Number Validation](verifiable-secret-sampling.md#sampling-number-validation) remains unchanged, with the exception that the blockchain must ensure the `Sampling Number` does not end in 0.
 
 ## Task Result Disclosure
 
