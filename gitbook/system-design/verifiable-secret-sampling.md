@@ -233,14 +233,24 @@ This validation ensures the `Task Parameters` provided by the application are co
 
 The validation is implemented using Zero-Knowledge Proofs. The application sends the hash of the `Task Parameters`, along with a `ZK Proof` to the blockchain.
 
-The `ZK Proof` is constructed to use the plain text `Task Parameters` as the private input, and publicly outputs the hash of the `Task Parameters` and the hash of the cipher text of the `Task Parameters`. A valid `ZK Proof` ensures that:
+```mermaid
+graph TD
+  tp[Task Parameters] --> |ZK Proof| hash[Hash of Task Parameters]
+  hash --> |Compare| ot[Other Tasks]
+  tp --> |ZK Proof| etp[Encrypted Task Parameters]
+  pk[Application Public Key] --> |ZK Proof| etp
+  etp --> |ZK Proof| hetp[Hash of Encrypted Task Parameters]
+  hetp --> |Merkle Proof| bc[Blockchain]
+```
 
-1. The `Task Parameters` has the given hash value.
-2. The `Task Parameters` are encrypted using the node's public key, and the cipher text has the given hash value.
+The `ZK Proof` is constructed to use the plain text `Task Parameters` as the private input, the `Public Key` of the application as the public input, and publicly outputs the hash of the `Task Parameters` and the hash of the `Encrypted Task Parameters`. A valid `ZK Proof` ensures that:
 
-If the `ZK Proof` is valid, the blockchain verifies that the three hashes of the cipher text match those provided by the application in the **Task Creation** stage. This ensures that the `Task Parameters` referenced in the `ZK Proof` are identical to those actually executed by the nodes.
+1. The `Task Parameters` has the given hash value `Hash of Task Parameters`.
+2. The `Task Parameters` are encrypted using the `Application Public Key`, and the cipher text has the given hash value `Hash of Encrypted Task Parameters`.
 
-The blockchain then compares the three hashes of the `Task Parameters` to ensure they are identical. This prevents the application from submitting inconsistent `Task Parameters`, which could lead to penalization of the honest nodes.
+If the `ZK Proof` is valid, the blockchain verifies that the three `Hash of Encrypted Task Parameters` match those provided by the application in the **Task Creation** stage, which are previous verified using the `Merkle Proof`. This ensures that the `Task Parameters` referenced in the `ZK Proof` are identical to those actually executed by the nodes.
+
+The blockchain then compares the three  `Hash of Task Parameters` to ensure they are identical. This prevents the application from submitting inconsistent `Task Parameters` to different nodes, which could lead to the penalization of the honest nodes.
 
 There is no way to penalize the application for submitting inconsistent `Task Parameters` for different tasks in a validation group. The application could always escape from the penalization by not sending the validation transaction, and simply waiting for the timeout of the tasks.
 
