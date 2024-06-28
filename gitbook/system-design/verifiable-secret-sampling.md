@@ -217,7 +217,15 @@ If the `Sampling Number` ends with 0, the task requires validation. The applicat
 
 #### Sampling Number Validation
 
-The application sends the `VRF Proof` and the `Sampling Number` to the blockchain, and the blockchain validates the `Sampling Number` using the `VRF Proof` and the application's public key. This ensures that the `Sampling Number` is generated from the on-chain `Sampling Seed` and the application's private key.
+The application sends the `VRF Proof` and the `Sampling Number` to the blockchain, and the blockchain validates the `Sampling Number` using the `VRF Proof` and the `Application Public Key`. This ensures that the `Sampling Number` is generated from the on-chain `Sampling Seed` and the application's private key.
+
+```mermaid
+graph LR
+  sn[Sampling Number] --> |VRF Proof| ss[Sampling Seed]
+  ss --> bc[Blockchain]
+  sn --> |VRF Proof| pk[Application Public Key]
+  pk --> bc
+```
 
 If the `VRF Proof` is valid, the blockchain will verify whether the `Sampling Number` ends in 0. If valid, the blockchain confirms that the task was genuinely selected during the secret task selection.
 
