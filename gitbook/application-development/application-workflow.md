@@ -65,54 +65,57 @@ The source code of the web UI of the AI Chatbot
 ### 1. Prepare the application wallet
 
 {% hint style="info" %}
-Crynux Network is currently deployed on the L2 blockchain of Dymension as a testnet Rollapp. **No CNX tokens are used**. You could[ join the Discord Server of Crynux ](https://discord.gg/y8YKxb7uZk)to get the test tokens for free.
+Crynux Network is currently deployed on the L2 blockchain of Dymension as a testnet Rollapp. **Test CNX tokens are used**. You could[ join the Discord Server of Crynux ](https://discord.gg/y8YKxb7uZk)to get the test tokens for free.
 {% endhint %}
 
 An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.
 
-Enough CNX tokens must be present in the wallet. The tokens will be used to pay for the tasks. The application should keep monitoring the balance of the wallet, and notify the admins to transfer more tokens into the wallet before it is not enough to pay for the next task.
-
-Some test gas tokens are also required in the wallet, to pay for the gas fees of sending the transaction.
-
-#### Approve the Task Contract to spend the CNX tokens in the wallet
-
-When the application invokes the `CreateTask` method of the Task Contract, the contract will transfer certain amount of CNX tokens to its own address. The purpose is that the Nodes could then trust that they will definitely get paid after they finish the task.
-
-In order to achieve this, the Task Contract must be approved to spend the CNX tokens in the application wallet. Since CNX is a standard ERC20 token, this is done by invoking the `Approve` method of the CNX Token Contract from the application wallet, passing the address of the Task Contract as argument.
-
-If the application is expected to create a lot of tasks frequently, a larger number of tokens could be approved at once to save gas fees. This is still safe, since the Task Contract can not do anything else other than the hard-coded behaviors.
-
-As a reference, the source code that automatically approves all the remaining balance of the application wallet to the Task Contract in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/blockchain/task.go#L177).
+Enough Test CNX tokens must be present in the wallet. The tokens will be used to pay for both the task fees and the transaction fees. The application should keep monitoring the balance of the wallet, and notify the admins to transfer more tokens into the wallet before it is not enough to pay for the next task.
 
 {% hint style="info" %}
-For the DApp, the application wallet is not required. The DApp will construct the transaction, and send it to the Metamask to be signed directly by the user, in the browser. The user's wallet will have to approve the CNX tokens to the Task Contract as well, before signing and sending the `CreateTask` transaction.
+For the DApp, the application wallet is not required. The DApp will construct the transaction, and send it to the Metamask to be signed directly by the user, in the browser.
 {% endhint %}
 
 ### 2. Create the Task on the Blockchain
 
-#### Construct the task arguments
+#### Construct the task parameters
 
-The arguments of the task are organized as a JSON string. An example of the arguments of an image generation task is given below:
+The task parameters are organized as a JSON string. An example of the arguments of an image generation task is given below:
 
 ```json
 {
-    "base_model": "emilianJR/chilloutmix_NiPrunedFp32Fix",
-    "prompt": "a realistic portrait photo of a beautiful girl, blonde hair+++, smiling, facing the viewer",
-    "negative_prompt": "low resolution++, bad hands",
+    "version": "2.0.0",
+    "base_model": {
+        "name": "stabilityai/sdxl-turbo"
+    },
+    "prompt": "best quality, ultra high res, photorealistic++++, 1girl, desert, full shot, dark stillsuit, "
+              "stillsuit mask up, gloves, solo, highly detailed eyes,"
+              "hyper-detailed, high quality visuals, dim Lighting, ultra-realistic, sharply focused, octane render,"
+              "8k UHD",
+    "negative_prompt": "no moon++, buried in sand, bare hands, figerless gloves, "
+                       "blue stillsuit, barefoot, weapon, vegetation, clouds, glowing eyes++, helmet, "
+                       "bare handed, no gloves, double mask, simplified, abstract, unrealistic, impressionistic, "
+                       "low resolution,",
     "task_config": {
         "num_images": 9,
-        "safety_checker": False
+        "steps": 1,
+        "cfg": 0
     },
     "lora": {
-        "model": "https://civitai.com/api/download/models/34562",
-        "weight": 80
+        "model": "https://civitai.com/api/download/models/178048"
     },
     "controlnet": {
-        "model": "lllyasviel/control_v11p_sd15_openpose",
-        "weight": 90,
-        "image_dataurl": "base64,image/png:...",
+        "model": "diffusers/controlnet-canny-sdxl-1.0",
+        "image_dataurl": "data:image/png;base64,12FE1373...",
         "preprocess": {
-            "method": "openpose_face"
+            "method": "canny"
+        },
+        "weight": 70
+    },
+    "scheduler": {
+        "method": "EulerAncestralDiscreteScheduler",
+        "args": {
+            "timestep_spacing": "trailing"
         }
     }
 }
@@ -154,7 +157,7 @@ function createTask(
 * `dataHash` is reserved for the future features and is not used right now. The application could just pass 32 zero bytes to it.
 * `vramLimit` indicates the minimum VRAM required to execute the task. The Crynux Network will select the capable nodes based on this value.
 
-The source code that implements the invocation of the CreateTask method in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/blockchain/task.go#L32).
+The source code that implements the invocation of the `CreateTask` method in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/blockchain/task.go#L32).
 
 #### Get the task creation result
 
@@ -164,37 +167,37 @@ All the possible reasons a transaction could be reverted for can be found [in th
 
 If the transaction is reverted, no event will be emitted. So the creation result could only be queried using the transaction hash, or the receipt from the transaction creation step above.
 
-### 3. Upload the Task Arguments to the Relay
+### 3. Upload the Task Parameters to the Relay
 
-When the transaction of the task creation is confirmed, the next step is to upload the actual JSON string of the task arguments to the Relay. The API endpoint to be used is:
+When the transaction of the task creation is confirmed, the next step is to upload the actual JSON string of the task parameters to the Relay. The API endpoint to be used is:
 
-{% swagger src="https://relay.h.crynux.ai/openapi.json" path="/v1/inference_tasks" method="post" %}
-[https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
+{% swagger src="https://dy.relay.crynux.ai/openapi.json" path="/v1/inference_tasks" method="post" %}
+[https://dy.relay.crynux.ai/openapi.json](https://dy.relay.crynux.ai/openapi.json)
 {% endswagger %}
 
-The complete API documentation can be found in the [OpenAPI specifications](https://relay.h.crynux.ai/static/api\_docs.html).
+The complete API documentation can be found in the [OpenAPI specifications](https://dy.relay.crynux.ai/openapi.json).
 
 The uploading is just a normal API invocation to the Relay server. The only step worth attention is that the request must be signed using the application wallet before sending to the Relay.
 
-> The Relay monitors the Blockchain for all the task creations. It will record the task ID and the address of the task creator (i.e. the application wallet) when the TaskCreated event is emitted on-chain. When the API to upload task arguments is invoked, the Relay requires that the request must be made from the same task creator on-chain.
+> The Relay monitors the blockchain for all the task creations. It will record the task ID and the address of the task creator (i.e. the application wallet) when the TaskCreated event is emitted on-chain. When the API to upload task arguments is invoked, the Relay requires that the request must be made from the same task creator on-chain.
 
 The signature is generated using ECDSA with the same curve that Ethereum uses, on the Keccak256 hash of a string, which is generated by including all the query and body params (except `timestamp` and `signature`) of the request in a JSON string, whose keys are sorted in alphabetical order, and concatenated with the current Unix timestamp.
 
-The reference implementation of the signing method, in Crynux Bridge, [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/relay/sign\_data.go). The code to upload the task arguments to the Relay can also be found [in the source code](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/relay/inference\_task.go#L41).
+The reference implementation of the signing method in Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/relay/sign\_data.go). The code to upload the task arguments to the Relay can also be found [in the source code](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/relay/inference\_task.go#L41).
 
 ### 4. Wait for the Task to Finish
 
-When the task is finished, either the `TaskSuccess` or the `TaskAborted` event will be emitted. If the `TaskSuccess` event is emitted, the application could get the result images from the Relay. If the `TaskAborted` event is emitted, the task is failed.
+When the task is finished, either the `TaskSuccess` or the `TaskAborted` event will be emitted. If the `TaskSuccess` event is emitted, the application could get the result from the Relay. If the `TaskAborted` event is emitted, the task is failed.
 
-Just like the task creation invocation, there are also several reasons why the task would fail during the execution. Might be that the task arguments do not pass the schema validation of the Nodes, or that some Nodes are not executing the consensus protocol correctly, or that the task is taking too long to finish on a single Node. The exact reason is included as an argument in the emitted event.&#x20;
+Just like the task creation invocation, there are also several reasons why the task would fail during the execution. Might be that the task arguments do not pass the schema validation of the nodes, or that some nodes are not executing the consensus protocol correctly, or that the task is taking too long to finish on a single node. The exact reason is included as an argument in the emitted event.&#x20;
 
-If the task is aborted, in some cases the CNX tokens will be returned to the application wallet, while in other cases the tokens are still paid to the Nodes even the task is not completed, depending on who to blame for the task failure.
+If the task is aborted, in some cases the CNX tokens will be returned to the application wallet, while in other cases the tokens are still paid to the nodes even the task is not completed, depending on who to blame for the task failure.
 
-There are two ways the application could monitor the Blockchain for the relevant events. The first method is to keep tracking the new blocks, and filter the blocks for these two kinds of events.
+There are two ways the application could monitor the blockchain for the relevant events. The first method is to keep tracking the new blocks, and filter the blocks for these two kinds of events.
 
 The tracking method requires the application to properly handle the block continuity, especially when the application could crash due to some unhandled bugs. And if the application has been stopped for a long time, it may take quite a while to catch up with the new blocks.
 
-The other method is to extract the task ID from the task creation transaction and save it, and periodically query the Blockchain for the newest task status. The block does not need to be tracked anymore in this method. The efficiency is lower than the previous method since a lot of meaningless queries should be made.
+The other method is to extract the task ID from the task creation transaction and save it, and periodically query the blockchain for the newest task status. The block does not need to be tracked anymore in this method. The efficiency is lower than the previous method since a lot of meaningless queries should be made.
 
 The Crynux Bridge uses the first method, the source code of the block synchronization [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/tasks/sync\_block.go).
 
@@ -206,8 +209,8 @@ The last step is to get the actual images/texts from the Relay. This is done by 
 
 The URL could be treated like an image downloading link as it returns the binary stream of the image content directly. The signature and timestamp is still required.
 
-{% swagger src="https://relay.h.crynux.ai/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
-[https://relay.h.crynux.ai/openapi.json](https://relay.h.crynux.ai/openapi.json)
+{% swagger src="https://dy.relay.crynux.ai/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
+[https://dy.relay.crynux.ai/openapi.json](https://dy.relay.crynux.ai/openapi.json)
 {% endswagger %}
 
 #### Get texts
@@ -215,7 +218,7 @@ The URL could be treated like an image downloading link as it returns the binary
 The API endpoint to get text results from the Relay is the same as the endpoint above, except that the `image_num` should be set to zero.
 
 {% hint style="info" %}
-When the application accesses the above URL after the `TaskSuccess` event is received, it could keep getting `404 not found` for a short while before it gets the correct images. The reason is that the Node will start to upload images/texts to the Relay only after the `TaskSuccess` event is received. So before the uploading is done, the application can not find the results on the Relay. Several times of retrying is required at this place.
+When the application accesses the above URL after the `TaskSuccess` event is received, it could keep getting `404 not found` for a short while before it gets the correct results. The reason is that the node will start to upload images/texts to the Relay only after the `TaskSuccess` event is received. So before the uploading is done, the application can not find the results on the Relay. Several times of retrying is required at this place.
 {% endhint %}
 
 The source code where the Crynux Bridge downloads the images is [located here](https://github.com/crynux-ai/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/relay/inference\_task.go#L93).
