@@ -6,7 +6,7 @@ If no suitable nodes are available, the task will be sent to the task queue to w
 
 The QoS scores are also taken into account during the random node selection. If a node is not providing high quality service, i.e. frequently timeout on its tasks, the QoS scores of the node will be low, and this node will have a low probability to be selected for the tasks.
 
-<figure><img src="../.gitbook/assets/a94e3a399d5954d9bee2ea9e9dba36e (1).png" alt=""><figcaption><p>The overview of the task dispatching algorithm</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/fd705dac6f56dab6fcc30062a56561d.png" alt=""><figcaption><p>Task Dispatching Overview</p></figcaption></figure>
 
 ## Assigning Task to the Nodes
 
@@ -20,11 +20,29 @@ The nodes are grouped based on their card model first, such as Nvidia RTX 4090 g
 
 ### Node Selection using the Groups
 
-When the blockchain tries to select nodes for a task, it first selects the groups based on the VRAM sizes. All the node groups with a equal or larger VRAM size than the task requirement are selected.
+If the application doesn't set `Required GPU` in the task parameters, the nodes with VRAM equal to or larger than the task's requirement are chosen as candidates. Otherwise, only the nodes with the required GPU model will be selected as the candidates.
 
-If the task type is Stable Diffusion, the nodes could have already been randomly selected across all the candidate VRAM size groups. However, if the task type is GPT, a card model group should be further selected in the VRAM size groups randomly, and the nodes should then be selected in the card model group.
+The node will then be randomly selected from all candidates based on their selection probability.
 
-> The random selection of the card model group is designed to ensure the equal probabilities of selection among all the nodes across all the candidate groups, rather than equal probabilities among the groups. As a result, the group with more nodes will have a higher probability to be selected.
+### Node Selection Probability
+
+The selection probability of a node depends on the following factors:
+
+#### Model Cache
+
+If a node recently executed tasks using the same model as the current task, it is likely that the model is still stored locally on the disk or even better, cached in the memory. This prevents the need for downloading or reloading the model, significantly speeding up task execution. Such nodes are given higher probabilities for selection.
+
+#### QoS Score
+
+Newer GPUs with the same VRAM but higher frequencies execute tasks faster. To speed up task execution, Crynux Network prioritizes faster nodes by giving them higher selection probabilities.
+
+To prevent nodes from reporting fake frequencies and GPU models, Crynux Network uses the Task Execution Speed score of the QoS instead of the reported frequencies. This score evaluates nodes by comparing their speed in executing the validation tasks. Nodes that complete the task faster receive a higher QoS score and are thus more likely to be selected for future tasks.
+
+Details about the QoS scores can be found in the following document:
+
+{% content-ref url="quality-of-service-qos.md" %}
+[quality-of-service-qos.md](quality-of-service-qos.md)
+{% endcontent-ref %}
 
 If there are not enough candidate nodes to be selected from, the task will be put into the task queue and wait for more nodes to become available.
 
