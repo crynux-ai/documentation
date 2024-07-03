@@ -1,16 +1,16 @@
 ---
-description: The OpenAPI specifications
+description: The OpenAPI specification of the Relay
 ---
 
 # API Specification of the Relay
 
 ## Resources
 
-The JSON schema of the OpenAPI Specifications of the Relay can be found at:
+The JSON schema of the OpenAPI Specification of the Relay can be found at:
 
 {% embed url="https://dy.relay.crynux.ai/openapi.json" %}
 
-The rendered documents of the specifications can also be accessed at:
+The rendered document of the specification can be accessed at:
 
 {% embed url="https://dy.relay.crynux.ai/static/api_docs.html" %}
 
