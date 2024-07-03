@@ -37,8 +37,14 @@
 * [Application Workflow](application-development/application-workflow.md)
 * [GPT Task](application-development/gpt-task.md)
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
+* [Crynux Bridge](application-development/crynux-bridge.md)
 * [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
 * [Crynux Network SDK](application-development/crynux-network-sdk.md)
+
+## Crynux Token
+
+* [Wallet Config](crynux-token/wallet-config/README.md)
+  * [Metamask](crynux-token/wallet-config/metamask.md)
 
 ## Troubleshooting
 

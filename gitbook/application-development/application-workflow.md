@@ -4,6 +4,12 @@ description: Use the Crynux Network as the inference API
 
 # Application Workflow
 
+{% hint style="info" %}
+The easiest method to connect an application to the Crynux Network is to deploy a Crynux Bridge, and connect the application to the bridge using API. The Crynux Bridge will take care of the application wallet, and all the interactions with the blockchain and Relay. The tutorial can be found in the following document:
+
+[Crynux Bridge](crynux-bridge.md)
+{% endhint %}
+
 The application can utilize the Crynux Network as an API service. It sends inference tasks to the network and receives images or texts in return. Two types of inference tasks are supported: Stable Diffusion image generation and GPT text generation.
 
 The application interacts with two network components: the blockchain node and the Relay. To send tasks successfully, it must have a wallet with sufficient Test CNX tokens for payment. Test CNX tokens can be acquired for free on the [Discord Server of Crynux](https://discord.gg/y8YKxb7uZk).
