@@ -16,7 +16,32 @@ As the first step, we will provide a high-level overview of the complete workflo
 
 The application workflow is illustrated in the graph below:
 
-<figure><img src="../.gitbook/assets/8ee0732297c74a6a66fd3d7a6d3382b.png" alt=""><figcaption><p>High level application workflow</p></figcaption></figure>
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant R as DA/Relay
+
+    A ->> B: Create task
+    activate B
+    note over A,B: Task Criteria<br/>Task Fee
+    B -->> A: Transaction confirmed
+    deactivate B
+    activate A
+    A ->> R: Send task parameters
+    activate R
+    note over A,R: Task Parameters
+    deactivate A
+    R -->> A: Task parameters saved
+    deactivate R
+    B ->> A: Event: TaskSuccess
+    activate A
+    A ->> R: Get task result
+    deactivate A
+    activate R
+    R -->> A: Task result
+    deactivate R
+```
 
 The application initiates the workflow by calling the `CreateTask` method of the smart contract. This method receives task parameters related to task type and VRAM requirements, which the network uses to select suitable nodes.
 
