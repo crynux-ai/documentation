@@ -64,7 +64,12 @@ The blockchain will try to retrieve a task from the task queue when a new node b
 
 > When a new task is sent to the blockchain, it attempts to dispatch the task immediately to the nodes, regardless of the task queue’s status. Tasks remain in the queue only if there are not enough **matching** nodes available. Even if the task queue isn't empty, there might still be available nodes in the network matching the new task, providing a chance for the new task to execute first.
 
+Depending on the GPU model and the VRAM size of the node, the candidate task groups including:
 
+* The task group of the same GPU model
+* The "Any" groups that have a equal or smaller VRAM requirement
+
+The first tasks of each candidate group are compared, and the task with the highest value is selected.
 
 ### Max Size of the Task Queue
 
