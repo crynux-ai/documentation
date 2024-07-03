@@ -4,35 +4,37 @@ description: Use the Crynux Network as the inference API
 
 # Application Workflow
 
-The Application could use the Crynux Network as an API service. The application sends the inference task to the network, and get the result back directly. Two types of the inference task are supported: the Stable Diffusion image generation task and the GPT text generation task.
+The application can utilize the Crynux Network as an API service. It sends inference tasks to the network and receives images or texts in return. Two types of inference tasks are supported: Stable Diffusion image generation and GPT text generation.
 
-The application will be talking to 2 components in the Network: a Blockchain node, and the Relay.
+The application interacts with two network components: the blockchain node and the Relay. To send tasks successfully, it must have a wallet with sufficient Test CNX tokens for payment. Test CNX tokens can be acquired for free on the [Discord Server of Crynux](https://discord.gg/y8YKxb7uZk).
 
-The application must have a wallet with enough CNX tokens to pay for the tasks, and a little bit of ETH to pay the gas fee.
+Reference applications are provided for both image generation and text generation tasks. The source code can be found on the GitHub.
 
-## High Level Overview
+As the first step, we will provide a high-level overview of the complete workflow, outlining the main steps involved in the process.
+
+## Overview
 
 The application workflow is illustrated in the graph below:
 
 <figure><img src="../.gitbook/assets/8ee0732297c74a6a66fd3d7a6d3382b.png" alt=""><figcaption><p>High level application workflow</p></figcaption></figure>
 
-The application starts the workflow by invoking the `CreateTask` method of the smart contract using the prepared wallet. The hash of the task arguments is passed to the method, which is used by the Nodes to verify the actual task arguments received from the Relay.
+The application initiates the workflow by calling the `CreateTask` method of the smart contract. This method receives task parameters related to task type and VRAM requirements, which the network uses to select suitable nodes.
 
-The smart contract transfers the required amount of the CNX tokens from the application wallet to its own address. The tokens will be transferred to the Nodes after the task is completed, and will be returned to the application wallet if the task is not completed successfully.
+The application transfers the task fee to the contract address by specifying it in the transaction's `value` field. Upon task completion, tokens are sent to the nodes. If the task fails, the fee is refunded to the application's wallet.
 
-After the transaction is confirmed on-chain, the application should then send the actual task arguments to the Relay.
+After the transaction is confirmed on-chain, the application should then send the task parameters to the Relay.
 
-> The task arguments will be fetched by the selected nodes from the Relay, and then the task will be started on the nodes.
+> Selected nodes will retrieve task parameters from the Relay and then execute the tasks locally.
 >
-> When the images/texts are generated, the nodes will generate proofs and send them to the Blockchain, who will verify the correctness of the proofs, and transfer the tokens to the nodes after the verification.
+> When images or texts are generated, nodes will create proofs and send them to the blockchain. The blockchain will verify the correctness of these proofs and transfer tokens to the nodes upon successful verification.
 >
-> The nodes will also upload the result images/texts to the Relay, who will compare the results with the proofs on-chain to make sure the results are correct.
+> The nodes will upload the result images/texts to the Relay, which will compare the results with the on-chain proofs to verify their accuracy.
 
-After sending the task arguments to the Relay, the application should simply wait for the `TaskSuccess` event from the Blockchain. When the event arrives, the application could get the images/texts from the Relay, and the task workflow is completed.
+After sending the task parameters to the Relay, the application should wait for the `TaskSuccess` event from the blockchain. Once the event is received, the application can retrieve the images or texts from the Relay, marking the completion of the task workflow.
 
-Note that there is no need to verify the results by the application itself, since they have been verified by the Relay already.
+The results have already been verified by the Relay, so no further verification by the application is necessary.
 
-A more detailed and complete workflow involving all the network participants can be found in the task lifecycle:
+For a detailed workflow involving all network participants, please refer to the task lifecycle document:
 
 {% content-ref url="../system-design/task-lifecycle.md" %}
 [task-lifecycle.md](../system-design/task-lifecycle.md)
@@ -141,14 +143,15 @@ The application should always validate the task arguments against the schema bef
 
 After the JSON string of the task arguments is prepared, the application should construct and send the `CreateTask` transaction to the Blockchain.
 
-`CreateTask` method of the [Task Contract](https://github.com/crynux-ai/crynux-contracts/blob/75a2f7014d9d797df9721be17161ec32c745b9dd/contracts/Task.sol#L75) has four arguments:
+`CreateTask` method of the [Task Contract](https://github.com/crynux-ai/crynux-contracts/blob/75a2f7014d9d797df9721be17161ec32c745b9dd/contracts/Task.sol#L75) has five arguments:
 
 ```solidity
 function createTask(
     uint taskType,
     bytes32 taskHash,
     bytes32 dataHash,
-    uint vramLimit
+    uint vramLimit,
+    uint cap
 )
 ```
 
@@ -156,6 +159,8 @@ function createTask(
 * `taskHash` is the keccak256 hash of the JSON string of the task arguments.
 * `dataHash` is reserved for the future features and is not used right now. The application could just pass 32 zero bytes to it.
 * `vramLimit` indicates the minimum VRAM required to execute the task. The Crynux Network will select the capable nodes based on this value.
+
+In addition to the arguments listed above, the task fee should be set in the `value` field of the transaction. The application is free to choose any task fee value, a higher task fee will result in a faster task execution, while lower task fee will result in longer waiting time.
 
 The source code that implements the invocation of the `CreateTask` method in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/blockchain/task.go#L32).
 
