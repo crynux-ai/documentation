@@ -6,7 +6,7 @@ description: Crynux Network Overview
 
 Crynux Network is illustrated in the graph below:
 
-<figure><img src="../.gitbook/assets/hydrogen-architecture.png" alt=""><figcaption><p>The Hydrogen Network Architecture</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/hydrogen-architecture.png" alt=""><figcaption><p>The Crynux Network Architecture</p></figcaption></figure>
 
 The core participants in the network are the **Nodes** and the **Applications**. The nodes provide computing power to the network, executing the Stable Diffusion image generation tasks from the applications, and receive tokens as the reward. The applications send the tasks to the nodes, paying with tokens, and get the images back.
 
