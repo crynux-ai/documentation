@@ -39,7 +39,7 @@
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
-* [Crynux Network SDK](application-development/crynux-network-sdk.md)
+* [Crynux SDK](application-development/crynux-sdk.md)
 
 ## Crynux Token
 
