@@ -46,59 +46,25 @@ If there are not enough candidate nodes to be selected from, the task will be ad
 
 ## Task Queue
 
-When a task is put into the task queue, the task will be graded according to their VRAM requirements and the task type.
+Tasks added to the queue are grouped based on VRAM and GPU model requirements. Initially, tasks are sorted into VRAM groups (e.g., 16GB, 24GB). Within these groups, tasks are further categorized by GPU model (e.g., 4090, A100). If no specific GPU model is required, tasks are placed in an "Any" group.
 
-### Task Grading
-
-The tasks are grouped into the GPT task group and the Stable Diffusion task group first. Then based on the VRAM requirements specified in the task arguments, the tasks are grouped into several groups of VRAM sizes, such as the 16GB group and the 24GB group.
-
-The tasks in the same VRAM size group will be sorted according to the **task value**. Whenever a task is taken from the task queue, it is always the task with the highest value that is taken first. The task value is estimated as "CNX per second" which is calculated by dividing the task fee by the estimated task execution time. The details about task value estimation could be found in the following doc:
+Tasks within the same group are sorted by **task value**. When a task is taken from the queue, the task with the highest value is prioritized. The task value, represented as "CNX per second", is calculated by dividing the task fee by the estimated execution time. For more details on task value estimation, refer to the following document:
 
 {% content-ref url="task-pricing.md" %}
 [task-pricing.md](task-pricing.md)
 {% endcontent-ref %}
 
-### Select the Best Task from the Task Queue for the Newly Available Node
+### Dequeue a Task for a Newly Available Node
 
 The blockchain will try to retrieve a task from the task queue when a new node becomes available. Which will happen when one of the following situations occurs:
 
-* A running task is finished. Which will cause 3 nodes to be released.
+* A running task is finished.
 * A new node joins the network.
+* A node resumes from the paused status.
 
-> When a new task is sent to the blockchain, the blockchain will try to dispatch the task immediately to the nodes regardless of whether the task queue is empty or not. There is only one possibility that the tasks are pending in the task queue: there are not enough **matching** nodes to execute the tasks. There might still be available nodes left in the network while the task queue is not empty, so that there is a chance that the new task could still find matching nodes.
+> When a new task is sent to the blockchain, it attempts to dispatch the task immediately to the nodes, regardless of the task queue’s status. Tasks remain in the queue only if there are not enough **matching** nodes available. Even if the task queue isn't empty, there might still be available nodes in the network matching the new task, providing a chance for the new task to execute first.
 
-Considering the nature of the sequential execution of the blockchain, when a new node becomes available while the task queue is not empty:
 
-* At most one task could be executed in the whole network.
-* If a task can be executed, there are only 3 nodes available to execute the task, including the newly available one.
-
-Given the observation above, the strategy to find the best task and the nodes to execute it could be simplified to the following two steps:
-
-#### 1. Find the best combination of 3 nodes
-
-Start from the newly available node, two types of the combination should be examined:&#x20;
-
-**Three nodes in the same card model**
-
-If 2 other nodes could be found which are in the same card model group of the newly available node, a new GPT task might be able to be executed.
-
-**Three nodes that have the possibly largest VRAM**
-
-Find the possible combination of 3 nodes, including the newly available node, that have the largest minimum VRAM. The largest minimum VRAM of the combination gives the best opportunity to find a matching Stable Diffusion task in the task queue.
-
-#### 2.Find the best task to execute
-
-Two steps are required to find the task with the highest value to execute:
-
-**Firstly, find all the candidate VRAM size groups of the tasks that can be executed by the node combinations.**
-
-If there is a combination of 3 nodes that are in the same card model, all the VRAM size groups that is equal or lower than the VRAM size of the node combination, in both the GPT group and the SD group, should be included in the candidate groups.
-
-Additionally, if there is a combination of 3 nodes that are not in the same card model. Some VRAM size groups of the SD task group should be included in the candidate groups similarly.
-
-**Secondly, find the task with the best value among the VRAM size groups selected above.**
-
-In each VRAM size group, the tasks should have already been sorted by the task value, it is easy to find the task with the largest value inside the group. The task is then compared to the tasks that are taken from the other groups to find the best task among all the groups, which is the task that will be executed.
 
 ### Max Size of the Task Queue
 
