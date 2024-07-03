@@ -38,7 +38,7 @@
 * [GPT Task](application-development/gpt-task.md)
 * [Stable Diffusion Task](application-development/stable-diffusion-task.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
-* [API Specifications of the Relay](application-development/api-specifications-of-the-relay.md)
+* [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)
 
 ## Crynux Token
