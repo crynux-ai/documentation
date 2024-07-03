@@ -43,7 +43,7 @@ sequenceDiagram
     deactivate R
 ```
 
-The application initiates the workflow by calling the `CreateTask` method of the smart contract. This method receives task parameters related to task type and VRAM requirements, which the network uses to select suitable nodes.
+The application initiates the workflow by calling the `CreateTask` method of the smart contract. This method receives task parameters related to the task criteria, such as the task type and VRAM requirements, which the network uses to select suitable nodes.
 
 The application transfers the task fee to the contract address by specifying it in the transaction's `value` field. Upon task completion, tokens are sent to the nodes. If the task fails, the fee is refunded to the application's wallet.
 
@@ -73,9 +73,9 @@ The Image Generator: [https://ig.crynux.ai](https://ig.crynux.ai)
 
 The AI Chatbot: [https://chat.crynux.ai](https://chat.crynux.ai)
 
-Both applications are using the Crynux Bridge as the backend. Crynux Bridge has a built-in wallet to pay for the task fees, so that the application doesn't need to prepare a wallet itself. The Crynux Bridge also isolates the Blockchain and Relay from the applications. The applications could simply submit the task arguments through API, and wait for the result without doing anything else.
+Both applications utilize the Crynux Bridge as the backend. The Crynux Bridge includes a built-in wallet to cover task fees, eliminating the need for applications to manage their own wallets. Additionally, it isolates the blockchain and Relay from the applications. This allows applications to simply submit task arguments via API and await the result without further action.
 
-The source code of the Crynux Bridge can be found at:
+The Crynux Bridge can be used by all the applications. The source code of the Crynux Bridge can be found at:
 
 {% embed url="https://github.com/crynux-ai/crynux-bridge" %}
 
