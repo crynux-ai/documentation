@@ -1,26 +1,24 @@
+---
+description: Find the best node to execute the task
+---
+
 # Task Dispatching
 
-When a task is created on the blockchain, the blockchain will try to find the available nodes that are suitable to execute the task based on the task grading. The task is graded according to the task type and its VRAM requirement, all the nodes that are capable to execute the task will become the candidates for the random node selection.
+When creating a task, the application can specify criteria such as the minimum VRAM requirement or restrict the node selection to a specific GPU model. The blockchain will identify all eligible nodes that meet the criteria and then randomly select one from these candidates.
 
-If no suitable nodes are available, the task will be sent to the task queue to wait for more available nodes. When enough nodes are released from the last task, the task with the highest value will be selected from the task queue, and sent to the nodes.
+If no available nodes meet the criteria, the task will be added to the queue to await more nodes. When a node satisfying the criteria is freed, the highest-price task from the queue will be assigned to this available node.
 
-The QoS scores are also taken into account during the random node selection. If a node is not providing high quality service, i.e. frequently timeout on its tasks, the QoS scores of the node will be low, and this node will have a low probability to be selected for the tasks.
+To optimize task execution speed while maintaining consensus strength, nodes are selected randomly from candidates with different probabilities. Factors influencing a node's selection probability include its local model cache and QoS score. Nodes with faster GPUs, superior networks, fewer timeouts, or locally cached models needed for the task will have a higher likelihood of selection.
+
+The details of the task dispatching algorithm are described in the following sections.
 
 <figure><img src="../.gitbook/assets/fd705dac6f56dab6fcc30062a56561d.png" alt=""><figcaption><p>Task Dispatching Overview</p></figcaption></figure>
 
 ## Assigning Task to the Nodes
 
-The GPT task requires 3 nodes with the same model of cards, but the Stable Diffusion task requires only the minimum VRAM. To dispatch tasks efficiently, the nodes are graded according to both the card model and the VRAM size. The blockchain will then match the tasks and the nodes according to their grading.
+The nodes on the blockchain are first grouped by their card model, such as the Nvidia RTX 4090 group and the RTX 3080 group. These card model groups are then further grouped by their VRAM size. For example, the 16GB VRAM group may include the RTX 4080, RTX 3080, and RTX 4000 Ada groups. The blockchain will use these card groups to select candidates for a task.
 
-If the VRAM requirement is set too low in the task argument, the task might be sent to a node that is not able to execute the task, and the task will be aborted eventually.
-
-### Node Grading
-
-The nodes are grouped based on their card model first, such as Nvidia RTX 4090 group and the 3080 group. Then the card model groups are grouped again according to their VRAM size. For example, the 16GB VRAM group may contain the RTX 4080 group, RTX 3080 group and the RTX 4000 Ada group. The blockchain will use the card groups to select candidates for a task.&#x20;
-
-### Node Selection using the Groups
-
-If the application doesn't set `Required GPU` in the task parameters, the nodes with VRAM equal to or larger than the task's requirement are chosen as candidates. Otherwise, only the nodes with the required GPU model will be selected as the candidates.
+If the application sets `Required GPU` in the task parameters, only the group with the required GPU model will be selected as the candidates. Otherwise, all the groups with VRAM equal to or larger than the task's requirement are chosen as candidates.
 
 The node will then be randomly selected from all candidates based on their selection probability.
 
@@ -44,7 +42,7 @@ Details about the QoS scores can be found in the following document:
 [quality-of-service-qos.md](quality-of-service-qos.md)
 {% endcontent-ref %}
 
-If there are not enough candidate nodes to be selected from, the task will be put into the task queue and wait for more nodes to become available.
+If there are not enough candidate nodes to be selected from, the task will be added to the task queue and wait for more nodes to become available.
 
 ## Task Queue
 
