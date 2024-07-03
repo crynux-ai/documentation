@@ -73,7 +73,7 @@ The Image Generator: [https://ig.crynux.ai](https://ig.crynux.ai)
 
 The AI Chatbot: [https://chat.crynux.ai](https://chat.crynux.ai)
 
-Both applications utilize the Crynux Bridge as the backend. The Crynux Bridge includes a built-in wallet to cover task fees, eliminating the need for applications to manage their own wallets. Additionally, it isolates the blockchain and Relay from the applications. This allows applications to simply submit task arguments via API and await the result without further action.
+Both applications utilize the Crynux Bridge as the backend. The Crynux Bridge includes a built-in wallet to cover task fees, eliminating the need for applications to manage their own wallets. Additionally, it isolates the blockchain and Relay from the applications. This allows applications to simply submit task parameters via API and await the result without further action.
 
 The Crynux Bridge can be used by all the applications. The source code of the Crynux Bridge can be found at:
 
@@ -97,10 +97,10 @@ Crynux Network is currently deployed on the L2 blockchain of Dymension as a test
 
 An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.
 
-Enough Test CNX tokens must be present in the wallet. The tokens will be used to pay for both the task fees and the transaction fees. The application should keep monitoring the balance of the wallet, and notify the admins to transfer more tokens into the wallet before it is not enough to pay for the next task.
+Ensure the wallet has sufficient Test CNX tokens to cover both task and transaction fees. The application should continuously monitor the wallet balance and alert admins to replenish tokens before it drops below the required amount for upcoming tasks.
 
 {% hint style="info" %}
-For the DApp, the application wallet is not required. The DApp will construct the transaction, and send it to the Metamask to be signed directly by the user, in the browser.
+In the DApp, an application wallet is not required. The DApp will create the transaction and send it to Metamask for the user to sign directly in the browser.
 {% endhint %}
 
 ### 2. Create the Task on the Blockchain
