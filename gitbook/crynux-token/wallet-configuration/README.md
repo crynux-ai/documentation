@@ -14,12 +14,13 @@ The base layer token (ETH in the Rollapp) is used as the Crynux Token, which can
 
 The network parameters are given in the following table:
 
-| Item          | Value                                                                                                          |
-| ------------- | -------------------------------------------------------------------------------------------------------------- |
-| JSON RPC      | [https://json-rpc.crynux.evm.ra.blumbus.noisnemyd.xyz/](https://json-rpc.crynux.evm.ra.blumbus.noisnemyd.xyz/) |
-| Chain ID      | crynux\_10000-1                                                                                                |
-| Token Symbol  | CNX                                                                                                            |
-| Token Decimal | 18                                                                                                             |
+| Item           | Value                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------- |
+| JSON RPC       | [https://json-rpc.crynux.evm.ra.blumbus.noisnemyd.xyz](https://json-rpc.crynux.evm.ra.blumbus.noisnemyd.xyz/) |
+| Chain ID       | 10000                                                                                                         |
+| Token Symbol   | CNX                                                                                                           |
+| Decimal        | 18                                                                                                            |
+| Block Explorer | [https://bb.dym.fyi/r/dev-crynux](https://bb.dym.fyi/r/dev-crynux)                                            |
 
 All ETH-compatible wallets can access tokens using the configuration provided. Tutorials for configuring several popular wallets are included in the documents below.
 
