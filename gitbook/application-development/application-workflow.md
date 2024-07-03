@@ -226,23 +226,29 @@ The reference implementation of the signing method in Crynux Bridge [can be foun
 
 ### 4. Wait for the Task to Finish
 
-When the task is finished, either the `TaskSuccess` or the `TaskAborted` event will be emitted. If the `TaskSuccess` event is emitted, the application could get the result from the Relay. If the `TaskAborted` event is emitted, the task is failed.
+When the task finishes, either the `TaskSuccess` or `TaskAborted` event will be emitted. If the `TaskSuccess` event is emitted, the application can retrieve the result from the Relay. If the `TaskAborted` event is emitted, indicating a failure, the application can retry by creating a new task.
 
-Just like the task creation invocation, there are also several reasons why the task would fail during the execution. Might be that the task arguments do not pass the schema validation of the nodes, or that some nodes are not executing the consensus protocol correctly, or that the task is taking too long to finish on a single node. The exact reason is included as an argument in the emitted event.&#x20;
+Several reasons can cause task execution failure. Task arguments might not pass node schema validation, some nodes might not run the consensus protocol correctly, or a task might take too long on a single node. The exact reason is included as an argument in the emitted event.
 
-If the task is aborted, in some cases the CNX tokens will be returned to the application wallet, while in other cases the tokens are still paid to the nodes even the task is not completed, depending on who to blame for the task failure.
+If a task is aborted, CNX tokens may either be returned to the application wallet or still paid to the nodes. This depends on who is at fault for the task's failure.
 
-There are two ways the application could monitor the blockchain for the relevant events. The first method is to keep tracking the new blocks, and filter the blocks for these two kinds of events.
+There are two ways the application could monitor the blockchain for relevant events.
 
-The tracking method requires the application to properly handle the block continuity, especially when the application could crash due to some unhandled bugs. And if the application has been stopped for a long time, it may take quite a while to catch up with the new blocks.
+#### Tracking new blocks and filtering the target events
 
-The other method is to extract the task ID from the task creation transaction and save it, and periodically query the blockchain for the newest task status. The block does not need to be tracked anymore in this method. The efficiency is lower than the previous method since a lot of meaningless queries should be made.
+The first method involves continuously tracking new blocks and filtering them for these two types of events.
+
+To ensure reliable block tracking, the application must handle potential crashes caused by unhandled bugs. Additionally, extended downtime can result in delays when catching up with new blocks.
+
+#### Query for the task status periodically
+
+Another approach is to extract the task ID from the creation transaction, store it, and periodically check the blockchain for the latest task status. This method eliminates the need to track the block, but it is less efficient due to a high volume of unnecessary queries.
 
 The Crynux Bridge uses the first method, the source code of the block synchronization [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/tasks/sync\_block.go).
 
 ### 5. Fetch the result from the Relay
 
-The last step is to get the actual images/texts from the Relay. This is done by calling the following API of the Relay:
+The final step is to retrieve the actual images or texts from the Relay. This can be accomplished by calling the Relay's API as follows:
 
 #### Get images
 
@@ -259,5 +265,7 @@ The API endpoint to get text results from the Relay is the same as the endpoint 
 {% hint style="info" %}
 When the application accesses the above URL after the `TaskSuccess` event is received, it could keep getting `404 not found` for a short while before it gets the correct results. The reason is that the node will start to upload images/texts to the Relay only after the `TaskSuccess` event is received. So before the uploading is done, the application can not find the results on the Relay. Several times of retrying is required at this place.
 {% endhint %}
+
+When the application accesses the URL after receiving the `TaskSuccess` event, it might encounter `404 not found` errors temporarily. This occurs because the node initiates the upload of images/texts to the Relay only after the `TaskSuccess` event is triggered. Therefore, the results won't be available on the Relay until the upload is complete. Retrying the request several times may be necessary.
 
 The source code where the Crynux Bridge downloads the images is [located here](https://github.com/crynux-ai/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/relay/inference\_task.go#L93).
