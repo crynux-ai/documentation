@@ -162,7 +162,7 @@ After the computation is finished, the node will calculate the `Sim Hash` of the
 
 The node cannot send the task result to the DA/Relay service at this stage. If the result is transmitted, the application could retrieve it prematurely and disrupt subsequent processes. The blockchain lacks mechanisms to identify and penalize the application in such scenarios.
 
-When the `Sim Hash` is sent, the blockchain emits `TaskResultReady` event to notify the application. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the blockchain will emit `TaskErrorReported`. In both cases, the task enters the **Task Validation** stage.
+When the `Sim Hash` is sent, the blockchain emits `TaskResultReady` event to notify the application. If the `Task Parameters` are invalid, the node will report error to the blockchain, and the blockchain will emit `TaskErrorReported`. In both cases, the task enters the **Result Validation** stage.
 
 ## Result Validation
 
