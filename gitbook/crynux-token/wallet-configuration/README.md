@@ -1,4 +1,8 @@
-# Wallet Config
+---
+description: Use a wallet to transfer the test CNX tokens
+---
+
+# Wallet Configuration
 
 {% hint style="info" %}
 Crynux is currently in its early stage testnet. All configurations below are subject to significant changes. Please monitor this page for updates and adjust your wallet settings accordingly if you're using a wallet.
