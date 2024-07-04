@@ -43,7 +43,7 @@ $ cat "0xabcd...23cd" >> privkey.txt
 
 Crynux Bridge relies on a database to store data. A MySQL instance is configured in the Docker Compose file by default.
 
-If you need to use another database instance, remove the service section of MySQL in the `docker-compose.yml` file, and modify `config/config.yml` to use another database instance:
+If the default configuration meets your needs, no further action is required. If you need to use another database instance, remove the service section of MySQL in the `docker-compose.yml` file, and modify `config/config.yml` to use another database instance:
 
 ```yaml
 # config/config.yml
