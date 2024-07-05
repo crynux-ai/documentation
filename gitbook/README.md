@@ -4,17 +4,31 @@ description: Truly Permissionless DeAI on GPU@home
 
 # Crynux Network
 
-Crynux is the truly permissionless AI infrastructure everyone can join and use right away.
+Crynux is the truly permissionless AI infrastructure on GPU@edge.
 
-The key component of Crynux is a robust consensus protocol that enables the permissionless joining and using of the decentralized network by millions. The ability to identify and penalize all the malicious behaviors ensures the ecosystem's sustainability and facilitates healthy growth in a long term.
+#### Truly Permissionless
 
-As the foundation layer, Crynux Network is composed of the decentralized nodes who contribute their spare AI computing power to the network in exchange for token rewards. The computing power is then grouped and dispatched to run the AI tasks from the developers and applications.
+The key component of Crynux is a robust consensus protocol that enables the permissionless joining and using of the decentralized network by millions.
 
-On top of the computing network, a decentralized model/dataset hosting service is provided to better support the various AI use cases.
+The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The applications could easily connect to the Crynux Network using API, use Crynux Network to generate images or texts, and bring AI power to their users with no extra need for the hardware and development.
+The innovative vssML technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
-The developers could write codes to train/fine-tune their models on the dataset provided by the network, using the computing power of the network. The developed model could also be hosted on the network as a service for others.
+#### Production-Ready AI Services Cloud, on Edge
+
+As the foundation layer, Crynux Network is composed of the decentralized nodes who contribute their spare AI computing power to the network in exchange for token rewards. The computing power is then dispatched to run the AI tasks from the developers and applications.
+
+Crynux Network brings AI power to the applications at no extra cost. The applications could run tasks such as GPT text generation and Stable Diffusion image generation using various models hosted on the Crynux Network. The integration could be implemented in one-line of code using Crynux SDK.
+
+The model developers use Crynux Network to train/fine-tune their models, and provide models as a service for applications and other developers, earning from the usage of their models.
+
+#### DeFi Ecosystem built on the Tokenized Model and Data Assets
+
+Building on top of the AI services, an innovative DeFi ecosystem could emerge around "Model Assets" and "Data Assets". All the current DeFi products could be reimagined using the brand-new assets as their base assets.
+
+For example, the developers of AI models can tokenize the models using Crynux, sharing the rewards from model usage with the model token holders.
+
+The model tokens can also be used as collateral in other DeFi products which are deployed on the Crynux Rollapp, or on other Blockchains through cross-chain communication.
 
 By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
@@ -56,32 +70,7 @@ To read more about the Helium Network release, go to the following page:
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table>
-    <thead>
-        <tr>
-            <th width="131">Platform</th>
-            <th width="261">Requirements</th>
-            <th data-type="content-ref">Download Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1XtjmAWcdfr8Ogxfq56oKyEgCk_bkz3zj&export=download">crynux-node-helium-v2.0.7-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg">crynux-node-helium-v2.0.7-mac-arm64-signed.dmg</a></td>
-        </tr>
-        <tr>
-            <td>Linux</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1co5v58oN9fbBYn74sHY5CpzsUyBVN3Ij&export=download">crynux-node-helium-v2.0.7-linux-bin-x64.tar.gz</a></td>
-        </tr>
-    </tbody>
-</table>
+<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1XtjmAWcdfr8Ogxfq56oKyEgCk_bkz3zj&#x26;export=download">https://drive.google.com/uc?id=1XtjmAWcdfr8Ogxfq56oKyEgCk_bkz3zj&#x26;export=download</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.0.7/crynux-node-helium-v2.0.7-mac-arm64-signed.dmg</a></td></tr><tr><td>Linux</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1co5v58oN9fbBYn74sHY5CpzsUyBVN3Ij&#x26;export=download">https://drive.google.com/uc?id=1co5v58oN9fbBYn74sHY5CpzsUyBVN3Ij&#x26;export=download</a></td></tr></tbody></table>
 
 To start a node on your Windows computer:
 
