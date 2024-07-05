@@ -1,24 +1,16 @@
 # Quality of Service (QoS)
 
-To encourage the nodes to provide better service to the network, i.e. faster response time, faster execution time and shorter timeout period, several QoS (Quality of Service) scores are introduced to evaluate the overall quality of the node:
+To encourage the nodes to provide better service to the network, i.e. faster response time, faster execution time and less timeouts, QoS (Quality of Service) score is introduced to evaluate the overall quality of the node:
 
-* the VRAM size
-* the timeout setting
-* the submission speed
+The QoS score of a node is continuously updated while the node is executing tasks. The score is then directly utilized to influence several key aspects of the network's operation.
 
-The QoS score of a node is continuously updated when the node is executing tasks. The scores are then directly utilized to influence several key aspects of the network's operation.
+By giving more advantages to the nodes with higher QoS score, the nodes are encouraged to improve their hardware and network environment, thus improving the overall service quality of the whole network to the applications.
 
-By giving more advantages to the nodes with higher QoS scores, the nodes are encouraged to improve their hardware and network environment, thus improving the overall service quality of the whole network to the applications.
+## QoS Score Usage
 
-## QoS Scores Usage
+### Node Selection Probability
 
-### Task Fee Distribution
-
-The task fee distribution among the 3 participating nodes is heavily influenced by the Submission Speed score. Nodes with higher scores are rewarded with a larger portion of the task fees, encouraging nodes to not only complete tasks accurately but also as quickly as possible. This distribution mechanism ensures that nodes are motivated to maintain high performance to maximize their earnings.
-
-### Penalization on the Node Selection Probability
-
-Nodes with consistently low Submission Speed score will face penalization in terms of their probability of being selected for future tasks. This approach ensures that higher-performing nodes are given priority in task allocation, thereby maintaining the overall quality and efficiency of the network.
+Nodes with consistently low QoS score will face penalization in terms of their probability of being selected for future tasks. This approach ensures that higher-performing nodes are given priority in task allocation, thereby maintaining the overall quality and efficiency of the network.
 
 ### Bad Node Kicking Out
 
@@ -30,35 +22,15 @@ Now that we have the Submission Speed score, which will drop dramatically during
 
 ### Token Incentivization Distribution
 
-A combination (weighed sum) of all the 3 QoS scores is used to decide the portion of the token incentivization given to each node in the node mining mechanism. A node with higher QoS scores will get more tokens as extra reward from the node mining. The details can be found in the following document:
+A combination (weighed sum) of all the 3 QoS scores is used to decide the portion of the token incentivization given to each node in the node mining mechanism. A node with higher QoS scores will get more tokens as extra reward from the node mining.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+## QoS Score Calculation
 
-## QoS Scores Calculation
+The QoS score of a node at a certain time is calculated using the node data (mostly task execution related) collected in a time window. The size of the time windows vary among different use cases.
 
-The QoS scores of a node at a certain time are calculated using the node data (mostly task execution related) collected in a time window. The size of the time windows vary among different use cases.
+<figure><img src="../.gitbook/assets/d4de536f66f20c84f0430de0de3332f.png" alt=""><figcaption></figcaption></figure>
 
-Some of the use cases require the scores exist even if no task has been executed in the whole time window. To support such use cases, the Blockchain will randomly send system generated tasks to the nodes at random times, to ensure that every node gets at least 1 task at each time window.
-
-<figure><img src="../.gitbook/assets/1f6e4c9f394ff73bc25e07b4940003f.png" alt=""><figcaption><p>QoS Score Calculation</p></figcaption></figure>
-
-### The VRAM Size
-
-The VRAM size is a critical factor that determines how many types of the AI tasks a node could support. For example, an SDXL image generation task will require roughly 12GB of VRAM. If running on an NVIDIA graphic card that has only 6GB of VRAM, the task will fail with a CUDA OOM error.
-
-Comparing to the VRAM, the GPU frequency (and bandwidth) affects only the speed of the execution. For example, both NVIDIA RTX 4060 and RTX 3060 have the same VRAM size of 8GB. They will be able to run the same set of the tasks in the Crynux Network, it is just the execution time will be longer for the old 3060 card.
-
-The VRAM size score $$R_i$$ is calculated by dividing the VRAM size of the node by the max VRAM size in the network:
-
-$$
-R_i = \frac{V_i}{max(V_j | j \in N )}
-$$
-
-Where $$V_i$$ is the VRAM size of the $$i$$th node in bytes, and $$N$$ is the collection of all the nodes in the network.
-
-### The Timeout Setting
+### Timeouts
 
 According to the [Consensus Protocol](consensus-protocol.md), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the percentage rate by increasing the timeout period and the staking amount.
 
@@ -74,7 +46,7 @@ $$
 
 $$O_i$$ is the timeout period in seconds, and $$O_{min}$$ is the minimum timeout period allowed by the network.
 
-### The Submission Speed
+### Submission Speed
 
 There are quite a lot of factors that affect the submission speed of the node. Such as the network quality, the GPU frequency, the number of the tensor cores, and even the system memory speed. Crynux Network encourages faster submission of the tasks to improve the application's experience. By introducing competition between the nodes who are selected for the same task, giving different rewards to the nodes according to their submission order, Crynux Network rewards the improvement the node has made on all the submission speed related factors as a whole.
 
@@ -107,5 +79,3 @@ Finally, the score a node gets for the submission speed factor is calculated by 
 $$
 B_i = \frac{ {ns}_i} {max({ns}_j | j \in N )}
 $$
-
-##
