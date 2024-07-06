@@ -20,13 +20,13 @@ The model developers use Crynux Network to train/fine-tune their models, and pro
 
 Mobile devices could also be AI-enhanced by running larger and faster models beyond their current capabilities.
 
-#### DeFi Ecosystem built on the Tokenized Model and Data Assets
+#### Modular DeFi Ecosystem built on the Tokenized Model and Data Assets
 
-Building on top of the AI services, an innovative DeFi ecosystem could emerge around "Model Assets" and "Data Assets". All the current DeFi products could be reimagined using the brand-new assets as their base assets.
+Building on top of the AI services, an innovative DeFi ecosystem could emerge around "Model Assets" and "Data Assets". All the current DeFi applications could be reimagined using the brand-new assets as their base assets.
 
 For example, the developers of AI models can tokenize the models using Crynux, sharing the rewards from model usage with the model token holders.
 
-The model tokens can also be used as collateral in other DeFi products which are deployed on the Crynux Blockchain, or on other Blockchains through cross-chain communication.
+Model tokens can be used as collateral in various DeFi applications. These applications can be deployed directly on the Crynux Blockchain or as modular L2 chains that connect to Crynux via cross-chain communication. Existing DeFi applications on other blockchains are also supported.
 
 By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
