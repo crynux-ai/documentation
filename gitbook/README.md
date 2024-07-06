@@ -14,9 +14,9 @@ The innovative [vssML](system-design/verifiable-secret-sampling.md) technology s
 
 As the foundation layer, Crynux Network is composed of the edge nodes, including home computers and mobile devices, who provide hardware to the network in exchange for tokens.
 
-The applications could run tasks such as GPT text generation and Stable Diffusion image generation using various models hosted on the Crynux Network. The integration could be implemented in one-line of code using Crynux SDK.
+Applications could run tasks such as GPT text generation and Stable Diffusion image generation using various models hosted on the Crynux Network. The integration could be implemented in one-line of code using Crynux SDK.
 
-The model developers use Crynux Network to train/fine-tune their models, and provide models as a service for applications and other developers, earning from the usage of their models.
+Model developers use Crynux Network to train/fine-tune their models, and provide models as a service for applications and other developers, earning from the usage of their models.
 
 Mobile devices could also be AI-enhanced by running larger and faster models beyond their current capabilities.
 
