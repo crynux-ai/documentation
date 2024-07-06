@@ -20,7 +20,7 @@ The model developers use Crynux Network to train/fine-tune their models, and pro
 
 Mobile devices could also be AI-enhanced by running larger and faster models beyond their current capabilities.
 
-#### Modular DeFi Ecosystem built on the Tokenized Model and Data Assets
+#### DeFi Ecosystem built on the Tokenized Model and Data Assets
 
 Building on top of the AI services, an innovative DeFi ecosystem could emerge around "Model Assets" and "Data Assets". All the current DeFi applications could be reimagined using the brand-new assets as their base assets.
 
