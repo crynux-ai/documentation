@@ -1,6 +1,6 @@
 # Crynux Network
 
-Crynux is the truly permissionless AI infrastructure on GPU@edge.
+Crynux is the truly permissionless #DeAI on GPU@edge.
 
 #### Truly Permissionless
 
