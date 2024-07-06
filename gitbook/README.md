@@ -26,7 +26,7 @@ Building on top of the AI services, an innovative DeFi ecosystem could emerge ar
 
 For example, the developers of AI models can tokenize the models using Crynux, sharing the rewards from model usage with the model token holders.
 
-The model tokens can also be used as collateral in other DeFi products which are deployed on the Crynux Rollapp, or on other Blockchains through cross-chain communication.
+The model tokens can also be used as collateral in other DeFi products which are deployed on the Crynux Blockchain, or on other Blockchains through cross-chain communication.
 
 By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
