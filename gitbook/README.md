@@ -1,7 +1,3 @@
----
-description: Truly Permissionless DeAI on GPU@edge
----
-
 # Crynux Network
 
 Crynux is the truly permissionless AI infrastructure on GPU@edge.
@@ -12,7 +8,7 @@ The key component of Crynux is a robust consensus protocol that enables the perm
 
 The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The innovative vssML technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
+The innovative [vssML](system-design/verifiable-secret-sampling.md) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
 #### Production-Ready AI Services Cloud, on Edge
 
@@ -22,7 +18,7 @@ The applications could run tasks such as GPT text generation and Stable Diffusio
 
 The model developers use Crynux Network to train/fine-tune their models, and provide models as a service for applications and other developers, earning from the usage of their models.
 
-The mobile devices could also be enhanced to run larger models beyond its own capability.
+Mobile devices could also be AI-enhanced by running larger and faster models beyond their current capabilities.
 
 #### DeFi Ecosystem built on the Tokenized Model and Data Assets
 
