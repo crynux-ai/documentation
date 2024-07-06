@@ -1,5 +1,5 @@
 ---
-description: Truly Permissionless DeAI on GPU@home
+description: Truly Permissionless DeAI on GPU@edge
 ---
 
 # Crynux Network
@@ -16,11 +16,13 @@ The innovative vssML technology significantly enhances network efficiency, rival
 
 #### Production-Ready AI Services Cloud, on Edge
 
-As the foundation layer, Crynux Network is composed of the decentralized nodes who contribute their spare AI computing power to the network in exchange for token rewards. The computing power is then dispatched to run the AI tasks from the developers and applications.
+As the foundation layer, Crynux Network is composed of the edge nodes, including home computers and mobile devices, who provide hardware to the network in exchange for tokens.
 
-Crynux Network brings AI power to the applications at no extra cost. The applications could run tasks such as GPT text generation and Stable Diffusion image generation using various models hosted on the Crynux Network. The integration could be implemented in one-line of code using Crynux SDK.
+The applications could run tasks such as GPT text generation and Stable Diffusion image generation using various models hosted on the Crynux Network. The integration could be implemented in one-line of code using Crynux SDK.
 
 The model developers use Crynux Network to train/fine-tune their models, and provide models as a service for applications and other developers, earning from the usage of their models.
+
+The mobile devices could also be enhanced to run larger models beyond its own capability.
 
 #### DeFi Ecosystem built on the Tokenized Model and Data Assets
 
