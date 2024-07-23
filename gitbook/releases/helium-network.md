@@ -101,9 +101,7 @@ The block explorer of the testnet rollapp can be accessed at:
 | QoS                | 0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb |
 | Network Statistics | 0xC2c060f8C46640394E0937D75Ea977207E6df130 |
 
-The test CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux:
-
-{% embed url="https://docs.crynux.ai/happyaigen#bind-the-wallet-address" %}
+The test CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux.
 
 ## The Relay In Use
 

@@ -70,22 +70,10 @@ The Crynux Bridge is serving as the backend of the Image Generator. The bridge t
 
 ## Node Hosting
 
-The contributor of the spared computation power could join the network by hosting a node on the local computer. The node could be easily started using Docker, in just a few steps.
+The contributor of the spared computation power could join the network by hosting a node on the local computer. The node could be easily started in just a few steps:
 
-#### Home Computers
-
-A web user interface is provided inside the node, for the users who are hosting the node on the home computers. The WebUI could be used to monitor the running status of the node, and to control the node to join or quit the network. A getting started guide can be found in the follow document:
-
-{% content-ref url="../node-hosting/start-a-node/start-a-node-windows.md" %}
-[start-a-node-windows.md](../node-hosting/start-a-node/start-a-node-windows.md)
-{% endcontent-ref %}
-
-#### Servers
-
-For the server operators, the node could be hosted in a headless mode where no WebUI is accessible. The node will automatically join the network on startup, and quit the network before termination. Follow the document below to start a node in headless mode:
-
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../node-hosting/start-a-node/" %}
+[start-a-node](../node-hosting/start-a-node/)
 {% endcontent-ref %}
 
 ## Consensus Protocol
