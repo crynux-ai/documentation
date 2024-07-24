@@ -1,10 +1,11 @@
 ---
-description: Truly Permissionless DeAI on GPU@home
+description: Truly Permissionless DeAI on GPU@edge
 ---
 
 # Crynux Network
 
-Crynux is the truly permissionless #DeAI on GPU@edge.
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk)
+[![X](https://img.shields.io/badge/@crynuxai-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxai)
 
 ### Truly Permissionless
 
@@ -124,7 +125,7 @@ Checkout our latest research paper about Crynux Network here:
 
 Join the Crynux community on Discord:
 
-{% embed url="https://discord.gg/y8YKxb7uZk" %}
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk)
 
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
