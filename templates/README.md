@@ -1,5 +1,5 @@
 ---
-description: Truly permissionless #DeAI on GPU@edge
+description: Truly permissionless DeAI on GPU@edge
 ---
 
 # Crynux Network
