@@ -10,11 +10,11 @@ To identify the cause of the problem, refer to the log file for the detailed err
 
 {% tabs %}
 {% tab title="Windows" %}
-Go to the directory where you click `Crynux Node.exe`, there is a sub directory with name `logs`, the log file can be found inside with name `crynux-server.log`.
+Go to the directory where you click `Crynux Node.exe`, there is a sub directory with name `data`, and inside `data` folder there is a folder with name `logs`, all the log files can be found inside.
 {% endtab %}
 
 {% tab title="Mac" %}
-Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app`  and select `Show Package Content`, then go to the folder `Contents/Resources/logs`, and the log file is located inside as `crynux-server.log`.
+Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app`  and select `Show Package Content`, then go to the folder `Contents/Resources/data/logs`, and the log files are located inside.
 {% endtab %}
 
 {% tab title="Docker" %}
@@ -49,17 +49,27 @@ $ docker logs {container_name} >> crynux.log
 
 ### Find the log file inside the container
 
-The log file can also be found under `/app/logs/crynux-server.log` inside the container.
+The log file can also be found under `/app/logs` inside the container.
 {% endtab %}
 
 {% tab title="Linux" %}
-If you downloaded the binary release version of Linux server, the log file `crynux-server.log` can be found in the `logs` folder of the project root.
+If you downloaded the binary release version of Linux server, the log files can be found in the `logs` folder of the project root.
 {% endtab %}
 
 {% tab title="Source Code" %}
 The log file is located at `logs/crynux-server.log`, relative to the project root folder.
 {% endtab %}
 {% endtabs %}
+
+There are several log files inside the `log` folder. The content of each file is described below:
+
+* `crynux-server.log`: Node manager related logs.&#x20;
+* `crynux-worker.log`: Task executor related logs.
+* `crynux_worker_inference.log`: Task execution logs.
+* `crynux_worker_prefetch.log`: Model downloading logs.
+* `main.log`: GUI related logs. Not available on Docker versions.
+
+Most of the error messages could be identified in the first two log files: `crynux-server.log` and `crynux-worker.log`.
 
 ## Locate the error message
 
