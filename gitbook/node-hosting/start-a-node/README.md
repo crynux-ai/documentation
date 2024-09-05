@@ -4,7 +4,32 @@
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/file/d/1XLRk9HxSMvCjhJZNX7K8J61NdiT9-ZGG/view?usp=sharing">https://drive.google.com/file/d/1XLRk9HxSMvCjhJZNX7K8J61NdiT9-ZGG/view?usp=sharing</a></td></tr><tr><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.0/crynux-node-helium-v2.1.0-mac-arm64-signed.dmg">https://github.com/crynux-ai/crynux-node/releases/download/v2.1.0/crynux-node-helium-v2.1.0-mac-arm64-signed.dmg</a></td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th width="131">Platform</th>
+            <th width="261">Requirements</th>
+            <th data-type="content-ref">Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1RatycmfrfWOwp_vUrV-Eu9z7d3kXxT_c&export=download">crynux-node-helium-v2.1.1-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.1/crynux-node-helium-v2.1.1-mac-arm64-signed.dmg">crynux-node-helium-v2.1.1-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
+            <td>Linux</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1XFg0z9VtuQe7PwJiyLCIDk28H37Gkvf2&export=download">crynux-node-helium-v2.1.1-linux-bin-x64.tar.gz</a></td>
+        </tr>
+    </tbody>
+</table>
 
 ## Tutorials
 
