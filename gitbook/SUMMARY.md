@@ -35,8 +35,15 @@
 ## Application Development
 
 * [Application Workflow](application-development/application-workflow.md)
-* [GPT Task](application-development/gpt-task.md)
-* [Stable Diffusion Task](application-development/stable-diffusion-task.md)
+* [Image Tasks](application-development/image-tasks/README.md)
+  * [Text-to-Image Task](application-development/image-tasks/text-to-image-task.md)
+  * [Fine-Tuning Task](application-development/image-tasks/fine-tuning-task.md)
+* [Text Tasks](application-development/text-tasks/README.md)
+  * [Text-to-Text Task](application-development/text-tasks/text-to-text-task.md)
+* [Music Tasks](application-development/music-tasks/README.md)
+  * [Text-to-Music Task](application-development/music-tasks/text-to-music-task.md)
+* [Video Tasks](application-development/video-tasks/README.md)
+  * [Text-to-Video Task](application-development/video-tasks/text-to-video-task.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)

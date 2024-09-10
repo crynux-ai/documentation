@@ -1,8 +1,8 @@
 ---
-description: How to define a Stable Diffusion task
+description: How to define a text-to-image task
 ---
 
-# Stable Diffusion Task
+# Text-to-Image Task
 
 The Stable Diffusion Task Framework has two components:
 

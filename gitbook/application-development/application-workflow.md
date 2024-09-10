@@ -160,14 +160,14 @@ The task parameters are organized as a JSON string. An example of the parameters
 
 The task definition above follows the schema given in the [Stable Diffusion Task Framework](https://github.com/crynux-ai/stable-diffusion-task). A wide range of common configurations are supported. The framework also provides a JSON schema to validate task parameters. More information about the framework can be found in the document below:&#x20;
 
-{% content-ref url="stable-diffusion-task.md" %}
-[stable-diffusion-task.md](stable-diffusion-task.md)
+{% content-ref url="image-tasks/text-to-image-task.md" %}
+[text-to-image-task.md](image-tasks/text-to-image-task.md)
 {% endcontent-ref %}
 
 A similar framework for the GPT text generation task is also provided in the following document:
 
-{% content-ref url="gpt-task.md" %}
-[gpt-task.md](gpt-task.md)
+{% content-ref url="text-tasks/text-to-text-task.md" %}
+[text-to-text-task.md](text-tasks/text-to-text-task.md)
 {% endcontent-ref %}
 
 {% hint style="info" %}

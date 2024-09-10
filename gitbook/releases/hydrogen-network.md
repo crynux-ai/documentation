@@ -36,8 +36,8 @@ A general framework to define and execute the Stable Diffusion tasks is develope
 
 The following document gives more information on how to write a Stable Diffusion task:
 
-{% content-ref url="../application-development/stable-diffusion-task.md" %}
-[stable-diffusion-task.md](../application-development/stable-diffusion-task.md)
+{% content-ref url="../application-development/image-tasks/text-to-image-task.md" %}
+[text-to-image-task.md](../application-development/image-tasks/text-to-image-task.md)
 {% endcontent-ref %}
 
 And more examples can be found in the GitHub repository:

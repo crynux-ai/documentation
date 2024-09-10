@@ -1,8 +1,8 @@
 ---
-description: How to define a GPT task
+description: How to define a text-to-text task
 ---
 
-# GPT Task
+# Text-to-Text Task
 
 The GPT Task framework has two components:
 
