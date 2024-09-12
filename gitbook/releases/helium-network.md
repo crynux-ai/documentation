@@ -34,8 +34,8 @@ A general framework to define and execute the GPT tasks is developed to be used 
 
 To find out more about how to write a GPT task, go to the following page:
 
-{% content-ref url="../application-development/text-tasks/text-to-text-task.md" %}
-[text-to-text-task.md](../application-development/text-tasks/text-to-text-task.md)
+{% content-ref url="../application-development/execute-tasks/text-to-text-task.md" %}
+[text-to-text-task.md](../application-development/execute-tasks/text-to-text-task.md)
 {% endcontent-ref %}
 
 ## GPT Task Verification On-chain
