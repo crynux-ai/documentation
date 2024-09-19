@@ -71,7 +71,13 @@ $ docker compose up -d
 
 ## Use the Crynux Bridge APIs
 
-The application can utilize the APIs of the Crynux Bridge to send tasks and receive results. The description of the APIs can be accessed as the OpenAPI Specification on the started Crynux Bridge instance. Assume the IP address of the instance is 192.168.1.2, the JSON schema of the specification can be accessed at:
+The application can utilize the APIs of the Crynux Bridge to send tasks and receive results. A simple webpage that allows the user to enter the text prompt, and generates the image when user clicks the button, is provided in the repo:
+
+{% embed url="https://github.com/crynux-ai/crynux-bridge/blob/main/examples/generate-image.html" %}
+
+### The OpenAPI Specification
+
+The description of the APIs can be accessed as the OpenAPI Specification on the started Crynux Bridge instance. Assume the IP address of the instance is 192.168.1.2, the JSON schema of the specification can be accessed at:
 
 ```
 http://192.168.1.2/openapi.json
