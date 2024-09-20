@@ -12,7 +12,11 @@ More specifically, the Crynux Bridge:
 2. Interacts with the blockchain and Relay to execute the entire task workflow.
 3. Provides simpler APIs to the application to execute tasks using only the task parameters(no blockchain transactions or signatures).
 
-This document provides a step-by-step guide to deploy the Crynux Bridge and connect it to your application.
+Check out this simple webpage that lets users create images from text prompts. Tasks are sent to the Crynux Bridge API, and the generated image is returned:
+
+{% embed url="https://codepen.io/Luke-Weber/pen/ExBqGrK" %}
+
+The next sections provide step-by-step guide to deploy the Crynux Bridge and connect it to your application.
 
 ## Get the Docker Compose Files
 
@@ -70,10 +74,6 @@ $ docker compose up -d
 ```
 
 ## Use the Crynux Bridge APIs
-
-The application can utilize the APIs of the Crynux Bridge to send tasks and receive results. A simple webpage that allows the user to enter the text prompt, and generates the image when user clicks the button, is provided in the repo:
-
-{% embed url="https://github.com/crynux-ai/crynux-bridge/blob/main/examples/generate-image.html" %}
 
 ### The OpenAPI Specification
 
