@@ -126,7 +126,7 @@ The fees charged for the validation tasks will be refunded once the task is comp
 
 If an application sends tasks infrequently, such as a human sending tasks to the blockchain via a browser-based DApp and Metamask, the node can monitor the user's address for new tasks. If no additional tasks are sent from the same address in a short period, the task is likely non-validation. However, if tasks are sent frequently, it becomes impossible for the node to determine if a task is for validation.
 
-The higher probability of guessing correctly increases the chance of a node performing a successful [statistical attack](consensus-protocol.md#expectation-of-the-income). Increasing the required amount of staking could solve this issue. A task mixer can also be designed to combine tasks from all applications before dispatching them to the nodes, thereby concealing the origin of the tasks from the nodes.
+The higher probability of guessing correctly increases the chance of a node performing a successful [statistical attack](consensus-protocol/#expectation-of-the-income). Increasing the required amount of staking could solve this issue. A task mixer can also be designed to combine tasks from all applications before dispatching them to the nodes, thereby concealing the origin of the tasks from the nodes.
 
 ### Uploading Task Parameters to the DA/Relay
 

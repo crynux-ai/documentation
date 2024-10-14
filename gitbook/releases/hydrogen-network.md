@@ -86,8 +86,8 @@ The malicious behaviors are discovered by dispatching the same task to 3 nodes r
 
 The consensus protocol is described in detail in the following doc:
 
-{% content-ref url="../system-design/consensus-protocol.md" %}
-[consensus-protocol.md](../system-design/consensus-protocol.md)
+{% content-ref url="../system-design/consensus-protocol/" %}
+[consensus-protocol](../system-design/consensus-protocol/)
 {% endcontent-ref %}
 
 ## The Blockchain In Use

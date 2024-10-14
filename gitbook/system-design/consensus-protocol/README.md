@@ -24,31 +24,61 @@ Hiding the random sampling process from the public while keeping it verifiable o
 
 Comparing to validating all the tasks on chain, the secret task sampling significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless by effectively preventing fraudulent activities. Please find the details of the sampling algorithm in the following document:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
-## Task Validation by Multiple Result Comparison
+## Cross Validation by Multiple Result Comparison
 
-### Similarity Comparison of the Images
+### Deterministic Execution of AI Tasks
 
-Due to some technical limitations, such as [this](https://github.com/pytorch/pytorch/issues/87992) ,and [this](https://pytorch.org/docs/stable/notes/randomness.html). It is currently impossible to generate two exactly same images on two different devices.
+For 3-task cross validation to function correctly, the execution of AI tasks needs to be deterministic. This means that, regardless of the GPU types, hardware, or operating systems used across different nodes, identical task parameters should consistently yield the same results.
 
-Luckily, we don't need the images to be exactly the same. If we could compute a similarity score between two results, and the score is high, the results are already **satisfied** to the application.
+The non-deterministic behaviors observed in current AI computations stem from two main sources:
 
-And yes, there will be some lower cost methods to generate a similar image than performing the actual Stable Diffusion computation, but as long as the result is similar enough to be accepted by the application, it is fine to the network.
+#### Hardware
 
-The Crynux Network uses the [Perceptual Hash](https://apiumhub.com/tech-blog-barcelona/introduction-perceptual-hashes-measuring-similarity/), or pHash, to calculate the image similarity. The node submits the pHash of the images to the blockchain, and the blockchain calculates the [Hamming Distance](https://en.wikipedia.org/wiki/Hamming\_distance) between two pHashes as the similarity score.
+For different types of GPUs, the non-determinism observed in AI computations can be pinpointed to specific nuances like floating-point precision disparities, execution strategies, and the tailored optimizations within math libraries and drivers.&#x20;
 
-### Similarity Comparison of the Texts
+The architectural distinctions across different GPUs can introduce slight precision variations, particularly noticeable when leveraging reduced precision formats (e.g., FP16 or BF16) to enhance computational speed. This approach, while efficient, may result in minor discrepancies after numerous calculations, a common scenario in deep learning tasks.&#x20;
 
-In GPT text generation tasks, the words are generated one after another. Each output word will be used as the input for the next word. If two different words are generated on two different cards in the middle of a text sequence, the rest parts of the sequence will highly likely to be completely different.
+Moreover, GPUs exhibit unique processing strategies, where the scheduling and load management of parallel computations can differ, affecting the determinism due to the non-associative and non-distributive nature of floating-point arithmetic under rounding errors.&#x20;
 
-To make the texts comparison work, the same GPT task must be executed on 3 cards that are exactly the same, such as 3 of the RTX 4090s, rather than two of the 4090s and one of the 3090s. The text generation result will be exactly the same when running on cards that are in the same model, given the same random seed.
+Additionally, Nvidia's continuous refinement of its CUDA toolkit, including specialized libraries like `cuDNN` for deep learning, introduces optimization-driven differences. These libraries are engineered to maximize efficiency and performance on hardware through sophisticated algorithmic choices and task partitioning strategies, which, while largely beneficial, can subtly influence the consistency of computational results.
 
-The Crynux Network will randomly choose 3 nodes that are equipped with the same cards when distributing a GPT task. The node will have to report the card model when joining the network. Note that there is no benefit to report a different card model to the network other than the one the node possesses, which will cause nothing else but the node being slashed when executing tasks.
+#### Framework
 
-### Random Number Generation on the Blockchain
+The frameworks commonly used in AI computation, such as `PyTorch`, introduce non-deterministic behaviors through their handling of random number generation and the use of inherently non-deterministic algorithms. This randomness is pivotal in various stages, from initializing neural network weights to shuffling data for training.
+
+Moreover, certain `PyTorch` operations and layers, especially those executed on GPUs, are designed with non-deterministic algorithms for efficiency, such as specific convolution implementations and atomic operations in parallel reductions. Although these features enrich `PyTorch`'s flexibility and performance, they also sow the seeds of variability in outcomes, making exact reproducibility a challenge despite the ability to set global random seeds. This nuanced dance between enhancing performance and managing unpredictability underscores the complexity of achieving deterministic results in AI models developed with `PyTorch`.
+
+{% hint style="info" %}
+More details about the non-deterministic behavior of `PyTorch` can be found in its [docs](https://pytorch.org/docs/main/notes/randomness.html) and [discussions](https://github.com/pytorch/pytorch/issues/15359).
+{% endhint %}
+
+Despite the aforementioned challenges, Crynux succeeded in achieving deterministic execution for specific AI tasks on identical GPU models. This was accomplished by thoroughly dissecting the frameworks to capture and control the random numbers, alongside substituting the non-deterministic algorithms with their deterministic counterparts.
+
+Restricting the execution of validation tasks to the same GPU models curtails network performance by narrowing the pool of eligible candidates for a task, and it compromises network security by diminishing the number of honest nodes, thereby making it easier for attackers to launch Sybil attacks with fewer counterfeit nodes.
+
+By tolerating slight discrepancies in computation results and employing specific similarity comparison methods, it becomes feasible to permit the execution of certain tasks across all GPU models, thereby optimizing both performance and security while still facilitating cross-validation of tasks.
+
+### Inference Tasks
+
+Image generation tasks, including text-to-image and image-to-image, can be executed across a variety of GPU models. However, text generation tasks utilizing Large Language Models (LLMs) are restricted to identical model types. Further information is provided in the document below:
+
+{% content-ref url="inference-task-validation.md" %}
+[inference-task-validation.md](inference-task-validation.md)
+{% endcontent-ref %}
+
+### Training/Fine-tuning Tasks
+
+The Stable Diffusion fine-tuning tasks can be executed across a variety of GPU models. Read more in the document below:
+
+{% content-ref url="training-ft-task-validation.md" %}
+[training-ft-task-validation.md](training-ft-task-validation.md)
+{% endcontent-ref %}
+
+## Random Number Generation on the Blockchain
 
 Generating random numbers on the blockchain is then a critical step to the security of the whole network. Ethereum 2.0 has `prevrando`, which can be used as the source of the random number. On the other blockchains, the block hash of the last confirmed block is usually used. More advanced (and complex) methods exist such as the Verifiable Random Functions. Strictly speaking, however, none of these methods are safe enough in our scenario.
 
@@ -202,4 +232,4 @@ graph TD
   classDef node fill: #00B0F0, stroke: none, color: #fff
 ```
 
-[Similar to the discussion earlier](consensus-protocol.md#identifying-the-validation-task-groups), the risk of this attack is low and therefore it is excluded from the consensus protocol.
+[Similar to the discussion earlier](./#identifying-the-validation-task-groups), the risk of this attack is low and therefore it is excluded from the consensus protocol.

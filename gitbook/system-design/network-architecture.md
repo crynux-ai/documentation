@@ -32,8 +32,8 @@ More about the running workflow of a task can be found in the task lifecycle int
 
 More explanations about the design of the consensus protocol can be found here:
 
-{% content-ref url="consensus-protocol.md" %}
-[consensus-protocol.md](consensus-protocol.md)
+{% content-ref url="consensus-protocol/" %}
+[consensus-protocol](consensus-protocol/)
 {% endcontent-ref %}
 
 The source code of the Node of the Hydrogen Network could be found in the repository [https://github.com/crynux-ai/crynux-node](https://github.com/crynux-ai/h-node).

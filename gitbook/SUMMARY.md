@@ -10,7 +10,9 @@
 ## System Design
 
 * [Network Architecture](system-design/network-architecture.md)
-* [Consensus Protocol](system-design/consensus-protocol.md)
+* [Consensus Protocol](system-design/consensus-protocol/README.md)
+  * [Inference Task Validation](system-design/consensus-protocol/inference-task-validation.md)
+  * [Training/FT Task Validation](system-design/consensus-protocol/training-ft-task-validation.md)
 * [Verifiable Secret Sampling](system-design/verifiable-secret-sampling.md)
 * [Task Lifecycle](system-design/task-lifecycle.md)
 * [Task Dispatching](system-design/task-dispatching.md)

@@ -32,7 +32,7 @@ The QoS score of a node at a certain time is calculated using the node data (mos
 
 ### Timeouts
 
-According to the [Consensus Protocol](consensus-protocol.md), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the percentage rate by increasing the timeout period and the staking amount.
+According to the [Consensus Protocol](consensus-protocol/), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the percentage rate by increasing the timeout period and the staking amount.
 
 However, longer timeout period makes the applications wait longer if something is wrong with the task,   which leads to the poor user experience. And the nodes will get less incomes since they could run less tasks in the same time range.
 
