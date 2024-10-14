@@ -18,7 +18,7 @@ description: Setup Metamask to use the test CNX tokens
 
 4. Fill in the network parameters according to the latest info given at the [Wallet Configuration](./) page, and then click "Save":
 
-<figure><img src="../../.gitbook/assets/caa2971812fe09eec0d3dc2ba46ba49.png" alt=""><figcaption><p>Fill in the Network Parameters</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/184f4f3132d67ce56cea891833f2ba5.png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/3bf3688c932897b8adeec73d825d5eb.png" alt=""><figcaption></figcaption></figure>
 
