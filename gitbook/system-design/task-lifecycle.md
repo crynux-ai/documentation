@@ -103,7 +103,7 @@ sequenceDiagram
 
     A ->> B: Create Task
     activate B
-    Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Fee
+    Note over A,B: Task ID Commitment<br/>Nonce<br/>Model ID<br/>Minimum VRAM<br/>Required GPU<br/>Task Fee<br/>Task Version
 
     break Task Fee == 0 or Nonce is not unique
         B -->> A: Tx reverted
