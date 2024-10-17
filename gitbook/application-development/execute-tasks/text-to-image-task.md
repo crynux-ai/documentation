@@ -66,7 +66,7 @@ SDXL Turbo is an adversarial time-distilled [Stable Diffusion XL](https://huggin
 
 ```
 "base_model": {
-    "name": "stabilityai/sdxl-turbo"
+    "name": "crynux-ai/sdxl-turbo"
 },
 ```
 
