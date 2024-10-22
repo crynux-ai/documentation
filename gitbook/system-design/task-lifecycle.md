@@ -237,7 +237,7 @@ sequenceDiagram
         deactivate B
     end
     
-    N ->> N: Calculate the similarity score
+    N ->> N: Calculate the task score
     N ->> B: Submit the score
     activate B
     Note over N,B: Task ID Commitment<br/>Task Score
@@ -287,6 +287,9 @@ sequenceDiagram
         Note over A,B: Task ID Commitment<br />Task Score
     else
         B ->> A: Event: TaskErrorReported
+        Note over A,B: Task ID Commitment
+    else
+        B ->> A: Event: TaskAborted
         Note over A,B: Task ID Commitment
     end
 
