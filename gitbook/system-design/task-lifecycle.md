@@ -94,12 +94,12 @@ And the pricing related parameters:
 
 ## Task Creation
 
+### Create Task On-Chain
+
 ```mermaid
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
-    Participant R as DA/Relay
-    Participant N as Node
 
     A ->> B: Create Task
     activate B
@@ -108,54 +108,35 @@ sequenceDiagram
     break Task Fee == 0 or Nonce is not unique
         B -->> A: Tx reverted
     end
-    
-    B -->> A: Tx confirmed
+
+    B ->> A: Event: TaskCreated
+    activate A
     Note over A,B: Sampling Seed
+    deactivate B
 
-    par Upload task parameters
-
-        loop Until node is selected
-            B ->> B: Select node
-            
-            break No available node
-                B ->> B: Enqueue task
-            end
-
-            B ->> A: Event: TaskStarted
-            activate A
-            Note over A,B: Task ID Commitment<br />Selected Node
-            deactivate B
-            A ->> R: Upload task parameters
-            activate R
-            note over A,R: Encrypted Task Parameters
-            deactivate A
-            R ->> B: Update Merkle root
-            note over B,R: Merkle Root
-            R -->> A: Return hash and Merkle proof
-            activate A
-            note over A,R: Hash of Encrypted Task Parameters<br/>Merkle Proof
-            deactivate R
-            A ->> B: Notify task parameters uploaded
-            activate B
-            note over A,B: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Merkle Proof
-            deactivate A
-            break Validation failed
-                B -->> A: Validation failed
-            end
-            B ->> N: Event: TaskParametersUploaded
-            note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Selected Node
-            deactivate B
+    A ->> A: Generate Sampling Number<br/>Using VRF
+    opt Last digit of the Sampling Number is 0
+        loop Repeat 2 times
+            A ->> B: Create the validation task and upload Task Parameters
         end
+    end    
+    deactivate A
+    activate B
 
-    and Send validation tasks
-        activate A
-        A ->> A: Generate Sampling Number<br/>Using VRF
-        opt Last digit of the Sampling Number is 0
-            loop Repeat 2 times
-                A ->> B: Create validation task and upload the task parameters
-                deactivate A
+    alt Node available
+        B ->> A: Event: TaskStarted
+        Note over A,B: Task ID Commitment<br/>Selected Node
+    else No node available
+        B ->> A: Event: TaskQueued
+        Note over A,B: Task ID Commitment
+        loop New node available
+            break Node available for task
+               B ->> B: Select node
+               B ->> A: Event: TaskStarted
+               Note over A,B: Task ID Commitment<br/>Selected Node
+               deactivate B
             end
-        end    
+        end
     end
 ```
 
@@ -174,11 +155,52 @@ If the transaction is confirmed, the application receives a `Sampling Seed`. The
 [verifiable-secret-sampling.md](verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
-For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address. Details of this process are outlined in the following document:
+For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue and `TaskQueued` event is emitted. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address. Details of this process are outlined in the following document:
 
 {% content-ref url="task-dispatching.md" %}
 [task-dispatching.md](task-dispatching.md)
 {% endcontent-ref %}
+
+### Upload Task Parameters
+
+```mermaid
+sequenceDiagram
+    Participant A as Application
+    Participant B as Blockchain
+    Participant R as DA/Relay
+    Participant N as Node
+    
+    activate B
+    B ->> A: Event: TaskStarted
+    activate A
+    Note over A,B: Task ID Commitment<br />Selected Node
+    deactivate B
+    
+    A ->> R: Upload task parameters
+    activate R
+    note over A,R: Encrypted Task Parameters
+    deactivate A
+            
+    R ->> B: Update Merkle root
+    note over B,R: Merkle Root
+    R -->> A: Return hash and Merkle proof
+    activate A
+    note over A,R: Hash of Encrypted Task Parameters<br/>Merkle Proof
+    deactivate R
+            
+    A ->> B: Notify task parameters uploaded
+    activate B
+    note over A,B: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Merkle Proof
+    deactivate A
+            
+    break Validation failed
+        B -->> A: Validation failed
+    end
+    
+    B ->> N: Event: TaskParametersUploaded
+    note over B,N: Task ID Commitment<br/>Hash of Encrypted Task Parameters<br/>Selected Node
+    deactivate B
+```
 
 Upon receiving the `TaskStarted` event, the application should encrypt the `Task Parameters` using the node's public key and send them to the DA/Relay. The DA/Relay will update the `Merkle Root` to the blockchain for validation, and return the `Merkle Proof` to the application.
 
@@ -214,20 +236,13 @@ sequenceDiagram
         B ->> A: Event: TaskErrorReported
         deactivate B
     end
-
-    break Retrying exceeds timeout
-        N ->> B: Abort task
-        activate B
-        B ->> A: Event: TaskAborted
-        deactivate B
-    end
     
     N ->> N: Calculate the similarity score
     N ->> B: Submit the score
     activate B
-    Note over N,B: Task ID Commitment<br/>Sim Hash
-    B ->> A: Event: TaskResultReady
-    Note over A,B: Task ID Commitment<br/>Sim Hash
+    Note over N,B: Task ID Commitment<br/>Task Score
+    B ->> A: Event: TaskScoreReady
+    Note over A,B: Task ID Commitment<br/>Task Score
     deactivate B
 
     break Waiting exceeds timeout
@@ -252,9 +267,9 @@ If the model download link is confirmed to be invalid, such as a 404 response fr
 
 The task is then sent to the execution engine of the node. If the execution engine finds out that the task is misconfigured, such as an SDXL LoRA model combined with an SD1.5 base model, it will report the error to the blockchain.
 
-When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the similarity hash of the result, and then submit it to the blockchain.
+When the task has finished execution successfully, the node has the final computation result such as the images. It will calculate the score of the result, and then submit it to the blockchain.
 
-The blockchain will emit `TaskResultReady` event to the application, and wait for the application to perform the validation process.
+The blockchain will emit `TaskScoreReady` event to the application, and wait for the application to perform the validation process.
 
 The node will also wait for the task validation. If validation isn't completed within the timeout period, the node might abort the task to accept new ones instead of waiting indefinitely.
 
@@ -267,16 +282,16 @@ sequenceDiagram
     Participant N as Node
 
     alt
-        B ->> A: Event: TaskResultReady
+        B ->> A: Event: TaskScoreReady
         activate A
-        Note over A,B: Task ID Commitment<br />Sim Hash
+        Note over A,B: Task ID Commitment<br />Task Score
     else
         B ->> A: Event: TaskErrorReported
         Note over A,B: Task ID Commitment
     end
 
     alt Validation not required
-        A ->> B: Finish task
+        A ->> B: Validate single task
         activate B
         Note over A,B: Task ID Commitment<br/>Sampling Number<br/>VRF Proof
         deactivate A
@@ -299,17 +314,20 @@ sequenceDiagram
         loop Until events from all three tasks are received
             A ->> A: Wait for other validation tasks
             alt
-                B ->> A: Event: TaskResultReady
-                Note over A,B: Task ID Commitment<br />Sim Hash
+                B ->> A: Event: TaskScoreReady
+                Note over A,B: Task ID Commitment<br />Task Score
             else
                 B ->> A: Event: TaskErrorReported
+                Note over A,B: Task ID Commitment
+            else
+                B ->> A: Event: TaskAborted
                 Note over A,B: Task ID Commitment
             end            
         end
 
         deactivate B
 
-        A ->> B: Finish task
+        A ->> B: Validate task group
         activate B
         Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
         deactivate A
@@ -321,12 +339,12 @@ sequenceDiagram
             B ->> A: Event: TaskAborted
         end
         
-        alt Sim Hash identical
+        alt Task Score identical
             B ->> N: Event: TaskValidated
             Note over B,N: Task ID Commitment
-        else One Sim Hash different
+        else One Task Score different
             B ->> N: Event: NodeSlashed
-        else All Sim Hash different
+        else All Task Score different
             B ->> A: Event: TaskAborted
         end
 
