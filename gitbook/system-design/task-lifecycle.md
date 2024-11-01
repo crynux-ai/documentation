@@ -332,7 +332,7 @@ sequenceDiagram
 
         A ->> B: Validate task group
         activate B
-        Note over A,B: Task ID Commitment<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
+        Note over A,B: Task ID Commitments<br/>Task GUID<br/>Sampling Number<br/>VRF Proof<br/>Hash of Task Parameters<br/>ZK Proof
         deactivate A
         B ->> B: Validate task
         break Invalid proofs
@@ -437,3 +437,42 @@ Upon receiving the `TaskValidated` event, the node can upload the computation re
 The computation result is encrypted with the application's public key before being sent to the DA/Relay, ensuring that only the application can decrypt and access the actual result.
 
 Once the node submits the proofs to the blockchain, and they are verified, the blockchain will transfer the task fee to the node and emit a `TaskSuccess` event to the application. The application can then retrieve the computation result from the DA/Relay service, completing the task.
+
+## Task State Transition
+
+A complete task state transition graph is given below:
+
+```mermaid
+stateDiagram-v2
+  state "Queued" as q
+  state "Started" as s
+  state "Parameters Uploaded" as pu
+  state "Error Reported" as er
+  state "Score Ready" as sr
+  state "Validated" as v
+  state "End Success" as es
+  state "End Invalidated" as ei
+  state "End Aborted" as ea
+
+  [*] --> q: App - create task
+  [*] --> s: App - create task
+  q --> s: Blockchain - start task
+  s --> pu: Relay - report parameters uploaded
+  pu --> sr: Node - submit task score
+  pu --> er: Node - report task error
+  sr --> es: App - validate task group
+  sr --> ei: App - validate task group
+  sr --> v: App - validate single task<br/>App - validate task group
+  q --> ea: App - abort task
+  s --> ea: App/Node - abort task
+  pu --> ea: App/Node - abort task
+  er --> ea: App - validate single task<br/>App - validate task group<br/>App/Node - abort task
+  er --> ei: App - validate task group
+  sr --> ea: App/Node - abort task
+  v --> ea: App/Node - abort task
+  v --> es: Relay - report result uploaded
+  ea --> ea: App - validate task group
+  es --> [*]
+  ei --> [*]
+  ea --> [*]
+```
