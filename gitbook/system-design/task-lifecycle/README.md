@@ -92,11 +92,17 @@ And the pricing related parameters:
 [task-pricing.md](../task-pricing.md)
 {% endcontent-ref %}
 
+The task lifecycle is modeled and implemented as the [Finite State Machine (FSM)](https://en.wikipedia.org/wiki/Finite-state\_machine) in the smart contract. All the states and possible transitions are given in the document below:
+
+{% content-ref url="task-state-transitions.md" %}
+[task-state-transitions.md](task-state-transitions.md)
+{% endcontent-ref %}
+
 ## Task Creation
 
 ### Create Task On-Chain
 
-```mermaid
+```mermaid fullWidth="false"
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
@@ -163,7 +169,7 @@ For each of the tasks, the blockchain will attempt to locate a suitable node tha
 
 ### Upload Task Parameters
 
-```mermaid
+```mermaid fullWidth="false"
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
@@ -208,7 +214,7 @@ The application sends the hash and `Merkle Proof` to the blockchain. The blockch
 
 ## Task Execution
 
-```mermaid
+```mermaid fullWidth="false"
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
@@ -275,7 +281,7 @@ The node will also wait for the task validation. If validation isn't completed w
 
 ## Result Validation
 
-```mermaid
+```mermaid fullWidth="false"
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
@@ -386,7 +392,7 @@ If the `Sim Hash` are different across the nodes, if two of them are identical, 
 
 ## Result Retrieval
 
-```mermaid
+```mermaid fullWidth="false"
 sequenceDiagram
     Participant A as Application
     Participant B as Blockchain
