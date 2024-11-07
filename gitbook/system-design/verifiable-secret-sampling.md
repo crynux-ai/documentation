@@ -27,7 +27,7 @@ The algorithm's detailed description will be provided in the next sections.
 {% hint style="info" %}
 The sequence diagrams in this document focus solely on consensus-related parameters. For a comprehensive list of all parameters, please refer to the task lifecycle documentation:
 
-[Task Lifecyle](task-lifecycle.md)
+[Task Lifecyle](task-lifecycle/)
 {% endhint %}
 
 ## Task Creation

@@ -71,8 +71,8 @@ The results have already been verified by the Relay, so no further verification 
 
 For a detailed workflow involving all network participants, please refer to the task lifecycle document:
 
-{% content-ref url="../system-design/task-lifecycle.md" %}
-[task-lifecycle.md](../system-design/task-lifecycle.md)
+{% content-ref url="../system-design/task-lifecycle/" %}
+[task-lifecycle](../system-design/task-lifecycle/)
 {% endcontent-ref %}
 
 ## The Reference Applications

@@ -76,20 +76,20 @@ After the validation, the application is notified to download the result from th
 
 The subsequent sections detail all the stages. This document focuses on listing the interaction steps between components, the parameters required for each step, and the possible status and return values. Explanations on why a parameter is required are given in other documents. For the validation related parameters, refer to the following document:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 For the node criteria related parameters, refer to the following document:
 
-{% content-ref url="task-dispatching.md" %}
-[task-dispatching.md](task-dispatching.md)
+{% content-ref url="../task-dispatching.md" %}
+[task-dispatching.md](../task-dispatching.md)
 {% endcontent-ref %}
 
 And the pricing related parameters:
 
-{% content-ref url="task-pricing.md" %}
-[task-pricing.md](task-pricing.md)
+{% content-ref url="../task-pricing.md" %}
+[task-pricing.md](../task-pricing.md)
 {% endcontent-ref %}
 
 ## Task Creation
@@ -151,14 +151,14 @@ The transaction might be reverted, due to several reasons:
 
 If the transaction is confirmed, the application receives a `Sampling Seed`. The application then uses the VRF algorithm with this `Sampling Seed` to generate a `Sampling Number`. If the last digit of the `Sampling Number` is 0, the application should create two additional tasks to form a task validation group. The details of the task validation are described in the following document:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 For each of the tasks, the blockchain will attempt to locate a suitable node that is available to execute the task. If such a node is found, the task starts immediately. Otherwise, the task is added to the queue and `TaskQueued` event is emitted. When a new node becomes available, it will retrieve the task from the queue and begin execution. In both cases, the blockchain emits a `TaskStarted` event when the task begins, including the node's address. Details of this process are outlined in the following document:
 
-{% content-ref url="task-dispatching.md" %}
-[task-dispatching.md](task-dispatching.md)
+{% content-ref url="../task-dispatching.md" %}
+[task-dispatching.md](../task-dispatching.md)
 {% endcontent-ref %}
 
 ### Upload Task Parameters
@@ -366,8 +366,8 @@ The blockchain will then validate the proofs. If the validation passes, the bloc
 
 For more information on the validation process, please see the following document:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 ### Task Requires Validation
@@ -376,8 +376,8 @@ If validation is required, the application should wait for the `TaskResultReady`
 
 There are more validations to be performed by the blockchain, comparing to the validation of tasks that do not require validation. For more information on the validation process, please see the following document:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 If the validation passes, the blockchain will emit `TaskValidated` event to all the three nodes. The transaction will fail if the proofs provided by the application are invalid.
@@ -430,53 +430,10 @@ sequenceDiagram
 
 Upon receiving the `TaskValidated` event, the node can upload the computation result to the DA/Relay service and obtain the task fee by proving to the blockchain that the upload was correct. The proving is implemented using ZKP, the details are described in the following section of the documentation:
 
-{% content-ref url="verifiable-secret-sampling.md" %}
-[verifiable-secret-sampling.md](verifiable-secret-sampling.md)
+{% content-ref url="../verifiable-secret-sampling.md" %}
+[verifiable-secret-sampling.md](../verifiable-secret-sampling.md)
 {% endcontent-ref %}
 
 The computation result is encrypted with the application's public key before being sent to the DA/Relay, ensuring that only the application can decrypt and access the actual result.
 
 Once the node submits the proofs to the blockchain, and they are verified, the blockchain will transfer the task fee to the node and emit a `TaskSuccess` event to the application. The application can then retrieve the computation result from the DA/Relay service, completing the task.
-
-## Task State Transition
-
-A complete task state transition graph is given below:
-
-```mermaid
-stateDiagram-v2
-  state "Queued" as q
-  state "Started" as s
-  state "Parameters Uploaded" as pu
-  state "Error Reported" as er
-  state "Score Ready" as sr
-  state "Validated" as v
-  state "End Success" as es
-  state "End Invalidated" as ei
-  state "End Aborted" as ea
-
-  [*] --> q: App - create task
-  [*] --> s: App - create task
-  q --> s: Blockchain - start task
-  s --> pu: Relay - report parameters uploaded
-  pu --> sr: Node - submit task score
-  pu --> er: Node - report task error
-  sr --> es: App - validate task group
-  sr --> ei: App - validate task group
-  sr --> v: App - validate single task<br/>App - validate task group
-  q --> ea: App - abort task
-  s --> ea: App/Node - abort task
-  pu --> ea: App/Node - abort task
-  er --> ea: App - validate single task<br/>App - validate task group<br/>App/Node - abort task
-  er --> ei: App - validate task group
-  sr --> ea: App/Node - abort task
-  v --> ea: App/Node - abort task
-  v --> es: Relay - report result uploaded
-  ea --> ea: App - validate task group
-  es --> [*]
-  ei --> [*]
-  ea --> [*]
-```
-
-## Group Validation Results
-
-<table><thead><tr><th width="105">Task 1</th><th width="94">Task 2</th><th width="95">Task 3</th><th>Task 1</th><th>Task 2</th><th>Task 3</th></tr></thead><tbody><tr><td>Score A</td><td>Score A</td><td>Score A</td><td>Validated</td><td>EndSuccess</td><td>EndSuccess</td></tr><tr><td>Score A</td><td>Score A</td><td>Score B</td><td>Validated</td><td>EndSuccess</td><td>EndInvalidated</td></tr><tr><td>Score A</td><td>Score B</td><td>Score C</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Score A</td><td>Score A</td><td>Report Error</td><td>Validated</td><td>EndSuccess</td><td>EndInvalidated</td></tr><tr><td>Score A</td><td>Score B</td><td>Report Error</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Score A</td><td>Score A</td><td>Abort</td><td>Validated</td><td>EndSuccess</td><td>EndAborted</td></tr><tr><td>Score A</td><td>Score B</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Score</td><td>Report Error</td><td>Report Error</td><td>EndInvalidated</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Score</td><td>Report Error</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Score</td><td>Abort</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Report Error</td><td>Report Error</td><td>Report Error</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Report Error</td><td>Report Error</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Report Error</td><td>Abort</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr><tr><td>Abort</td><td>Abort</td><td>Abort</td><td>EndAborted</td><td>EndAborted</td><td>EndAborted</td></tr></tbody></table>

@@ -26,8 +26,8 @@ After the images are generated, the node executes the consensus protocol to proo
 
 More about the running workflow of a task can be found in the task lifecycle introduction:
 
-{% content-ref url="task-lifecycle.md" %}
-[task-lifecycle.md](task-lifecycle.md)
+{% content-ref url="task-lifecycle/" %}
+[task-lifecycle](task-lifecycle/)
 {% endcontent-ref %}
 
 More explanations about the design of the consensus protocol can be found here:
