@@ -56,11 +56,4 @@ When a task is validated in a validation group, its result state is determined a
 
 ## Actions for Each State
 
-| State             | Action                                                         |
-| ----------------- | -------------------------------------------------------------- |
-| Group Validated   | Record the address of all the 3 nodes in the validation group. |
-| End Success       | Settle the payment. Release the node.                          |
-| End Group Refund  | Refund the payment. Release the node.                          |
-| End Group Success | Distribute payment to 3 nodes. Release the node.               |
-| End Invalidated   | Refund the payment. Slash the node.                            |
-| End Aborted       | Refund the payment. Release the node.                          |
+<table><thead><tr><th width="248">State</th><th>Action</th></tr></thead><tbody><tr><td>Group Validated</td><td>Record the address of all the 3 nodes in the validation group.</td></tr><tr><td>End Success</td><td>Settle the payment. Release the node.</td></tr><tr><td>End Group Refund</td><td>Refund the payment. Release the node.</td></tr><tr><td>End Group Success</td><td>Distribute payment to 3 nodes. Release the node.</td></tr><tr><td>End Invalidated</td><td>Refund the payment. Slash the node.</td></tr><tr><td>End Aborted</td><td>Refund the payment. Release the node.</td></tr></tbody></table>
