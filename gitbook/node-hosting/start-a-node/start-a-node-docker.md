@@ -64,7 +64,7 @@ Docker version 26.0.0, build 2ae903e
 
 **b. Run the following command in the terminal:**
 
-<pre class="language-bash"><code class="lang-bash"><strong>$ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+<pre class="language-bash"><code class="lang-bash"><strong>$ sudo docker run --rm --gpus all ubuntu nvidia-smi
 </strong></code></pre>
 
 You should get the info of the GPU from `nvidia-smi` like this:
