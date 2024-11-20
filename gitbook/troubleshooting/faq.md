@@ -110,7 +110,9 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\...\\crynux-
 
 It is due to the long path limitation on Windows. Please enable the long path support according to this guide, and then restart the computer:
 
-[Enable Long Path Support on Windows](https://docs.lucentsky.com/en/avm/how-to/enable-long-path-support)
+**Enable Long Path Support on Windows**
+
+Open the Windows Registry Editor by pressing `Win + R` and typing `regedit`. Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`. Find the `LongPathsEnabled` DWORD (create it if not exist) and set its value to `1`.
 
 ### Otherwise
 
