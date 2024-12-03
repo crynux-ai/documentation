@@ -16,7 +16,7 @@
         <tr>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1gL21Nfb7QFZ4-y3pXv3T609_KWEuE1rM&export=download">crynux-node-helium-v2.1.2-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1yZkHVt5Hcp2_y951MJa25-ujrTPNYOTh&export=download">crynux-node-helium-v2.1.2-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Mac</td>
@@ -26,7 +26,7 @@
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1jqc_r5dPitcnezFc4pKDIeCCX1k7Ul-P&export=download">crynux-node-helium-v2.1.2-linux-bin-x64.tar.gz</a></td>
+            <td><a href="https://drive.google.com/uc?id=1dyagU3iK0uUR01lVEPG6pGAY4HY6mL5x&export=download">crynux-node-helium-v2.1.2-linux-bin-x64.tar.gz</a></td>
         </tr>
     </tbody>
 </table>
