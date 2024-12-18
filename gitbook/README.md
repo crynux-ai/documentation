@@ -86,17 +86,17 @@ To read more about the Helium Network release, go to the following page:
         <tr>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1yZkHVt5Hcp2_y951MJa25-ujrTPNYOTh&export=download">crynux-node-helium-v2.1.2-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1IXgzrIa_EWe4BiUuZZH6mSBwnjvWqPvp&export=download">crynux-node-helium-v2.1.3-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.2/crynux-node-helium-v2.1.2-mac-arm64-signed.dmg">crynux-node-helium-v2.1.2-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.3/crynux-node-helium-v2.1.3-mac-arm64-signed.dmg">crynux-node-helium-v2.1.3-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Linux</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1dyagU3iK0uUR01lVEPG6pGAY4HY6mL5x&export=download">crynux-node-helium-v2.1.2-linux-bin-x64.tar.gz</a></td>
+            <td><a href="https://drive.google.com/uc?id=1BvJU0njAAbAWKuj1ExS1fVkF8qBgMMPn&export=download">crynux-node-helium-v2.1.3-linux-bin-x64.tar.gz</a></td>
         </tr>
     </tbody>
 </table>
