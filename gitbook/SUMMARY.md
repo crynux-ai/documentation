@@ -19,6 +19,7 @@
 * [Task Dispatching](system-design/task-dispatching.md)
 * [Task Pricing](system-design/task-pricing.md)
 * [Quality of Service (QoS)](system-design/quality-of-service-qos.md)
+* [Model Distribution](system-design/model-distribution.md)
 
 ## Node Hosting
 

@@ -26,6 +26,8 @@ The node will then be randomly selected from all candidates based on their selec
 
 The selection probability of a node depends on the following factors:
 
+#### Model Storage
+
 #### Model Cache
 
 If a node recently executed tasks using the same model as the current task, it is likely that the model is still stored locally on the disk or even better, cached in the memory. This prevents the need for downloading or reloading the model, significantly speeding up task execution. Such nodes are given higher probabilities for selection.
