@@ -10,6 +10,8 @@ Crynux will offer model hosting within the Lithium Network. Developers can uploa
 
 Upon upload, the model is initially stored on a few nodes. Tasks requiring the model are randomly distributed among these nodes. As demand grows, additional nodes are selected to store the model, enhancing service capabilities. Conversely, if demand decreases, the model is removed from some nodes to save disk space.
 
+<figure><img src="../.gitbook/assets/a9131a607111e465ab97972ee67260d.png" alt=""><figcaption></figcaption></figure>
+
 ## Model Download Cache
 
 In the pre-Lithium network setup, the model required by a task is specified as a Huggingface or Civitai link in the task parameters. Upon task arrival on the node, if the model isn't already stored locally, the node needs to download it. This downloading process often takes a considerable amount of time, significantly reducing task execution speed and potentially causing task timeout.
