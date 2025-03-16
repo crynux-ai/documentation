@@ -7,6 +7,7 @@
 <table>
     <thead>
         <tr>
+            <th width="131">Blockchain</th>
             <th width="131">Platform</th>
             <th width="261">Requirements</th>
             <th data-type="content-ref">Download Link</th>
@@ -14,19 +15,28 @@
     </thead>
     <tbody>
         <tr>
+            <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="WINDOWS_DOWNLOAD_LINK">crynux-node-helium-vRELEASE_VERSION-windows-x64.zip</a></td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_DYMENSION">crynux-node-helium-vRELEASE_VERSION-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
+            <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="MAC_LINK">crynux-node-helium-vRELEASE_VERSION-mac-arm64-signed.dmg</a></td>
+            <td><a href="MAC_LINK_DYMENSION">crynux-node-helium-vRELEASE_VERSION-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
-            <td>Linux</td>
+            <td>Near</td>
+            <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="LINUX_DOWNLOAD_LINK">crynux-node-helium-vRELEASE_VERSION-linux-bin-x64.tar.gz</a></td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="MAC_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
@@ -43,12 +53,6 @@
 
 {% content-ref url="start-a-node-mac.md" %}
 [start-a-node-mac.md](start-a-node-mac.md)
-{% endcontent-ref %}
-
-### Linux (such as Ubuntu)
-
-{% content-ref url="start-a-node-linux.md" %}
-[start-a-node-linux.md](start-a-node-linux.md)
 {% endcontent-ref %}
 
 ### Cloud services based on Docker, such as Vast.ai

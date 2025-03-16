@@ -20,7 +20,13 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 Download the DMG file using the following link, then double-click the file, and drag the app to the application's folder:
 
-{% embed url="MAC_LINK" %}
+For Dymension users:
+
+{% embed url="MAC_LINK_DYMENSION" %}
+
+For Near users:
+
+{% embed url="MAC_LINK_NEAR" %}
 
 ## 3. Start the node
 
