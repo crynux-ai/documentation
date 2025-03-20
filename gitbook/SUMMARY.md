@@ -59,3 +59,7 @@
 * [FAQ](troubleshooting/faq.md)
 * [Locate the Error Message](troubleshooting/locate-the-error-message.md)
 * [Exceptions in WebUI](troubleshooting/exceptions-in-webui.md)
+
+## Misc
+
+* [Privacy Policy](misc/privacy-policy.md)
