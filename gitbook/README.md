@@ -77,6 +77,7 @@ To read more about the Helium Network release, go to the following page:
 <table>
     <thead>
         <tr>
+            <th width="131">Blockchain</th>
             <th width="131">Platform</th>
             <th width="261">Requirements</th>
             <th data-type="content-ref">Download Link</th>
@@ -84,19 +85,28 @@ To read more about the Helium Network release, go to the following page:
     </thead>
     <tbody>
         <tr>
+            <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1IXgzrIa_EWe4BiUuZZH6mSBwnjvWqPvp&export=download">crynux-node-helium-v2.1.3-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1091WsJiouN5P5fp7Wt20kCARmPdwNZlc&export=download">crynux-node-helium-v2.5.0-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
+            <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.3/crynux-node-helium-v2.1.3-mac-arm64-signed.dmg">crynux-node-helium-v2.1.3-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
-            <td>Linux</td>
+            <td>Near</td>
+            <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1BvJU0njAAbAWKuj1ExS1fVkF8qBgMMPn&export=download">crynux-node-helium-v2.1.3-linux-bin-x64.tar.gz</a></td>
+            <td><a href="https://drive.google.com/uc?id=10T5jWStfx4_rbm792ZE07Zm4HMlPemZQ&export=download">crynux-node-helium-v2.5.0-near-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
@@ -111,12 +121,6 @@ If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 
 {% content-ref url="node-hosting/start-a-node/start-a-node-mac.md" %}
 [start-a-node-mac.md](node-hosting/start-a-node/start-a-node-mac.md)
-{% endcontent-ref %}
-
-To start a node on Linux (such as Ubuntu):
-
-{% content-ref url="node-hosting/start-a-node/start-a-node-linux.md" %}
-[start-a-node-linux.md](node-hosting/start-a-node/start-a-node-linux.md)
 {% endcontent-ref %}
 
 To start a node on cloud services based on Docker, such as Vast.ai:

@@ -20,7 +20,13 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 Download the DMG file using the following link, then double-click the file, and drag the app to the application's folder:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.1.3/crynux-node-helium-v2.1.3-mac-arm64-signed.dmg" %}
+For Dymension users:
+
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg" %}
+
+For Near users:
+
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 
