@@ -14,7 +14,7 @@ The key component of Crynux is a robust consensus protocol that enables the perm
 
 The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The innovative [vssML](system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
+The innovative [vssML](https://docs.crynux.ai/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
 ### Production-Ready AI Services Cloud, on Edge
 
