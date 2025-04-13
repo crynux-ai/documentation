@@ -28,6 +28,12 @@ For Near users:
 
 {% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg" %}
 
+{% hint style="warning" %}
+If the OS prevents the application from starting due to security reasons, you could run the following command in a terminal:
+
+`$ xattr -d com.apple.quarantine "/Applications/Crynux Node.app"`
+{% endhint %}
+
 ## 3. Start the node
 
 Double-click on the icon of the newly installed app to start the node:
