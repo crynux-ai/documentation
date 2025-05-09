@@ -38,6 +38,7 @@
 
 ## Application Development
 
+* [How to Run LLM using Crynux Network](application-development/how-to-run-llm-using-crynux-network.md)
 * [Application Workflow](application-development/application-workflow.md)
 * [Execute Tasks](application-development/execute-tasks/README.md)
   * [Text-to-Image Task](application-development/execute-tasks/text-to-image-task.md)
@@ -48,10 +49,6 @@
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)
-
-***
-
-* [How to Run LLM using Crynux Network](how-to-run-llm-using-crynux-network.md)
 
 ## Crynux Token
 
