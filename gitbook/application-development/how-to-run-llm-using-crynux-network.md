@@ -22,7 +22,6 @@ res = client.chat.completions.create(
             "content": "What is the capital of France?",
         },
     ],
-    seed=100,
     stream=False
 )
 
@@ -51,7 +50,6 @@ async function main() {
           content: "What is the capital of France?",
         },
       ],
-      seed: 42,
       stream: false,
     });
     console.log("Chat completion response:", chatCompletion);
