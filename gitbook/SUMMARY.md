@@ -49,6 +49,10 @@
 * [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)
 
+***
+
+* [How to Run LLM using Crynux Network](how-to-run-llm-using-crynux-network.md)
+
 ## Crynux Token
 
 * [Wallet Configuration](crynux-token/wallet-configuration/README.md)
