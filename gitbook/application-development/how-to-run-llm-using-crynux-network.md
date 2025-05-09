@@ -32,8 +32,37 @@ print(res)
 
 {% tab title="JavaScript" %}
 ```javascript
-// Import OpenAI SDK
-import openai
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://bridge.crynux.ai/v1/llm",
+  apiKey: "wo19nkaeWy4ly34iexE7DKtNIY6fZWErCAU8l--735U=", // For public demonstration only, strict rate limit applied.
+  timeout: 180000,
+  maxRetries: 1,
+});
+
+async function main() {
+  try {
+    const chatCompletion = await client.chat.completions.create({
+      model: "Qwen/Qwen2.5-7B",
+      messages: [
+        {
+          role: "user",
+          content: "What is the capital of France?",
+        },
+      ],
+      seed: 42,
+      stream: false,
+    });
+    console.log("Chat completion response:", chatCompletion);
+    
+    return chatCompletion;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+main();
 ```
 {% endtab %}
 {% endtabs %}
