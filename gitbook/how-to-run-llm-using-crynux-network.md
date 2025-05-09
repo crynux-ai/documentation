@@ -56,7 +56,7 @@ You can request a separate API Key with a higher quota from the Crynux Discord s
 
 You can host your own instance of the Crynux Bridge to provide private APIs for your application. This approach gives you greater control over various system aspects, including reliability and speed-related configurations.
 
-Starting a Crynux Bridge is as straightforward as running a Docker container. An additional requirement is a wallet funded with sufficient (test) CNX to cover the tasks you run on the network. And at this moment, you can get test CNXs for free in the [Crynux Discord](httpshttps://discord.gg/y8YKxb7uZk) as well:
+Starting a Crynux Bridge is as straightforward as running a Docker container. An additional requirement is a wallet funded with sufficient (test) CNX to cover the tasks you run on the network. And at this moment, you can get test CNXs for free in the [Crynux Discord](https://discord.gg/y8YKxb7uZk) as well:
 
 Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
 
