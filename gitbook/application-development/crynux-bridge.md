@@ -97,6 +97,46 @@ As an example, the URLs of the Crynux Bridge used by the showcase applications o
 
 ### API List
 
+#### Chat completions API
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/llm/chat/completions" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/llm/completions" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+#### Image generation API
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/sd/images/generations" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+#### API key related API
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/api_key/{client_id}" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/api_key/{client_id}" method="delete" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/api_key/{client_id}/role" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/api_key/{client_id}/use_limit" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+{% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/api_key/{client_id}/rate_limit" method="post" %}
+[https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
+{% endswagger %}
+
+#### Others
+
 {% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/application/wallet/balance" method="get" %}
 [https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
 {% endswagger %}
@@ -124,3 +164,458 @@ As an example, the URLs of the Crynux Bridge used by the showcase applications o
 {% swagger src="https://api_ig.crynux.ai/openapi.json" path="/v1/network/nodes" method="get" %}
 [https://api_ig.crynux.ai/openapi.json](https://api_ig.crynux.ai/openapi.json)
 {% endswagger %}
+
+### API Key Management
+
+The Crynux Bridge uses API keys for authentication and access control. Each API key is associated with specific roles and usage limits. Here's how to manage API keys:
+
+#### Request Signing
+
+Before diving into the API key management, it's important to understand the request signing mechanism. All API key management endpoints require signed requests for security. Here's how the signing works:
+
+1. Create a request input object with required parameters
+2. Convert the input object to a JSON string (with sorted keys)
+3. Concatenate the JSON string with the timestamp
+4. Calculate the keccak256 hash of the concatenated string
+5. Sign the hash with your private key
+
+Here's an example of the signing process:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+from eth_account import Account
+from web3 import Web3
+import json
+import time
+
+class Signer:
+    def __init__(self, privkey: str):
+        self.account = Account.from_key(privkey)
+
+    def sign(self, input_dict, timestamp=None):
+        if timestamp is None:
+            timestamp = int(time.time())
+            
+        # Sort keys and convert to JSON string
+        input_bytes = json.dumps(
+            input_dict, 
+            ensure_ascii=False, 
+            separators=(",", ":"), 
+            sort_keys=True
+        ).encode("utf-8")
+        
+        # Convert timestamp to bytes
+        t_bytes = str(timestamp).encode("utf-8")
+        
+        # Calculate hash
+        data_hash = Web3.keccak(input_bytes + t_bytes)
+        
+        # Sign the hash
+        signature = self.account.signHash(data_hash).signature
+        signature = bytearray(signature)
+        signature[-1] -= 27
+        
+        return timestamp, "0x" + signature.hex()
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+import Web3 from 'web3';
+
+class Signer {
+    constructor(privkey) {
+        this.web3 = new Web3();
+        this.account = this.web3.eth.accounts.privateKeyToAccount(privkey);
+    }
+
+    async sign(inputDict, timestamp = null) {
+        if (timestamp === null) {
+            timestamp = Math.floor(Date.now() / 1000);
+        }
+
+        // Sort keys and convert to JSON string
+        const inputStr = JSON.stringify(inputDict, Object.keys(inputDict).sort());
+        
+        // Convert to bytes
+        const inputBytes = new TextEncoder().encode(inputStr);
+        const timestampBytes = new TextEncoder().encode(timestamp.toString());
+        
+        // Concatenate bytes
+        const dataBytes = new Uint8Array([...inputBytes, ...timestampBytes]);
+        
+        // Calculate hash
+        const dataHash = this.web3.utils.keccak256(dataBytes);
+        
+        // Sign the hash
+        const signature = this.account.sign(dataHash);
+        let sigBytes = Buffer.from(signature.signature.slice(2), 'hex');
+        sigBytes[64] = sigBytes[64] - 27;
+        
+        return [timestamp, '0x' + sigBytes.toString('hex')];
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### Creating an API Key
+
+To create a new API key, you need to sign a request with the account's private key. The API key will be associated with the account address (client_id). Here's an example:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+# Initialize the signer with your private key
+signer = Signer(privkey)
+
+# Prepare the request input
+create_api_key_input = {"client_id": address}
+timestamp, signature = signer.sign(create_api_key_input)
+
+# Send the request
+response = client.post(
+    f"/v1/api_key/{address}",
+    json={"timestamp": timestamp, "signature": signature}
+)
+
+api_key = response.json()["data"]["api_key"]
+expires_at = response.json()["data"]["expires_at"]
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+// Initialize the signer with your private key
+const signer = new Signer(privkey);
+
+// Create API key
+async function createApiKey(address) {
+    const createApiKeyInput = { client_id: address };
+    const [timestamp, signature] = await signer.sign(createApiKeyInput);
+
+    const response = await fetch(`/v1/api_key/${address}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            timestamp: timestamp,
+            signature: signature
+        })
+    });
+
+    const result = await response.json();
+    const apiKey = result.data.api_key;
+    const expiresAt = result.data.expires_at;
+    
+    return { apiKey, expiresAt };
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### Adding Roles to API Key
+
+API keys can be assigned different roles to control access to different features. The available roles are "chat" for LLM API access and "image" for image generation API access. Only the bridge account (root account) can add roles:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+# Initialize the root signer
+root_signer = Signer(root_privkey)
+
+# Add chat role
+role_input = {
+    "client_id": address,
+    "role": "chat"
+}
+timestamp, signature = root_signer.sign(role_input)
+
+response = client.post(
+    f"/v1/api_key/{address}/role",
+    json={
+        "timestamp": timestamp, 
+        "signature": signature,
+        "role": "chat"
+    }
+)
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+// Initialize the root signer
+const rootSigner = new Signer(rootPrivkey);
+
+// Add role to API key
+async function addRole(address, role) {
+    const roleInput = {
+        client_id: address,
+        role: role
+    };
+    const [timestamp, signature] = await rootSigner.sign(roleInput);
+
+    const response = await fetch(`/v1/api_key/${address}/role`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            timestamp: timestamp,
+            signature: signature,
+            role: role
+        })
+    });
+
+    return response.json();
+}
+
+// Example: Add chat role
+await addRole(address, 'chat');
+```
+{% endtab %}
+{% endtabs %}
+
+#### Setting Usage Limits
+
+You can set two types of limits for API keys:
+
+1. Use limit: The total number of times an API key can be used
+2. Rate limit: The number of requests allowed per minute
+
+Both limits can only be set by the bridge account:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+# Set use limit to 1000 requests
+use_limit_input = {
+    "client_id": address,
+    "use_limit": 1000
+}
+timestamp, signature = root_signer.sign(use_limit_input)
+
+response = client.post(
+    f"/v1/api_key/{address}/use_limit",
+    json={
+        "timestamp": timestamp,
+        "signature": signature,
+        "use_limit": 1000
+    }
+)
+
+# Set rate limit to 6 requests per minute
+rate_limit_input = {
+    "client_id": address,
+    "rate_limit": 6
+}
+timestamp, signature = root_signer.sign(rate_limit_input)
+
+response = client.post(
+    f"/v1/api_key/{address}/rate_limit",
+    json={
+        "timestamp": timestamp,
+        "signature": signature,
+        "rate_limit": 6
+    }
+)
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+// Set use limit
+async function setUseLimit(address, useLimit) {
+    const useLimitInput = {
+        client_id: address,
+        use_limit: useLimit
+    };
+    const [timestamp, signature] = await rootSigner.sign(useLimitInput);
+
+    const response = await fetch(`/v1/api_key/${address}/use_limit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            timestamp: timestamp,
+            signature: signature,
+            use_limit: useLimit
+        })
+    });
+
+    return response.json();
+}
+
+// Set rate limit
+async function setRateLimit(address, rateLimit) {
+    const rateLimitInput = {
+        client_id: address,
+        rate_limit: rateLimit
+    };
+    const [timestamp, signature] = await rootSigner.sign(rateLimitInput);
+
+    const response = await fetch(`/v1/api_key/${address}/rate_limit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            timestamp: timestamp,
+            signature: signature,
+            rate_limit: rateLimit
+        })
+    });
+
+    return response.json();
+}
+
+// Example: Set limits
+await setUseLimit(address, 1000);
+await setRateLimit(address, 6);
+```
+{% endtab %}
+{% endtabs %}
+
+The API key will be rejected when either the use limit is exceeded or the rate limit is reached. Make sure to set appropriate limits based on your application's needs.
+
+### Using the APIs
+
+The Crynux Bridge provides OpenAI-compatible APIs for both chat completions and image generation. This means you can use these APIs with the OpenAI SDK or make direct HTTP requests. Below are examples of both approaches.
+
+#### Chat Completions API
+
+The chat completions API allows you to interact with Large Language Models (LLMs) in a conversational manner. Here's how to use it:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+from openai import OpenAI
+
+# Initialize the client
+client = OpenAI(
+    base_url="https://bridge.crynux.ai/v1/llm",
+    api_key="your-api-key-here",  # Replace with your API key
+    timeout=180,
+    max_retries=1,
+)
+
+# Make a chat completion request
+response = client.chat.completions.create(
+    model="Qwen/Qwen2.5-7B",  # Specify the model to use
+    messages=[
+        {
+            "role": "user",
+            "content": "What is the capital of France?",
+        },
+    ],
+    stream=False
+)
+
+print(response)
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+import OpenAI from "openai";
+
+async function getChatCompletion() {
+    try {
+        // Initialize the client
+        const client = new OpenAI({
+            baseURL: "https://bridge.crynux.ai/v1/llm",
+            apiKey: "your-api-key-here",  // Replace with your API key
+            timeout: 180000,  // 180 seconds
+            maxRetries: 1,
+        });
+
+        // Make a chat completion request
+        const completion = await client.chat.completions.create({
+            model: "Qwen/Qwen2.5-7B",  // Specify the model to use
+            messages: [
+                {
+                    role: "user",
+                    content: "What is the capital of France?",
+                },
+            ],
+            stream: false,
+        });
+
+        console.log(completion);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+getChatCompletion();
+```
+{% endtab %}
+{% endtabs %}
+
+#### Image Generation API
+
+The image generation API allows you to create images from text descriptions using Stable Diffusion models. Here's how to use it:
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+from openai import OpenAI
+
+# Initialize the client
+client = OpenAI(
+    base_url="https://bridge.crynux.ai/v1/sd",
+    api_key="your-api-key-here",  # Replace with your API key
+    timeout=180,
+    max_retries=1,
+)
+
+# Generate images
+response = client.images.generate(
+    model="crynux-ai/sdxl-turbo",  # Specify the model to use
+    prompt="A beautiful sunset over a calm ocean",
+    n=1,  # Number of images to generate
+    size="512x512"  # Image dimensions
+)
+
+print(response)
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+import OpenAI from "openai";
+
+async function generateImage() {
+    try {
+        // Initialize the client
+        const client = new OpenAI({
+            baseURL: "https://bridge.crynux.ai/v1/sd",
+            apiKey: "your-api-key-here",  // Replace with your API key
+            timeout: 180000,  // 180 seconds
+            maxRetries: 1,
+        });
+
+        // Generate images
+        const response = await client.images.generate({
+            model: "crynux-ai/sdxl-turbo",  // Specify the model to use
+            prompt: "A beautiful sunset over a calm ocean",
+            n: 1,  // Number of images to generate
+            size: "512x512"  // Image dimensions
+        });
+
+        console.log(response);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+generateImage();
+```
+{% endtab %}
+{% endtabs %}
+
+Both APIs support various parameters and options to customize the output. For detailed information about available parameters and models, refer to the OpenAPI specification at `/openapi.json` or browse the interactive documentation at `/static/api_docs.html`.
+
