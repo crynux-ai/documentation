@@ -38,6 +38,18 @@
             <td>M1/M2/M3 and later</td>
             <td><a href="MAC_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
         </tr>
+        <tr>
+            <td>Kaspa</td>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_KASPA">crynux-node-helium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Kaspa</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="MAC_LINK_KASPA">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
+        </tr>
     </tbody>
 </table>
 

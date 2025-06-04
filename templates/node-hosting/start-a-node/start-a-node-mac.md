@@ -28,6 +28,10 @@ For Near users:
 
 {% embed url="MAC_LINK_NEAR" %}
 
+For Kaspa users:
+
+{% embed url="MAC_LINK_KASPA" %}
+
 ## 3. Start the node
 
 Double-click on the icon of the newly installed app to start the node:
