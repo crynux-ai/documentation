@@ -69,7 +69,7 @@ This code is standard for invoking OpenAI models through their API. The only mod
 
 {% embed url="https://codepen.io/0x-Berry/pen/raaorYP" %}
 
-The API, provided by the official Crynux Bridge, supports both OpenAI-compliant `/completions` and `/chat/completions` endpoints. Features like streaming, tool-calling, and numerous other configuration options are also supported. For a comprehensive list of supported features, please refer to the[ Crynux Bridge documentation](crynux-bridge.md).
+The API, provided by the official Crynux Bridge, supports both OpenAI-compliant `/completions` and `/chat/completions` endpoints. Features like streaming, tool-calling, and numerous other configuration options are also supported. For a comprehensive list of supported features, please refer to the[ Crynux Bridge documentation](../crynux-bridge.md).
 
 The API Key in the example code is for public demonstration purposes only and has a strict rate limit, making it unsuitable for production environments. To use the Crynux Network in production, choose one of the following methods:
 
@@ -87,14 +87,14 @@ Starting a Crynux Bridge is as straightforward as running a Docker container. An
 
 Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
 
-{% content-ref url="crynux-bridge.md" %}
-[crynux-bridge.md](crynux-bridge.md)
+{% content-ref url="../crynux-bridge.md" %}
+[crynux-bridge.md](../crynux-bridge.md)
 {% endcontent-ref %}
 
 ## Method 3: Sending Tasks Directly to the Blockchain
 
 You can bypass the Crynux Bridge entirely and interact directly with the blockchain and Crynux Relay to send tasks. Crynux SDKs are available in various languages and can be embedded directly into your code to run LLM tasks. Please consult the Crynux SDK documentation for detailed usage instructions:
 
-{% content-ref url="crynux-sdk.md" %}
-[crynux-sdk.md](crynux-sdk.md)
+{% content-ref url="../crynux-sdk.md" %}
+[crynux-sdk.md](../crynux-sdk.md)
 {% endcontent-ref %}

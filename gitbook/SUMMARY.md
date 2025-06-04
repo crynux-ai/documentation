@@ -38,7 +38,8 @@
 
 ## Application Development
 
-* [How to Run LLM using Crynux Network](application-development/how-to-run-llm-using-crynux-network.md)
+* [How to Run LLM using Crynux Network](application-development/how-to-run-llm-using-crynux-network/README.md)
+  * [Supported Models](application-development/how-to-run-llm-using-crynux-network/supported-models.md)
 * [Application Workflow](application-development/application-workflow.md)
 * [Execute Tasks](application-development/execute-tasks/README.md)
   * [Text-to-Image Task](application-development/execute-tasks/text-to-image-task.md)
