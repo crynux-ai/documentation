@@ -28,9 +28,9 @@ For Near users:
 
 {% embed url="MAC_LINK_NEAR" %}
 
-For Kaspa users:
+For Kasplex users:
 
-{% embed url="MAC_LINK_KASPA" %}
+{% embed url="MAC_LINK_KASPLEX" %}
 
 ## 3. Start the node
 

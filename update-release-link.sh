@@ -3,13 +3,13 @@
 release_version=$1
 mac_link_dymension=$2
 mac_link_near=$3
-mac_link_kaspa=$4
+mac_link_kasplex=$4
 windows_download_link_dymension=$5
 windows_preview_link_dymension=$6
 windows_download_link_near=$7
 windows_preview_link_near=$8
-windows_download_link_kaspa=$9
-windows_preview_link_kaspa=$10
+windows_download_link_kasplex=$9
+windows_preview_link_kasplex=$10
 
 if [ -z "${release_version}" ]; then
   echo "Please specify the release version"
@@ -26,8 +26,8 @@ if [ -z "${mac_link_near}" ]; then
   exit 0
 fi
 
-if [ -z "${mac_link_kaspa}" ]; then
-  echo "Please specify the mac link for kaspa"
+if [ -z "${mac_link_kasplex}" ]; then
+  echo "Please specify the mac link for kasplex"
   exit 0
 fi
 
@@ -51,20 +51,20 @@ if [ -z "${windows_preview_link_near}" ]; then
   exit 0
 fi
 
-if [ -z "${windows_download_link_kaspa}" ]; then
-  echo "Please specify the windows link for kaspa"
+if [ -z "${windows_download_link_kasplex}" ]; then
+  echo "Please specify the windows link for kasplex"
   exit 0
 fi
 
-if [ -z "${windows_preview_link_kaspa}" ]; then
-  echo "Please specify the windows preview link for kaspa"
+if [ -z "${windows_preview_link_kasplex}" ]; then
+  echo "Please specify the windows preview link for kasplex"
   exit 0
 fi
 
 
 mac_link_dymension_escaped=$(printf '%s\n' "$mac_link_dymension" | sed -e 's/[\/&]/\\&/g')
 mac_link_near_escaped=$(printf '%s\n' "$mac_link_near" | sed -e 's/[\/&]/\\&/g')
-mac_link_kaspa_escaped=$(printf '%s\n' "$mac_link_kaspa" | sed -e 's/[\/&]/\\&/g')
+mac_link_kasplex_escaped=$(printf '%s\n' "$mac_link_kasplex" | sed -e 's/[\/&]/\\&/g')
 
 windows_download_link_dymension_escaped=$(printf '%s\n' "$windows_download_link_dymension" | sed -e 's/[\/&]/\\&/g')
 windows_preview_link_dymension_escaped=$(printf '%s\n' "$windows_preview_link_dymension" | sed -e 's/[\/&]/\\&/g')
@@ -72,8 +72,8 @@ windows_preview_link_dymension_escaped=$(printf '%s\n' "$windows_preview_link_dy
 windows_download_link_near_escaped=$(printf '%s\n' "$windows_download_link_near" | sed -e 's/[\/&]/\\&/g')
 windows_preview_link_near_escaped=$(printf '%s\n' "$windows_preview_link_near" | sed -e 's/[\/&]/\\&/g')
 
-windows_download_link_kaspa_escaped=$(printf '%s\n' "$windows_download_link_kaspa" | sed -e 's/[\/&]/\\&/g')
-windows_preview_link_kaspa_escaped=$(printf '%s\n' "$windows_preview_link_kaspa" | sed -e 's/[\/&]/\\&/g')
+windows_download_link_kasplex_escaped=$(printf '%s\n' "$windows_download_link_kasplex" | sed -e 's/[\/&]/\\&/g')
+windows_preview_link_kasplex_escaped=$(printf '%s\n' "$windows_preview_link_kasplex" | sed -e 's/[\/&]/\\&/g')
 
 
 files=(
@@ -94,13 +94,13 @@ do
 	sed -i "s/RELEASE_VERSION/$release_version/g" "gitbook/$file"
   sed -i "s/MAC_LINK_DYMENSION/$mac_link_dymension_escaped/g" "gitbook/$file"
   sed -i "s/MAC_LINK_NEAR/$mac_link_near_escaped/g" "gitbook/$file"
-  sed -i "s/MAC_LINK_KASPA/$mac_link_kaspa_escaped/g" "gitbook/$file"
+  sed -i "s/MAC_LINK_KASPLEX/$mac_link_kasplex_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_DOWNLOAD_LINK_DYMENSION/$windows_download_link_dymension_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_PREVIEW_LINK_DYMENSION/$windows_preview_link_dymension_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_DOWNLOAD_LINK_NEAR/$windows_download_link_near_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_PREVIEW_LINK_NEAR/$windows_preview_link_near_escaped/g" "gitbook/$file"
-	sed -i "s/WINDOWS_DOWNLOAD_LINK_KASPA/$windows_download_link_kaspa_escaped/g" "gitbook/$file"
-	sed -i "s/WINDOWS_PREVIEW_LINK_KASPA/$windows_preview_link_kaspa_escaped/g" "gitbook/$file"
+	sed -i "s/WINDOWS_DOWNLOAD_LINK_KASPLEX/$windows_download_link_kasplex_escaped/g" "gitbook/$file"
+	sed -i "s/WINDOWS_PREVIEW_LINK_KASPLEX/$windows_preview_link_kasplex_escaped/g" "gitbook/$file"
 	# sed -i "s/LINUX_DOWNLOAD_LINK/$linux_download_link_escaped/g" "gitbook/$file"
 	# sed -i "s/LINUX_PREVIEW_LINK/$linux_preview_link_escaped/g" "gitbook/$file"
 done
