@@ -36,7 +36,7 @@ For Near users:
 
 For Kasplex users:
 
-{% embed url="2.5.10" %}
+{% embed url="https://drive.google.com/file/d/13PPeSTUSXxy1x7l2SQQFAK9qlApeRHzX/view?usp=drivesdk" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.

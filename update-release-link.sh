@@ -9,7 +9,7 @@ windows_preview_link_dymension=$6
 windows_download_link_near=$7
 windows_preview_link_near=$8
 windows_download_link_kasplex=$9
-windows_preview_link_kasplex=$10
+windows_preview_link_kasplex=${10}
 
 if [ -z "${release_version}" ]; then
   echo "Please specify the release version"
