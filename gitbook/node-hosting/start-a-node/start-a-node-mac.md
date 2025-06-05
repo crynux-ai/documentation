@@ -22,17 +22,15 @@ Download the DMG file using the following link, then double-click the file, and 
 
 For Dymension users:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-dymension-mac-arm64-signed.dmg" %}
 
 For Near users:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg" %}
 
-{% hint style="warning" %}
-If the OS prevents the application from starting due to security reasons, you could run the following command in a terminal:
+For Kasplex users:
 
-`$ xattr -d com.apple.quarantine "/Applications/Crynux Node.app"`
-{% endhint %}
+{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-kasplex-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 

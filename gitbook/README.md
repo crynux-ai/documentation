@@ -14,7 +14,7 @@ The key component of Crynux is a robust consensus protocol that enables the perm
 
 The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The innovative [vssML](system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
+The innovative [vssML](https://docs.crynux.ai/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
 ### Production-Ready AI Services Cloud, on Edge
 
@@ -88,25 +88,37 @@ To read more about the Helium Network release, go to the following page:
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1091WsJiouN5P5fp7Wt20kCARmPdwNZlc&export=download">crynux-node-helium-v2.5.0-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1M0Vls9KSqJJdVluKQeEDijIDEicvcmmA&export=download">crynux-node-helium-v2.5.1-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.0-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=10T5jWStfx4_rbm792ZE07Zm4HMlPemZQ&export=download">crynux-node-helium-v2.5.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1A25dYsBfGU4tQU8YFN0fGlHKp4aOsmEt&export=download">crynux-node-helium-v2.5.1-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.0/crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.0-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=13PPeSTUSXxy1x7l2SQQFAK9qlApeRHzX&export=download">crynux-node-helium-v2.5.1-near-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
