@@ -9,7 +9,7 @@ from openai import OpenAI
 
 client = OpenAI(
     base_url="https://bridge.crynux.ai/v1/llm",
-    api_key="wo19nkaeWy4ly34iexE7DKtNIY6fZWErCAU8l--735U=", # For public demonstration only, strict rate limit applied.
+    api_key="q3hXHA_8O0LuGJ1_tou4_KamMlQqAo-aYwyAIDttdmI=", # For public demonstration only, strict rate limit applied.
     timeout=180,
     max_retries=1,
 )
@@ -35,7 +35,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   baseURL: "https://bridge.crynux.ai/v1/llm",
-  apiKey: "wo19nkaeWy4ly34iexE7DKtNIY6fZWErCAU8l--735U=", // For public demonstration only, strict rate limit applied.
+  apiKey: "q3hXHA_8O0LuGJ1_tou4_KamMlQqAo-aYwyAIDttdmI=", // For public demonstration only, strict rate limit applied.
   timeout: 180000,
   maxRetries: 1,
 });
