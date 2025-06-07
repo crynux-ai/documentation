@@ -10,19 +10,6 @@ For example, below is a list of popular models that can be used in the Crynux Ne
 If a model isn't on this list, feel free to try it out as long as you're confident it's compatible with the `transformers` library and there's sufficient VRAM available on the network.
 {% endhint %}
 
-### Llama Models
-
-| Model ID                            | Hugging Face Link                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
-| meta-llama/llama-3.2-1b             | [meta-llama/llama-3.2-1b](https://huggingface.co/meta-llama/llama-3.2-1b)                         |
-| meta-llama/llama-3.2-1b-instruct    | [meta-llama/llama-3.2-1b-instruct](https://huggingface.co/meta-llama/llama-3.2-1b-instruct)       |
-| meta-llama/llama-3.2-3b             | [meta-llama/llama-3.2-3b](https://huggingface.co/meta-llama/llama-3.2-3b)                         |
-| meta-llama/llama-3.2-3b-instruct    | [meta-llama/llama-3.2-3b-instruct](https://huggingface.co/meta-llama/llama-3.2-3b-instruct)       |
-| meta-llama/llama-3.1-8b             | [meta-llama/llama-3.1-8b](https://huggingface.co/meta-llama/llama-3.1-8b)                         |
-| meta-llama/llama-3.1-8b-instruct    | [meta-llama/llama-3.1-8b-instruct](https://huggingface.co/meta-llama/llama-3.1-8b-instruct)       |
-| meta-llama/llama-3-8b               | [meta-llama/llama-3-8b](https://huggingface.co/meta-llama/llama-3-8b)                             |
-| meta-llama/Meta-Llama-3-8B-Instruct | [meta-llama/Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) |
-
 ### DeepSeek Models
 
 | Model ID                                  | Hugging Face Link                                                                                             |
@@ -39,13 +26,6 @@ If a model isn't on this list, feel free to try it out as long as you're confide
 | Qwen/Qwen3-8B            | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B)                       |
 | Qwen/Qwen2.5-7B          | [Qwen/Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B)                   |
 | Qwen/Qwen2.5-7B-Instruct | [Qwen/Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) |
-
-### Gemma Models
-
-| Model ID             | Hugging Face Link                                                   |
-| -------------------- | ------------------------------------------------------------------- |
-| google/gemma-3-4b-pt | [google/gemma-3-4b-pt](https://huggingface.co/google/gemma-3-4b-pt) |
-| google/gemma-3-4b-it | [google/gemma-3-4b-it](https://huggingface.co/google/gemma-3-4b-it) |
 
 ### NousResearch Models
 
