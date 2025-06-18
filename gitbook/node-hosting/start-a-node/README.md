@@ -18,37 +18,37 @@
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1AuzssSGU-zikcfBL67xvoooHBbvtMrjt&export=download">crynux-node-helium-v2.5.1-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1T1ZULsSSLKlsanPD5R1Ga34qdNCB33Mr&export=download">crynux-node-helium-v2.5.2-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1XOH2G2d_JqjaUqn_xG3T41NeUbWjlzkd&export=download">crynux-node-helium-v2.5.1-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1N6doUOvDdhl28UPp5QxCv7UQdngDmnpl&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1UQV_sLh1CMv3Vn9Cr11BWkCIQxM0JUd1&export=download">crynux-node-helium-v2.5.1-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=11P57LgZ8VLwuxMYg3EBeI447edQfsFNr&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.1/crynux-node-helium-v2.5.1-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.1-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
