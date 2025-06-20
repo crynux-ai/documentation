@@ -44,8 +44,7 @@ Although called a testnet, the featured consensus protocol is robust enough to a
 
 ### LLM Text Generation
 
-The OpenAI-compliant APIs for LLM inference is provided through the Crynux Bridge, the applications could use the official OpenAI SDKs with the Crynux Bridge API for LLM tasks. Most of the models using transformers on Huggingface could be used directly.
-Please read the following document for details:
+The OpenAI-compliant APIs for LLM inference is provided through the Crynux Bridge, the applications could use the official OpenAI SDKs with the Crynux Bridge API for LLM tasks. Most of the models using transformers on Huggingface could be used directly. Please read the following document for details:
 
 {% content-ref url="application-development/how-to-run-llm-using-crynux-network" %}
 [How to Run LLM Using Crynux Network](application-development/how-to-run-llm-using-crynux-network)
