@@ -42,6 +42,19 @@ Helium Network is the latest testnet of the Crynux Network. Helium Network imple
 
 Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment. Everyone has an Nvidia GPU, or Mac with the Apple Silicon chips (M1, M2 and M3 series), could have already joined the network using our node software.
 
+### LLM Text Generation
+
+The OpenAI-compliant APIs for LLM inference is provided through the Crynux Bridge, the applications could use the official OpenAI SDKs with the Crynux Bridge API for LLM tasks. Most of the models using transformers on Huggingface could be used directly.
+Please read the following document for details:
+
+{% content-ref url="application-development/how-to-run-llm-using-crynux-network" %}
+[How to Run LLM Using Crynux Network](application-development/how-to-run-llm-using-crynux-network)
+{% endcontent-ref %}
+
+A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
+
+The chatbot can be accessed at [https://chat.crynux.io](https://chat.crynux.io)
+
 ### Stable Diffusion Image Generation
 
 The applications could now send the Stable Diffusion image generation tasks to the network using the inference API, and get the images back instantly.
@@ -51,14 +64,6 @@ A showcase application has been developed to demonstrate the abilities. The app 
 The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
 Give it a try at [https://ig.crynux.io](https://ig.crynux.io)
-
-### GPT Text Generation
-
-The applications could also execute the GPT text generation tasks using most of the LLM models on Huggingface, such as [LLaMa 2](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf), using the inference API of the Helium Network.
-
-A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
-
-The chatbot can be accessed at [https://chat.crynux.io](https://chat.crynux.io)
 
 To read more about the Helium Network release, go to the following page:
 
