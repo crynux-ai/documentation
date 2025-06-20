@@ -5,7 +5,7 @@ description: Truly permissionless DeAI on GPU@edge
 # Crynux Network
 
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk)
-[![X](https://img.shields.io/badge/@crynuxai-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxai)
+[![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxio)
 [![GitHub Org's stars](https://img.shields.io/github/stars/crynux-ai?style=for-the-badge&logo=github)](https://github.com/crynux-ai)
 
 ### Truly Permissionless
@@ -14,7 +14,7 @@ The key component of Crynux is a robust consensus protocol that enables the perm
 
 The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The innovative [vssML](https://docs.crynux.ai/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
+The innovative [vssML](https://docs.crynux.io/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
 ### Production-Ready AI Services Cloud, on Edge
 
@@ -50,7 +50,7 @@ A showcase application has been developed to demonstrate the abilities. The app 
 
 The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
-Give it a try at [https://ig.crynux.ai](https://ig.crynux.ai)
+Give it a try at [https://ig.crynux.io](https://ig.crynux.io)
 
 ### GPT Text Generation
 
@@ -58,7 +58,7 @@ The applications could also execute the GPT text generation tasks using most of 
 
 A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
 
-The chatbot can be accessed at [https://chat.crynux.ai](https://chat.crynux.ai)
+The chatbot can be accessed at [https://chat.crynux.io](https://chat.crynux.io)
 
 To read more about the Helium Network release, go to the following page:
 
@@ -175,8 +175,8 @@ All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
 The Crynux Blog contains the technical explanations and our latest progress:
 
-{% embed url="https://blog.crynux.ai" %}
+{% embed url="https://blog.crynux.io" %}
 
 And follow us on Twitter:
 
-{% embed url="https://twitter.com/crynuxai" fullWidth="true" %}
+{% embed url="https://x.com/crynuxio" fullWidth="true" %}
