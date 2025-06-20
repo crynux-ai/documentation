@@ -38,7 +38,7 @@ By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Comput
 
 ## Helium Network
 
-Helium Network is the latest testnet of the Crynux Network. Helium Network implements a decentralized AI task execution engine that supports running the Stable Diffusion image generation tasks and the GPT text generation tasks.
+Helium Network is the latest testnet of the Crynux Network. Helium Network implements a decentralized AI task execution engine that supports running the Stable Diffusion image generation tasks and the LLM text generation tasks.
 
 Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment. Everyone has an Nvidia GPU, or Mac with the Apple Silicon chips (M1, M2 and M3 series), could have already joined the network using our node software. And the applications could also use the network to run AI tasks such as LLM inference, Stable Diffusion image generation and fine-tuning already.
 
