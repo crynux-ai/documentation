@@ -1,7 +1,7 @@
 # Crynux Network
 
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/zmU9GRwU6f)](https://discord.gg/zmU9GRwU6f)
-[![X](https://img.shields.io/badge/@crynuxai-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxai)
+[![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxio)
 
 Crynux is the truly permissionless #DeAI on GPU@edge.
 
@@ -11,7 +11,7 @@ The key component of Crynux is a robust consensus protocol that enables the perm
 
 The ability to identify and penalize all malicious behaviors ensures the ecosystem's sustainability while facilitating healthy growth in the long term.
 
-The innovative [vssML](https://docs.crynux.ai/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
+The innovative [vssML](https://docs.crynux.io/system-design/verifiable-secret-sampling) technology significantly enhances network efficiency, rivaling centralized platforms while remaining decentralized and permissionless.
 
 ### Production-Ready AI Services Cloud, on Edge
 
@@ -35,14 +35,14 @@ By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Comput
 
 ## The Image Generator
 
-[https://ig.crynux.ai](https://ig.crynux.ai)
+[https://ig.crynux.io](https://ig.crynux.io)
 
 The Image Generator is a showcase application that provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. 
 The application can be used on any devices that do not have a capable GPU integrated. The Blockchain and token stuff are handled at the application backend using the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
 ## The GPT Chatbot
 
-[https://chat.crynux.ai](https://chat.crynux.ai)
+[https://chat.crynux.io](https://chat.crynux.io)
 
 The GPT Chatbot is a showcase application that provides a simple chat UI in the browser. The web application connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
 
@@ -54,19 +54,19 @@ To start a node on your local computer to earn tokens:
 
 Windows:
 
-[Start a Node on Windows](https://docs.crynux.ai/node-hosting/start-a-node-windows)
+[Start a Node on Windows](https://docs.crynux.io/node-hosting/start-a-node-windows)
 
 Mac:
 
-[Start a Node on Mac](https://docs.crynux.ai/node-hosting/start-a-node-mac)
+[Start a Node on Mac](https://docs.crynux.io/node-hosting/start-a-node-mac)
 
 Other systems:
 
-[Start a Node using Docker](https://docs.crynux.ai/node-hosting/start-a-node-docker)
+[Start a Node using Docker](https://docs.crynux.io/node-hosting/start-a-node-docker)
 
 ### Application Developer
 
-If you are an application developer who want to utilize the AI abilities provided by the Crynux Network, [follow this guide](https://docs.crynux.ai/application-development/application-workflow) to connect your application to the network.
+If you are an application developer who want to utilize the AI abilities provided by the Crynux Network, [follow this guide](https://docs.crynux.io/application-development/application-workflow) to connect your application to the network.
 
 ## Helium Network
 
@@ -79,7 +79,7 @@ The computation power comes from a decentralized network of the home computers t
 
 Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment.
 
-To know more about the Helium Network, start from the [Helium Network introduction](https://docs.crynux.ai/releases/helium-network).
+To know more about the Helium Network, start from the [Helium Network introduction](https://docs.crynux.io/releases/helium-network).
 
 ## Research
 
@@ -95,16 +95,16 @@ Join the Crynux community on Discord:
 
 Crynux homepage:
 
-[https://crynux.ai](https://crynux.ai)
+[https://crynux.io](https://crynux.io)
 
 The Crynux Blog contains the technical explanations and our latest progress:
 
-[https://blog.crynux.ai](https://blog.crynux.ai)
+[https://blog.crynux.io](https://blog.crynux.io)
 
 The technical documentation:
 
-[https://docs.crynux.ai](https://docs.crynux.ai)
+[https://docs.crynux.io](https://docs.crynux.io)
 
 And follow us on Twitter:
 
-[https://twitter.com/crynuxai](https://twitter.com/crynuxai)
+[https://twitter.com/crynuxio](https://twitter.com/crynuxio)
