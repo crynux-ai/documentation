@@ -4,19 +4,21 @@ description: '[Jan 30, 2024] Decentralized GPT Task Execution Engine'
 
 # Helium Network
 
-Helium Network adds the support of the GPT text generation tasks. The Crynux Network now supports running both the Stable Diffusion image generation tasks and the GPT text generation tasks.
+Helium Network adds the support of the LLM text generation tasks. The Crynux Network now supports running both the Stable Diffusion image generation tasks and the LLM text generation tasks.
 
-Now the applications could use the inference APIs to generate texts with [most of the LLM models on the Huggingface](https://huggingface.co/models?pipeline\_tag=text-generation\&sort=trending). AI Chatbot applications could have already been built on top of the Crynux Network. To get started, follow the guide below:
+OpenAI-compliant APIs are implemented through the Crynux Bridge. Official OpenAI SDKs can be directly used. And [most of the LLM models on the Huggingface](https://huggingface.co/models?pipeline_tag=text-generation\&sort=trending) are supported.
 
-{% content-ref url="../application-development/application-workflow.md" %}
-[application-workflow.md](../application-development/application-workflow.md)
+To get started, follow the guide below:
+
+{% content-ref url="../application-development/how-to-run-llm-using-crynux-network/" %}
+[how-to-run-llm-using-crynux-network](../application-development/how-to-run-llm-using-crynux-network/)
 {% endcontent-ref %}
 
 ## AI Chatbot Application
 
 An AI chatbot application has been released to demonstrate the abilities. The app provides a simple chat UI in the browser, and the text generation task is sent to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend, and then sent to the Crynux Network for execution. The task fees are paid from the wallet inside the Crynux Bridge so that the users won't have to deal with the wallet themselves.
 
-Try the application yourself at: [https://chat.crynux.ai](https://chat.crynux.ai)
+Try the application yourself at: [https://chat.crynux.io](https://chat.crynux.io/)
 
 The source code of the application is located on the GitHub:
 
@@ -83,34 +85,6 @@ To start a node on Mac, just follow the tutorial below:
 [start-a-node-mac.md](../node-hosting/start-a-node/start-a-node-mac.md)
 {% endcontent-ref %}
 
-## The Blockchain In Use
+## Multi-chain Architecture
 
-Thanks to [Dymension](https://dymension.xyz/), the Helium Network is using a [testnet rollapp of Dymension](https://testnet.dymension.xyz/rollapp/crynux\_10000-1/metrics) as an L2 blockchain. An EVM is running on the rollapp to support the smart contracts of Crynux.
-
-The base layer token (think of it as the ETH in the testnet rollapp) is now used as the Crynux token. The old ERC20 token is deprecated.
-
-The block explorer of the testnet rollapp can be accessed at:
-
-{% embed url="https://bb.dym.fyi/r/dev-crynux" %}
-
-| Contract           | Address                                    |
-| ------------------ | ------------------------------------------ |
-| Node               | 0x662d296cae3f1Be2ed5803227dAd6435f1ffC438 |
-| Task               | 0x07E149A0e372C2F54Df6358d021d700703D222D1 |
-| Task Queue         | 0xeD4cbf24978AD18d73ee6190e361E71095E857A7 |
-| QoS                | 0x95E7e7Ed5463Ff482f61585605a0ff278e0E1FFb |
-| Network Statistics | 0xC2c060f8C46640394E0937D75Ea977207E6df130 |
-
-The test CNX tokens are required to start a node, or call the inference API. To get the test tokens, using the bot inside the Discord server of Crynux.
-
-## The Relay In Use
-
-The relay server used is:
-
-```url
-https://dy.relay.crynux.ai
-```
-
-The source code of the relay is hosted at:
-
-{% embed url="https://github.com/crynux-ai/crynux-relay" %}
+Crynux now supports applications and nodes running on different blockchains. Dymension, Near and Kasplex are now supported, and more will follow.
