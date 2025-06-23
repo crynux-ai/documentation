@@ -1,5 +1,5 @@
 ---
-description: Deploy Crynux Bridge for Applications
+description: How to Start a Crynux Bridge Locally
 ---
 
 # Crynux Bridge
@@ -86,6 +86,8 @@ The response includes:
 
 ### Multi-user Support and Role-Based Access Control
 
+The Crynux Bridge is designed to support multiple users, enabling seamless collaboration and improved management of access to both the image generation and LLM APIs. With Role-Based Access Control (RBAC), administrators can define specific roles with varying permissions, ensuring that each user can only access those features necessary for their tasks.
+
 ## Start a Crynux Bridge Locally
 
 ### 1. Get the Docker Compose files
@@ -145,7 +147,17 @@ $ docker compose up -d
 
 ### 5. API keys and rate limits configuration
 
-Once the Docker container is started, find the correct IP address
+Once the Docker container is started, find the correct IP address of the Docker container. It is either `127.0.0.1`, or an IP address on your Docker network.
+
+Open the following URL in your web browser:
+
+{% embed url="https://crynux-ai.github.io/crynux-bridge/examples/access-key-generation.html" %}
+
+You should see a webpage like this:
+
+<figure><img src="../.gitbook/assets/01218c22d23c768e6c1603307e52a93.png" alt=""><figcaption></figcaption></figure>
+
+Enter your local Crynux Bridge IP address and port (default is 5028), along with the private key from step 2. Choose the role and set limits as needed. Click "Create Access Token" to generate and display the token on the page.
 
 ### 6. Use the APIs
 
