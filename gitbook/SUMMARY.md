@@ -40,6 +40,7 @@
 
 * [How to Run LLM using Crynux Network](application-development/how-to-run-llm-using-crynux-network/README.md)
   * [Supported Models](application-development/how-to-run-llm-using-crynux-network/supported-models.md)
+* [Crynux Bridge](application-development/crynux-bridge.md)
 * [Application Workflow](application-development/application-workflow.md)
 * [Execute Tasks](application-development/execute-tasks/README.md)
   * [Text-to-Image Task](application-development/execute-tasks/text-to-image-task.md)
@@ -47,7 +48,6 @@
   * [Text-to-Music Task](application-development/execute-tasks/text-to-music-task.md)
   * [Text-to-Video Task](application-development/execute-tasks/text-to-video-task.md)
   * [Fine-Tuning Task](application-development/execute-tasks/fine-tuning-task.md)
-* [Crynux Bridge](application-development/crynux-bridge.md)
 * [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)
 
