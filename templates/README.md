@@ -150,7 +150,7 @@ To start a node on cloud services based on Docker:
 *Octa.space*
 
 {% content-ref url="node-hosting/start-a-node/start-a-node-octa.md" %}
-[start-a-node-vast.md](node-hosting/start-a-node/start-a-node-octa.md)
+[start-a-node-octa.md](node-hosting/start-a-node/start-a-node-octa.md)
 {% endcontent-ref %}
 
 You can also start the node using Docker:
