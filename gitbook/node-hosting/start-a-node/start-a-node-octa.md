@@ -26,7 +26,7 @@ Select the GPU that fits your need. And then click "Configure".
 
 <figure><img src="../../.gitbook/assets/step_3.png" alt=""><figcaption></figcaption></figure>
 
-You could adjust the tag name in the "Image name" field to use a newer version of Crynux Node, or select a different blockchain network such as `dymension` and `kasplex`.
+You could adjust the tag name in the "Image name" field to use a newer version of the Crynux Node, or select a different blockchain network such as `dymension` and `kasplex`.
 
 Expose port `7412` for the remote access of the WebUI.
 
@@ -36,26 +36,27 @@ After you're done, click "Deploy" to start the Docker container:
 
 <figure><img src="../../.gitbook/assets/step_4.png" alt=""><figcaption></figcaption></figure>
 
-Octa will pull the image to the node and start the container after the image is ready. Monitor the `Status` field in the session item for progress. You could also view the logs by clicking on the `View logs` button in the `Actions` column:
+Once Octa pulls and prepares the image on the node, it will start the container. To track progress, check the `Status` field in the session item. For more detailed insights, click the `View logs` button in the `Actions` column.
 
 <figure><img src="../../.gitbook/assets/step_5.png" alt=""><figcaption></figcaption></figure>
 
-
-
 ## 4. Find the URL to access the WebUI
+
+Once the container has started, the `Status` will change to `Service configured`. Then, click on the session item to find the URL for accessing the WebUI:
+
+<figure><img src="../../.gitbook/assets/step_6.png" alt=""><figcaption></figcaption></figure>
+
+Click on the link below `HTTP Services`, and you will be redirected to the WebUI in the browser:
+
+<figure><img src="../../.gitbook/assets/step_7.png" alt=""><figcaption></figcaption></figure>
 
 ## 5. Prepare the wallet
 
-[Use an SSH connection](https://vast.ai/docs/gpu-instances/ssh?_gl=1*ye4y7p*_gcl_au*OTc1MTUwMTIwLjE3MTY2MTA3OTkuMzAyNTUxNjAzLjE3MTY2NDIxMzkuMTcxNjY0MjEzOA..*_ga*NTc0NjQxMDIwLjE3MTY2MTA3OTk.*_ga_DG15WC8WXG*MTcxNjYxMDc5OS4xLjEuMTcxNjY0Nzg1MC42MC4wLjA.) to login to the Docker container you started, and set the private key in the config file at:`/app/config/config.yml`, and the field name is `privkey`:
+A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys:
 
-```
-ethereum:
-  privkey: ""
-```
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-After you filled the value of the private key, restart the Docker container.
-
-## 6. Get the test CNX tokens from the Discord Server
+### Get the test CNX tokens from the Discord Server
 
 Some test CNX tokens are required to start the node. The test CNX tokens can be acquired for free in the Discord server of Crynux:
 
@@ -81,7 +82,7 @@ After a short while, the test CNX tokens should appear in your node wallet:
 
 <figure><img src="../../.gitbook/assets/336e0e3d3e49835b681851733e7efa2.png" alt=""><figcaption></figcaption></figure>
 
-## 7. Wait for the system initialization to finish
+## 6. Wait for the system initialization to finish
 
 If this is the first time you start a node, it could take quite a long while for the system to initialize. The most time consuming step is to download \~40GB of the commonly used model files from the Huggingface. The time may vary depending on your network speed.
 
@@ -89,7 +90,7 @@ After the models are downloaded, a test image generation task will be executed l
 
 <figure><img src="../../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
 
-## 8. Join the Crynux Network
+## 7. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
