@@ -36,7 +36,13 @@ After you're done, click "Deploy" to start the Docker container:
 
 <figure><img src="../../.gitbook/assets/step_4.png" alt=""><figcaption></figcaption></figure>
 
-Octa will pull the images to t4. Find the URL to access the WebUI
+Octa will pull the image to the node and start the container after the image is ready. Monitor the `Status` field in the session item for progress. You could also view the logs by clicking on the `View logs` button in the `Actions` column:
+
+<figure><img src="../../.gitbook/assets/step_5.png" alt=""><figcaption></figcaption></figure>
+
+
+
+## 4. Find the URL to access the WebUI
 
 ## 5. Prepare the wallet
 
