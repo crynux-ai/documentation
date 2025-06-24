@@ -139,10 +139,19 @@ If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 [start-a-node-mac.md](node-hosting/start-a-node/start-a-node-mac.md)
 {% endcontent-ref %}
 
-To start a node on cloud services based on Docker, such as Vast.ai:
+To start a node on cloud services based on Docker:
+
+*Vast.ai*
 
 {% content-ref url="node-hosting/start-a-node/start-a-node-vast.md" %}
 [start-a-node-vast.md](node-hosting/start-a-node/start-a-node-vast.md)
+{% endcontent-ref %}
+
+
+*Octa.space*
+
+{% content-ref url="node-hosting/start-a-node/start-a-node-octa.md" %}
+[start-a-node-octa.md](node-hosting/start-a-node/start-a-node-octa.md)
 {% endcontent-ref %}
 
 You can also start the node using Docker:
