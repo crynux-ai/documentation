@@ -67,10 +67,18 @@
 [start-a-node-mac.md](start-a-node-mac.md)
 {% endcontent-ref %}
 
-### Cloud services based on Docker, such as Vast.ai
+### Cloud services based on Docker
+
+*Vast.ai*
 
 {% content-ref url="start-a-node-vast.md" %}
 [start-a-node-vast.md](start-a-node-vast.md)
+{% endcontent-ref %}
+
+*Octa.space*
+
+{% content-ref url="start-a-node-octa.md" %}
+[start-a-node-octa.md](start-a-node-octa.md)
 {% endcontent-ref %}
 
 ### Docker
