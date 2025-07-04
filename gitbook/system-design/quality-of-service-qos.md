@@ -46,19 +46,11 @@ This directly ties the cost of an attack to the cost of controlling the network'
 
 There are quite a lot of factors that affect the submission speed of the node. Such as the network quality, the GPU frequency, the number of the tensor cores, and even the system memory speed. Crynux Network encourages faster submission of the tasks to improve the application's experience. By introducing competition between the nodes who are selected for the same task, giving different rewards to the nodes according to their submission order, Crynux Network rewards the improvement the node has made on all the submission speed related factors as a whole.
 
-**Round score:** There are two rounds of submission in a single task: result commitment and result disclosure. For each round, the Crynux Network records the order of submission of the nodes, and assigns higher score to the nodes who have submitted earlier. The round score $${rs}_i$$ a node could get in a round $$i$$ can be visualized as:&#x20;
+**Task score:** Within a validation task group, the Crynux Network measures the time each node takes to submit its result, and faster submissions earn a higher task score ($${ts}_i$$) for that task $$i$$, as visualized below:
 
-<figure><img src="../.gitbook/assets/96ba525e88bb1faabe5d1c376193601.png" alt=""><figcaption><p>The round score of a node by its submission order and status</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/96ba525e88bb1faabe5d1c376193601.png" alt=""><figcaption><p>The task score of a node by its submission order and status</p></figcaption></figure>
 
-**Task score:** the task score a node gets for the $$i$$th task $${ts}_i$$ is calculated simply by summing up the scores the node gets for all the rounds in the task:
-
-$$
-{ts}_i = {rs}_c + {rs}_d
-$$
-
-where $${rs}_c$$ is the round score of the commitment round, and $${rs}_d$$ is the round score of the disclosure round.
-
-**Node score:** the node score is calculated by averaging all the scores the node gets for all the tasks it received in the month:
+**Node score:** the node score is calculated by averaging all the task scores the node gets for all the tasks it received in the time window:
 
 $$
 {ns}_i = \frac{\sum_{j=1}^n {ts}_j}{n}
