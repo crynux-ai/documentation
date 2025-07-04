@@ -10,41 +10,37 @@ By giving more advantages to the nodes with higher QoS score, the nodes are enco
 
 ### Node Selection Probability
 
-Nodes with consistently low QoS score will face penalization in terms of their probability of being selected for future tasks. This approach ensures that higher-performing nodes are given priority in task allocation, thereby maintaining the overall quality and efficiency of the network.
+The total QoS score is used to decide the node selection probability. Nodes with consistently low QoS score will face penalization in terms of their probability of being selected for future tasks. This approach ensures that higher-performing nodes are given priority in task allocation, thereby maintaining the overall quality and efficiency of the network.
 
 ### Bad Node Kicking Out
 
-If a node’s performance falls below a certain threshold for a prolonged period, the network has mechanisms to remove (kick out) this node from participating further. This is crucial to prevent underperforming nodes from negatively impacting the network’s performance and reliability.
+If a node's performance falls below a certain threshold for a prolonged period, the network has mechanisms to remove (kick out) this node from participating further. This is crucial to prevent underperforming nodes from negatively impacting the network's performance and reliability.
 
 For instance, if a node is shutdown without sending the transaction to inform the blockchain, it will still receive new tasks. However, all these upcoming tasks will be aborted, leading to a negative experience for the applications that issued the tasks.
 
 Now that we have the Submission Speed score, which will drop dramatically during the first several aborts of the tasks, after the threshold is reached, the node will be forced to quit the network by the blockchain, and no more tasks will be sent to the node.
 
-### Token Incentivization Distribution
-
-A combination (weighed sum) of all the 3 QoS scores is used to decide the portion of the token incentivization given to each node in the node mining mechanism. A node with higher QoS scores will get more tokens as extra reward from the node mining.
-
 ## QoS Score Calculation
 
-The QoS score of a node at a certain time is calculated using the node data (mostly task execution related) collected in a time window. The size of the time windows vary among different use cases.
+The QoS score of a node at a certain time is calculated using the node data (mostly task execution related) collected in a time window.
 
-<figure><img src="../.gitbook/assets/d4de536f66f20c84f0430de0de3332f.png" alt=""><figcaption></figcaption></figure>
+### Staking
 
-### Timeouts
+To align a node's economic incentives with the long-term health and security of the network, the QoS system includes a Staking Score.
 
-According to the [Consensus Protocol](consensus-protocol/), the nodes could perform the Timeout Attack to earn tokens for free. The solution is to limit the percentage rate by increasing the timeout period and the staking amount.
-
-However, longer timeout period makes the applications wait longer if something is wrong with the task,   which leads to the poor user experience. And the nodes will get less incomes since they could run less tasks in the same time range.
-
-By staking more tokens, the node could decrease its timeout period while still maintaining a safe percentage rate that is acceptable by the network. Crynux Network encourages the nodes to set a shorter timeout by giving more incentives to them, thus increasing the overall responsiveness of the whole network.
-
-The timeout settings score $$P_i$$ is calculated by normalizing the timeout period between the minimum timeout period allowed in the network, and the maximum timeout period set by the node in the network.
+The Staking Score ($$S_i$$) for a node $$i$$ is calculated by normalizing its staked amount against the maximum stake in the network:
 
 $$
-P_i = 1 - \frac{O_i-O_{min}}{max(O_j | j \in N) - O_{min}} = \frac{max(O_j | j \in N) - O_i}{max(O_j | j \in N) - O_{min}}
+S_i = \frac{ s_i} {max({s}_j | j \in N )}
 $$
 
-$$O_i$$ is the timeout period in seconds, and $$O_{min}$$ is the minimum timeout period allowed by the network.
+Where $$s_i$$ is the amount staked by node $$i$$, and $$max({s}_j | j \in N )$$ is the highest stake among all nodes $$N$$.
+
+By including the staking amount in the QoS score, nodes with a higher stake receive a better QoS score, which in turn increases their probability of being assigned tasks. This design is fundamental to network security, as it significantly raises the cost of a successful Sybil attack.
+
+To successfully disrupt the network, an attacker's malicious nodes must be selected to perform tasks. Because the network prioritizes nodes with higher QoS scores (and thus higher stakes) for task assignment, an attacker cannot rely on a large number of cheap, low-stake nodes. Instead, they are forced to consolidate their capital into high-stake nodes just to be considered for selection.
+
+This directly ties the cost of an attack to the cost of controlling the network's most trusted and active participants. It forces the attacker to lock up significant funds in the very nodes they wish to use for malicious purposes, dramatically increasing the economic risk and capital required to disrupt a meaningful portion of the network's operations. This makes the entire system more resilient by making attacks economically impractical.
 
 ### Submission Speed
 
@@ -68,7 +64,7 @@ $$
 {ns}_i = \frac{\sum_{j=1}^n {ts}_j}{n}
 $$
 
-Where $$n$$ is the total number of the tasks the node has executed in this month.
+Where $$n$$ is the total number of the tasks the node has executed in the time window.
 
 {% hint style="info" %}
 Note that if there are no nodes that have submitted result in a task. It is highly likely that the task is itself misconfigured, and the task score is simply ignored, and will not be included in the average score calculation.
@@ -79,3 +75,17 @@ Finally, the score a node gets for the submission speed factor is calculated by 
 $$
 B_i = \frac{ {ns}_i} {max({ns}_j | j \in N )}
 $$
+
+### Total QoS Score
+
+The final QoS score for a node, $$Q_i$$, is the unweighted average of its component scores. It provides a balanced measure of a node's economic commitment and its operational performance.
+
+The formula is defined as:
+
+$$
+Q_i = \frac{S_i + B_i}{2}
+$$
+
+Where:
+*   $$S_i$$ is the node's Staking Score.
+*   $$B_i$$ is the node's Submission Speed Score.
