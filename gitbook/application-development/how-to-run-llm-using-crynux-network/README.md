@@ -8,7 +8,7 @@ Running LLM tasks with various open-source models can be as simple as calling an
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://bridge.crynux.ai/v1/llm",
+    base_url="https://bridge.crynux.io/v1/llm",
     api_key="q3hXHA_8O0LuGJ1_tou4_KamMlQqAo-aYwyAIDttdmI=", # For public demonstration only, strict rate limit applied.
     timeout=180,
     max_retries=1,
@@ -34,7 +34,7 @@ print(res)
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://bridge.crynux.ai/v1/llm",
+  baseURL: "https://bridge.crynux.io/v1/llm",
   apiKey: "q3hXHA_8O0LuGJ1_tou4_KamMlQqAo-aYwyAIDttdmI=", // For public demonstration only, strict rate limit applied.
   timeout: 180000,
   maxRetries: 1,
