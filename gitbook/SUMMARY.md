@@ -41,6 +41,7 @@
 
 * [How to Run LLM using Crynux Network](application-development/how-to-run-llm-using-crynux-network/README.md)
   * [Supported Models](application-development/how-to-run-llm-using-crynux-network/supported-models.md)
+* [How to Fine-tune a Stable Diffusion Model using Crynux Network](application-development/how-to-finetune-a-stable-diffusion-model-using-crynux-network.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [Application Workflow](application-development/application-workflow.md)
 * [Execute Tasks](application-development/execute-tasks/README.md)
