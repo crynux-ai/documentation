@@ -96,6 +96,7 @@ The argument `revision` means the model revision, can be main or a commit hash o
 {
     "dataset": {
         "name": "lambdalabs/naruto-blip-captions",
+        "url": "",
         "config_name": null,
         "image_column": "image",
         "caption_column": "text",
@@ -105,7 +106,11 @@ The argument `revision` means the model revision, can be main or a commit hash o
 
 Dataset defines the dataset to train on.
 
-The argument `name` defines the name of the dataset to train on. It can be Huggingface dataset ID, or a path pointing to a local copy of a dataset in your filesystem.
+The `name` argument specifies the dataset to train on. You can provide either a Hugging Face dataset ID or a local file path to a dataset on your filesystem.
+
+The `url` argument specifies the URL of a dataset file to download. The file can be compressed (in formats like .zip, .tar, .tar.gz, etc.) and will be automatically extracted. The downloaded file will then be loaded using the Hugging Face dataset library.
+
+If both `name` and `url` are provided, only the `name` argument will be used. You must specify either `name` or `url` (but not necessarily both).
 
 The argument `config_name` defines the config file name of the dataset, leave as null if there is only one config. Default is `null`.
 
