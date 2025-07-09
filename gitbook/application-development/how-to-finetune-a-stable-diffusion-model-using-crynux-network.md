@@ -322,7 +322,11 @@ The fine-tuning configuration includes various parameters that control the train
 * `random_flip`: Whether to randomly flip images horizontally
 * `mixed_precision`: Training precision (`"fp16"` or `"bf16"`)
 
-For a comprehensive list of all supported parameters and their detailed descriptions, please refer to the [Crynux Bridge documentation](../crynux-bridge.md) and the [Fine-tuning Task documentation](../execute-tasks/fine-tuning-task.md).
+For a comprehensive list of all supported parameters and their detailed descriptions, please refer to the fine-tuning task's document:
+
+{% content-ref url="execute-tasks/fine-tuning-task.md" %}
+[fine-tuning-task.md](execute-tasks/fine-tuning-task.md)
+{% endcontent-ref %}
 
 ## Best Practices for Fine-tuning
 
@@ -372,14 +376,14 @@ Starting a Crynux Bridge is as straightforward as running a Docker container. An
 
 Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
 
-{% content-ref url="../crynux-bridge.md" %}
-[crynux-bridge.md](../crynux-bridge.md)
+{% content-ref url="crynux-bridge.md" %}
+[crynux-bridge.md](crynux-bridge.md)
 {% endcontent-ref %}
 
 ### Method 3: Sending Tasks Directly to the Blockchain
 
 You can bypass the Crynux Bridge entirely and interact directly with the blockchain and Crynux Relay to send fine-tuning tasks. Crynux SDKs are available in various languages and can be embedded directly into your code to run fine-tuning tasks. Please consult the Crynux SDK documentation for detailed usage instructions:
 
-{% content-ref url="../crynux-sdk.md" %}
-[crynux-sdk.md](../crynux-sdk.md)
+{% content-ref url="crynux-sdk.md" %}
+[crynux-sdk.md](crynux-sdk.md)
 {% endcontent-ref %}
