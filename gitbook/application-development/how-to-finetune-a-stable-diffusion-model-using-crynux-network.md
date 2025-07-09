@@ -1,6 +1,6 @@
 # How to Fine-tune a Stable Diffusion Model using Crynux Network
 
-Fine-tuning Stable Diffusion models on the Crynux Network involves creating a training task and monitoring its progress. Unlike immediate inference tasks, fine-tuning is a long-running process that requires tracking the task status and downloading results upon completion.
+Fine-tuning Stable Diffusion models on the Crynux Network involves creating a training task and monitoring its progress. Unlike inference tasks, fine-tuning is a long-running process that requires asynchronously creating the task, tracking the task status and downloading results upon completion.
 
 ## Fine-tuning Task Execution Process
 
@@ -8,33 +8,34 @@ Before diving into the code examples, let's understand the complete workflow for
 
 ### 1. Dataset Preparation
 
-The first step is to prepare your training dataset. Crynux Network supports two types of dataset sources:
+The first step is to prepare your training dataset. Crynux Network supports many types of dataset sources:
 
-- **Hugging Face Dataset**: You can use any dataset available on Hugging Face by specifying its dataset ID (e.g., `"lambdalabs/naruto-blip-captions"`)
-- **Custom Dataset via URL**: You can provide a URL to download your custom dataset file. The file can be compressed (ZIP, TAR, etc.) and will be automatically extracted and loaded using the Hugging Face dataset library
+* **Huggingface Dataset**: You can use any dataset available on [Huggingface](https://huggingface.co/) by specifying its dataset ID (e.g., `"lambdalabs/naruto-blip-captions"`).
+* **Irys Network**: The dataset can be stored on the decentralized data network of [Irys](https://irys.xyz/). And provided to the Crynux nodes as a download link.
+* **Custom Dataset via URL**: Other downloadable links are also supported. The file can be compressed (ZIP, TAR, etc.) and will be automatically extracted and loaded using the Huggingface dataset library.
 
-Your dataset should contain image-caption pairs, with images in one column and corresponding text captions in another column. The default column names are `"image"` for images and `"text"` for captions, but you can customize these.
+Your dataset should contain image-caption pairs, with images in one column and corresponding text captions in another column. The default column names are `"image"` for images and `"text"` for captions, you can also customize these in the task config.
 
 ### 2. Model Selection
 
 Fine-tuning tasks create LoRA (Low-Rank Adaptation) models that enhance existing Stable Diffusion models. You need to specify:
 
-- **Base Model**: Choose a pre-trained Stable Diffusion model (e.g., `"runwayml/stable-diffusion-v1-5"` or `"stabilityai/stable-diffusion-xl-base-1.0"`)
-- **LoRA Parameters**: Configure how the LoRA adapter will be applied:
-  - `rank`: The dimension of LoRA attention (typically 4-64)
-  - `target_modules`: Which transformer modules to apply LoRA to (common choices include `["to_k", "to_q", "to_v", "to_out.0"]`)
-  - `init_lora_weights`: How to initialize LoRA weights (`"gaussian"` is commonly used)
+* **Base Model**: Choose a pre-trained Stable Diffusion model (e.g., `"runwayml/stable-diffusion-v1-5"` or `"stabilityai/stable-diffusion-xl-base-1.0"`)
+* **LoRA Parameters**: Configure how the LoRA adapter will be applied:
+  * `rank`: The dimension of LoRA attention (typically 4-64)
+  * `target_modules`: Which transformer modules to apply LoRA to (common choices include `["to_k", "to_q", "to_v", "to_out.0"]`)
+  * `init_lora_weights`: How to initialize LoRA weights (`"gaussian"` is commonly used)
 
 ### 3. Training Parameter Configuration
 
 Set the training hyperparameters that control the learning process:
 
-- **Learning Rate**: The step size for gradient updates (typically 1e-4 to 1e-5)
-- **Batch Size**: Number of samples processed together (usually 1-4 for fine-tuning)
-- **Training Steps**: Total number of training iterations
-- **Learning Rate Scheduler**: How the learning rate changes over time (e.g., `"cosine"` for gradual decay)
-- **Image Resolution**: Target resolution for training images (typically 512 or 768)
-- **Data Augmentation**: Whether to apply random flips, center crops, etc.
+* **Learning Rate**: The step size for gradient updates (typically 1e-4 to 1e-5)
+* **Batch Size**: Number of samples processed together (usually 1-4 for fine-tuning)
+* **Training Steps**: Total number of training iterations
+* **Learning Rate Scheduler**: How the learning rate changes over time (e.g., `"cosine"` for gradual decay)
+* **Image Resolution**: Target resolution for training images (typically 512 or 768)
+* **Data Augmentation**: Whether to apply random flips, center crops, etc.
 
 ### 4. Task Execution
 
@@ -134,7 +135,7 @@ if success:
         with open("finetuned_model.zip", "wb") as f:
             for chunk in resp.iter_bytes():
                 f.write(chunk)
-    print("Fine-tuned model downloaded as finetuned_model.zip")
+    print("Fine-tuned model downloaded as finetuned_model.zip")G
 ```
 {% endtab %}
 
@@ -253,9 +254,7 @@ finetuneStableDiffusion();
 The fine-tuning process on Crynux Network consists of three main steps:
 
 1. **Task Creation**: Submit a POST request to `/v1/images/models` with your fine-tuning configuration. This returns a task ID that you'll use to track progress.
-
 2. **Status Monitoring**: Poll the `/v1/images/models/{task_id}/status` endpoint to check if the task has completed, failed, or is still running. Fine-tuning can take anywhere from minutes to hours depending on your configuration.
-
 3. **Result Download**: Once the task succeeds, download the fine-tuned model using the `/v1/images/models/{task_id}/result` endpoint. The result is typically a ZIP file containing your fine-tuned model weights.
 
 ## Understanding the Task Execution Flow
@@ -263,10 +262,13 @@ The fine-tuning process on Crynux Network consists of three main steps:
 When you submit a fine-tuning task, here's what happens behind the scenes:
 
 ### Task Distribution
+
 Your fine-tuning task is distributed across multiple nodes in the Crynux Network. Each node receives the same task definition and executes it independently to ensure consensus.
 
 ### Training Execution
+
 The training process follows these steps:
+
 1. **Data Loading**: The dataset is downloaded and prepared according to your specifications
 2. **Model Loading**: The base Stable Diffusion model is loaded with LoRA adapters applied
 3. **Training Loop**: The model is trained for the specified number of steps using your hyperparameters
@@ -274,12 +276,15 @@ The training process follows these steps:
 5. **Checkpointing**: Training checkpoints are saved periodically
 
 ### Result Generation
+
 Upon completion, the task produces:
-- **LoRA Weights**: The trained LoRA adapter weights that can be applied to the base model
-- **Validation Images**: Sample images generated during training to assess model quality
-- **Training Logs**: Information about the training process and metrics
+
+* **LoRA Weights**: The trained LoRA adapter weights that can be applied to the base model
+* **Validation Images**: Sample images generated during training to assess model quality
+* **Training Logs**: Information about the training process and metrics
 
 ### Using Your Fine-tuned Model
+
 The downloaded ZIP file contains the LoRA weights that can be loaded into compatible Stable Diffusion pipelines. You can use these weights with the same base model to generate images with your custom style or subject matter.
 
 ## Key Configuration Parameters
@@ -287,30 +292,35 @@ The downloaded ZIP file contains the LoRA weights that can be loaded into compat
 The fine-tuning configuration includes various parameters that control the training process. Here are the most important parameters you'll need to configure:
 
 ### Dataset Parameters
-- `dataset_url`: URL to download your custom dataset (or use `dataset_name` for Hugging Face datasets)
-- `validation_num_images`: Number of validation images to generate during training
+
+* `dataset_url`: URL to download your custom dataset (or use `dataset_name` for Hugging Face datasets)
+* `validation_num_images`: Number of validation images to generate during training
 
 ### Model Parameters
-- `model_name`: The base Stable Diffusion model to fine-tune (e.g., `"runwayml/stable-diffusion-v1-5"`)
-- `model_variant`: Model precision variant (`"fp16"`, `"bf16"`, or `null`)
+
+* `model_name`: The base Stable Diffusion model to fine-tune (e.g., `"runwayml/stable-diffusion-v1-5"`)
+* `model_variant`: Model precision variant (`"fp16"`, `"bf16"`, or `null`)
 
 ### LoRA Parameters
-- `rank`: LoRA attention dimension (typically 4-64, higher values = more capacity but larger file size)
-- `target_modules`: Transformer modules to apply LoRA to (common: `["to_k", "to_q", "to_v", "to_out.0"]`)
-- `init_lora_weights`: LoRA weight initialization method (`"gaussian"` recommended)
+
+* `rank`: LoRA attention dimension (typically 4-64, higher values = more capacity but larger file size)
+* `target_modules`: Transformer modules to apply LoRA to (common: `["to_k", "to_q", "to_v", "to_out.0"]`)
+* `init_lora_weights`: LoRA weight initialization method (`"gaussian"` recommended)
 
 ### Training Parameters
-- `learning_rate`: Initial learning rate (typically 1e-4 to 1e-5)
-- `batch_size`: Training batch size (usually 1-4 for fine-tuning)
-- `num_train_steps`: Steps per task execution
-- `max_train_steps`: Total training steps across all tasks
-- `lr_scheduler`: Learning rate schedule (`"cosine"`, `"linear"`, etc.)
-- `lr_warmup_steps`: Warmup steps for learning rate
+
+* `learning_rate`: Initial learning rate (typically 1e-4 to 1e-5)
+* `batch_size`: Training batch size (usually 1-4 for fine-tuning)
+* `num_train_steps`: Steps per task execution
+* `max_train_steps`: Total training steps across all tasks
+* `lr_scheduler`: Learning rate schedule (`"cosine"`, `"linear"`, etc.)
+* `lr_warmup_steps`: Warmup steps for learning rate
 
 ### Data Processing Parameters
-- `center_crop`: Whether to center crop images to resolution
-- `random_flip`: Whether to randomly flip images horizontally
-- `mixed_precision`: Training precision (`"fp16"` or `"bf16"`)
+
+* `center_crop`: Whether to center crop images to resolution
+* `random_flip`: Whether to randomly flip images horizontally
+* `mixed_precision`: Training precision (`"fp16"` or `"bf16"`)
 
 For a comprehensive list of all supported parameters and their detailed descriptions, please refer to the [Crynux Bridge documentation](../crynux-bridge.md) and the [Fine-tuning Task documentation](../execute-tasks/fine-tuning-task.md).
 
@@ -319,26 +329,34 @@ For a comprehensive list of all supported parameters and their detailed descript
 To achieve the best results with your fine-tuning tasks, consider these recommendations:
 
 ### Dataset Quality
-- **Image Quality**: Use high-quality, consistent images (512x512 or higher resolution)
-- **Caption Quality**: Write descriptive, accurate captions that capture the key features
-- **Dataset Size**: Aim for 10-100 images per concept for good results
-- **Diversity**: Include variations in poses, lighting, and backgrounds
+
+* **Image Quality**: Use high-quality, consistent images (512x512 or higher resolution)
+* **Caption Quality**: Write descriptive, accurate captions that capture the key features
+* **Dataset Size**: Aim for 10-100 images per concept for good results
+* **Diversity**: Include variations in poses, lighting, and backgrounds
 
 ### Model Selection
-- **Base Model**: Choose a model that matches your target style (SD 1.5 for general use, SDXL for higher quality)
-- **LoRA Rank**: Start with rank 4-8 for most use cases, increase to 16-32 for complex concepts
-- **Target Modules**: Use the default `["to_k", "to_q", "to_v", "to_out.0"]` for most applications
+
+* **Base Model**: Choose a model that matches your target style (SD 1.5 for general use, SDXL for higher quality)
+* **LoRA Rank**: Start with rank 4-8 for most use cases, increase to 16-32 for complex concepts
+* **Target Modules**: Use the default `["to_k", "to_q", "to_v", "to_out.0"]` for most applications
 
 ### Training Parameters
-- **Learning Rate**: Start with 1e-4, reduce to 1e-5 for sensitive concepts
-- **Batch Size**: Use 1-2 for most cases to avoid memory issues
-- **Training Steps**: 500-2000 steps usually sufficient, monitor validation images
-- **Scheduler**: Use `"cosine"` for smooth learning rate decay
+
+* **Learning Rate**: Start with 1e-4, reduce to 1e-5 for sensitive concepts
+* **Batch Size**: Use 1-2 for most cases to avoid memory issues
+* **Training Steps**: 500-2000 steps usually sufficient, monitor validation images
+* **Scheduler**: Use `"cosine"` for smooth learning rate decay
 
 ### Monitoring Progress
-- **Validation Images**: Check generated validation images to assess training progress
-- **Task Status**: Monitor task status regularly, especially for long-running tasks
-- **Error Handling**: Implement proper error handling for failed tasks
+
+* **Validation Images**: Check generated validation images to assess training progress
+* **Task Status**: Monitor task status regularly, especially for long-running tasks
+* **Error Handling**: Implement proper error handling for failed tasks
+
+
+
+
 
 The API Key in the example code is for public demonstration purposes only and has a strict rate limit, making it unsuitable for production environments. To use the Crynux Network for fine-tuning in production, choose one of the following methods:
 
@@ -366,4 +384,4 @@ You can bypass the Crynux Bridge entirely and interact directly with the blockch
 
 {% content-ref url="../crynux-sdk.md" %}
 [crynux-sdk.md](../crynux-sdk.md)
-{% endcontent-ref %} 
+{% endcontent-ref %}
