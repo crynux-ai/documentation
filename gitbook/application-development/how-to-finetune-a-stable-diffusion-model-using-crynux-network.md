@@ -354,19 +354,17 @@ To achieve the best results with your fine-tuning tasks, consider these recommen
 * **Task Status**: Monitor task status regularly, especially for long-running tasks
 * **Error Handling**: Implement proper error handling for failed tasks
 
-
-
-
+## Get the API Key to Run Tasks
 
 The API Key in the example code is for public demonstration purposes only and has a strict rate limit, making it unsuitable for production environments. To use the Crynux Network for fine-tuning in production, choose one of the following methods:
 
-## Method 1: Using the Official Crynux Bridge
+### Method 1: Using the Official Crynux Bridge
 
 You can request a separate API Key with a higher quota from the Crynux Discord server. Join the server and request new keys from an admin in the "applications" channel.
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-## Method 2: Hosting Your Own Crynux Bridge
+### Method 2: Hosting Your Own Crynux Bridge
 
 You can host your own instance of the Crynux Bridge to provide private APIs for your application. This approach gives you greater control over various system aspects, including reliability and speed-related configurations.
 
@@ -378,7 +376,7 @@ Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/cry
 [crynux-bridge.md](../crynux-bridge.md)
 {% endcontent-ref %}
 
-## Method 3: Sending Tasks Directly to the Blockchain
+### Method 3: Sending Tasks Directly to the Blockchain
 
 You can bypass the Crynux Bridge entirely and interact directly with the blockchain and Crynux Relay to send fine-tuning tasks. Crynux SDKs are available in various languages and can be embedded directly into your code to run fine-tuning tasks. Please consult the Crynux SDK documentation for detailed usage instructions:
 
