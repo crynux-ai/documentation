@@ -109,7 +109,7 @@ while True:
     resp.raise_for_status()
     res = resp.json()
     status = res["data"]["status"]
-    
+
     if status == "success":
         print("Task completed successfully")
         success = True
@@ -120,7 +120,7 @@ while True:
         break
     elif status == "running":
         print("Task is still running...")
-    
+
     time.sleep(60)  # Check status every minute
 
 # Step 3: Download results if successful
@@ -135,7 +135,7 @@ if success:
         with open("finetuned_model.zip", "wb") as f:
             for chunk in resp.iter_bytes():
                 f.write(chunk)
-    print("Fine-tuned model downloaded as finetuned_model.zip")G
+    print("Fine-tuned model downloaded as finetuned_model.zip")
 ```
 {% endtab %}
 
